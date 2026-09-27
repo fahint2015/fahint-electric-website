@@ -5,6 +5,8 @@ import Capabilities from './Capabilities.jsx';
 import About from './About.jsx';
 import { certificates } from '../data/certificates.js';
 import { publicAsset } from '../utils/publicAsset.js';
+import { existsSync, readFileSync } from 'node:fs';
+import userEvent from '@testing-library/user-event';
 
 function renderPage(Page) {
   return render(<MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}><Page /></MemoryRouter>);
@@ -14,9 +16,31 @@ describe('Manufacturing and company information', () => {
   it('introduces manufacturing with actual factory images and an OEM anchor', () => {
     renderPage(Capabilities);
     expect(screen.getByRole('heading', { level: 1, name: 'Your product. Our production.' })).toBeInTheDocument();
-    expect(screen.getByAltText('GFCI assembly and functional testing at FAHINT')).toHaveAttribute('src', publicAsset('assets/images/editorial-home/factory-optimized.webp'));
+    expect(screen.getByAltText('FAHINT staff assembling wiring-device components')).toHaveAttribute('src', publicAsset('assets/images/company/factory/device-assembly-v1.webp'));
+    expect(screen.getByRole('heading', { name: 'Assembly & automation' })).toBeInTheDocument();
+    expect(screen.getByRole('tab', { name: 'Aging tests' })).toBeInTheDocument();
+    expect(screen.getByRole('tab', { name: 'Laboratory verification' })).toBeInTheDocument();
     expect(document.getElementById('oem')).toBeInTheDocument();
     expect(screen.getByRole('link', { name: 'Discuss your OEM / ODM project' })).toHaveAttribute('href', '/contact?topic=oem');
+  });
+  it('lets buyers explore factory stages with pointer and keyboard controls', async () => {
+    const user = userEvent.setup();
+    renderPage(Capabilities);
+    const tabs = screen.getAllByRole('tab');
+    expect(tabs).toHaveLength(3);
+    expect(tabs[0]).toHaveAttribute('aria-selected', 'true');
+    await user.click(tabs[1]);
+    expect(tabs[1]).toHaveAttribute('aria-selected', 'true');
+    expect(screen.getByRole('tabpanel', { name: 'Aging tests' })).toHaveTextContent('Test conditions and duration');
+    await user.keyboard('{ArrowRight}');
+    expect(tabs[2]).toHaveFocus();
+    expect(tabs[2]).toHaveAttribute('aria-selected', 'true');
+    expect(screen.getByRole('tabpanel', { name: 'Laboratory verification' })).toHaveTextContent('temperature and humidity');
+    await user.keyboard('{Home}{ArrowLeft}');
+    expect(tabs[2]).toHaveFocus();
+    await user.keyboard('{Home}');
+    expect(tabs[0]).toHaveFocus();
+    expect(screen.getByRole('link', { name: 'See our testing stations' })).toHaveAttribute('href', '/#studio-making');
   });
   it('provides a sequenced cooperation process and model-scoped documentation', () => {
     renderPage(Capabilities);
@@ -46,12 +70,14 @@ describe('Manufacturing and company information', () => {
     renderPage(About);
     expect(screen.getByText('2015')).toBeInTheDocument();
     expect(screen.getByText('Yueqing, Wenzhou, Zhejiang, China')).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: 'From components to a finished device.' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'The people behind the product.' })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'Built in Wenzhou. Working across markets.' })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'A conversation around real products.' })).toBeInTheDocument();
     expect(screen.getByText(/United States, Canada and Mexico/)).toBeInTheDocument();
-    expect(screen.getByAltText('Electronic assembly equipment shown in the FAHINT product catalog')).toBeInTheDocument();
-    expect(screen.getByAltText('A product discussion at the FAHINT exhibition display')).toBeInTheDocument();
+    expect(screen.getByAltText('The FAHINT team in front of the company product display')).toBeInTheDocument();
+    expect(screen.getByAltText('FAHINT colleagues reviewing a product drawing together')).toBeInTheDocument();
+    expect(screen.getByAltText('Electronic assembly equipment in the FAHINT workshop')).toHaveAttribute('width', '1920');
+    expect(screen.getByAltText('Wiring-device samples in the FAHINT showroom')).toBeInTheDocument();
     expect(document.body).not.toHaveTextContent(/70,000|2,400|5500|100\+|20\+ patents|2005/);
   });
   it('keeps section navigation on the About route when a deployment base URL is present', () => {
@@ -59,5 +85,27 @@ describe('Manufacturing and company information', () => {
     const nav = screen.getByRole('navigation', { name:'About FAHINT sections' });
     expect(within(nav).getByRole('link', { name:'Our markets' })).toHaveAttribute('href','/about#our-markets');
     expect(within(nav).getByRole('link', { name:'Inside FAHINT' })).toHaveAttribute('href','/about#inside-fahint');
+  });
+  it('uses separate, traceable factory photographs across the three updated surfaces', () => {
+    const manifest = JSON.parse(readFileSync('public/assets/images/company/factory/manifest.json', 'utf8').replace(/^\uFEFF/, ''));
+    expect(manifest).toHaveLength(10);
+    expect(new Set(manifest.map(photo => photo.source_sha256)).size).toBe(10);
+    for (const photo of manifest) {
+      expect(existsSync(`public/assets/images/company/factory/${photo.asset}`)).toBe(true);
+      expect(photo.bytes).toBeLessThan(500000);
+    }
+    for (const [Page, page] of [[Capabilities, 'Capabilities'], [About, 'About']]) {
+      const { container, unmount } = renderPage(Page);
+      const images = Array.from(container.querySelectorAll('img[src*="/company/factory/"]'));
+      const expected = manifest.filter(photo => photo.page === page);
+      expect(images).toHaveLength(expected.length);
+      for (const photo of expected) {
+        const image = images.find(item => item.getAttribute('src') === publicAsset(`assets/images/company/factory/${photo.asset}`));
+        expect(image).toHaveAttribute('width', String(photo.width));
+        expect(image).toHaveAttribute('height', String(photo.height));
+      }
+      expect(container.querySelector('img[src*="factory-optimized"],img[src*="catalog-production"],img[src*="catalog-tooling"]')).toBeNull();
+      unmount();
+    }
   });
 });

@@ -722,11 +722,14 @@ describe('studio homepage and catalog', () => {
     expect(section.querySelector('img[src*="brand-program-review-v2"]')).toBeNull();
   });
 
-  it('pairs manufacturing photography with readable inspection and documentation context', () => {
+  it('labels real testing photographs accurately and keeps their documentation context', () => {
     show(HomeStudio);
-    const section = screen.getByRole('region', { name: 'Manufacturing you can see.' });
-    expect(within(section).getByRole('img', { name: /FAHINT workers and GFCI/ })).toHaveAttribute('src', publicAsset('assets/images/editorial-home/factory-optimized.webp'));
-    for (const title of ['Product development & assembly', 'Functional inspection', 'Model documentation']) {
+    const section = screen.getByRole('region', { name: 'Testing you can see.' });
+    expect(within(section).getByRole('img', { name: 'GFCI functional testing stations at FAHINT' })).toHaveAttribute('src', publicAsset('assets/images/company/factory/gfci-testing-v1.webp'));
+    expect(within(section).getByRole('img', { name: 'USB outlets connected to the FAHINT charging test bench' })).toHaveAttribute('src', publicAsset('assets/images/company/factory/usb-testing-v1.webp'));
+    expect(within(section).getAllByRole('img')).toHaveLength(2);
+    expect(section).not.toHaveTextContent(/production line|Checked on the line/i);
+    for (const title of ['GFCI functional testing', 'USB charging tests', 'Model-specific checks']) {
       expect(within(section).getByRole('heading', { name: title })).toBeVisible();
     }
     expect(within(section).getByRole('link', { name: 'Review model certificates' })).toHaveAttribute('href', '/#studio-certificates');

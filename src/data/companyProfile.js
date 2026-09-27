@@ -9,6 +9,47 @@ export const companyProfile = {
 };
 
 export const companyPhotos = {
+  // Supplied factory originals; resize-only provenance is recorded in factory/manifest.json.
+  gfciTesting: {
+    src: 'assets/images/company/factory/gfci-testing-v1.webp', width: 1920, height: 1080,
+    alt: 'GFCI functional testing stations at FAHINT',
+  },
+  usbTesting: {
+    src: 'assets/images/company/factory/usb-testing-v1.webp', width: 1120, height: 840,
+    alt: 'USB outlets connected to the FAHINT charging test bench',
+  },
+  deviceAssembly: {
+    src: 'assets/images/company/factory/device-assembly-v1.webp', width: 1600, height: 1200,
+    alt: 'FAHINT staff assembling wiring-device components',
+  },
+  automatedAssembly: {
+    src: 'assets/images/company/factory/automated-assembly-v1.webp', width: 1440, height: 960,
+    alt: 'Wiring devices in rotary assembly equipment at FAHINT',
+  },
+  agingTests: {
+    src: 'assets/images/company/factory/aging-tests-v1.webp', width: 800, height: 1066,
+    alt: 'Wiring devices connected to an aging-test rack at FAHINT',
+  },
+  environmentalChamber: {
+    src: 'assets/images/company/factory/environmental-chamber-v1.webp', width: 880, height: 938,
+    alt: 'Temperature and humidity test chamber in the FAHINT laboratory',
+  },
+  team: {
+    src: 'assets/images/company/factory/fahint-team-v1.webp', width: 1600, height: 1200,
+    alt: 'The FAHINT team in front of the company product display',
+  },
+  productReview: {
+    src: 'assets/images/company/factory/product-review-v1.webp', width: 900, height: 1200,
+    alt: 'FAHINT colleagues reviewing a product drawing together',
+  },
+  workshop: {
+    src: 'assets/images/company/factory/electronics-workshop-v2.webp', width: 1920, height: 1440,
+    alt: 'Electronic assembly equipment in the FAHINT workshop',
+  },
+  showroomSamples: {
+    src: 'assets/images/company/factory/showroom-samples-v1.webp', width: 1200, height: 900,
+    alt: 'Wiring-device samples in the FAHINT showroom',
+  },
   electronics: {
     src: 'assets/images/company/catalog-electronics.jpg', width: 498, height: 506,
     alt: 'Electronic assembly equipment shown in the FAHINT product catalog',
