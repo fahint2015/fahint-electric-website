@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, ArrowUpRight, Check } from 'lucide-react';
 import { company } from '../data/company.js';
+import { companyPhotos } from '../data/companyProfile.js';
 import { studioRanges } from '../data/studioCatalog.js';
 import { StudioImage, StudioLink, useStudioPageMeta } from '../components/studio/StudioShared.jsx';
 import StudioBuyerSections from '../components/studio/StudioBuyerSections.jsx';
@@ -184,19 +185,21 @@ function PrivateLabel() {
 function Manufacturing() {
   return <section className="studio-making studio-space" id="studio-making" aria-labelledby="studio-making-title">
       <div className="studio-wrap">
-        <Reveal as="header" className="studio-section-head">
-          <h2 id="studio-making-title">Manufacturing<br /><span>you can see.</span></h2>
-          <div><p>Inside our Wenzhou facility: product development, assembly and functional testing. See the production line, then review the documentation for your chosen model.</p><Link className="studio-text-link" to="/capabilities">Inside our manufacturing <ArrowUpRight size={19} aria-hidden="true" /></Link></div>
-        </Reveal>
-      </div>
-      <div className="studio-factory-stage"><figure className="studio-factory-photo">
-        <StudioImage src="assets/images/editorial-home/factory-optimized.webp" alt="FAHINT workers and GFCI functional testing stations on the production line" width={1600} height={900} />
-        <figcaption className="studio-factory-caption"><span>Made with care.<br />Checked on the line.</span><Link to="/capabilities">Explore manufacturing <ArrowUpRight size={24} aria-hidden="true" /></Link></figcaption>
-      </figure></div>
-      <div className="studio-wrap studio-quality-context">
-        <div><h3>Product development & assembly</h3><p>Device development, manufacturing and quality control brought together in Wenzhou, China.</p></div>
-        <div><h3>Functional inspection</h3><p>The GFCI production line shown above includes comprehensive functional testing stations.</p></div>
-        <div><h3>Model documentation</h3><p>Check electrical ratings, installation information and certification coverage for the exact model.</p><Link className="studio-text-link" to="/#studio-certificates">Review model certificates <ArrowUpRight size={17} aria-hidden="true" /></Link></div>
+        <div className="studio-testing-feature">
+          <figure className="studio-testing-primary">
+            <div className="studio-factory-stage"><div className="studio-factory-photo"><StudioImage {...companyPhotos.gfciTesting} /></div></div>
+            <figcaption><h3>GFCI functional testing</h3><p>Dedicated test stations and device fixtures · Wenzhou, China</p></figcaption>
+          </figure>
+          <Reveal as="header" className="studio-section-head studio-testing-intro">
+            <h2 id="studio-making-title">Testing<br /><span>you can see.</span></h2>
+            <p>A closer look at the checks behind the device. Our GFCI functional testing stations are a separate stage from component assembly.</p>
+            <Link className="studio-text-link" to="/capabilities#production">Inside our manufacturing <ArrowUpRight size={19} aria-hidden="true" /></Link>
+          </Reveal>
+        </div>
+        <div className="studio-testing-support">
+          <figure className="studio-testing-usb"><StudioImage {...companyPhotos.usbTesting} /><figcaption><h3>USB charging tests</h3><p>A dedicated bench for charging and electrical checks on USB outlet models.</p></figcaption></figure>
+          <div className="studio-testing-note"><h3>Model-specific checks</h3><p>Confirm the test requirements, electrical ratings and certification coverage for your selected device.</p><Link className="studio-text-link" to="/#studio-certificates">Review model certificates <ArrowUpRight size={17} aria-hidden="true" /></Link></div>
+        </div>
       </div>
     </section>;
 }
