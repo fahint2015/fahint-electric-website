@@ -36,11 +36,18 @@ describe('Shared visual finish and original company imagery', () => {
     }
     expect(screen.getByText('Tooling')).toBeInTheDocument();
   });
-  it('illustrates the manufacturing stages with their own original catalog photographs', () => {
+  it('illustrates each factory-tour stage with a distinct original factory photograph', () => {
     show(Capabilities);
     const production=document.getElementById('production');
-    expect(production.querySelectorAll('.company-columns img')).toHaveLength(3);
-    expect([...production.querySelectorAll('.company-columns img')].every(img=>!img.getAttribute('src').includes('/facility-'))).toBe(true);
+    const panels=within(production).getAllByRole('tabpanel', { hidden:true });
+    expect(panels).toHaveLength(3);
+    const images=panels.map(panel=>within(panel).getByRole('img', { hidden:true }));
+    expect(new Set(images.map(image=>image.getAttribute('src'))).size).toBe(3);
+    for(const image of images) {
+      expect(image.getAttribute('src')).toContain('company/factory/');
+      expect(Number(image.getAttribute('width'))).toBeGreaterThan(700);
+      expect(existsSync(publicAssetFile(image.getAttribute('src')))).toBe(true);
+    }
   });
   it('loads a shared system without altering the retained homepage source', () => {
     expect(existsSync('src/styles/site-system.css')).toBe(true);

@@ -6,6 +6,7 @@ import About from './About.jsx';
 import { certificates } from '../data/certificates.js';
 import { publicAsset } from '../utils/publicAsset.js';
 import { existsSync, readFileSync } from 'node:fs';
+import { join } from 'node:path';
 import userEvent from '@testing-library/user-event';
 
 function renderPage(Page) {
@@ -87,11 +88,12 @@ describe('Manufacturing and company information', () => {
     expect(within(nav).getByRole('link', { name:'Inside FAHINT' })).toHaveAttribute('href','/about#inside-fahint');
   });
   it('uses separate, traceable factory photographs across the three updated surfaces', () => {
-    const manifest = JSON.parse(readFileSync('public/assets/images/company/factory/manifest.json', 'utf8').replace(/^\uFEFF/, ''));
+    const factoryDirectory = join('public', 'assets', 'images', 'company', 'factory');
+    const manifest = JSON.parse(readFileSync(join(factoryDirectory, 'manifest.json'), 'utf8').replace(/^\uFEFF/, ''));
     expect(manifest).toHaveLength(10);
     expect(new Set(manifest.map(photo => photo.source_sha256)).size).toBe(10);
     for (const photo of manifest) {
-      expect(existsSync(`public/assets/images/company/factory/${photo.asset}`)).toBe(true);
+      expect(existsSync(join(factoryDirectory, photo.asset))).toBe(true);
       expect(photo.bytes).toBeLessThan(500000);
     }
     for (const [Page, page] of [[Capabilities, 'Capabilities'], [About, 'About']]) {
