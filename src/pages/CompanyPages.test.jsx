@@ -7,7 +7,6 @@ import { certificates } from '../data/certificates.js';
 import { publicAsset } from '../utils/publicAsset.js';
 import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
-import userEvent from '@testing-library/user-event';
 
 function renderPage(Page) {
   return render(<MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}><Page /></MemoryRouter>);
@@ -19,29 +18,34 @@ describe('Manufacturing and company information', () => {
     expect(screen.getByRole('heading', { level: 1, name: 'Your product. Our production.' })).toBeInTheDocument();
     expect(screen.getByAltText('FAHINT staff assembling wiring-device components')).toHaveAttribute('src', publicAsset('assets/images/company/factory/device-assembly-v1.webp'));
     expect(screen.getByRole('heading', { name: 'Assembly & automation' })).toBeInTheDocument();
-    expect(screen.getByRole('tab', { name: 'Aging tests' })).toBeInTheDocument();
-    expect(screen.getByRole('tab', { name: 'Laboratory verification' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'Aging tests' })).toBeVisible();
+    expect(screen.getByRole('heading', { name: 'Laboratory verification' })).toBeVisible();
     expect(document.getElementById('oem')).toBeInTheDocument();
     expect(screen.getByRole('link', { name: 'Discuss your OEM / ODM project' })).toHaveAttribute('href', '/contact?topic=oem');
+    const styles = readFileSync('src/styles/capabilities.css', 'utf8');
+    expect(styles.match(/\.capabilities-page\.company-page h2\s*\{/g)).toHaveLength(2);
   });
-  it('lets buyers explore factory stages with pointer and keyboard controls', async () => {
-    const user = userEvent.setup();
+  it('shows the three factory stages without hiding the testing photographs behind tabs', () => {
     renderPage(Capabilities);
-    const tabs = screen.getAllByRole('tab');
-    expect(tabs).toHaveLength(3);
-    expect(tabs[0]).toHaveAttribute('aria-selected', 'true');
-    await user.click(tabs[1]);
-    expect(tabs[1]).toHaveAttribute('aria-selected', 'true');
-    expect(screen.getByRole('tabpanel', { name: 'Aging tests' })).toHaveTextContent('Test conditions and duration');
-    await user.keyboard('{ArrowRight}');
-    expect(tabs[2]).toHaveFocus();
-    expect(tabs[2]).toHaveAttribute('aria-selected', 'true');
-    expect(screen.getByRole('tabpanel', { name: 'Laboratory verification' })).toHaveTextContent('temperature and humidity');
-    await user.keyboard('{Home}{ArrowLeft}');
-    expect(tabs[2]).toHaveFocus();
-    await user.keyboard('{Home}');
-    expect(tabs[0]).toHaveFocus();
+    const stages = within(document.getElementById('production')).getAllByRole('article');
+    expect(stages).toHaveLength(3);
+    for (const stage of stages) expect(within(stage).getByRole('img')).toBeVisible();
+    expect(screen.queryByRole('tab')).not.toBeInTheDocument();
+    expect(screen.getByRole('article', { name: 'Aging tests' })).toHaveTextContent('Test conditions and duration');
+    expect(screen.getByRole('article', { name: 'Laboratory verification' })).toHaveTextContent('temperature and humidity');
     expect(screen.getByRole('link', { name: 'See our testing stations' })).toHaveAttribute('href', '/#studio-making');
+  });
+  it('keeps chapter navigation on the manufacturing route and joins documentation with the project inquiry', () => {
+    renderPage(Capabilities);
+    const nav = screen.getByRole('navigation', { name: 'Manufacturing sections' });
+    for (const [name, anchor] of [['Inside production', 'production'], ['OEM / ODM', 'oem'], ['Working with us', 'process']]) {
+      expect(within(nav).getByRole('link', { name })).toHaveAttribute('href', `/capabilities#${anchor}`);
+      expect(document.getElementById(anchor)).toBeInTheDocument();
+    }
+    const nextStep = screen.getByRole('region', { name: 'Bring us your product brief.' });
+    expect(within(nextStep).getByRole('link', { name: 'Start a project' })).toHaveAttribute('href', '/contact?topic=oem');
+    expect(within(nextStep).getByRole('link', { name: 'Review certificates' })).toHaveAttribute('href', '/about#certifications');
+    expect(nextStep).toHaveTextContent('A company certificate does not certify every product in the range.');
   });
   it('provides a sequenced cooperation process and model-scoped documentation', () => {
     renderPage(Capabilities);
@@ -90,8 +94,8 @@ describe('Manufacturing and company information', () => {
   it('uses separate, traceable factory photographs across the three updated surfaces', () => {
     const factoryDirectory = join('public', 'assets', 'images', 'company', 'factory');
     const manifest = JSON.parse(readFileSync(join(factoryDirectory, 'manifest.json'), 'utf8').replace(/^\uFEFF/, ''));
-    expect(manifest).toHaveLength(10);
-    expect(new Set(manifest.map(photo => photo.source_sha256)).size).toBe(10);
+    expect(manifest).toHaveLength(13);
+    expect(new Set(manifest.map(photo => photo.source_sha256)).size).toBe(13);
     for (const photo of manifest) {
       expect(existsSync(join(factoryDirectory, photo.asset))).toBe(true);
       expect(photo.bytes).toBeLessThan(500000);

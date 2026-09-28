@@ -30,6 +30,15 @@ function renderDetail(sku, initialPath = `/products/gfci/${sku}`) {
 }
 
 describe('ProductDetail', () => {
+  it.each(['GF15', ...OTHER_GFCI_MODELS])('uses the corrected shared factory context on %s', (sku) => {
+    renderDetail(sku.toLowerCase());
+    const manufacturing = screen.getByRole('region', { name: 'Manufacturing evidence.' });
+    expect(within(manufacturing).getAllByRole('img')).toHaveLength(3);
+    expect([...manufacturing.querySelectorAll('figcaption')].map(caption => caption.textContent)).toEqual([
+      'Component assembly', 'GFCI functional testing', 'Laboratory verification'
+    ]);
+  });
+
   it('reserves the correct aspect ratio for every product-page image', () => {
     const { container } = renderDetail('gf15');
 

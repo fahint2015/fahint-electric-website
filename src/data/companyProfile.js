@@ -10,6 +10,18 @@ export const companyProfile = {
 
 export const companyPhotos = {
   // Supplied factory originals; resize-only provenance is recorded in factory/manifest.json.
+  productAssembly: {
+    src: 'assets/images/company/factory/product-assembly-workshop-v1.webp', width: 1600, height: 900,
+    alt: 'FAHINT staff working at wiring-device assembly benches',
+  },
+  productGfciTesting: {
+    src: 'assets/images/company/factory/product-gfci-testing-v1.webp', width: 1600, height: 900,
+    alt: 'FAHINT staff operating GFCI functional testing stations',
+  },
+  productLaboratory: {
+    src: 'assets/images/company/factory/product-laboratory-v1.webp', width: 1600, height: 900,
+    alt: 'FAHINT laboratory with test benches and a temperature and humidity chamber',
+  },
   gfciTesting: {
     src: 'assets/images/company/factory/gfci-testing-v1.webp', width: 1920, height: 1080,
     alt: 'GFCI functional testing stations at FAHINT',

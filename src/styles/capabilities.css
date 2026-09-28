@@ -1,0 +1,125 @@
+/* Manufacturing has its own composition, not its own brand system. */
+.capabilities-page {
+  --cap-space: clamp(64px, 7vw, 104px);
+  --cap-gap: clamp(32px, 4vw, 64px);
+}
+.capabilities-page .cap-wrap {
+  width: min(calc(100% - var(--cp-gutter) * 2), 1440px);
+  margin-inline: auto;
+}
+.capabilities-page .cap-section { padding-block: var(--cap-space); }
+.capabilities-page.company-page h2 { font-size: clamp(36px, 3.6vw, 54px); line-height: 1.12; }
+.capabilities-page h3 { font-size: 25px; line-height: 1.25; }
+.capabilities-page p { font-size: 18px; line-height: 1.65; }
+.capabilities-page .cap-intro { max-width: 650px; }
+.capabilities-page .cap-intro h2 { max-width: 21ch; }
+.capabilities-page .cap-intro > p { margin-top: 20px; }
+.capabilities-page .cap-intro > .company-button { margin-top: 32px; }
+
+.capabilities-page .cap-hero { padding-top: 20px; background: var(--cp-navy); color: #fff; }
+.capabilities-page .cap-hero :is(p, .company-breadcrumb, figcaption) { color: #c4d5df; }
+.capabilities-page .cap-hero__layout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.5fr);
+  gap: var(--cap-gap);
+  align-items: center;
+  padding-block: 36px 48px;
+}
+.capabilities-page .cap-hero h1 { font-size: clamp(44px, 4.6vw, 72px); line-height: 1.08; letter-spacing: -0.03em; }
+.capabilities-page .cap-hero h1 > span { color: #a4c5d6; }
+.capabilities-page .cap-hero__copy > p { max-width: 38ch; margin-top: 28px; font-size: 19px; }
+.capabilities-page .cap-hero__copy > .company-button { margin-top: 32px; }
+.capabilities-page .cap-hero__photo > img { width: 100%; }
+.capabilities-page .cap-hero__photo figcaption { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 20px; padding-top: 16px; }
+.capabilities-page .cap-hero__photo figcaption > span:first-child { color: #fff; }
+.capabilities-page .cap-chapters { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; border-top: 1px solid #40576a; }
+.capabilities-page .cap-chapters a { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 76px; color: #c4d5df; font-size: 17px; text-decoration: none; }
+.capabilities-page .cap-chapters a:hover { color: #fff; text-decoration: underline; }
+
+.capabilities-page .cap-factory-stories { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 32px var(--cap-gap); margin-top: 40px; }
+.capabilities-page .cap-stage { display: grid; grid-template-columns: minmax(0, 0.7fr) minmax(0, 1fr); gap: 24px; align-items: center; }
+.capabilities-page .cap-stage--lead { display: block; grid-row: span 2; }
+.capabilities-page .cap-stage__photo > img { width: 100%; }
+.capabilities-page .cap-stage--lead .cap-stage__copy { padding-top: 28px; }
+.capabilities-page .cap-stage p { margin-top: 12px; font-size: 17px; }
+.capabilities-page .cap-stage--lead h3 { font-size: 29px; }
+.capabilities-page .cap-stage .cap-stage__note { margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--cp-line); }
+.capabilities-page .cap-stage .company-text-link { margin-top: 12px; }
+
+.capabilities-page .cap-oem { background: var(--cp-paper); }
+.capabilities-page .cap-oem__layout { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: var(--cap-gap); align-items: center; }
+.capabilities-page .cap-oem__options { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 32px; margin-top: 36px; }
+.capabilities-page .cap-oem__options > div { padding-top: 20px; border-top: 1px solid var(--cp-line); }
+.capabilities-page .cap-oem__options h3 { font-size: 22px; }
+.capabilities-page .cap-oem__options p { margin-top: 12px; font-size: 17px; }
+.capabilities-page .cap-oem__options + .company-text-link { margin-top: 28px; }
+.capabilities-page .cap-oem__photo > div { padding: 28px; background: #fff; }
+.capabilities-page .cap-oem__photo img { width: 100%; }
+.capabilities-page .cap-oem__photo figcaption { padding-top: 20px; color: var(--cp-muted); font-size: 15px; }
+
+.capabilities-page .cap-process__layout { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.2fr); gap: clamp(48px, 7vw, 112px); align-items: start; }
+.capabilities-page .cap-process__layout h2 { max-width: 18ch; }
+.capabilities-page .cap-intro .cap-process__note { max-width: 48ch; margin-top: 32px; font-size: 15px; }
+.capabilities-page .cap-process { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--cp-line); }
+.capabilities-page .cap-process > li { display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 24px; padding-block: 24px; border-bottom: 1px solid var(--cp-line); }
+.capabilities-page .cap-process__number { color: var(--cp-blue); font-size: 24px; line-height: 1.25; font-variant-numeric: tabular-nums; }
+.capabilities-page .cap-process h3 { font-size: 24px; }
+.capabilities-page .cap-process p { margin-top: 8px; font-size: 17px; }
+
+.capabilities-page .cap-next { background: var(--cp-navy); color: #fff; border-bottom: 1px solid #40576a; }
+.capabilities-page .cap-next p { color: #c4d5df; }
+.capabilities-page .cap-next__layout { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: var(--cap-gap); align-items: center; }
+.capabilities-page .cap-next h2 { max-width: 19ch; }
+.capabilities-page .cap-next__documents { padding-left: var(--cap-gap); border-left: 1px solid #40576a; }
+.capabilities-page .cap-next__documents h3 { max-width: 26ch; font-size: 28px; }
+.capabilities-page .cap-next__documents p { margin-top: 16px; font-size: 17px; }
+.capabilities-page .cap-next__documents .company-text-link { margin-top: 20px; }
+
+@media (max-width: 1100px) {
+  .capabilities-page .cap-hero__layout { grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); }
+  .capabilities-page .cap-hero h1 { font-size: clamp(40px, 4.7vw, 52px); }
+  .capabilities-page .cap-factory-stories { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 36px; }
+  .capabilities-page .cap-stage--lead { display: grid; grid-column: 1 / -1; grid-row: auto; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 32px; }
+  .capabilities-page .cap-stage--lead .cap-stage__copy { padding-top: 0; }
+  .capabilities-page .cap-stage:not(.cap-stage--lead) { grid-template-columns: minmax(0, 0.7fr) minmax(0, 1fr); gap: 20px; align-items: start; }
+  .capabilities-page .cap-stage h3 { font-size: 24px; }
+  .capabilities-page .cap-oem__layout { grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr); }
+  .capabilities-page .cap-oem__options { grid-template-columns: 1fr; gap: 20px; }
+  .capabilities-page .cap-process__layout { gap: 40px; }
+}
+
+@media (max-width: 760px) {
+  .capabilities-page { --cap-space: 56px; --cap-gap: 32px; }
+  .capabilities-page.company-page h2 { font-size: clamp(32px, 8vw, 42px); }
+  .capabilities-page p { font-size: 17px; }
+  .capabilities-page .cap-hero { padding-top: 8px; }
+  .capabilities-page .cap-hero__layout { grid-template-columns: 1fr; padding-block: 28px 24px; gap: 32px; }
+  .capabilities-page .cap-hero h1 { font-size: clamp(38px, 9.6vw, 58px); }
+  .capabilities-page .cap-hero__copy > p { max-width: 48ch; margin-top: 20px; font-size: 18px; }
+  .capabilities-page .cap-hero__copy > .company-button { margin-top: 24px; }
+  .capabilities-page .cap-hero__photo figcaption { gap: 4px 16px; font-size: 13px; }
+  .capabilities-page .cap-chapters { gap: 16px; }
+  .capabilities-page .cap-chapters a { min-height: 72px; justify-content: flex-start; font-size: 15px; line-height: 1.35; }
+  .capabilities-page .cap-chapters a svg { display: none; }
+  .capabilities-page .cap-factory-stories { grid-template-columns: 1fr; gap: 32px; margin-top: 28px; }
+  .capabilities-page .cap-stage--lead { display: block; grid-column: auto; }
+  .capabilities-page .cap-stage--lead .cap-stage__copy { padding-top: 24px; }
+  .capabilities-page .cap-stage--lead h3 { font-size: 27px; }
+  .capabilities-page .cap-stage:not(.cap-stage--lead) { grid-template-columns: minmax(0, 0.65fr) minmax(0, 1fr); gap: 20px; padding-top: 28px; border-top: 1px solid var(--cp-line); }
+  .capabilities-page .cap-stage p { font-size: 16px; }
+  .capabilities-page .cap-stage--lead p { font-size: 17px; }
+  .capabilities-page .cap-oem__layout { grid-template-columns: 1fr; gap: 32px; }
+  .capabilities-page .cap-oem__options { margin-top: 28px; }
+  .capabilities-page .cap-oem__options p { font-size: 16px; }
+  .capabilities-page .cap-oem__photo { width: min(100%, 440px); }
+  .capabilities-page .cap-oem__photo > div { padding: 20px; }
+  .capabilities-page .cap-oem__photo figcaption { padding-top: 16px; font-size: 14px; }
+  .capabilities-page .cap-process__layout { grid-template-columns: 1fr; gap: 32px; }
+  .capabilities-page .cap-process > li { grid-template-columns: 28px minmax(0, 1fr); gap: 20px; padding-block: 20px; }
+  .capabilities-page .cap-process h3 { font-size: 23px; }
+  .capabilities-page .cap-process p { margin-top: 8px; font-size: 16px; }
+  .capabilities-page .cap-next__layout { grid-template-columns: 1fr; gap: 36px; }
+  .capabilities-page .cap-next__documents { padding: 32px 0 0; border-left: 0; border-top: 1px solid #40576a; }
+  .capabilities-page .cap-next__documents h3 { font-size: 26px; }
+  .capabilities-page .cap-next__documents p { font-size: 16px; }
+}

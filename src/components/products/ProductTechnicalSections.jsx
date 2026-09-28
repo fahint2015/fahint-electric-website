@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { ArrowRight, ExternalLink, FileCheck2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { isVerifiedListing } from '../../data/products.js';
+import { companyPhotos } from '../../data/companyProfile.js';
 import { publicAsset } from '../../utils/publicAsset.js';
 import SafeImage from '../SafeImage.jsx';
 
@@ -445,22 +446,22 @@ export function ProductCertification({ product }) {
 }
 
 const MANUFACTURING_EVIDENCE = [
-  ['assets/images/company/catalog-production.jpg', 'Production', 'GFCI production line photographed for the FAHINT catalog', 1417, 547],
-  ['assets/images/company/fahint-laboratory-catalog.webp', 'Testing', 'Laboratory equipment photographed for the FAHINT catalog', 1417, 422],
-  ['assets/images/company/catalog-tooling.jpg', 'Tooling', 'Metal tooling photographed for the FAHINT catalog', 786, 248]
+  [companyPhotos.productAssembly, 'Component assembly'],
+  [companyPhotos.productGfciTesting, 'GFCI functional testing'],
+  [companyPhotos.productLaboratory, 'Laboratory verification']
 ];
 
 export function ProductManufacturingProof() {
   return (
-    <section className="product-technical product-manufacturing">
+    <section className="product-technical product-manufacturing" id="manufacturing-evidence" aria-labelledby="manufacturing-evidence-title">
       <div className="container">
         <div className="product-technical__head">
-          <p className="product-section-label">Factory context</p>
-          <h2>Manufacturing evidence.</h2>
+          <h2 id="manufacturing-evidence-title">Manufacturing evidence.</h2>
+          <p>Factory photographs from FAHINT. Test requirements and documentation are confirmed for the selected model.</p>
         </div>
         <div className="product-manufacturing__grid">
-          {MANUFACTURING_EVIDENCE.map(([src, caption, alt, width, height]) => (
-            <figure key={src}><SafeImage src={src} alt={alt} width={width} height={height} loading="lazy" /><figcaption>{caption}</figcaption></figure>
+          {MANUFACTURING_EVIDENCE.map(([photo, caption]) => (
+            <figure key={photo.src}><SafeImage {...photo} loading="lazy" /><figcaption>{caption}</figcaption></figure>
           ))}
         </div>
       </div>

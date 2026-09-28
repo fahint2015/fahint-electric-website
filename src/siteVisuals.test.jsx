@@ -25,23 +25,36 @@ describe('Shared visual finish and original company imagery', () => {
     expect(section.querySelector('figcaption')).toHaveTextContent('FAHINT exhibition');
     expect(section.querySelector('img[src*="brand-program-review-v2"]')).toBeNull();
   });
-  it('shows complete original manufacturing photos instead of low-resolution diagonal brochure fragments', () => {
+  it('pairs the supplied factory photographs with accurate assembly, testing and laboratory captions', () => {
     show(ProductManufacturingProof);
-    const images=screen.getAllByRole('img');
-    expect(images).toHaveLength(3);
-    for(const image of images) {
-      expect(image.getAttribute('src')).not.toContain('/facility-');
-      expect(Number(image.getAttribute('width'))).toBeGreaterThan(700);
+    const examples = [
+      ['Component assembly', 'product-assembly-workshop-v1.webp', 1600, 900, 'FAHINT staff working at wiring-device assembly benches'],
+      ['GFCI functional testing', 'product-gfci-testing-v1.webp', 1600, 900, 'FAHINT staff operating GFCI functional testing stations'],
+      ['Laboratory verification', 'product-laboratory-v1.webp', 1600, 900, 'FAHINT laboratory with test benches and a temperature and humidity chamber']
+    ];
+    expect(screen.getAllByRole('img')).toHaveLength(3);
+    for(const [caption, filename, width, height, alt] of examples) {
+      const figure = screen.getByText(caption).closest('figure');
+      const image = within(figure).getByRole('img', { name: alt });
+      expect(image).toHaveAttribute('src', expect.stringContaining(`company/factory/${filename}`));
+      expect(image).toHaveAttribute('width', String(width));
+      expect(image).toHaveAttribute('height', String(height));
       expect(existsSync(publicAssetFile(image.getAttribute('src')))).toBe(true);
     }
-    expect(screen.getByText('Tooling')).toBeInTheDocument();
+    expect(screen.queryByText('Production')).not.toBeInTheDocument();
+    expect(screen.queryByText('Tooling')).not.toBeInTheDocument();
+    expect(screen.getByText('Factory photographs from FAHINT. Test requirements and documentation are confirmed for the selected model.')).toBeInTheDocument();
+    const styles = readFileSync('src/styles/site-system.css', 'utf8');
+    expect(styles).toMatch(/\.product-manufacturing__grid figure img\s*\{[^}]*aspect-ratio:\s*16\s*\/\s*9[^}]*object-fit:\s*cover/);
+    expect(styles.match(/\.product-manufacturing__grid figure\s*\{([^}]*)\}/)?.[1]).toContain('border-radius: 0;');
+    expect(styles.match(/\.product-manufacturing__grid figure img\s*\{([^}]*)\}/)?.[1]).toContain('border-radius: var(--site-radius);');
   });
-  it('illustrates each factory-tour stage with a distinct original factory photograph', () => {
+  it('illustrates each visible manufacturing stage with a distinct original factory photograph', () => {
     show(Capabilities);
     const production=document.getElementById('production');
-    const panels=within(production).getAllByRole('tabpanel', { hidden:true });
-    expect(panels).toHaveLength(3);
-    const images=panels.map(panel=>within(panel).getByRole('img', { hidden:true }));
+    const stages=within(production).getAllByRole('article');
+    expect(stages).toHaveLength(3);
+    const images=stages.map(stage=>within(stage).getByRole('img'));
     expect(new Set(images.map(image=>image.getAttribute('src'))).size).toBe(3);
     for(const image of images) {
       expect(image.getAttribute('src')).toContain('company/factory/');

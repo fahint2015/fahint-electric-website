@@ -228,8 +228,8 @@
 .product-packaging__footer .btn { background: var(--site-blue); color: #fff; }
 .product-certification__open { background: #fff; color: var(--site-ink); }
 .product-certification__actions .textlink { font-size: 16px; font-weight: 600; }
-.product-manufacturing__grid figure { overflow: hidden; border-radius: var(--site-radius); }
-.product-manufacturing__grid figure img { width: 100%; height: auto; aspect-ratio: 2 / 1; object-fit: cover; }
+.product-manufacturing__grid figure { overflow: hidden; border-radius: 0; }
+.product-manufacturing__grid figure img { width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; border-radius: var(--site-radius); }
 .product-manufacturing__grid figure figcaption { padding: 18px 0; background: transparent; color: var(--site-muted); font-size: 16px; font-weight: 550; text-transform: none; letter-spacing: 0; }
 .catalog-product-detail :is(.catalog-features figure,.catalog-presentation__photos figure,.catalog-drawings__grid figure,.catalog-documentation__certificate) { border-radius: var(--site-radius); overflow: hidden; }
 .catalog-product-detail .catalog-section-heading h2 { font-size: var(--site-section-title); }

@@ -138,5 +138,47 @@
     "purpose": "Wiring-device samples displayed in the showroom",
     "processing": "Proportional downscale and WebP compression only. No generated content, retouching or color changes.",
     "status": "selected"
+  },
+  {
+    "asset": "product-assembly-workshop-v1.webp",
+    "source": "D:\\国际站运营平台\\方特插座\\网站资料\\工厂视频+照片\\照片\\生产车间\\微信图片_202304041046241.jpg",
+    "source_sha256": "80d13eff18ceb5f445d6cbb509aba18d461009934a1e0cf3b68b2c8450d4ff84",
+    "source_width": 4032,
+    "source_height": 2268,
+    "width": 1600,
+    "height": 900,
+    "bytes": 262870,
+    "page": "GFCI product details",
+    "purpose": "Wiring-device assembly benches with FAHINT staff",
+    "processing": "Proportional downscale and WebP compression only. No cropping, generated content, retouching or color changes.",
+    "status": "selected"
+  },
+  {
+    "asset": "product-gfci-testing-v1.webp",
+    "source": "D:\\国际站运营平台\\方特插座\\网站资料\\工厂视频+照片\\照片\\生产车间\\微信图片_202304041046243.jpg",
+    "source_sha256": "16b97f7d9c2affdd6e01ae0f29645189c9e81177ddae0f815288b7adb96af73e",
+    "source_width": 4032,
+    "source_height": 2268,
+    "width": 1600,
+    "height": 900,
+    "bytes": 292228,
+    "page": "GFCI product details",
+    "purpose": "GFCI functional testing stations with operators, not component assembly",
+    "processing": "Proportional downscale and WebP compression only. No cropping, generated content, retouching or color changes.",
+    "status": "selected"
+  },
+  {
+    "asset": "product-laboratory-v1.webp",
+    "source": "D:\\国际站运营平台\\方特插座\\网站资料\\工厂视频+照片\\照片\\生产车间\\微信图片_202304041046233.jpg",
+    "source_sha256": "ee475dd6962be0dcd3b5881fe95d2c8a891a990e3edb62d142ee67a49a294759",
+    "source_width": 4032,
+    "source_height": 2268,
+    "width": 1600,
+    "height": 900,
+    "bytes": 186200,
+    "page": "GFCI product details",
+    "purpose": "Laboratory test benches and a temperature and humidity chamber",
+    "processing": "Proportional downscale and WebP compression only. No cropping, generated content, retouching or color changes.",
+    "status": "selected"
   }
 ]
