@@ -1,9 +1,11 @@
-import { useEffect } from 'react';
 import { Link, Navigate, useLocation, useParams } from 'react-router-dom';
 import { MessageSquareText } from 'lucide-react';
 import { findProduct, products } from '../data/products.js';
 import { findCatalogProduct } from '../data/catalogProducts.js';
 import { findLine } from '../data/lines.js';
+import { productMetadata } from '../seo/metadata.js';
+import { usePageMetadata } from '../seo/usePageMetadata.js';
+import { ModelBuyingChecklist } from '../components/products/BuyingGuide.jsx';
 import CatalogProductDetail from './CatalogProductDetail.jsx';
 import ProductCard from '../components/ProductCard.jsx';
 import InquiryForm from '../components/InquiryForm.jsx';
@@ -49,6 +51,7 @@ function ProductInquiry({ product }) {
           <Link className="textlink" to={`/contact?model=${encodeURIComponent(product.sku)}`}>
             Use the full contact page
           </Link>
+          <ModelBuyingChecklist product={product} />
         </div>
         <InquiryForm defaultModel={product.sku} title="Send a product brief." />
       </div>
@@ -62,33 +65,7 @@ export default function ProductDetail() {
   const product = line === 'gfci' ? findProduct(sku) : null;
   const catalogProduct = findCatalogProduct(line, sku);
 
-  useEffect(() => {
-    if (!product) return undefined;
-
-    const previousTitle = document.title;
-    const pageTitle = `${product.sku} ${product.name} | Fahint Electric`;
-    const metadata = [
-      [document.querySelector('meta[name="description"]'), product.summary],
-      [document.querySelector('meta[property="og:title"]'), pageTitle],
-      [document.querySelector('meta[property="og:description"]'), product.summary]
-    ].map(([element, value]) => ({
-      element,
-      previousValue: element?.getAttribute('content') ?? null,
-      value
-    }));
-
-    document.title = pageTitle;
-    metadata.forEach(({ element, value }) => element?.setAttribute('content', value));
-
-    return () => {
-      document.title = previousTitle;
-      metadata.forEach(({ element, previousValue }) => {
-        if (!element) return;
-        if (previousValue === null) element.removeAttribute('content');
-        else element.setAttribute('content', previousValue);
-      });
-    };
-  }, [product]);
+  usePageMetadata(product ? productMetadata(product, findLine('gfci')) : undefined);
 
   if (!product && catalogProduct) return <CatalogProductDetail key={`${line}-${catalogProduct.slug}`} product={catalogProduct} />;
   if (!product) return <Navigate to={findLine(line) ? `/products/${line}` : '/products'} replace />;

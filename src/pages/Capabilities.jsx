@@ -5,10 +5,10 @@ import { companyPhotos } from '../data/companyProfile.js';
 import '../styles/capabilities.css';
 
 const steps = [
-  ['Define the brief', 'Share your market, model mix, target quantities and installation requirements.'],
-  ['Configure the range', 'Review available finishes, wall plates, authorized branding and packaging.'],
-  ['Approve the sample', 'Confirm appearance, function, model documentation and artwork before the order.'],
-  ['Plan production', 'Agree on quantities, lead times, packing and delivery requirements for the selected models.']
+  ['Define the brief', 'Send the model list, quantity by finish, destination and intended application. Identify the specifications and documents your market requires.'],
+  ['Configure the range', 'Review the exact device, matching wallplate, authorized brand artwork and packaging. Confirm feasibility and any changes in writing.'],
+  ['Approve the sample', 'Compare the sample with the agreed specification, model documents, markings and pack artwork. Resolve differences before approving the order.'],
+  ['Plan production', 'Confirm quantities, lead times, packing and shipping terms in the quotation. Agree on inspection requirements and the documents to accompany the order.']
 ];
 
 const factoryStages = [
@@ -103,7 +103,15 @@ export default function Capabilities() {
         <div className="cap-intro">
           <h2 id="process-title">From a product brief to an agreed order.</h2>
           <p>A clear approval path keeps product choices, documentation and delivery expectations aligned.</p>
+          <h3>What to include in your brief</h3>
+          <ul className="cap-brief-list" aria-label="OEM quotation checklist">
+            <li>Model numbers and quantities by finish or configuration.</li>
+            <li>Destination, intended application and required model documents.</li>
+            <li>Wallplate choice, packaging format and authorized brand artwork.</li>
+            <li>Sample requirements and your requested delivery window.</li>
+          </ul>
           <p className="cap-process__note">Order quantities, sample arrangements and lead times are confirmed in your quotation. There is no single minimum or delivery promise for every product.</p>
+          <CompanyLink to="/blog/how-to-source-ul-listed-gfci-from-china" secondary>Read the sourcing checklist</CompanyLink>
         </div>
         <ol className="cap-process" aria-label="From brief to production">
           {steps.map(([title, description], index) => <li key={title}>

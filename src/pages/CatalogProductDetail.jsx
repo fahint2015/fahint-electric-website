@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { MessageSquareText } from 'lucide-react';
 import { findLine } from '../data/lines.js';
@@ -8,6 +7,9 @@ import { ProductSpecifications } from '../components/products/ProductTechnicalSe
 import { CatalogApplications, CatalogDocumentation, CatalogDrawings, CatalogFeatures, CatalogPresentation } from '../components/products/CatalogProductSections.jsx';
 import CatalogModelCard from '../components/products/CatalogModelCard.jsx';
 import InquiryForm from '../components/InquiryForm.jsx';
+import { productMetadata } from '../seo/metadata.js';
+import { usePageMetadata } from '../seo/usePageMetadata.js';
+import { ModelBuyingChecklist } from '../components/products/BuyingGuide.jsx';
 
 export default function CatalogProductDetail({ product }) {
   const { pathname, search } = useLocation();
@@ -20,27 +22,7 @@ export default function CatalogProductDetail({ product }) {
   const related = models.filter((candidate) => candidate.slug !== product.slug)
     .sort((a, b) => Number(b.group === product.group) - Number(a.group === product.group)).slice(0, 4);
 
-  useEffect(() => {
-    const previousTitle = document.title;
-    const title = `${product.sku} ${product.name} | Fahint Electric`;
-    const changes = [
-      ['meta[name="description"]', product.summary],
-      ['meta[property="og:title"]', title],
-      ['meta[property="og:description"]', product.summary]
-    ].map(([selector, content]) => {
-      const element = document.querySelector(selector);
-      return { element, content, before: element?.getAttribute('content') };
-    });
-    document.title = title;
-    changes.forEach(({ element, content }) => element?.setAttribute('content', content));
-    return () => {
-      document.title = previousTitle;
-      changes.forEach(({ element, before }) => {
-        if (before == null) element?.removeAttribute('content');
-        else element?.setAttribute('content', before);
-      });
-    };
-  }, [product]);
+  usePageMetadata(productMetadata(product, line));
 
   return (
     <div className={`catalog-product-detail${isUsb ? ' catalog-product-detail--usb' : ''}${isSmart ? ' catalog-product-detail--smart' : ''}${isLighting ? ' catalog-product-detail--lighting' : ''}${upfrontSpecifications ? ' catalog-product-detail--matrix' : ''}`}>
@@ -81,6 +63,7 @@ export default function CatalogProductDetail({ product }) {
             <p className="product-section-label">Project inquiry</p><h2>{product.draft ? 'Request approved documentation' : 'Request a quotation'} for {product.sku}.</h2>
             <p>Share the quantity, intended application, finish and packaging needs. The selected model travels with your inquiry.</p>
             <Link className="textlink" to={`/contact?model=${encodeURIComponent(product.sku)}`}>Use the full contact page</Link>
+            <ModelBuyingChecklist product={product} />
           </div>
           <InquiryForm defaultModel={product.sku} modelOptions={models} title="Send a product brief." />
         </div>

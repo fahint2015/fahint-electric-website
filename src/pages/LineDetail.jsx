@@ -1,10 +1,13 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Link, useParams, Navigate } from 'react-router-dom';
 import { ArrowRight, Search } from 'lucide-react';
 import { findLine, productLines } from '../data/lines.js';
 import { filterCatalogProducts, getCatalogProducts } from '../data/catalogProducts.js';
 import CatalogModelCard from '../components/products/CatalogModelCard.jsx';
 import SafeImage from '../components/SafeImage.jsx';
+import { familyMetadata } from '../seo/metadata.js';
+import { usePageMetadata } from '../seo/usePageMetadata.js';
+import { BuyingGuide } from '../components/products/BuyingGuide.jsx';
 
 function ModelCatalogue({ line }) {
   const [query, setQuery] = useState('');
@@ -23,11 +26,7 @@ function ModelCatalogue({ line }) {
     'lighting-switches': 'assets/images/lines/lighting-series-stair-entry-v1.webp',
   }[line.slug];
 
-  useEffect(() => {
-    const previous = document.title;
-    document.title = `${line.name} · Models & Specifications | Fahint Electric`;
-    return () => { document.title = previous; };
-  }, [line]);
+  usePageMetadata(familyMetadata(line));
 
   return <div className="catalog-series">
     <section className={`catalog-series__intro${poster ? ' catalog-series__intro--poster' : ''}${isCenteredPoster ? ' catalog-series__intro--centered' : ''}${isRightPoster ? ' catalog-series__intro--right' : ''}`} aria-labelledby="catalog-series-title">
@@ -59,12 +58,14 @@ function ModelCatalogue({ line }) {
           <label><span>Configuration</span><select value={group} onChange={(event) => setGroup(event.target.value)}>
             <option value="">All configurations</option>{groups.map((name) => <option key={name} value={name}>{name}</option>)}
           </select></label>
-          <p className="catalog-filters__count" aria-live="polite">{filtered.length} of {models.length} models</p>
+          <div className="catalog-filters__summary"><p className="catalog-filters__count" aria-live="polite">{filtered.length} of {models.length} models</p>
+            <Link className="textlink" to={`/products/${line.slug}#buying-guide`}>Need help choosing?</Link></div>
         </div>
         {filtered.length ? <div className="catalog-model-grid">{filtered.map((product) => <CatalogModelCard key={product.slug} product={product} />)}</div>
           : <div className="catalog-empty"><p role="status">No models match your selection.</p><button className="btn btn--outline" onClick={clear}>Clear filters</button></div>}
       </div>
     </section>
+    <BuyingGuide line={line.slug} />
     <section className="catalog-series__footer">
       <div className="container">
         <header className="catalog-section-heading"><div><h2>Explore the other ranges.</h2></div>

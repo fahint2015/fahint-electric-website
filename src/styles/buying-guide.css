@@ -1,0 +1,23 @@
+.buying-guide { padding-block: var(--site-space); background: var(--site-paper); scroll-margin-top: 110px; }
+.buying-guide__layout { display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); gap: clamp(32px, 5vw, 80px); align-items: start; }
+.buying-guide__intro h2 { margin: 0 0 20px; color: var(--site-ink); font-size: var(--site-section-title); font-weight: 550; line-height: 1.16; }
+.buying-guide__intro > p:not(.product-section-label) { max-width: 48ch; color: var(--site-muted); font-size: 17px; line-height: 1.65; margin-bottom: 24px; }
+.buying-guide__intro .textlink { display: flex; width: fit-content; margin-top: 12px; min-height: 44px; align-items: center; }
+.buying-guide .textlink, .buying-guide .faq-q svg, .buying-guide .product-section-label { color: var(--site-blue); }
+.buying-guide .faq-item { border-color: var(--site-line); }
+.buying-guide .faq-q { text-align: left; color: var(--site-ink); }
+.buying-guide .faq-q svg { flex-shrink: 0; }
+.buying-guide .faq-a { font-size: 16px; line-height: 1.7; color: var(--site-muted); }
+.model-buying-checklist { margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--site-line); }
+.model-buying-checklist h3 { font-size: 20px; line-height: 1.35; margin: 0 0 16px; overflow-wrap: anywhere; }
+.model-buying-checklist ul { margin: 0 0 16px; padding-left: 20px; }
+.model-buying-checklist li { padding-left: 4px; margin-bottom: 12px; line-height: 1.65; }
+.model-buying-checklist strong { color: inherit; }
+.product-inquiry .model-buying-checklist { border-color: rgba(255, 255, 255, .2); color: #c8d8e3; }
+.product-inquiry .model-buying-checklist h3, .product-inquiry .model-buying-checklist strong { color: #fff; }
+.product-inquiry .model-buying-checklist p { color: #c8d8e3; font-size: 15px; }
+@media (max-width: 760px) {
+  .buying-guide { padding-block: 56px; }
+  .buying-guide__layout { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+  .buying-guide__intro h2 { font-size: 30px; }
+}

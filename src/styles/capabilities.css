@@ -59,6 +59,9 @@
 
 .capabilities-page .cap-process__layout { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.2fr); gap: clamp(48px, 7vw, 112px); align-items: start; }
 .capabilities-page .cap-process__layout h2 { max-width: 18ch; }
+.capabilities-page .cap-process__layout .cap-intro h3 { margin: 32px 0 16px; font-size: 22px; line-height: 1.35; }
+.capabilities-page .cap-brief-list { padding-left: 20px; margin: 0; color: var(--cp-muted); font-size: 16px; line-height: 1.7; }
+.capabilities-page .cap-brief-list li { padding-left: 4px; margin-bottom: 12px; }
 .capabilities-page .cap-intro .cap-process__note { max-width: 48ch; margin-top: 32px; font-size: 15px; }
 .capabilities-page .cap-process { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--cp-line); }
 .capabilities-page .cap-process > li { display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 24px; padding-block: 24px; border-bottom: 1px solid var(--cp-line); }

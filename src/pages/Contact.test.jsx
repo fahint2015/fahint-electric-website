@@ -36,7 +36,7 @@ describe('Contact product categories', () => {
   it('falls back to product inquiry for an unsupported topic', () => {
     renderContact('/contact?topic=invalid');
     expect(screen.getByRole('link', { name: 'Product inquiry' })).toHaveAttribute('aria-current', 'page');
-    expect(document.title).toBe('Contact FAHINT | FAHINT');
+    expect(document.title).toBe('Contact FAHINT | Product & OEM Inquiries');
   });
   it.each([
     ['GTN15', 'GFCI Outlets'],

@@ -1,34 +1,15 @@
-import { useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
 import { publicAsset } from '../../utils/publicAsset.js';
+import { staticMetadata } from '../../seo/metadata.js';
+import { usePageMetadata } from '../../seo/usePageMetadata.js';
 
 export function useStudioPageMeta(title, description) {
   const { pathname } = useLocation();
-  const preview = ['/home-studio', '/products-studio'].includes(pathname.replace(/\/$/, ''));
-  useEffect(() => {
-    const oldTitle = document.title;
-    let robots = document.querySelector('meta[name="robots"]');
-    const original = robots?.getAttribute('content');
-    const created = !robots;
-    if (!robots) { robots = document.createElement('meta'); robots.name = 'robots'; document.head.append(robots); }
-    let descriptionMeta = document.querySelector('meta[name="description"]');
-    const oldDescription = descriptionMeta?.getAttribute('content');
-    const createdDescription = !descriptionMeta;
-    if (!descriptionMeta) { descriptionMeta = document.createElement('meta'); descriptionMeta.name = 'description'; document.head.append(descriptionMeta); }
-    descriptionMeta.content = description;
-    robots.content = preview ? 'noindex, nofollow' : 'index, follow';
-    document.title = `FAHINT | ${title}${preview ? ' — Preview' : ''}`;
-    return () => {
-      document.title = oldTitle;
-      if (created) robots.remove();
-      else if (original === null) robots.removeAttribute('content');
-      else robots.content = original;
-      if (createdDescription) descriptionMeta.remove();
-      else if (oldDescription === null) descriptionMeta.removeAttribute('content');
-      else descriptionMeta.content = oldDescription;
-    };
-  }, [title, description, preview]);
+  const path = pathname.replace(/\/$/, '') || '/';
+  const preview = ['/home-studio', '/products-studio'].includes(path);
+  usePageMetadata(preview ? { title: `FAHINT | ${title} — Preview`, description, noindex: true, robots: 'noindex, nofollow' }
+    : staticMetadata[path] || { title: `FAHINT | ${title}`, description });
 }
 
 export function StudioImage({ src, alt = '', className = '', width = 800, height = 800, priority = false, ...props }) {

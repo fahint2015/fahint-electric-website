@@ -3,7 +3,9 @@ import { Download, ArrowUpRight } from 'lucide-react';
 import { findPost, posts } from '../data/posts.js';
 import { catalogueDocument } from '../data/documents.js';
 import { publicAsset } from '../utils/publicAsset.js';
-import { CompanyLink, usePageMeta } from '../components/company/CompanyShared.jsx';
+import { CompanyLink } from '../components/company/CompanyShared.jsx';
+import { articleMetadata } from '../seo/metadata.js';
+import { usePageMetadata } from '../seo/usePageMetadata.js';
 import EditorialPhoto from '../components/company/EditorialPhoto.jsx';
 import { formatPostDate, ReadingCard } from '../components/company/ReadingShared.jsx';
 import NotFound from './NotFound.jsx';
@@ -14,7 +16,7 @@ function SourceLink({ source, children, ...props }) {
 }
 
 function ArticleContent({ post }) {
-  usePageMeta(post.title, post.excerpt);
+  usePageMetadata(articleMetadata(post));
   const headings = post.body.map((block,index) => ({ ...block, id:'article-section-' + index })).filter(block => block.type === 'h2');
   const related = posts.filter(item => item.slug !== post.slug).sort((a,b) => Number(b.category === post.category) - Number(a.category === post.category)).slice(0,3);
   return <div className="company-page reading-page">

@@ -18,7 +18,7 @@ const createDist = async (html) => {
   const distDir = join(root, 'dist');
   temporaryRoots.push(root);
   await mkdir(distDir, { recursive: true });
-  if (html !== undefined) await writeFile(join(distDir, 'index.html'), html);
+  if (html !== undefined) await writeFile(join(distDir, 'index.html'), html + '<!-- page-meta:start --><title>Fixture</title><!-- page-meta:end -->');
   return distDir;
 };
 
@@ -27,6 +27,26 @@ afterEach(async () => {
 });
 
 describe('GitHub Pages deployment', () => {
+  it('covers all published pages with unique metadata and real share images', async () => {
+    const { PUBLIC_ROUTES } = await loadPreparePages();
+    const { routeMetadata } = await import('../scripts/page-metadata.mjs');
+    const { renderHeadEntries, headEntries } = await import('./seo/metadata.js');
+    expect(new Set(routeMetadata.keys())).toEqual(new Set(['/', ...PUBLIC_ROUTES.map(route => `/${route}`)]));
+    const metadata = [...routeMetadata.values()];
+    expect(new Set(metadata.map(meta => meta.title)).size).toBe(metadata.length);
+    expect(new Set(metadata.map(meta => meta.description)).size).toBe(metadata.length);
+    for (const [path, meta] of routeMetadata) {
+      expect(fs.existsSync(join('public', meta.image)), path).toBe(true);
+      const html = renderHeadEntries(headEntries(meta, { path, publicUrl: 'https://preview.example/catalog/' }));
+      const head = new DOMParser().parseFromString(`<html><head>${html}</head></html>`, 'text/html').head;
+      expect(head.querySelectorAll('title'), path).toHaveLength(1);
+      expect(head.querySelector('meta[name="description"]').content, path).toBe(meta.description);
+      expect(head.querySelector('meta[property="og:image"]').content, path).toMatch(/^https:\/\/preview\.example\/catalog\//);
+      const schema = head.querySelector('script[type="application/ld+json"]');
+      if (schema) expect(() => JSON.parse(schema.textContent), path).not.toThrow();
+    }
+  });
+
   it('ships a sitemap for every published route without preview or draft pages', async () => {
     const { PUBLIC_ROUTES } = await loadPreparePages();
     const sitemap = await readFile('public/sitemap.xml', 'utf8');
@@ -46,14 +66,17 @@ describe('GitHub Pages deployment', () => {
     expect(workflow).not.toMatch(/run:\s*(?:echo|printf)[^\n]*CUSTOM_DOMAIN/i);
   });
 
-  it('copies index byte-for-byte to 404 and creates .nojekyll', async () => {
+  it('gives the fallback noindex metadata and creates .nojekyll', async () => {
     const { preparePages } = await loadPreparePages();
     const html = '<!doctype html><base href="/fahint-electric-website/"><main>fixture</main>';
     const distDir = await createDist(html);
 
     await preparePages({ distDir, expectedBase: '/fahint-electric-website/' });
 
-    expect(await readFile(join(distDir, '404.html'))).toEqual(await readFile(join(distDir, 'index.html')));
+    const fallback = await readFile(join(distDir, '404.html'), 'utf8');
+    expect(fallback).toContain('<main>fixture</main>');
+    expect(fallback).toContain('noindex, follow');
+    expect(fallback).toContain('Page not found | FAHINT');
     expect((await stat(join(distDir, '.nojekyll'))).isFile()).toBe(true);
   });
 
@@ -82,8 +105,26 @@ describe('GitHub Pages deployment', () => {
     ];
 
     for (const route of publicRoutes) {
-      expect(await readFile(join(distDir, route, 'index.html'), 'utf8')).toBe(html);
+      const entry = await readFile(join(distDir, route, 'index.html'), 'utf8');
+      expect(entry).toContain('<main>fixture</main>');
+      expect(entry).not.toContain('<title>Fixture</title>');
+      expect(entry).toContain('name="description"');
     }
+  });
+
+  it('writes model-specific metadata into initial HTML without requiring JavaScript', async () => {
+    const { preparePages } = await loadPreparePages();
+    const distDir = await createDist('<!doctype html><base href="/fahint-electric-website/"><script type="module" src="/app.js"></script>');
+    await preparePages({ distDir, expectedBase: '/fahint-electric-website/', publicUrl: 'https://preview.example/fahint-electric-website/', siteUrl: '' });
+    const gfci = await readFile(join(distDir, 'products/gfci/gf15/index.html'), 'utf8');
+    const usb = await readFile(join(distDir, 'products/usb-outlets/ftr15-3100/index.html'), 'utf8');
+    expect(gfci).toContain('<title>GF15 15A Self-Test GFCI Receptacle | FAHINT</title>');
+    expect(usb).toContain('FTR15-3100');
+    expect(usb).not.toContain('<title>GF15');
+    expect(gfci).toContain(new URL('assets/images/products/gf15-main.webp', 'https://preview.example/fahint-electric-website/').href);
+    expect(gfci).toContain('application/ld+json');
+    expect(gfci).toContain('<script type="module" src="/app.js"></script>');
+    expect(gfci).not.toContain('rel="canonical"');
   });
 
   it('fails when index.html is missing', async () => {

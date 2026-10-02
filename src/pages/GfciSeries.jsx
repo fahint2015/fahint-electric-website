@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import ProductCard from '../components/ProductCard.jsx';
@@ -7,6 +6,10 @@ import { isVerifiedListing, products } from '../data/products.js';
 import { gfciSeriesVisuals } from '../data/productPageVisuals.js';
 import { getCatalogProducts } from '../data/catalogProducts.js';
 import CatalogModelCard from '../components/products/CatalogModelCard.jsx';
+import { findLine } from '../data/lines.js';
+import { familyMetadata } from '../seo/metadata.js';
+import { usePageMetadata } from '../seo/usePageMetadata.js';
+import { BuyingGuide } from '../components/products/BuyingGuide.jsx';
 
 const GFCI_HERO_VIDEO = `${import.meta.env.BASE_URL}assets/videos/gfci-product-video-optimized.mp4`;
 const GFCI_HERO_POSTER = `${import.meta.env.BASE_URL}assets/videos/gfci-product-video-poster.webp`;
@@ -38,11 +41,7 @@ const OEM_OPTIONS = [
 ];
 
 export default function GfciSeries() {
-  useEffect(() => {
-    const previous = document.title;
-    document.title = 'GFCI Outlets · Models & Specifications | FAHINT';
-    return () => { document.title = previous; };
-  }, []);
+  usePageMetadata(familyMetadata(findLine('gfci')));
   return (
     <div className="gfci-series">
       <section className="gfci-series__hero gfci-series-hero">
@@ -74,7 +73,7 @@ export default function GfciSeries() {
         <div className="container">
           <div className="gfci-series__catalog-head">
             <h2 id="gfci-models-heading">Explore GFCI models</h2>
-            <p>{products.length} published models</p>
+            <div><p>{products.length} published models</p><Link className="textlink" to="/products/gfci#buying-guide">Need help choosing?</Link></div>
           </div>
           <div className="prod-grid gfci-series__product-grid gfci-product-grid">
             {products.map((product) => <ProductCard key={product.sku} product={product} />)}
@@ -126,6 +125,8 @@ export default function GfciSeries() {
           <div className="catalog-model-grid">{industrialModels.map((product) => <CatalogModelCard key={product.sku} product={product} />)}</div>
         </div>
       </section>
+
+      <BuyingGuide line="gfci" />
 
       <section id="engineering-proof" className="gfci-series__engineering section" aria-labelledby="gfci-engineering-heading">
         <div className="container">

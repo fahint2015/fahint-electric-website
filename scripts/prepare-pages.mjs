@@ -1,9 +1,11 @@
-import { copyFile, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { join, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { posts } from '../src/data/posts.js';
 import { products } from '../src/data/products.js';
 import { catalogProducts, productHref } from '../src/data/catalogProducts.js';
+import { pageHtml, routeMetadata } from './page-metadata.mjs';
+import { notFoundMetadata, validateSiteUrl } from '../src/seo/metadata.js';
 
 const STATIC_ROUTES = [
   'products',
@@ -76,10 +78,16 @@ function validateCustomDomain(customDomain) {
 export async function preparePages({
   distDir = 'dist',
   expectedBase = process.env.SITE_BASE,
-  customDomain = process.env.CUSTOM_DOMAIN
+  customDomain = process.env.CUSTOM_DOMAIN,
+  siteUrl = process.env.VITE_SITE_URL || '',
+  publicUrl
 } = {}) {
   const validatedBase = validateExpectedBase(expectedBase);
   const validatedDomain = validateCustomDomain(customDomain);
+  const canonicalBase = validateSiteUrl(siteUrl);
+  const actualPublicUrl = validateSiteUrl(publicUrl ?? (canonicalBase || (validatedDomain
+    ? `https://${validatedDomain}${validatedBase}`
+    : process.env.GITHUB_REPOSITORY ? `https://${process.env.GITHUB_REPOSITORY.split('/')[0]}.github.io${validatedBase}` : '')));
 
   const outputDir = resolve(distDir);
   const indexPath = join(outputDir, 'index.html');
@@ -96,11 +104,20 @@ export async function preparePages({
     throw new Error(`Cannot prepare Pages artifact: expected base "${validatedBase}", found "${actualBase || 'none'}".`);
   }
 
-  await copyFile(indexPath, join(outputDir, '404.html'));
-  await Promise.all(PUBLIC_ROUTES.map(async (route) => {
+  const metadataOptions = { siteUrl: canonicalBase, publicUrl: actualPublicUrl };
+  // Prepare all heads before writing: a missing route or malformed template must fail the build.
+  const preparedRoutes = ['', ...PUBLIC_ROUTES].map(route => {
+    const path = `/${route}`;
+    const metadata = routeMetadata.get(path);
+    if (!metadata) throw new Error(`Missing page metadata for ${path}`);
+    return [route, pageHtml(indexHtml, metadata, { ...metadataOptions, path })];
+  });
+  const fallback = pageHtml(indexHtml, notFoundMetadata, { ...metadataOptions, path: '/404' });
+  await writeFile(join(outputDir, '404.html'), fallback);
+  await Promise.all(preparedRoutes.map(async ([route, html]) => {
     const routeDir = join(outputDir, ...route.split('/'));
     await mkdir(routeDir, { recursive: true });
-    await copyFile(indexPath, join(routeDir, 'index.html'));
+    await writeFile(join(routeDir, 'index.html'), html);
   }));
   await writeFile(join(outputDir, '.nojekyll'), '');
 

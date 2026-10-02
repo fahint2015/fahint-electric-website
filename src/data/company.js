@@ -105,7 +105,15 @@ export const faqs = [
   {
     q: 'Can you supply neutral or private-label packaging?',
     a:
-      'Yes. We produce both neutral packaging and full private-label programs, including custom color boxes, printed wall plates and branded body markings.'
+      'Discuss neutral or private-label packaging, authorized logos and product markings with our team. Send the model list, packaging format and artwork requirements; availability, minimum quantities and sample approval are confirmed for the selected program.'
+  },
+  {
+    q: 'What information helps you prepare a quotation?',
+    a: 'Include the complete model numbers, quantities by finish, destination, required documents and packaging needs. State your requested timing and any sample or private-label requirements. Keep different configurations separate so the quotation can identify exactly what is included.'
+  },
+  {
+    q: 'What should I confirm before approving an order?',
+    a: 'Match the sample to the agreed model, specification, finish, wallplate and markings. Review the relevant model documents and authorized packaging artwork. Confirm quantities, warranty terms, inspection requirements and the delivery arrangement in writing.'
   }
 ];
 

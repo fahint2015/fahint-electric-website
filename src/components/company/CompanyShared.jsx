@@ -1,21 +1,13 @@
-import { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
 import { publicAsset } from '../../utils/publicAsset.js';
 import '../../styles/company-pages.css';
+import { staticMetadata } from '../../seo/metadata.js';
+import { usePageMetadata } from '../../seo/usePageMetadata.js';
 
 export function usePageMeta(title, description) {
-  useEffect(() => {
-    const previousTitle = document.title;
-    const element = document.querySelector('meta[name="description"]');
-    const previousDescription = element?.getAttribute('content');
-    document.title = `${title} | FAHINT`;
-    if (element && description) element.setAttribute('content', description);
-    return () => {
-      document.title = previousTitle;
-      if (element && previousDescription !== null) element.setAttribute('content', previousDescription);
-    };
-  }, [title, description]);
+  const { pathname } = useLocation();
+  usePageMetadata(staticMetadata[pathname.replace(/\/$/, '') || '/'] || { title: `${title} | FAHINT`, description, noindex: true });
 }
 
 export function CompanyImage({ src, alt, width = 1600, height = 900, priority = false, ...props }) {

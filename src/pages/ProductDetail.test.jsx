@@ -64,14 +64,14 @@ describe('ProductDetail', () => {
 
     renderDetail('gt20');
 
-    expect(document.title).toBe('GT20 20A Tamper-Resistant GFCI | Fahint Electric');
+    expect(document.title).toBe('GT20 20A Tamper-Resistant GFCI | FAHINT');
     expect(description).toHaveAttribute(
       'content',
       expect.stringMatching(/20A, 125V.*tamper-resistant.*GFCI/i)
     );
     expect(openGraphTitle).toHaveAttribute(
       'content',
-      'GT20 20A Tamper-Resistant GFCI | Fahint Electric'
+      'GT20 20A Tamper-Resistant GFCI | FAHINT'
     );
     expect(openGraphDescription).toHaveAttribute(
       'content',
