@@ -60,12 +60,12 @@ describe('published page prerendering', () => {
     expect(html).not.toContain('Loading page…');
   });
 
-  it('waits for the actual lazy homepage, including product and company links', async () => {
-    const html = await renderPage('/');
+  it.each(['/', '/fahint-electric-website/'])('waits for the actual lazy homepage with product and company links under %s', async (base) => {
+    const html = await renderPage('/', base);
     expect(html).toContain('Wiring devices.');
     expect(html).toContain('Built for your market.');
     expect(html).toContain('Wenzhou Fahint Electric');
-    expect(html).toContain('href="/products/usb-outlets"');
+    expect(html).toContain(`href="${base}products/usb-outlets"`);
     expect(html).not.toContain('Loading page…');
     expect(html).not.toContain('data-motion="ready"');
     expect(html).toContain('class="studio-hero"');
