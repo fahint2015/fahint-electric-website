@@ -76,6 +76,9 @@ export default function Footer() {
                 <Link to="/about#certifications">Certifications</Link>
               </li>
               <li>
+                <Link to="/resources">Resources</Link>
+              </li>
+              <li>
                 <Link to="/blog">Blog &amp; insights</Link>
               </li>
               <li>

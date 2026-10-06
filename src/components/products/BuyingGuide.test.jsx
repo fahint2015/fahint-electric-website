@@ -48,7 +48,7 @@ describe('Purchasing information', () => {
   });
 
   it.each([
-    ['gfci/gf15', 'GF15'], ['usb-outlets/ftr15-3100', 'FTR15-3100'], ['gfci/gl20', 'GL20'], ['gfci/gtn15', 'GTN15'],
+    ['gfci/gf15', 'GF15'], ['usb-outlets/ftr15-3100', 'FTR15-3100'], ['gfci/gl20', 'GL20'], ['gfci/gtn15', 'GTN15'], ['gfci/gtn20', 'GTN20'],
   ])('includes the exact model in the order checklist for %s', (route, sku) => {
     openPage(`/products/${route}`);
     const checklist = screen.getByRole('region', { name: `Before you order ${sku}` });
@@ -56,7 +56,40 @@ describe('Purchasing information', () => {
     expect(checklist).toHaveTextContent(/packaging/i);
     expect(checklist).toHaveTextContent(/confirmed in your quotation/i);
     if (sku === 'GL20') expect(checklist).toHaveTextContent(/under review/i);
-    if (sku === 'GTN15') expect(checklist).toHaveTextContent(/residential.*not.*coverage/i);
+    if (/^GTN/.test(sku)) {
+      expect(checklist).toHaveTextContent(/August 16, 2022.*E504391/);
+      expect(checklist).toHaveTextContent(/current coverage.*ordered configuration/i);
+      expect(checklist).not.toHaveTextContent(/does not establish coverage/);
+    }
+  });
+
+  it('describes the supplied GFCI addendum without excluding its GTN models', () => {
+    const answer = buyingGuides.gfci.questions.find(question => /certificate/.test(question.q)).a;
+    expect(answer).toMatch(/August 16, 2022.*E504391-20210212/);
+    expect(answer).toMatch(/GTN15.*GTN20.*no feed-through/i);
+    expect(answer).toMatch(/GL20.*under review/);
+    expect(answer).toMatch(/current.*coverage/i);
+    expect(answer).not.toMatch(/does not establish/);
+  });
+
+  it.each([
+    ['bs1801-m', 'BS1801-M', 'E501377-20181016', 'August 16, 2022'],
+    ['bs1803-g', 'BS1803-G', 'E501377-20181016', 'August 16, 2022'],
+    ['bs18032-m', 'BS18032-M', 'E501377-20230919', 'September 25, 2023'],
+  ])('keeps the base-model document and finish caveat together for %s', (slug, sku, report, date) => {
+    openPage(`/products/wallplates/${slug}`);
+    const checklist = screen.getByRole('region', { name: `Before you order ${sku}` });
+    expect(checklist).toHaveTextContent(report);
+    expect(checklist).toHaveTextContent(date);
+    expect(checklist).toHaveTextContent(/base model/i);
+    expect(checklist).toHaveTextContent(/finish.*current coverage/i);
+  });
+
+  it('requests a matching document when the wallplate base model is absent', () => {
+    openPage('/products/wallplates/bs1805');
+    const checklist = screen.getByRole('region', { name: 'Before you order BS1805' });
+    expect(checklist).toHaveTextContent(/not named in the.*wallplate.*addenda/i);
+    expect(checklist).toHaveTextContent(/request.*model.*document/i);
   });
 
   it('makes the OEM quotation inputs explicit without universal promises', () => {

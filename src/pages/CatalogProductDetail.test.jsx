@@ -72,7 +72,8 @@ describe('catalogue product details', () => {
     }
     await user.click(screen.getByRole('button', { name: `View ${product.sku} image 1` }));
     expect(image).toHaveAttribute('src', publicAsset(product.assets.gallery[0]));
-    expect(screen.getByRole('button', { name: `Show ${product.sku} in Graphite` })).toHaveAttribute('aria-pressed', 'false');
+    expect(screen.getByRole('button', { name: `Show ${product.sku} in Graphite` })).toHaveAttribute('aria-pressed', 'true');
+    expect(screen.getByRole('group', { name: 'Selected product' })).toHaveTextContent('Finish: Graphite');
   });
 
   it('does not resolve a model from the wrong product family', () => {
@@ -186,7 +187,8 @@ describe('catalogue product details', () => {
       expect(thumb).toHaveAttribute('aria-pressed', 'true');
       expect(image).toHaveAttribute('src', publicAsset(product.assets.gallery[index]));
     }
-    expect(screen.getByRole('button', { name: `Show ${sku} in Black` })).toHaveAttribute('aria-pressed', 'false');
+    expect(screen.getByRole('button', { name: `Show ${sku} in Black` })).toHaveAttribute('aria-pressed', 'true');
+    expect(screen.getByRole('group', { name: 'Selected product' })).toHaveTextContent('Finish: Black');
     expect(screen.getByRole('img', { name: `${sku} product detail reference` }))
       .toHaveAttribute('src', publicAsset(product.assets.gallery[1]));
   });

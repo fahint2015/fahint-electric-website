@@ -300,13 +300,26 @@ describe('complete, model-specific catalogue', () => {
     expect(rows(standard).get('Warranty')).toBe('3 years limited');
   });
 
-  it('uses industrial GFCI sources without copying residential feed-through or certificates', () => {
+  it('matches wallplate scans to the documented base model instead of the family alone', () => {
+    for (const sku of ['BS1801', 'BS1801-M', 'BS1802', 'BS1803-G', 'BS1803-M', 'BS1804']) {
+      expect(model('wallplates', sku).certificate.image, sku).toBe('assets/images/certs/ul-wallplate-2018.jpg');
+    }
+    for (const sku of ['BS1806', 'BS1807', 'BS18012', 'BS18013-M', 'BS18014', 'BS18032-M', 'BS18033-G', 'BS18034-M']) {
+      expect(model('wallplates', sku).certificate.image, sku).toBe('assets/images/certs/ul-wallplate.webp');
+    }
+    expect(model('wallplates', 'BS1805').certificate.image).toBeNull();
+  });
+
+  it('uses the GTN addendum without restoring conflicting feed-through drawings', () => {
     for (const sku of ['GTN15', 'GTN20']) {
       const p = model('gfci', sku);
       expect(rows(p).get('Feed-through terminals')).toMatch(/^None/);
       expect(p.certificate.image).toBeNull();
       expect(p.summary).toMatch(/nylon/);
-      expect(p.notes.join(' ')).toMatch(/does not establish coverage/);
+      expect(p.notes.join(' ')).toMatch(/August 16, 2022.*E504391-20210212.*GTN15.*GTN20/);
+      expect(p.notes.join(' ')).toMatch(/current.*coverage/i);
+      expect(p.notes.join(' ')).not.toMatch(/does not establish coverage/);
+      expect(p.certificationLabel).toMatch(/E504391.*2022/);
       expect(rows(p).get('Weather-resistant')).toBe('No');
       expect(p.assets.drawings).toEqual([]);
       expect(p.notes.join(' ')).toMatch(/drawing.*20A Feed-Through.*withheld/);

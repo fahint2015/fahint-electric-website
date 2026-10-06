@@ -22,13 +22,26 @@ async function completeRequiredFields(user) {
 
 describe('InquiryForm helpers', () => {
   it.each(['USB Outlets', ''])('labels category inquiries correctly, including an optional empty selection: %s', (category) => {
-    const inquiry = { ...validForm, category };
+    const { model, ...details } = validForm;
+    const inquiry = { ...details, category };
     const expected = `Product category: ${category || 'Not specified'}`;
     const body = new URLSearchParams(buildMailtoUrl(inquiry).split('?')[1]).get('body');
     expect(body).toContain(expected);
     expect(body).not.toContain('Model of interest:');
     expect(buildInquiryText(inquiry)).toContain(expected);
     expect(buildInquiryText(inquiry)).not.toContain('Model of interest:');
+  });
+
+  it('preserves category and model together with finish, topic and source in both outputs', () => {
+    const inquiry = { ...validForm, category: 'GFCI Outlets', finish: 'Black',
+      topic: 'Technical question', source: '/products/gfci/gf15' };
+    const body = new URLSearchParams(buildMailtoUrl(inquiry).split('?')[1]).get('body');
+    expect(body).toContain('Product category: GFCI Outlets');
+    expect(body).toContain('Model of interest: GF15');
+    expect(body).toContain('Finish: Black');
+    expect(body).toContain('Inquiry type: Technical question');
+    expect(body).toContain('Product page: /products/gfci/gf15');
+    expect(buildInquiryText(inquiry)).toBe(`To: louis@fahint.com\n\n${body}`);
   });
 
   it('returns the exact errors for trimmed required fields and an invalid email', () => {
@@ -104,6 +117,28 @@ describe('InquiryForm', () => {
     render(<InquiryForm defaultModel="GF15" />);
 
     expect(screen.getByLabelText('Model of interest')).toHaveValue('GF15');
+  });
+
+  it.each([
+    ['GF15', 'GFCI Outlets', '/products/gfci/gf15'],
+    ['FTR15C-3100', 'USB Outlets', '/products/usb-outlets/ftr15c-3100']
+  ])('composes and copies the same selected %s brief from a category form', async (model, category, source) => {
+    const user = userEvent.setup();
+    const delivery = vi.fn();
+    const clipboardWriter = vi.fn();
+    const productContext = { model, category, finish: 'Black', finishSlug: 'black', source };
+    render(<InquiryForm defaultCategory={category} categoryOptions={productLines}
+      productContext={productContext} topic="OEM / ODM inquiry"
+      delivery={delivery} clipboardWriter={clipboardWriter} />);
+    expect(screen.getByRole('group', { name: 'Selected product' })).toHaveTextContent(`${model} · Finish: Black`);
+    await completeRequiredFields(user);
+    await user.click(screen.getByRole('button', { name: 'Open email app' }));
+    const body = new URLSearchParams(delivery.mock.calls[0][0].split('?')[1]).get('body');
+    expect(body).toContain(`Product category: ${category}\nModel of interest: ${model}\nFinish: Black`);
+    expect(body).toContain('Inquiry type: OEM / ODM inquiry');
+    expect(body).toContain(`Product page: ${source}`);
+    await user.click(await screen.findByRole('button', { name: 'Copy inquiry details' }));
+    expect(clipboardWriter).toHaveBeenCalledWith(`To: louis@fahint.com\n\n${body}`);
   });
 
   it('includes the selected category in the email and copy recovery without a model field', async () => {
@@ -484,5 +519,25 @@ describe('InquiryForm', () => {
     await act(async () => finishCopy());
     expect(clipboardWriter).toHaveBeenCalledWith(expect.stringContaining(validForm.message));
     expect(screen.queryByText('Inquiry details copied.')).not.toBeInTheDocument();
+  });
+
+  it.each(['finish', 'topic'])('does not confirm an old submission after changing the %s', async field => {
+    let resolveRequest;
+    const request = vi.fn(() => new Promise(resolve => { resolveRequest = resolve; }));
+    const context = { model: 'GF15', category: 'GFCI Outlets', finish: 'Black',
+      finishSlug: 'black', source: '/products/gfci/gf15' };
+    const props = { defaultCategory: 'GFCI Outlets', categoryOptions: productLines,
+      productContext: context, topic: 'Product inquiry', endpoint: 'https://forms.example.com/inquiry', request };
+    const { rerender } = render(<InquiryForm {...props} />);
+    fireEvent.change(screen.getByLabelText('Your name *'), { target: { value: validForm.name } });
+    fireEvent.change(screen.getByLabelText('Business email *'), { target: { value: validForm.email } });
+    fireEvent.change(screen.getByLabelText('Requirements *'), { target: { value: validForm.message } });
+    fireEvent.submit(screen.getByRole('button', { name: 'Send inquiry' }).closest('form'));
+    rerender(<InquiryForm {...props} {...(field === 'finish'
+      ? { productContext: { ...context, finish: 'White', finishSlug: 'white' } }
+      : { topic: 'Technical question' })} />);
+    await act(async () => resolveRequest({ ok: true, json: async () => ({ ok: true }) }));
+    expect(JSON.parse(request.mock.calls[0][1].body)).toMatchObject({ finish: 'Black', topic: 'Product inquiry' });
+    expect(screen.queryByText(/Your inquiry has been received/)).not.toBeInTheDocument();
   });
 });

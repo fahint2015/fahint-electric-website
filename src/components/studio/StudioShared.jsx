@@ -13,7 +13,7 @@ export function useStudioPageMeta(title, description) {
 }
 
 export function StudioImage({ src, alt = '', className = '', width = 800, height = 800, priority = false, ...props }) {
-  return <img className={className} src={publicAsset(src)} alt={alt} width={width} height={height} loading={priority ? 'eager' : 'lazy'} fetchpriority={priority ? 'high' : undefined} decoding="async" {...props} />;
+  return <img className={className} src={publicAsset(src)} alt={alt} width={width} height={height} loading={priority ? 'eager' : 'lazy'} fetchpriority={priority ? 'high' : 'low'} decoding="async" {...props} />;
 }
 
 export function StudioLink({ to, children, light = false, className = '', ...props }) {

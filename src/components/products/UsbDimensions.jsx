@@ -119,7 +119,7 @@ function DimensionView({ sku, dimensions, view, title, caption, index }) {
   return <figure className="usb-dimensions__view">
     <figcaption><span>{String(index + 1).padStart(2, '0')}</span><h3>{title}</h3></figcaption>
     <svg viewBox="0 0 320 360" width="320" height="360" role="img" aria-labelledby={titleId}>
-      <title id={titleId}>{sku} {title.toLowerCase()} dimension drawing</title>
+      <title id={titleId}>{`${sku} ${title.toLowerCase()} dimension drawing`}</title>
       {side ? <SideOutline dimensions={dimensions} /> : <FrontOutline sku={sku} dimensions={dimensions} plate={plate} mounting={mounting} />}
       {mounting ? <>
         <HorizontalDimension from={center.x - dimensions.tabPitch * SCALE / 2} to={center.x + dimensions.tabPitch * SCALE / 2} sourceY={holeY} y={36} value={dimensions.tabPitch} />

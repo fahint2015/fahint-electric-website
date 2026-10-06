@@ -566,7 +566,7 @@
 .studio-certificates { background: var(--studio-paper); }
 .studio-certificates .certcar { display: block; }
 .studio-certificates .certcar__track { gap: 20px; padding: 5px 4px; margin: -5px -4px; }
-.studio-certificates .certcard { flex: 0 0 calc((100% - 100px) / 6); min-width: 0; }
+.studio-certificates .certcard { flex: 1 0 0; min-width: 0; }
 .studio-certificates .certcard__media { width: 100%; padding: 9px 9px 0; border: 1px solid #d5e0e6; border-radius: 12px; background: #fff; }
 .studio-certificates .certcard__media img { border-radius: 5px 5px 0 0; }
 .studio-certificates .certcard__view { min-height: 44px; margin-inline: -9px; border-radius: 0 0 12px 12px; color: var(--studio-blue); font-size: 13px; }

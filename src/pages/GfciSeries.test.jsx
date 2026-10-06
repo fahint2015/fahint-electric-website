@@ -227,7 +227,7 @@ describe('GfciSeries', () => {
   });
 
   it('keeps the series route ahead of product and generic family routes', () => {
-    const main = readFileSync('src/main.jsx', 'utf8');
+    const main = readFileSync('src/App.jsx', 'utf8');
     const lineDetail = readFileSync('src/pages/LineDetail.jsx', 'utf8');
     const seriesRoute = main.indexOf('path="/products/gfci"');
     const productRoute = main.indexOf('path="/products/gfci/:sku"');

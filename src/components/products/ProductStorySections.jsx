@@ -99,7 +99,7 @@ export function ProductFeatureStory({ product }) {
   );
 }
 
-export function ProductApplicationStory({ product }) {
+export function ProductApplicationStory({ product, contactHref = `/contact?model=${encodeURIComponent(product.sku)}` }) {
   const lifestyleImage = product.assets.application
     || product.assets.gallery?.[4]
     || product.assets.gallery?.at(-1)
@@ -116,7 +116,7 @@ export function ProductApplicationStory({ product }) {
           <p className="product-story__note">
             Confirm the intended location, enclosure and applicable code requirements before specifying a model.
           </p>
-          <Link className="textlink" to={`/contact?model=${encodeURIComponent(product.sku)}`}>
+          <Link className="textlink" to={contactHref}>
             Review your application <ArrowRight size={15} aria-hidden="true" />
           </Link>
         </div>
@@ -172,7 +172,7 @@ const PACKAGING_REFERENCES = [
   { key: 'brown', name: 'Brown' }
 ];
 
-export function ProductOemStory({ product }) {
+export function ProductOemStory({ product, contactHref = `/contact?model=${encodeURIComponent(product.sku)}` }) {
   const packagingTitleId = `packaging-${product.sku.toLowerCase()}`;
   const wallPlateTitleId = `wall-plates-${product.sku.toLowerCase()}`;
   const programTitleId = `packaging-programs-${product.sku.toLowerCase()}`;
@@ -320,7 +320,7 @@ export function ProductOemStory({ product }) {
                 Customer-branded packaging is available after the registered trademark and brand authorization
                 documents are reviewed.
               </p>
-              <Link className="btn btn--primary" to={`/contact?model=${encodeURIComponent(product.sku)}`}>
+              <Link className="btn btn--primary" to={contactHref}>
                 Discuss {product.sku} configuration <ArrowRight size={16} aria-hidden="true" />
               </Link>
             </footer>

@@ -1,9 +1,18 @@
 // Buyer guides reviewed against the linked primary references; existing article URLs are retained.
+import { usbBuyingGuide } from './usbBuyingGuide.js';
+import { dimmerBuyingGuide } from './dimmerBuyingGuide.js';
+import { wallplateBuyingGuide } from './wallplateBuyingGuide.js';
+import { lightSwitchBuyingGuide } from './lightSwitchBuyingGuide.js';
+
 export const posts = [
+  lightSwitchBuyingGuide,
+  wallplateBuyingGuide,
+  dimmerBuyingGuide,
+  usbBuyingGuide,
   {
     "slug": "gfci-vs-afci-whats-the-difference",
     "title": "GFCI vs AFCI: Two Different Kinds of Protection",
-    "excerpt": "Understand the difference between ground-fault and arc-fault protection before comparing devices for your project.",
+    "excerpt": "GFCI and AFCI protect against different hazards. Learn what each does and which details to check before ordering a FAHINT GFCI.",
     "date": "2026-08-12",
     "updated": "2026-08-31",
     "readMinutes": 3,
@@ -29,51 +38,52 @@ export const posts = [
     "body": [
       {
         "type": "p",
-        "text": "A GFCI and an AFCI serve different purposes. Choosing one does not automatically address the protection provided by the other. The appropriate combination depends on the circuit, location and locally adopted electrical code."
+        "text": "When a project calls for GFCI and AFCI protection, check both functions in the specification. A device marked GFCI does not automatically provide AFCI protection, and vice versa."
       },
       {
         "type": "h2",
-        "text": "Ground-fault protection"
+        "text": "What a GFCI does"
       },
       {
         "type": "p",
-        "text": "A ground-fault circuit interrupter helps protect people from electric shock by interrupting power when it detects a ground fault. This is different from the overload protection provided by a conventional circuit breaker.",
+        "text": "A ground-fault circuit interrupter (GFCI) shuts off power when it detects a ground fault, helping protect people from electric shock. A conventional circuit breaker’s overload protection serves a different purpose.",
         "source": 1
       },
       {
         "type": "h2",
-        "text": "Arc-fault protection"
+        "text": "What an AFCI does"
       },
       {
         "type": "p",
-        "text": "An arc-fault circuit interrupter addresses fire hazards associated with dangerous electrical arcing. CPSC distinguishes this role from the shock protection offered by a GFCI. Some devices provide both functions; check the actual product designation rather than assuming that one label includes the other."
+        "text": "An arc-fault circuit interrupter (AFCI) addresses the fire risk from dangerous electrical arcing. CPSC explains the distinction between this function and GFCI shock protection. Some devices include both; check the product’s designation to see which functions it provides.",
+        "source": 0
       },
       {
         "type": "h2",
-        "text": "Start with the project requirements"
+        "text": "What to put in the purchasing brief"
       },
       {
         "type": "p",
-        "text": "Have a qualified electrical professional determine the protection required by the locally adopted code and the circuit design. Do not use a product category name as a substitute for that review, and do not work inside an electrical panel yourself."
+        "text": "A qualified electrical professional should determine which protection the circuit and location need under the locally adopted code. Do not make that decision from a product category name or work inside an electrical panel yourself."
       },
       {
         "type": "p",
-        "text": "For a purchasing brief, record the required protection, voltage, current rating, receptacle configuration and installation environment. This gives the supplier a concrete specification to check."
+        "text": "Once those requirements are clear, give the supplier the protection type, voltage, current rating, receptacle configuration and installation environment."
       },
       {
         "type": "h2",
-        "text": "Review the exact FAHINT model"
+        "text": "Compare the exact FAHINT model"
       },
       {
         "type": "p",
-        "text": "The GFCI collection includes different ratings and configurations. Review the selected model page and original listing documentation. Indicator behavior, testing instructions and available finishes must be confirmed for that model; they are not universal features of every device."
+        "text": "FAHINT’s GFCI range includes different ratings and configurations. Read the model page and its original listing documents before ordering. Confirm indicator behavior, test instructions and available finishes for that model; these details can differ across the range."
       }
     ]
   },
   {
     "slug": "nec-406-8-weather-resistant-receptacles",
     "title": "Weather-Resistant Receptacles: The Device and the Cover",
-    "excerpt": "An outdoor installation needs more than a WR marking. Review the device, enclosure and location together.",
+    "excerpt": "A WR marking does not make an outlet waterproof. Check the receptacle, enclosure and cover against the location and locally adopted code.",
     "date": "2026-08-08",
     "updated": "2026-08-31",
     "readMinutes": 3,
@@ -95,50 +105,43 @@ export const posts = [
     "body": [
       {
         "type": "p",
-        "text": "Weather-resistant receptacles and weatherproof covers do different jobs. A suitable device does not remove the need to specify the enclosure and cover for the location."
+        "text": "A WR marking means weather-resistant; it does not mean waterproof. The receptacle still needs an enclosure and cover suitable for the location."
       },
       {
         "type": "h2",
-        "text": "Confirm the code edition"
+        "text": "Will a plug stay inserted?"
       },
       {
         "type": "p",
-        "text": "The 2023 NEC addresses receptacles in damp or wet locations in Section 406.9. Older references may use different numbering. Check the edition adopted locally and its amendments with the authority having jurisdiction before finalizing a specification."
+        "text": "Cover requirements depend on the location and how the outlet will be used. Include whether protection is needed while a plug is inserted. Check the device rating separately from the enclosure and cover requirements."
       },
       {
         "type": "h2",
-        "text": "Specify the complete installation"
+        "text": "Which code edition applies?"
       },
       {
         "type": "p",
-        "text": "The device rating and the enclosure are separate checks. Cover requirements depend on the location and conditions of use, including whether protection is needed while a plug is inserted. A WR device should not be described as waterproof."
+        "text": "The 2023 NEC covers receptacles in damp or wet locations in Section 406.9. Older editions may number the requirement differently. Check the edition and amendments adopted for the site with the local authority having jurisdiction before finalizing the specification.",
+        "source": 0
       },
       {
         "type": "h2",
-        "text": "Keep the requirements separate"
+        "text": "What to specify for a FAHINT order"
       },
       {
         "type": "p",
-        "text": "Record the voltage and current rating, receptacle configuration, required GFCI protection, weather resistance and tamper resistance as separate items. A product with one feature does not necessarily provide the others."
-      },
-      {
-        "type": "h2",
-        "text": "Confirm the model and documentation"
+        "text": "List voltage, current and receptacle configuration, then identify GFCI protection, weather resistance and tamper resistance separately. A product with one of these features does not necessarily provide the others."
       },
       {
         "type": "p",
-        "text": "For a FAHINT order, include the full model designation rather than only “outdoor outlet.” Ask for the relevant model instructions and certification coverage. Have a qualified installer select the appropriate box, cover and installation method for the site."
-      },
-      {
-        "type": "p",
-        "text": "The original article URL is retained for existing links; the text has been revised to avoid presenting an older code number as a universal current requirement."
+        "text": "Use the full model number, not just “outdoor outlet,” and request its instructions and certification coverage. Have a qualified installer select the box, cover and installation method for the site."
       }
     ]
   },
   {
     "slug": "why-gfci-outlets-trip",
     "title": "A GFCI Keeps Tripping: What to Record Before Asking for Help",
-    "excerpt": "A useful support brief starts with the model, symptoms and conditions. Repeated tripping is a reason to investigate, not bypass protection.",
+    "excerpt": "Note the model, indicator and conditions when a GFCI trips repeatedly or will not reset. Know what to send for support and when to call an electrician.",
     "date": "2026-08-04",
     "updated": "2026-08-31",
     "readMinutes": 3,
@@ -160,54 +163,55 @@ export const posts = [
     "body": [
       {
         "type": "p",
-        "text": "Repeated tripping, a failure to reset or an unfamiliar indicator needs attention. Do not bypass the GFCI or repeatedly reset it to keep equipment operating. Stop using damaged, wet, hot or scorched equipment and contact a qualified electrician."
-      },
-      {
-        "type": "h2",
-        "text": "Record the model and the symptom"
+        "text": "Repeated trips, a failure to reset or an unfamiliar indicator need attention. Do not bypass the GFCI or keep resetting it to run equipment. Stop using damaged, wet, hot or scorched equipment and contact a qualified electrician."
       },
       {
         "type": "p",
-        "text": "Photograph the visible model label only if it can be read safely without removing the device. Note whether the unit trips, will not reset or shows an indicator. Record when the problem started and whether it coincided with a new appliance, weather event or electrical work."
+        "text": "If there is smoke, sparking or an immediate fire risk, keep clear and contact emergency services."
       },
       {
         "type": "h2",
-        "text": "Do not diagnose from the light alone"
+        "text": "Record what you can see safely"
       },
       {
         "type": "p",
-        "text": "Indicator meanings differ by model and design. Use the instructions supplied with the exact device. A color alone is not enough to conclude that the receptacle is safe, defective or at the end of its service life."
+        "text": "Photograph the model label only if it is visible and safe to read without removing the device. Describe what happens: does it trip, refuse to reset or show an indicator? Note when the problem began and whether it followed a new appliance, a weather event or electrical work."
+      },
+      {
+        "type": "p",
+        "text": "Indicator meanings vary by model and design. Use the exact device’s instructions; color alone cannot establish that a receptacle is safe, defective or at the end of its service life."
       },
       {
         "type": "h2",
-        "text": "Leave circuit checks to a qualified electrician"
+        "text": "Leave the electrical checks to an electrician"
       },
       {
         "type": "p",
-        "text": "A professional can inspect the device, wiring, connected equipment and installation environment safely. Opening a box, changing conductors or making electrical measurements is not part of this buyer guide. If there is smoke, sparking or an immediate fire risk, keep clear and contact emergency services."
+        "text": "Have a qualified electrician inspect the device, wiring, connected equipment and surroundings. Do not open the box, change conductors or take electrical measurements as part of this support check."
       },
       {
         "type": "h2",
-        "text": "Keep testing instructions with the device"
+        "text": "Keep the test instructions"
       },
       {
         "type": "p",
-        "text": "ESFI recommends monthly GFCI testing. Follow the device manufacturer’s test instructions and arrange qualified help if the device does not behave as described. Automatic self-testing is not a reason to disregard those instructions."
+        "text": "ESFI recommends testing GFCIs monthly. Follow the procedure supplied with your device, even if it has automatic self-testing. If it does not behave as the instructions describe, arrange qualified help.",
+        "source": 0
       },
       {
         "type": "h2",
-        "text": "Send a useful support request"
+        "text": "Sending the support request"
       },
       {
         "type": "p",
-        "text": "Include the model, order reference, safely obtained photos, observed indicator and a description of the conditions. FAHINT can help identify the relevant product documentation; site diagnosis remains the responsibility of a qualified electrical professional."
+        "text": "Send the full model number and order reference, safely obtained photos, the observed indicator and a description of the conditions. FAHINT can help find the relevant product documents. A qualified electrical professional still needs to diagnose the installation."
       }
     ]
   },
   {
     "slug": "tamper-resistant-receptacle-requirements",
     "title": "Tamper-Resistant Receptacles: A Buyer’s Specification Checklist",
-    "excerpt": "Keep tamper resistance distinct from weather resistance and GFCI protection, and verify the applicable local requirements.",
+    "excerpt": "Specify tamper resistance alongside the electrical rating, GFCI protection and weather resistance. Check the local requirements before ordering.",
     "date": "2026-07-29",
     "updated": "2026-08-31",
     "readMinutes": 3,
@@ -229,57 +233,54 @@ export const posts = [
     "body": [
       {
         "type": "p",
-        "text": "Tamper resistance is a receptacle feature. It does not, by itself, mean that a device is weather-resistant or provides ground-fault protection. Specify each required feature explicitly."
+        "text": "Tamper resistance, weather resistance and ground-fault protection are separate features. A tamper-resistant receptacle may still need other functions to meet your project specification."
       },
       {
         "type": "h2",
-        "text": "Check the adopted requirements"
+        "text": "Where is tamper resistance required?"
       },
       {
         "type": "p",
-        "text": "The 2023 NEC addresses tamper-resistant receptacles in Section 406.12. The scope includes specified residential and other occupancies and includes both 125V and 250V nonlocking receptacles at the stated ratings. Do not reduce it to a rule only about children’s rooms."
+        "text": "Section 406.12 of the 2023 NEC covers specified residential and other occupancies. It includes 125V and 250V nonlocking receptacles at the ratings named in that section. The scope is broader than children’s rooms.",
+        "source": 0
       },
       {
         "type": "p",
-        "text": "Applicability and exceptions depend on the adopted edition and local amendments. Confirm the project requirements with a qualified electrical professional or the authority having jurisdiction."
+        "text": "The edition adopted locally, its amendments and any applicable exceptions determine the requirements for the project. Ask a qualified electrical professional or the authority having jurisdiction to confirm them."
       },
       {
         "type": "h2",
-        "text": "Write a complete model description"
+        "text": "Make each required feature explicit"
       },
       {
         "type": "p",
-        "text": "List the voltage, current rating, NEMA configuration, tamper resistance, weather resistance and GFCI requirements separately. Then check that the chosen model actually matches the list. Similar-looking devices may have different electrical ratings or functions."
+        "text": "Write down the voltage, current rating and NEMA configuration, followed by the required tamper resistance, weather resistance and GFCI protection. Match the selected model to the whole list. Similar-looking receptacles can have different ratings or functions."
       },
       {
         "type": "h2",
-        "text": "Review the supplied product"
+        "text": "Check the supplied model and finish"
       },
       {
         "type": "p",
-        "text": "Compare the full model designation, device markings and documentation with the purchase order. A family-level description is not enough to confirm the construction of every variant."
-      },
-      {
-        "type": "h2",
-        "text": "Confirm the visible details"
+        "text": "Compare the full model number, device markings and documents with the purchase order. A description covering an entire product family may not describe every variant’s construction."
       },
       {
         "type": "p",
-        "text": "Specify the desired finish and wall plate as part of the same order. Use samples to check the appearance and fit, and retain the approved model and finish information for later reorders."
+        "text": "Include the finish and wallplate in the order specification. Review the appearance and fit using samples, then retain the approved model and finish details for reorders."
       }
     ]
   },
   {
     "slug": "how-to-source-ul-listed-gfci-from-china",
     "title": "Sourcing GFCI Outlets: A Model-by-Model Review",
-    "excerpt": "Build a sourcing brief around exact models, original documentation, samples and agreed commercial terms.",
+    "excerpt": "Match the GFCI model on your quote with its certification record and approved sample. Check the configuration, packaging and order terms.",
     "date": "2026-07-22",
     "updated": "2026-08-31",
     "readMinutes": 4,
     "category": "Sourcing",
     "cover": "assets/images/editorial-home/factory-optimized.webp",
     "coverAlt": "GFCI functional test stations on the FAHINT production floor",
-    "coverCaption": "Inside FAHINT: GFCI assembly and functional testing in Wenzhou, China.",
+    "coverCaption": "GFCI functional testing at FAHINT in Wenzhou, China.",
     "coverSource": "Archived FAHINT company page — template/default/public/common/images/10.jpg",
     "sources": [
       {
@@ -294,58 +295,55 @@ export const posts = [
     "body": [
       {
         "type": "p",
-        "text": "An effective sourcing review connects the product you order to the documentation and sample you approve. A certificate image or a factory photograph alone does not complete that review."
+        "text": "Keep the quoted GFCI model, certification documents and approved sample together through the order review. A certificate image or factory photograph alone is not enough to approve the purchase."
       },
       {
         "type": "h2",
-        "text": "Verify the certification record"
+        "text": "Find the certification record"
       },
       {
         "type": "p",
-        "text": "UL Solutions provides Product iQ for searching certification information. Use identifiers such as the file number and model designation to locate the relevant record. Compare it with the supplier, device and intended application instead of relying on a logo in a presentation."
+        "text": "Search UL Solutions’ Product iQ using the file number and model designation. Compare the record with the supplier, the device and its intended application. A UL logo in a presentation is not enough for that check.",
+        "source": 0
       },
       {
         "type": "p",
-        "text": "FAHINT supplies original product-family certificates in its document library. E504391 relates to the listed GFCI models; it is not a single certification number for every FAHINT product. Read the addendum and confirm current coverage before ordering."
+        "text": "FAHINT’s document library holds original product-family certificates. File E504391 relates to the listed GFCI models, not every product in the FAHINT range. Read the addendum and confirm current coverage for your model before ordering."
       },
       {
         "type": "h2",
-        "text": "Confirm the exact configuration"
+        "text": "Does the sample match the quotation?"
       },
       {
         "type": "p",
-        "text": "Record the model, rating, required features, finish and included wall plate. Ask the supplier to confirm any differences between the quotation, sample, published specification and order. Resolve conflicting information before approval."
+        "text": "Compare the model number, rating, required features, finish and included wallplate across the quotation, published specification, sample and order. Resolve any differences with the supplier before approval."
+      },
+      {
+        "type": "p",
+        "text": "Check the sample’s appearance alongside its packaging, required identification and authorized brand artwork. Leave electrical performance evaluation to qualified personnel using the appropriate procedures and equipment."
       },
       {
         "type": "h2",
-        "text": "Review production and verification"
+        "text": "Ask about checks for that model"
       },
       {
         "type": "p",
-        "text": "Ask which assembly and inspection steps apply to your selected model, and which supporting records are available. Discuss any additional project verification with qualified personnel. Factory size or a generic quality claim is not a substitute for model-specific evidence."
+        "text": "Ask which assembly and inspection steps apply to your selected model and what supporting records are available. Discuss any extra project verification with qualified personnel. Factory size and general quality claims cannot answer those model-specific questions."
       },
       {
         "type": "h2",
-        "text": "Approve the sample and artwork"
+        "text": "Put the commercial terms in the quotation"
       },
       {
         "type": "p",
-        "text": "Review the product appearance, packaging, required identification and authorized brand artwork together. Electrical performance evaluation should be carried out by qualified personnel using appropriate procedures and equipment."
-      },
-      {
-        "type": "h2",
-        "text": "Agree the commercial terms"
-      },
-      {
-        "type": "p",
-        "text": "Confirm order quantities, sample arrangements, production timing, delivery terms and warranty terms in the quotation. These depend on the actual model and order; do not assume that one stock or lead-time statement applies to all configurations."
+        "text": "Agree on order quantities, sample arrangements, production timing, delivery terms and warranty terms for the actual model and order. Availability and lead times can vary between configurations, so a statement about one model should not be applied to the whole range."
       }
     ]
   },
   {
     "slug": "gfci-colour-finishes-specification",
     "title": "Coordinating Device Finishes Across a Project",
-    "excerpt": "Choose the device and wall plate together, then use actual samples to approve the combination.",
+    "excerpt": "Check device and wallplate finishes together under project lighting, then keep the approved model and sample details with the order.",
     "date": "2026-07-15",
     "updated": "2026-08-31",
     "readMinutes": 3,
@@ -370,47 +368,39 @@ export const posts = [
     "body": [
       {
         "type": "p",
-        "text": "The visible wall device is a combination of product, finish and wall plate. Selecting those details together makes it easier to communicate the intended appearance and repeat it across an order."
+        "text": "Choose the device finish and wallplate together if you want the same appearance across a project. Keep that combination in the specification so it can be repeated throughout the order."
       },
       {
         "type": "h2",
-        "text": "Start with the model"
+        "text": "Choose the electrical model before the color"
       },
       {
         "type": "p",
-        "text": "Choose the required electrical rating, configuration and functions before the finish. A color selection should never lead to substituting a device with a different rating or feature set."
+        "text": "Start with the rating, configuration and functions the project needs. Do not substitute a different electrical specification just to get a preferred finish."
+      },
+      {
+        "type": "p",
+        "text": "Then check the finishes offered for each model. A color shown for one GFCI does not establish what is available for a smart switch or metal wallplate; palettes and surface finishes vary across the range."
       },
       {
         "type": "h2",
-        "text": "Do not assume a universal palette"
+        "text": "Compare samples under project lighting"
       },
       {
         "type": "p",
-        "text": "Available colors and surface finishes vary by model and product family. The options shown on one GFCI page do not establish the available finishes for a smart switch or a metal wall plate. Check each exact model."
+        "text": "Place the device and plate together under the lighting planned for the project. Screen images can help you narrow the choice, but they cannot guarantee a physical color match. Use actual samples to approve a finish that matters to the specification."
       },
       {
         "type": "h2",
-        "text": "Review samples together"
+        "text": "Keep a record of the approved combination"
       },
       {
         "type": "p",
-        "text": "View the device and plate under the lighting used for the project. Screen images are useful for selection, but they cannot guarantee a physical color match. Approve actual samples if the finish is important to the specification."
-      },
-      {
-        "type": "h2",
-        "text": "Record the approved combination"
+        "text": "Record the model, finish name, plate style and approved sample reference on the order. For a multi-gang installation, also confirm the opening arrangement and dimensions."
       },
       {
         "type": "p",
-        "text": "Keep the model, finish name, plate style and approved sample reference together on the order. For multi-gang installations, also confirm the opening arrangement and dimensions."
-      },
-      {
-        "type": "h2",
-        "text": "Coordinate private-label requirements"
-      },
-      {
-        "type": "p",
-        "text": "Discuss proposed finishes, authorized branding and packaging with FAHINT before promising them to a customer. Feasibility, quantities and lead times must be confirmed for the selected product and finish."
+        "text": "For private-label work, discuss proposed finishes, authorized branding and packaging with FAHINT before making a commitment to your customer. We need to confirm feasibility, quantities and lead times for the selected product and finish."
       }
     ]
   }

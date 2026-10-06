@@ -3,6 +3,7 @@ import { ArrowRight, ExternalLink, FileCheck2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { isVerifiedListing } from '../../data/products.js';
 import { companyPhotos } from '../../data/companyProfile.js';
+import { resourcesHref } from '../../data/documents.js';
 import { publicAsset } from '../../utils/publicAsset.js';
 import SafeImage from '../SafeImage.jsx';
 
@@ -344,7 +345,7 @@ function ProductDownloads({ documents }) {
   );
 }
 
-export function ProductCertification({ product }) {
+export function ProductCertification({ product, contactHref = `/contact?model=${encodeURIComponent(product.sku)}` }) {
   const verified = isVerifiedListing(product);
   if (!verified) {
     return (
@@ -355,9 +356,14 @@ export function ProductCertification({ product }) {
             <p className="product-section-label">Model documentation</p>
             <h2>Documentation review for {product.sku}.</h2>
             <p>Certification status requires model-specific documentation review before specification or purchase.</p>
-            <Link className="textlink" to={`/contact?model=${encodeURIComponent(product.sku)}`}>
-              Request a documentation review <ArrowRight size={15} aria-hidden="true" />
-            </Link>
+            <div className="product-certification__actions">
+              <Link className="textlink" to={contactHref}>
+                Request a documentation review <ArrowRight size={15} aria-hidden="true" />
+              </Link>
+              <Link className="textlink" to={resourcesHref(product)}>
+                Browse product resources <ArrowRight size={15} aria-hidden="true" />
+              </Link>
+            </div>
           </div>
         </div>
       </section>
@@ -436,6 +442,9 @@ export function ProductCertification({ product }) {
             </a>
             <Link className="textlink" to="/capabilities">
               Review quality capabilities <ArrowRight size={15} aria-hidden="true" />
+            </Link>
+            <Link className="textlink" to={resourcesHref(product)}>
+              Browse product resources <ArrowRight size={15} aria-hidden="true" />
             </Link>
           </div>
           <ProductDownloads documents={product.documents} />

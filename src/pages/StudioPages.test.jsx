@@ -31,7 +31,7 @@ function show(Component, path = '/home-studio') {
 
 describe('studio homepage and catalog', () => {
   it('publishes the completed homepage and catalog while preserving local review routes', () => {
-    const source = readFileSync('src/main.jsx', 'utf8');
+    const source = readFileSync('src/App.jsx', 'utf8');
     for (const route of ['path="/" element={<HomeStudio />}', 'path="/products" element={<ProductsStudio />}']) expect(source).toContain(route);
     expect(source).toContain('{import.meta.env.DEV && <Route path="/home-next"');
     expect(source).toContain('{import.meta.env.DEV && <Route path="/home-legacy"');
@@ -79,6 +79,20 @@ describe('studio homepage and catalog', () => {
       publicAsset('assets/images/editorial-products/home-hero-bedside-scene-v2.webp'),
       publicAsset('assets/images/editorial-products/home-hero-lighting-scene-v3.webp')
     ]);
+  });
+
+  it('prioritizes the active poster without competing category and inactive scene downloads', () => {
+    const { container } = show(HomeStudio);
+    const images = [...container.querySelectorAll('.studio-hero__photo img')];
+    expect(images.map(image => image.getAttribute('fetchpriority'))).toEqual(['high', 'low', 'low']);
+    expect(images.map(image => image.getAttribute('loading'))).toEqual(['eager', 'lazy', 'lazy']);
+    for (const image of container.querySelectorAll('.studio-selection-card img')) {
+      expect(image).toHaveAttribute('loading', 'lazy');
+      expect(image).toHaveAttribute('fetchpriority', 'low');
+    }
+    fireEvent.click(screen.getByRole('button', { name: 'Bedside charging' }));
+    expect(images.map(image => image.getAttribute('fetchpriority'))).toEqual(['low', 'high', 'low']);
+    expect(images[1]).toHaveAttribute('loading', 'eager');
   });
 
   it('separates the application scene and company story with a navy chapter band only', () => {
@@ -601,6 +615,15 @@ describe('studio homepage and catalog', () => {
     for (const img of container.querySelectorAll('img')) expect(existsSync(publicAssetFile(img.getAttribute('src')))).toBe(true);
     for (const link of container.querySelectorAll('a[href$=".pdf"]')) expect(existsSync(publicAssetFile(link.getAttribute('href')))).toBe(true);
     expect(screen.getByText(/Certification coverage is model-specific/)).toBeInTheDocument();
+  });
+
+  it('shares desktop certificate space without a fixed document count and keeps smaller-screen paging', () => {
+    const css = readFileSync('src/styles/studio.css', 'utf8');
+    const desktopCard = css.match(/\.studio-certificates \.certcard\s*\{([^}]+)\}/)[1];
+    expect(desktopCard).toMatch(/flex:\s*1 0 0\s*;/);
+    expect(desktopCard).toMatch(/min-width:\s*0\s*;/);
+    expect(css).toMatch(/@media \(max-width:\s*1100px\)[\s\S]*?\.studio-certificates \.certcard\s*\{[^}]*flex-basis:\s*226px/);
+    expect(css).toMatch(/@media \(max-width:\s*1100px\)[\s\S]*?\.studio-certificates \.certcar__nav\s*\{[^}]*display:\s*grid/);
   });
 
   it('restores the complete original certificate library, without blanket certification claims', () => {

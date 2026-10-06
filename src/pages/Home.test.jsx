@@ -104,7 +104,7 @@ describe('Home', () => {
     const { container } = renderHome();
     expect(container.textContent).not.toMatch(/400 cartons|as fast as 10 days|Every product carries a 3-year|Five product platforms|Browse certified models/);
     expect(screen.getByRole('link', { name: /Download product catalog/i })).toHaveAttribute('href', 'assets/documents/fahint-product-catalog.pdf');
-    expect(screen.getAllByRole('link', { name: /^Download .* PDF$/ })).toHaveLength(6);
+    expect(screen.getAllByRole('link', { name: /^Download .* PDF$/ })).toHaveLength(7);
   });
   it('reserves the correct aspect ratio for every homepage image', () => {
     const { container } = renderHome();

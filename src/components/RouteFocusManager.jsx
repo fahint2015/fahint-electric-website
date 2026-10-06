@@ -2,9 +2,10 @@ import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
 export default function RouteFocusManager() {
-  const { pathname, hash, key } = useLocation();
+  const { pathname, hash, key, state } = useLocation();
 
   useEffect(() => {
+    if (state?.preserveScroll) return;
     if (hash) {
       let target = null;
 
@@ -39,7 +40,7 @@ export default function RouteFocusManager() {
     });
 
     return () => window.cancelAnimationFrame(frame);
-  }, [pathname, hash, key]);
+  }, [pathname, hash, key, state?.preserveScroll]);
 
   return null;
 }

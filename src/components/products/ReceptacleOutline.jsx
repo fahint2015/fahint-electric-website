@@ -52,7 +52,7 @@ function RearBody({ quickWire }) {
   </g>;
 }
 
-export default function ReceptacleOutline({ product }) {
+export default function ReceptacleOutline({ product, contactHref = `/contact?model=${encodeURIComponent(product.sku)}` }) {
   const id = useId();
   const quickWire = product.sku === 'R15Q';
   const wiring = quickWire ? 'Side wire / push-in quick wire' : 'Side wire / back wire';
@@ -68,7 +68,7 @@ export default function ReceptacleOutline({ product }) {
           {['front', 'rear'].map((view, index) => <figure key={view} className="usb-dimensions__view">
             <figcaption><span>{String(index + 1).padStart(2, '0')}</span><h3>{view === 'front' ? 'Front view' : 'Rear view'}</h3></figcaption>
             <svg viewBox="0 0 320 360" width="320" height="360" role="img" aria-labelledby={`${id}-${view}`}>
-              <title id={`${id}-${view}`}>{product.sku} {view} view line drawing</title>
+              <title id={`${id}-${view}`}>{`${product.sku} ${view} view line drawing`}</title>
               <g className="usb-dimension-outline" transform="translate(160 176) scale(2.65)">
                 <MountingTabs />
                 {view === 'front' ? <FrontFace twentyAmp={product.sku === 'R20'} /> : <RearBody quickWire={quickWire} />}
@@ -79,7 +79,7 @@ export default function ReceptacleOutline({ product }) {
         </div>
         <footer className="usb-dimensions__footer">
           <p>Illustrative outlines only, not a dimensioned installation drawing. Confirm measurements against the approved model drawing before specifying.</p>
-          <Link to={`/contact?model=${encodeURIComponent(product.sku)}`}>Request dimensioned drawing <ArrowRight size={16} aria-hidden="true" /></Link>
+          <Link to={contactHref}>Request dimensioned drawing <ArrowRight size={16} aria-hidden="true" /></Link>
         </footer>
       </div>
     </div>

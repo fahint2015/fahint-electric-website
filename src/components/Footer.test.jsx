@@ -51,11 +51,11 @@ describe('Footer product certification context', () => {
     expect(screen.queryByText(/E504391/)).not.toBeInTheDocument();
   });
 
-  it('keeps the industrial listing scope qualification in the footer', async () => {
+  it('keeps the GTN addendum date and current-coverage qualification in the footer', async () => {
     const { container } = renderFooter('/products/gfci/gtn20');
 
     expect(container.querySelector('footer')).toHaveClass('footer--product-detail');
-    expect(await screen.findByText(/exact model scope requires review/i)).toBeInTheDocument();
+    expect(await screen.findByText(/E504391.*August 16, 2022.*confirm current coverage/i)).toBeInTheDocument();
     expect(screen.queryByText(/UL File E504391/)).not.toBeInTheDocument();
   });
 

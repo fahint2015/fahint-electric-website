@@ -1,0 +1,32 @@
+.inquiry-list { margin: 0 0 24px; padding: 20px; border: 1px solid var(--site-line); border-radius: var(--site-radius); background: var(--site-paper); color: var(--site-ink); min-width: 0; }
+.inquiry-list__heading { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+.inquiry-list__heading h4 { margin: 0; font-size: 20px; line-height: 1.4; }
+.inquiry-list__heading > span { flex-shrink: 0; color: var(--site-blue); font-size: 13px; }
+.inquiry-list__intro, .inquiry-list__note { margin: 8px 0 16px; color: var(--site-muted); font-size: 13px; line-height: 1.6; }
+.inquiry-list ul { display: grid; gap: 12px; list-style: none; margin: 0; padding: 0; }
+.inquiry-list__item { padding: 16px; border: 1px solid var(--site-line); border-radius: 10px; background: #fff; min-width: 0; }
+.inquiry-list__product { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+.inquiry-list__product img { flex: 0 0 52px; width: 52px; height: 68px; object-fit: contain; }
+.inquiry-list__product > div { flex: 1; min-width: 0; }
+.inquiry-list__product a { color: var(--site-blue); font-size: 15px; font-weight: 650; text-decoration: underline; text-underline-offset: 3px; overflow-wrap: anywhere; }
+.inquiry-list__product p { margin: 4px 0 0; color: var(--site-muted); font-size: 13px; line-height: 1.5; }
+.inquiry-list__remove { display: grid; place-items: center; align-self: flex-start; flex: 0 0 44px; width: 44px; height: 44px; padding: 0; border: 1px solid var(--site-line); border-radius: 8px; color: var(--site-muted); background: #fff; cursor: pointer; }
+.inquiry-list__remove:hover { color: var(--site-ink); background: var(--site-paper); }
+.inquiry-list__fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.inquiry-list__fields .field { min-width: 0; margin: 0; }
+.inquiry-list__fields .field label { font-size: 12px; }
+.inquiry-list__fields .field input, .inquiry-list__fields .field select { min-width: 0; min-height: 44px; width: 100%; padding: 10px 12px; font-size: 16px; }
+.inquiry-list__note { margin: 14px 0 0; font-size: 12px; }
+.inquiry-list :focus-visible { outline: 2px solid var(--site-blue); outline-offset: 3px; }
+.inquiry-list__copy { margin-top: 12px; width: 100%; justify-content: center; }
+@media (max-width: 480px) {
+  .inquiry-list { padding: 12px; }
+  .inquiry-list__item { padding: 12px; }
+  .inquiry-list__product { gap: 8px; }
+  .inquiry-list__product img { flex-basis: 36px; width: 36px; height: 56px; }
+  .inquiry-list__fields { gap: 10px; }
+  .inquiry-list__fields .field input, .inquiry-list__fields .field select { padding-inline: 8px; }
+}
+@media (max-width: 360px) {
+  .inquiry-list__fields { grid-template-columns: minmax(0, 1fr); }
+}

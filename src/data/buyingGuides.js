@@ -1,10 +1,12 @@
+import { findWallplateCertificate } from './certificates.js';
+
 // Purchasing guidance based on the published model data, not installation instructions.
 export const buyingGuides = {
   gfci: {
     intro: 'Start with the device configuration, then check the documentation for the exact model you plan to order.',
     questions: [
       { q: 'How do I compare standard, TR / WR and blank-face models?', a: 'GF15/GF20 are the standard-face models; GT15/GT20 add tamper resistance; GW15/GW20 combine tamper and weather resistance. GL20 is a blank-face device, not a plug-in receptacle. Use the comparison table to shortlist the rating and configuration, then have a qualified professional confirm suitability for the project.' },
-      { q: 'Does the same certificate cover every GFCI model?', a: 'No. The available E504391 report names the residential GF, GT and GW models. GL20 documentation remains under review. Industrial GTN15/GTN20 require their own model-specific listing review; the residential report does not establish their coverage.' },
+      { q: 'Does the same certificate cover every GFCI model?', a: 'No. The August 16, 2022 E504391-20210212 addendum names GF15, GF20, GT15, GT20, GW15 and GW20, plus GTN15 and GTN20 as tamper-resistant models with no feed-through. GL20 documentation remains under review. Confirm current listing status and coverage for the ordered configuration.' },
       { q: 'What should I confirm with the sample?', a: 'Record the complete model number, face rating, finish, wallplate and required markings. Compare the sample with the relevant specifications and documents. Confirm packaging and any authorized private-label artwork before approving an order.' },
     ],
     resource: { label: 'Read the GFCI sourcing checklist', to: '/blog/how-to-source-ul-listed-gfci-from-china' },
@@ -17,7 +19,7 @@ export const buyingGuides = {
       { q: 'How should I compare total output and power sharing?', a: 'Check combined USB output, single-port limits and the behaviour with multiple ports in use. Do not add individual maximum ratings together. Charging output depends on the connected device, cable and negotiated profile; confirm simultaneous-port power sharing for the selected model.' },
       { q: 'What belongs in a USB outlet quotation request?', a: 'Send the complete model, input rating, any AC receptacle rating, required port mix, target charging profile and quantity. Include finish, wallplate, destination and packaging requirements. Review the model documentation and approve the requested configuration with a sample.' },
     ],
-    resource: { label: 'Review product-family certificates', to: '/about#certifications' },
+    resource: { label: 'Read the USB outlet buying guide', to: '/blog/usb-wall-outlet-buying-guide' },
     modelCheck: 'Confirm port mix, charging profiles, simultaneous-port power sharing and input rating; where applicable, confirm the AC receptacle rating.',
   },
   receptacles: {
@@ -37,7 +39,7 @@ export const buyingGuides = {
       { q: 'Are DM2010 and DM2010S interchangeable?', a: 'They represent different control choices: DM2010 is the digital slide dimmer and DM2010S is the 0-10V model. Review the model-specific control method, wiring and lighting-system requirements before selecting either one.' },
       { q: 'What should the approved sample establish?', a: 'Agree on the exact dimmer, finish, plate and intended lamp or driver combination. Specify what compatibility checks and documentation are needed before the order. Sample arrangements, quantities and timing are confirmed for the project.' },
     ],
-    resource: { label: 'Explore OEM / ODM support', to: '/capabilities#oem' },
+    resource: { label: 'Read the dimmer buying guide', to: '/blog/dimmer-buying-guide-led-0-10v' },
     modelCheck: 'Provide lamp or driver model, load type and total load; confirm compatibility with the selected control method.',
   },
   'smart-switches': {
@@ -57,7 +59,7 @@ export const buyingGuides = {
       { q: 'What electrical and approval details should I check?', a: 'Compare the current and voltage stated for the model, including the separate 125V and 120/277V configurations. Published UL or ETL identification varies by model. Do not substitute a certificate from another switch or product family.' },
       { q: 'Which details help keep a mixed order consistent?', a: 'Provide model numbers and quantities by circuit type, with the required paddle or toggle style, finish and matching wallplate opening. Approve the sample, markings and packaging for each configuration in the order.' },
     ],
-    resource: { label: 'Compare matching wallplates', to: '/products/wallplates' },
+    resource: { label: 'Read the light switch buying guide', to: '/blog/light-switch-buying-guide' },
     modelCheck: 'Confirm single-pole, 3-way or combination operation, voltage and current, and the matching plate opening.',
   },
   wallplates: {
@@ -67,14 +69,20 @@ export const buyingGuides = {
       { q: 'What changes between standard and screwless plates?', a: 'Check the fixing style and the components shown for the selected model. Confirm the plate and device fit together using the model dimensions and a sample. Do not assume every plate is included with every device order.' },
       { q: 'How should I specify colour and packaging?', a: 'Name the finish and surface appearance, then approve it alongside the intended device. Include quantities by model and finish, required pack format and authorized artwork. Custom colours, minimum quantities and timing need confirmation in the quotation.' },
     ],
-    resource: { label: 'Read about finish approval', to: '/blog/gfci-colour-finishes-specification' },
+    resource: { label: 'Read the wallplate buying guide', to: '/blog/wallplate-buying-guide' },
     modelCheck: 'Confirm opening, gang count, dimensions, fixing style and whether the plate is ordered separately or with a device.',
   },
 };
 
 export function modelDocumentationNote(product) {
   if (product.listing?.status === 'review') return `${product.sku} documentation remains under review. Request the exact model listing record before specifying it.`;
-  if (/^GTN(?:15|20)$/.test(product.sku)) return `For ${product.sku}, the residential GFCI report does not establish coverage. Request model-specific listing documentation.`;
+  if (/^GTN(?:15|20)$/.test(product.sku)) return `${product.sku} is listed in the August 16, 2022 E504391-20210212 addendum. Confirm current coverage for the ordered configuration.`;
+  if (product.line === 'wallplates') {
+    const reference = findWallplateCertificate(product.sourceModel || product.sku);
+    return reference
+      ? `The base model for ${product.sku} appears in report ${reference.report}, issued ${reference.issued}. Confirm the finish designation and current coverage for the ordered configuration.`
+      : `${product.sku} is not named in the supplied wallplate addenda. Request the matching model document before specifying it.`;
+  }
   if (product.listing?.file) return `Match ${product.sku} to the available ${product.listing.file} report and confirm current coverage for the ordered configuration.`;
   return `Request documentation for ${product.sku} and its ordered configuration. A company or product-family certificate does not automatically cover every model.`;
 }

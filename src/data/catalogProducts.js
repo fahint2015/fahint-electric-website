@@ -4,6 +4,7 @@ import smartSwitchMedia from './catalog/smart-switch-media.json' with { type: 'j
 import { colors, products as gfciProducts } from './products.js';
 
 import { catalogueDocument } from './documents.js';
+import { findWallplateCertificate } from './certificates.js';
 export { catalogueDocument };
 const clean = (value) => String(value ?? '').replace(/\s+/g, ' ').trim();
 export const modelKey = (value) => clean(value).toLowerCase().replace(/[^a-z0-9]/g, '');
@@ -240,7 +241,7 @@ function legacyProduct(record) {
     reviewNotice = 'Industrial model: catalogue specifies no feed-through terminals. Conflicting legacy drawings are withheld; request the approved drawing, exact listing scope and enclosure requirements before ordering.';
     notes.push('The legacy introduction mentions 20A feed-through, but both its industrial feature list and the supplied catalogue state no feed-through terminals. The catalogue is used here. Do not substitute a residential GFCI wiring diagram.');
     notes.push('The legacy model drawing also prints “20A Feed-Through” on the device face, so it is withheld as an installation reference. Request an approved model-specific drawing to confirm dimensions and terminals.');
-    notes.push('The legacy site cites E504391, but the available certificate naming the residential GF/GT/GW models does not establish coverage for GTN15/GTN20. Request a model-specific listing record.');
+    notes.push('The August 16, 2022 E504391-20210212 addendum lists GTN15 and GTN20 as tamper-resistant GFCIs with no feed-through. Confirm current listing status and coverage for the ordered configuration.');
   }
   if (record.family === 'wallplates') {
     const surface = record.breadcrumb.includes('Matte Finish') ? 'Matte' : 'Glossy';
@@ -302,11 +303,12 @@ function legacyProduct(record) {
   const description = describeLegacy(record, rows);
   const values = new Map(rows);
   const file = values.get('Certification file') || record.features.join(' ').match(/E\d{6}/)?.[0];
-  const certImages = { 'usb-outlets': ['E498095', 'ul-usb'], receptacles: ['E498095', 'ul-receptacle'], wallplates: ['E501377', 'ul-wallplate'] };
+  const certImages = { 'usb-outlets': ['E498095', 'ul-usb'], receptacles: ['E498095', 'ul-receptacle'] };
+  const wallplateReference = record.family === 'wallplates' ? findWallplateCertificate(record.model) : null;
   const certificate = file ? {
     file,
     label: `${values.get('Published certification') || 'Published certification'} · file ${file}`,
-    image: certImages[record.family]?.[0] === file ? `assets/images/certs/${certImages[record.family][1]}.webp` : null
+    image: wallplateReference?.file === file ? wallplateReference.image : certImages[record.family]?.[0] === file ? `assets/images/certs/${certImages[record.family][1]}.webp` : null
   } : null;
   const photoCorrection = catalogueRecords.find((item) => item.imageOnly && item.gallery.length > 0 && item.model === record.model && item.family === record.family);
   const gallery = photoCorrection ? [...photoCorrection.gallery, ...record.gallery.filter((image) => !photoCorrection.gallery.some((photo) => photo.src === image.src))] : record.gallery;
@@ -373,7 +375,7 @@ function legacyProduct(record) {
     specificationGroups: makeGroups([['Model', description.sku], ...rows], materialRows, record.family),
     specificationSummary: description.keyFacts,
     features, finishes, certificate,
-    certificationLabel: draft ? 'No certification stated in the source' : /^GTN/.test(record.model) ? 'Legacy source: E504391 · exact model scope requires review' : certificate?.label || 'Model-specific documentation available on request',
+    certificationLabel: draft ? 'No certification stated in the source' : /^GTN/.test(record.model) ? 'E504391 · August 16, 2022 addendum · confirm current coverage' : certificate?.label || 'Model-specific documentation available on request',
     notes, reviewNotice, draft,
     assets: {
       hero: primaryView.src, card: primaryView.src, gallery: productViews.map((image) => image.src),

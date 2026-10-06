@@ -23,7 +23,7 @@ describe('Buyer reading pages', () => {
     expect(screen.getByRole('heading', { name:'Sources & further reading' })).toBeInTheDocument();
     expect(screen.getByRole('link', { name:/CPSC.*AFCI/ })).toHaveAttribute('href', expect.stringContaining('cpsc.gov'));
     expect(screen.getByRole('link', { name:'Download FAHINT catalog' })).toHaveAttribute('download');
-    expect(document.title).toBe(`${posts[0].title} | FAHINT`);
+    expect(document.title).toBe(`${posts.find(post => post.slug === 'gfci-vs-afci-whats-the-difference').title} | FAHINT`);
   });
   it('shows a real not-found message for an unknown article', () => {
     renderBlog('/blog/not-a-real-article');
@@ -31,14 +31,14 @@ describe('Buyer reading pages', () => {
     expect(screen.getByRole('link', { name:'Browse products' })).toHaveAttribute('href','/products');
   });
   it('removes unsourced universal specifications and retains original article URLs', () => {
-    expect(posts).toHaveLength(6);
+    expect(posts).toHaveLength(10);
     const content = posts.map(post => `${post.title} ${post.body.map(block=>block.text).join(' ')}`).join(' ');
     expect(content).not.toMatch(/every 15 minutes|400 cartons|98 percent|without Compliance Risk|seven-finish|Current production should be to UL 943 5th/i);
     expect(posts.find(post => post.slug === 'nec-406-8-weather-resistant-receptacles').title).not.toContain('406.8');
     for (const post of posts) expect(post.sources?.length).toBeGreaterThan(0);
   });
   it('gives every guide a distinct editorial cover with a source-aware description', () => {
-    expect(new Set(posts.map(post => JSON.stringify([post.cover, post.coverRegion])))).toHaveProperty('size', 6);
+    expect(new Set(posts.map(post => JSON.stringify([post.cover, post.coverRegion])))).toHaveProperty('size', 10);
     for (const post of posts) {
       expect(post.coverAlt).toBeTruthy();
       expect(post.coverCaption).toBeTruthy();
@@ -53,8 +53,8 @@ describe('Buyer reading pages', () => {
     expect(screen.getByText(post.coverCaption)).toBeInTheDocument();
   });
   it('visibly labels every reused application illustration, not only in alternative text', () => {
-    const illustrations = posts.filter(post => /application|product-gfci/.test(post.cover));
-    expect(illustrations).toHaveLength(4);
+    const illustrations = posts.filter(post => /application|product-gfci|product-usb|home-installations/.test(post.cover));
+    expect(illustrations).toHaveLength(6);
     for (const post of illustrations) expect(post.coverCaption).toMatch(/illustrat/i);
   });
 });

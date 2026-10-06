@@ -46,6 +46,21 @@ describe('RouteFocusManager', () => {
     expect(screen.getByText('Main content')).toHaveFocus();
   });
 
+  it('leaves scroll and keyboard focus in place for an explicitly preserved form query change', async () => {
+    const user = userEvent.setup();
+    render(<MemoryRouter initialEntries={['/contact?model=GF15']} future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+      <RouteFocusManager />
+      <main id="main-content" tabIndex={-1}>
+        <Link to="/contact?model=GF15&topic=oem" state={{ preserveScroll: true }}>OEM inquiry</Link>
+      </main>
+    </MemoryRouter>);
+    vi.mocked(window.scrollTo).mockClear();
+    const link = screen.getByRole('link', { name: 'OEM inquiry' });
+    await user.click(link);
+    expect(window.scrollTo).not.toHaveBeenCalled();
+    expect(link).toHaveFocus();
+  });
+
   it('scrolls to and focuses a hash target while respecting reduced motion', async () => {
     const user = userEvent.setup();
     const scrollIntoView = vi.fn();

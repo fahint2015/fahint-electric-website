@@ -91,6 +91,9 @@ export default function Header() {
             <NavLink to="/capabilities" className={({ isActive }) => (isActive ? 'is-active' : '')}>
               Capabilities
             </NavLink>
+            <NavLink to="/resources" className={({ isActive }) => (isActive ? 'is-active' : '')}>
+              Resources
+            </NavLink>
             <NavLink to="/blog" className={({ isActive }) => (isActive ? 'is-active' : '')}>
               Blog
             </NavLink>
@@ -131,6 +134,7 @@ export default function Header() {
           )}
 
           <Link to="/capabilities">Capabilities</Link>
+          <Link to="/resources">Resources</Link>
           <Link to="/blog">Blog</Link>
           <Link to="/about">About</Link>
           <Link to="/contact">Contact</Link>

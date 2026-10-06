@@ -1,20 +1,94 @@
 import { render, screen } from '@testing-library/react';
-import { MemoryRouter, Route, Routes } from 'react-router-dom';
+import { MemoryRouter, Route, Routes, useLocation } from 'react-router-dom';
 import { describe, expect, it } from 'vitest';
 import { existsSync, readFileSync } from 'node:fs';
 import userEvent from '@testing-library/user-event';
 import LineDetail from './LineDetail.jsx';
 import { publicAsset } from '../utils/publicAsset.js';
 
-function renderSeries(line = 'usb-outlets') {
+function LocationProbe() {
+  const location = useLocation();
+  return <span data-testid="listing-location">{location.pathname}{location.search}</span>;
+}
+
+function renderSeries(line = 'usb-outlets', search = '') {
   return render(
-    <MemoryRouter initialEntries={[`/products/${line}`]} future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+    <MemoryRouter initialEntries={[`/products/${line}${search}`]} future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
       <Routes><Route path="/products/:line" element={<LineDetail />} /></Routes>
+      <LocationProbe />
     </MemoryRouter>
   );
 }
 
 describe('model catalogue', () => {
+  it('offers USB specification controls in place of the generic configuration field', () => {
+    renderSeries();
+    expect(screen.getByRole('combobox', { name: 'USB ports' }).options).toHaveLength(5);
+    expect(screen.getByRole('combobox', { name: 'Receptacle rating' }).options).toHaveLength(4);
+    expect(screen.getByRole('combobox', { name: 'Charging output' }).options).toHaveLength(8);
+    expect(screen.queryByRole('combobox', { name: 'Configuration' })).not.toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Clear filters' })).toBeDisabled();
+    expect(screen.getByText(/PD values are USB-C single-port maximums/)).toBeVisible();
+  });
+
+  it('combines USB specifications with search and clears every selection together', async () => {
+    const user = userEvent.setup();
+    renderSeries();
+    await user.selectOptions(screen.getByRole('combobox', { name: 'USB ports' }), 'dual-c');
+    await user.selectOptions(screen.getByRole('combobox', { name: 'Receptacle rating' }), '20a');
+    await user.selectOptions(screen.getByRole('combobox', { name: 'Charging output' }), 'pd-65w');
+    expect(screen.getByText('1 of 37 models')).toBeVisible();
+    expect(screen.getByRole('link', { name: 'View FTR20QC-DC65W details' })).toHaveAttribute('href', '/products/usb-outlets/ftr20qc-dc65w');
+    expect(screen.getByTestId('listing-location')).toHaveTextContent('ports=dual-c&rating=20a&charging=pd-65w');
+    const search = screen.getByRole('searchbox', { name: 'Search models' });
+    await user.type(search, 'FTR15');
+    expect(screen.getByRole('status')).toHaveTextContent('No models match');
+    await user.click(screen.getByRole('button', { name: 'Clear filters' }));
+    expect(screen.getByText('37 of 37 models')).toBeVisible();
+    expect(search).toHaveValue('');
+    for (const select of screen.getAllByRole('combobox')) expect(select).toHaveValue('');
+    expect(screen.getByTestId('listing-location')).toHaveTextContent(/^\/products\/usb-outlets$/);
+  });
+
+  it('restores a filtered USB listing from its URL while keeping series metadata', () => {
+    renderSeries('usb-outlets', '?ports=dual-c&rating=20a&charging=pd-65w&q=FTR20QC');
+    expect(screen.getByRole('searchbox', { name: 'Search models' })).toHaveValue('FTR20QC');
+    expect(screen.getByRole('combobox', { name: 'USB ports' })).toHaveValue('dual-c');
+    expect(screen.getByRole('combobox', { name: 'Receptacle rating' })).toHaveValue('20a');
+    expect(screen.getByRole('combobox', { name: 'Charging output' })).toHaveValue('pd-65w');
+    expect(screen.getByText('1 of 37 models')).toBeVisible();
+    expect(document.querySelector('meta[property="og:url"]').content).toMatch(/\/products\/usb-outlets\/$/);
+  });
+
+  it('ignores invalid USB filter values and unrelated query fields', async () => {
+    const user = userEvent.setup();
+    renderSeries('usb-outlets', '?ports=unknown&rating=130a&charging=pd-130w&source=https://example.invalid');
+    expect(screen.getByText('37 of 37 models')).toBeVisible();
+    for (const select of screen.getAllByRole('combobox')) expect(select).toHaveValue('');
+    await user.selectOptions(screen.getByRole('combobox', { name: 'USB ports' }), 'four-a');
+    expect(screen.getByText('1 of 37 models')).toBeVisible();
+    expect(screen.getByRole('link', { name: 'View F4P details' })).toBeVisible();
+    expect(screen.getByTestId('listing-location')).toHaveTextContent(/^\/products\/usb-outlets\?ports=four-a$/);
+  });
+
+  it('preserves an incompatible selection until the user resets it', async () => {
+    const user = userEvent.setup();
+    renderSeries('usb-outlets', '?ports=dual-a&charging=pd-65w');
+    expect(screen.getByRole('status')).toHaveTextContent('No models match');
+    expect(screen.getByRole('combobox', { name: 'USB ports' })).toHaveValue('dual-a');
+    expect(screen.getByRole('combobox', { name: 'Charging output' })).toHaveValue('pd-65w');
+    await user.click(screen.getByRole('button', { name: 'Clear filters' }));
+    expect(screen.getByText('37 of 37 models')).toBeVisible();
+  });
+
+  it('does not apply USB-specific controls or URL parameters to another family', () => {
+    renderSeries('dimmers', '?ports=dual-c&rating=20a&charging=pd-65w&q=nonexistent');
+    expect(screen.queryByRole('combobox', { name: 'USB ports' })).not.toBeInTheDocument();
+    expect(screen.getByRole('combobox', { name: 'Configuration' })).toHaveValue('');
+    expect(screen.getByRole('searchbox', { name: 'Search models' })).toHaveValue('');
+    expect(screen.getByText('2 of 2 models')).toBeVisible();
+  });
+
   it.each([
     ['usb-outlets', 'USB Outlets', 'usb-series-desktop-charging-v1.webp', 37],
     ['dimmers', 'Dimmers', 'dimmer-series-living-room-v1.webp', 2],

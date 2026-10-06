@@ -35,12 +35,9 @@ jobs:
       # SITE_BASE controls the asset path.
       # - Custom domain (e.g. www.fahint.com via Cloudflare)  -> leave as "/"
       # - GitHub project page (user.github.io/<repo>/)        -> use "/<repo>/"
+      # Build includes prerendering, base validation, the fallback and .nojekyll.
       - name: Build
         run: npm run build
-
-      # Validate the repository base, add the SPA fallback and disable Jekyll.
-      - name: Prepare Pages artifact
-        run: node scripts/prepare-pages.mjs
         env:
           CUSTOM_DOMAIN: ${{ vars.CUSTOM_DOMAIN }}
 

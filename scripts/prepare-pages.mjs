@@ -5,7 +5,7 @@ import { posts } from '../src/data/posts.js';
 import { products } from '../src/data/products.js';
 import { catalogProducts, productHref } from '../src/data/catalogProducts.js';
 import { pageHtml, routeMetadata } from './page-metadata.mjs';
-import { notFoundMetadata, validateSiteUrl } from '../src/seo/metadata.js';
+import { escapeHtml, notFoundMetadata, validateSiteUrl } from '../src/seo/metadata.js';
 
 const STATIC_ROUTES = [
   'products',
@@ -19,6 +19,7 @@ const STATIC_ROUTES = [
   'blog',
   'capabilities',
   'about',
+  'resources',
   'contact'
 ];
 
@@ -28,6 +29,28 @@ export const PUBLIC_ROUTES = [
   ...catalogProducts.filter((product) => !product.draft).map((product) => productHref(product).slice(1)),
   ...posts.map((post) => `blog/${post.slug}`)
 ];
+
+function withPageModules(html, path, manifest, base) {
+  if (!manifest || path === '/404') return html;
+  if (!html.includes('</head>')) throw new Error('Cannot preload page modules: missing head closing tag.');
+  const [, section, family, model] = path.split('/');
+  const page = section === 'products'
+    ? model ? 'ProductDetail' : family === 'gfci' ? 'GfciSeries' : family ? 'LineDetail' : 'ProductsStudio'
+    : section === 'blog' ? family ? 'BlogPost' : 'Blog'
+      : { '': 'HomeStudio', about: 'About', capabilities: 'Capabilities', resources: 'Resources', contact: 'Contact' }[section];
+  if (!page) throw new Error(`Missing page module mapping for ${path}.`);
+
+  const entry = `src/pages/${page}.jsx`;
+  const file = manifest[entry]?.file;
+  if (!file) throw new Error(`Missing page module in client manifest: ${entry}.`);
+  if (!/^assets\/[A-Za-z0-9_./-]+\.js$/.test(file) || file.split('/').includes('..')) {
+    throw new Error(`Unsafe module asset in client manifest: ${file}.`);
+  }
+  // Preloading the dependency tree competed with the hero image in cold mobile tests.
+  // Only hint the current page entry; let Vite load its dependencies when needed.
+  const tag = `<link rel="modulepreload" crossorigin fetchpriority="low" href="${escapeHtml(base + file)}">`;
+  return html.replace('</head>', () => `${tag}\n</head>`);
+}
 
 function validateExpectedBase(expectedBase) {
   if (typeof expectedBase !== 'string' || expectedBase.length === 0) {
@@ -80,7 +103,9 @@ export async function preparePages({
   expectedBase = process.env.SITE_BASE,
   customDomain = process.env.CUSTOM_DOMAIN,
   siteUrl = process.env.VITE_SITE_URL || '',
-  publicUrl
+  publicUrl,
+  renderPage,
+  clientManifest
 } = {}) {
   const validatedBase = validateExpectedBase(expectedBase);
   const validatedDomain = validateCustomDomain(customDomain);
@@ -103,6 +128,9 @@ export async function preparePages({
   if (actualBase !== validatedBase) {
     throw new Error(`Cannot prepare Pages artifact: expected base "${validatedBase}", found "${actualBase || 'none'}".`);
   }
+  if (indexHtml.includes('data-prerender-path=')) {
+    throw new Error('Pages are already prerendered. Run npm run build to prepare a fresh artifact.');
+  }
 
   const metadataOptions = { siteUrl: canonicalBase, publicUrl: actualPublicUrl };
   // Prepare all heads before writing: a missing route or malformed template must fail the build.
@@ -110,9 +138,24 @@ export async function preparePages({
     const path = `/${route}`;
     const metadata = routeMetadata.get(path);
     if (!metadata) throw new Error(`Missing page metadata for ${path}`);
-    return [route, pageHtml(indexHtml, metadata, { ...metadataOptions, path })];
+    return [route, withPageModules(pageHtml(indexHtml, metadata, { ...metadataOptions, path }), path, clientManifest, validatedBase)];
   });
-  const fallback = pageHtml(indexHtml, notFoundMetadata, { ...metadataOptions, path: '/404' });
+  let fallback = pageHtml(indexHtml, notFoundMetadata, { ...metadataOptions, path: '/404' });
+  if (renderPage) {
+    const root = '<div id="root"></div>';
+    if (!indexHtml.includes(root)) throw new Error('Cannot prerender: expected an empty root in the fresh Vite build.');
+    const withBody = async (html, path) => {
+      const body = await renderPage(path, validatedBase);
+      if (typeof body !== 'string' || !/<main\b/.test(body) || !/<h1\b/.test(body) || body.includes('<!--$!-->')) {
+        throw new Error(`Incomplete prerender for ${path}.`);
+      }
+      const pathname = escapeHtml(`${validatedBase.slice(0, -1)}${path}`);
+      return html.replace(root, () => `<div id="root" data-prerender-path="${pathname}">${body}</div>`);
+    };
+    // Finish every render before writing any routes, including the noindex fallback.
+    for (const entry of preparedRoutes) entry[1] = await withBody(entry[1], `/${entry[0]}`);
+    fallback = await withBody(fallback, '/404');
+  }
   await writeFile(join(outputDir, '404.html'), fallback);
   await Promise.all(preparedRoutes.map(async ([route, html]) => {
     const routeDir = join(outputDir, ...route.split('/'));
@@ -133,8 +176,16 @@ const isDirectRun = process.argv[1]
   && import.meta.url === pathToFileURL(resolve(process.argv[1])).href;
 
 if (isDirectRun) {
-  preparePages().catch((error) => {
-    console.error(error.message);
-    process.exitCode = 1;
-  });
+  const expectedBase = process.env.SITE_BASE || '/';
+  import('./build-page-renderer.mjs')
+    .then(async ({ buildPageRenderer }) => preparePages({
+      expectedBase,
+      clientManifest: JSON.parse(await readFile('dist/.vite/manifest.json', 'utf8')),
+      renderPage: await buildPageRenderer(expectedBase)
+    }))
+    .then(() => console.log(`Prerendered ${PUBLIC_ROUTES.length + 1} published pages and the 404 fallback.`))
+    .catch((error) => {
+      console.error(error.message);
+      process.exitCode = 1;
+    });
 }

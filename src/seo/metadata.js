@@ -27,6 +27,11 @@ export const staticMetadata = {
     description: 'Send FAHINT your models, quantities, market and packaging needs. Contact our Wenzhou team about product quotations, OEM/ODM projects or technical documents.',
     image: 'assets/images/company/fahint-showroom-front-v1.webp', imageAlt: 'FAHINT showroom and product display', label: 'Contact',
   },
+  '/resources': {
+    title: 'Product Catalog & Certificate Downloads | FAHINT',
+    description: 'Download the FAHINT product catalog and original product-family certificates. Find model references and request installation or technical documents for your device.',
+    image: 'assets/images/company/factory/showroom-samples-v1.webp', imageAlt: 'FAHINT wiring-device samples', label: 'Resources',
+  },
   '/blog': {
     title: 'Wiring Device Guides | FAHINT',
     description: 'Read FAHINT buyer guides on GFCI selection, sourcing, finishes and product documentation. Compare options using practical questions and original references.',
@@ -122,7 +127,7 @@ export function headEntries(meta, { path = '/', siteUrl = '', publicUrl = '' } =
   return entries;
 }
 
-const escapeHtml = value => String(value).replace(/[&<>"']/g, character => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[character]);
+export const escapeHtml = value => String(value).replace(/[&<>"']/g, character => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[character]);
 export function renderHeadEntries(entries) {
   return entries.filter(entry => !entry.remove).map(({ tag, attributes = {}, text = '' }) => {
     const attrs = Object.entries(attributes).map(([key, value]) => ` ${key}="${escapeHtml(value)}"`).join('');

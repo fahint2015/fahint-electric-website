@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { colors, isVerifiedListing, productFinishImage } from '../../data/products.js';
 import ProductGallery from './ProductGallery.jsx';
 
-export default function ProductDetailHero({ product, anchorPath, anchorSearch }) {
+export default function ProductDetailHero({ product, anchorPath, anchorSearch, inquiryFinish, onFinishChange }) {
   const listed = isVerifiedListing(product);
   const [selectedImage, setSelectedImage] = useState(product.assets.hero);
   const [selectedFinish, setSelectedFinish] = useState(null);
@@ -31,6 +31,7 @@ export default function ProductDetailHero({ product, anchorPath, anchorSearch })
   function selectFinish(finish) {
     setSelectedImage(product.assets.finishes?.[finish.slug] || productFinishImage(product.sku, finish.slug));
     setSelectedFinish(finish.slug);
+    onFinishChange?.(finish.slug);
   }
 
   return (
@@ -62,7 +63,7 @@ export default function ProductDetailHero({ product, anchorPath, anchorSearch })
                   type="button"
                   className="product-detail-hero__finish"
                   aria-label={`Show ${product.sku} in ${finish.name}`}
-                  aria-pressed={selectedFinish === finish.slug}
+                  aria-pressed={(inquiryFinish === undefined ? selectedFinish : inquiryFinish) === finish.slug}
                   onClick={() => selectFinish(finish)}
                 >
                   <span

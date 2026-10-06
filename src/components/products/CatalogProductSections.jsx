@@ -2,6 +2,7 @@ import { ArrowRight, ExternalLink, FileCheck2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import SafeImage from '../SafeImage.jsx';
 import { publicAsset } from '../../utils/publicAsset.js';
+import { resourcesHref } from '../../data/documents.js';
 import { usbDimensionReference } from '../../data/usbDimensions.js';
 import UsbDimensions from './UsbDimensions.jsx';
 import ReceptacleOutline from './ReceptacleOutline.jsx';
@@ -32,13 +33,13 @@ export function CatalogFeatures({ product }) {
   );
 }
 
-export function CatalogApplications({ product }) {
+export function CatalogApplications({ product, contactHref = `/contact?model=${encodeURIComponent(product.sku)}` }) {
   return (
     <section className="product-story product-story--application catalog-applications">
       <div className="container">
         <header className="catalog-section-heading">
           <div><p className="product-section-label">Application review</p><h2>{product.applicationHeading}</h2></div>
-          <Link className="textlink" to={`/contact?model=${encodeURIComponent(product.sku)}`}>Review your application <ArrowRight size={16} aria-hidden="true" /></Link>
+          <Link className="textlink" to={contactHref}>Review your application <ArrowRight size={16} aria-hidden="true" /></Link>
         </header>
         <div className="catalog-applications__grid">
           {product.applications.map(([title, body]) => <article key={title}><h3>{title}</h3><p>{body}</p></article>)}
@@ -48,7 +49,7 @@ export function CatalogApplications({ product }) {
   );
 }
 
-export function CatalogPresentation({ product }) {
+export function CatalogPresentation({ product, contactHref = `/contact?model=${encodeURIComponent(product.sku)}` }) {
   const photos = product.assets.presentation || [];
   return (
     <section className="product-story product-story--cool catalog-presentation">
@@ -70,7 +71,7 @@ export function CatalogPresentation({ product }) {
               <div><dt>Custom outer packaging</dt><dd>Customer-branded boxes can be reviewed with your artwork and brand authorization.</dd></div>
               <div><dt>Packing quantities</dt><dd>Inner-box and carton quantities are confirmed for the selected model and packaging format.</dd></div>
             </dl>
-            <Link className="btn btn--primary" to={`/contact?model=${encodeURIComponent(product.sku)}`}>
+            <Link className="btn btn--primary" to={contactHref}>
               Discuss {product.sku} configuration <ArrowRight size={16} aria-hidden="true" />
             </Link>
           </div>
@@ -80,12 +81,12 @@ export function CatalogPresentation({ product }) {
   );
 }
 
-export function CatalogDrawings({ product }) {
+export function CatalogDrawings({ product, contactHref }) {
   const drawings = product.assets.drawings || [];
   if (product.line === 'smart-switches' && drawings.length) return <SmartSwitchReferences product={product} />;
   if (!drawings.length) {
     return product.line === 'receptacles' && ['R15', 'R15Q', 'R20'].includes(product.sku)
-      ? <ReceptacleOutline product={product} /> : null;
+      ? <ReceptacleOutline product={product} contactHref={contactHref} /> : null;
   }
   const usbDimensions = usbDimensionReference(product);
   if (usbDimensions) return <UsbDimensions product={product} dimensions={usbDimensions} />;
@@ -109,7 +110,7 @@ export function CatalogDrawings({ product }) {
   );
 }
 
-export function CatalogDocumentation({ product }) {
+export function CatalogDocumentation({ product, contactHref = `/contact?model=${encodeURIComponent(product.sku)}` }) {
   const certificate = product.certificate;
   return (
     <section className="product-technical catalog-documentation" id="model-documentation">
@@ -126,10 +127,11 @@ export function CatalogDocumentation({ product }) {
           <p className="catalog-documentation__reference"><FileCheck2 size={20} aria-hidden="true" />{product.certificationLabel}</p>
           <p>Specifications are recorded for {product.sku}. A series certificate is supporting documentation; confirm that the exact model is covered before final specification or purchase.</p>
           <div className="catalog-documentation__links">
+            <Link to={resourcesHref(product)}>Browse product resources <ArrowRight size={15} aria-hidden="true" /></Link>
             {product.sources.map((source) => <a key={source.href} href={source.kind === 'website' ? source.href : publicAsset(source.href)} target="_blank" rel="noreferrer">
               {source.kind === 'website' ? 'View original model specifications' : source.label} <ExternalLink size={15} aria-hidden="true" />
             </a>)}
-            <Link to={`/contact?model=${encodeURIComponent(product.sku)}`}>Request model-specific documents <ArrowRight size={15} aria-hidden="true" /></Link>
+            <Link to={contactHref}>Request model-specific documents <ArrowRight size={15} aria-hidden="true" /></Link>
           </div>
           {product.notes.length > 0 && <aside className="catalog-documentation__notes" aria-label="Specification notes">
             <h3>Specification notes</h3>

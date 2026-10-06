@@ -1,7 +1,7 @@
 import { Download, ArrowUpRight, ChevronDown } from 'lucide-react';
 import { certificates } from '../../data/certificates.js';
 import { publicAsset } from '../../utils/publicAsset.js';
-import { CompanyImage } from './CompanyShared.jsx';
+import { CompanyImage, CompanyLink } from './CompanyShared.jsx';
 
 export default function CertificateLibrary() {
   return <section className="company-section company-section--paper" id="certifications" aria-labelledby="certificate-library-title">
@@ -15,6 +15,7 @@ export default function CertificateLibrary() {
         </div>
       </article>)}</div>
       <p className="company-library-note">Confirm current status, model designations and any conditions with the issuing body and our team before ordering. ISO 9001 relates to the quality management system, not a product listing.</p>
+      <CompanyLink to="/resources" secondary>Browse all resources</CompanyLink>
     </div>
   </section>;
 }

@@ -21,6 +21,9 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     assetsDir: 'assets',
+    manifest: true,
+    // Initial HTML must be styled even before lazy route JavaScript loads.
+    cssCodeSplit: false,
     chunkSizeWarningLimit: 900
   }
 });

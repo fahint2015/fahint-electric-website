@@ -39,12 +39,8 @@ function RoomHero() {
   const [hovered, setHovered] = useState(false);
   const [focusWithin, setFocusWithin] = useState(false);
   const [heroVisible, setHeroVisible] = useState(true);
-  const [pageVisible, setPageVisible] = useState(() => typeof document === 'undefined' || !document.hidden);
-  const [reducedMotion, setReducedMotion] = useState(() => (
-    typeof window !== 'undefined' && typeof window.matchMedia === 'function'
-      ? window.matchMedia('(prefers-reduced-motion: reduce)').matches
-      : false
-  ));
+  const [pageVisible, setPageVisible] = useState(true);
+  const [reducedMotion, setReducedMotion] = useState(false);
   const paused = hovered || focusWithin || !heroVisible || !pageVisible || reducedMotion;
 
   useEffect(() => {
@@ -67,6 +63,7 @@ function RoomHero() {
 
   useEffect(() => {
     const updatePageVisibility = () => setPageVisible(!document.hidden);
+    updatePageVisibility();
     document.addEventListener('visibilitychange', updatePageVisibility);
     return () => document.removeEventListener('visibilitychange', updatePageVisibility);
   }, []);
@@ -91,7 +88,7 @@ function RoomHero() {
     }}
   >
     <div className="studio-hero__photo" id="studio-room-scene">
-      {scenes.map((item, index) => <StudioImage key={item.line} src={`assets/images/editorial-products/${item.image}`} alt={item.alt} width={1536} height={1024} priority={index === 0} className={index === active ? 'is-current' : ''} aria-hidden={index !== active} />)}
+      {scenes.map((item, index) => <StudioImage key={item.line} src={`assets/images/editorial-products/${item.image}`} alt={item.alt} width={1536} height={1024} priority={index === active} className={index === active ? 'is-current' : ''} aria-hidden={index !== active} />)}
     </div>
     <div className="studio-wrap studio-hero__layout">
       <div className="studio-hero__copy">

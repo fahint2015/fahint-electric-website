@@ -36,6 +36,14 @@
 .catalog-filters__count { color: #586d80; font-size: 13px; padding-bottom: 14px; margin: 0; }
 .catalog-filters__summary .catalog-filters__count { padding-bottom: 4px; }
 .catalog-filters__summary .textlink { display: inline-flex; align-items: center; min-height: 44px; font-size: 14px; color: var(--site-blue); }
+.catalog-filters--usb { grid-template-columns: minmax(0, 1.4fr) repeat(3, minmax(0, 1fr)); gap: 16px 20px; }
+.catalog-filters--usb > label { min-width: 0; }
+.catalog-filters__note { grid-column: 1 / -1; margin: 0; color: var(--site-muted); font-size: 13px; line-height: 1.65; max-width: 100ch; }
+.catalog-filters--usb .catalog-filters__summary { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 20px; }
+.catalog-filters--usb .catalog-filters__count { margin-right: auto; padding: 0; }
+.catalog-filters__clear { min-height: 44px; padding: 8px 16px; border: 1px solid var(--site-line); border-radius: 8px; background: #fff; color: var(--site-blue); font: inherit; font-size: 14px; cursor: pointer; }
+.catalog-filters__clear:hover:not(:disabled) { background: var(--site-paper); border-color: var(--site-blue); }
+.catalog-filters__clear:disabled { color: var(--site-muted); opacity: .65; cursor: default; }
 .catalog-model-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; }
 .catalog-model-card { min-width: 0; background: #fff; border: 1px solid #dfe6eb; display: flex; flex-direction: column; }
 .catalog-model-card__image { display: block; padding: 20px; background: #fff; aspect-ratio: 1; overflow: hidden; }
@@ -168,11 +176,13 @@
 .catalog-product-detail .receptacle-outline > .container { max-width: 1060px; }
 .receptacle-outline .usb-dimensions__views { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 @media (max-width: 1100px) {
+  .catalog-filters--usb { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .catalog-model-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .catalog-section-heading > p { max-width: 36ch; }
   .catalog-presentation__body { gap: 32px; }
 }
 @media (max-width: 760px) {
+  .catalog-filters--usb .catalog-filters__search, .catalog-filters--usb .catalog-filters__ports { grid-column: 1 / -1; }
   /* On phones, the photograph has its own stage; no shade crosses the product. */
   .catalog-series__poster { position: relative; inset: auto; height: clamp(220px, 64vw, 320px); object-position: 74% center; }
   .catalog-series__poster-shade { display: none; }
@@ -219,5 +229,6 @@
 }
 @media (max-width: 420px) {
   .catalog-filters, .catalog-family-links { grid-template-columns: 1fr; }
+  .catalog-filters--usb { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .catalog-presentation__photos { gap: 10px; }
 }

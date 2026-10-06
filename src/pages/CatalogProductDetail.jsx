@@ -1,4 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
+import { useState } from 'react';
 import { MessageSquareText } from 'lucide-react';
 import { findLine } from '../data/lines.js';
 import { getCatalogProducts } from '../data/catalogProducts.js';
@@ -10,9 +11,18 @@ import InquiryForm from '../components/InquiryForm.jsx';
 import { productMetadata } from '../seo/metadata.js';
 import { usePageMetadata } from '../seo/usePageMetadata.js';
 import { ModelBuyingChecklist } from '../components/products/BuyingGuide.jsx';
+import { inquiryContactHref, resolveInquiryContext } from '../utils/inquiryContext.js';
 
 export default function CatalogProductDetail({ product }) {
   const { pathname, search } = useLocation();
+  const [selection, setSelection] = useState(null);
+  const selectedModel = selection?.pageModel === product.sku ? selection.model : product.sku;
+  const selectedFinish = selection?.pageModel === product.sku ? selection.finish : '';
+  const context = resolveInquiryContext(selectedModel, selectedFinish);
+  const selectModel = model => setSelection({ pageModel: product.sku, model, finish: '' });
+  const selectFinish = finish => setSelection({ pageModel: product.sku, model: product.sku, finish });
+  const pageContext = selectedModel === product.sku ? context : resolveInquiryContext(product.sku);
+  const technicalContact = inquiryContactHref(pageContext, 'technical');
   const line = findLine(product.line);
   const isUsb = product.line === 'usb-outlets';
   const isSmart = product.line === 'smart-switches';
@@ -33,7 +43,8 @@ export default function CatalogProductDetail({ product }) {
           <span aria-hidden="true">/</span><span aria-current="page">{product.sku}</span>
         </div>
       </nav>
-      <ProductDetailHero key={product.slug} product={product} anchorPath={pathname} anchorSearch={search} />
+      <ProductDetailHero key={product.slug} product={product} anchorPath={pathname} anchorSearch={search}
+        inquiryFinish={selectedModel === product.sku ? selectedFinish : ''} onFinishChange={selectFinish} />
       {upfrontSpecifications ? <ProductSpecifications key={`specifications-${product.slug}`} product={product} layout="matrix" /> : <nav className="catalog-product-nav" aria-label="Product sections">
         <div className="container">
           <Link to={{ pathname, search, hash: '#technical-details' }}>Specifications</Link>
@@ -43,11 +54,11 @@ export default function CatalogProductDetail({ product }) {
         </div>
       </nav>}
       <CatalogFeatures product={product} />
-      <CatalogApplications product={product} />
-      {!product.draft && <CatalogPresentation product={product} />}
+      <CatalogApplications product={product} contactHref={technicalContact} />
+      {!product.draft && <CatalogPresentation product={product} contactHref={inquiryContactHref(pageContext, 'oem')} />}
       {!upfrontSpecifications && <ProductSpecifications key={`specifications-${product.slug}`} product={product} />}
-      <CatalogDrawings product={product} />
-      <CatalogDocumentation product={product} />
+      <CatalogDrawings product={product} contactHref={technicalContact} />
+      <CatalogDocumentation product={product} contactHref={technicalContact} />
       {related.length > 0 && <section className="product-related">
         <div className="container">
           <header className="catalog-section-heading">
@@ -62,10 +73,10 @@ export default function CatalogProductDetail({ product }) {
           <div className="product-inquiry__intro">
             <p className="product-section-label">Project inquiry</p><h2>{product.draft ? 'Request approved documentation' : 'Request a quotation'} for {product.sku}.</h2>
             <p>Share the quantity, intended application, finish and packaging needs. The selected model travels with your inquiry.</p>
-            <Link className="textlink" to={`/contact?model=${encodeURIComponent(product.sku)}`}>Use the full contact page</Link>
+            <Link className="textlink" to={inquiryContactHref(context)}>Use the full contact page</Link>
             <ModelBuyingChecklist product={product} />
           </div>
-          <InquiryForm defaultModel={product.sku} modelOptions={models} title="Send a product brief." />
+          <InquiryForm defaultModel={selectedModel} productContext={context} onModelChange={selectModel} modelOptions={models} title="Send a product brief." />
         </div>
       </section>
       <Link className="product-mobile-quote" to={{ pathname, search, hash: '#inquiry' }} aria-label={`Request ${product.draft ? 'documents' : 'quote'} for ${product.sku}`}>

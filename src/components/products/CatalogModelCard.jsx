@@ -3,7 +3,7 @@ import { ArrowRight } from 'lucide-react';
 import { productHref } from '../../data/catalogProducts.js';
 import SafeImage from '../SafeImage.jsx';
 
-export default function CatalogModelCard({ product }) {
+export default function CatalogModelCard({ product, children }) {
   const [width, height] = product.assets.imageSizes[product.assets.card] || [800, 800];
   return (
     <article className="catalog-model-card">
@@ -18,6 +18,7 @@ export default function CatalogModelCard({ product }) {
         <Link className="textlink" to={productHref(product)} aria-label={`View ${product.sku} details`}>
           View details <ArrowRight size={16} aria-hidden="true" />
         </Link>
+        {children}
       </div>
     </article>
   );

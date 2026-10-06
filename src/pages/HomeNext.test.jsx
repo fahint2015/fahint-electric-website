@@ -63,7 +63,7 @@ describe('new homepage preview', () => {
 
   it('keeps this earlier design local while publishing the completed homepage', async () => {
     await renderNext();
-    const entry = readFileSync('src/main.jsx', 'utf8');
+    const entry = readFileSync('src/App.jsx', 'utf8');
     expect(entry).toContain('path="/" element={<HomeStudio />}');
     expect(entry).toContain('{import.meta.env.DEV && <Route path="/home-next" element={<HomeNext />}');
   });
