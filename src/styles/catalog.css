@@ -104,6 +104,7 @@
 .catalog-drawings__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
 .catalog-drawings__grid figure { margin: 0; background: #fff; border: 1px solid #dce5ea; }
 .catalog-drawings__grid figure:only-child { grid-column: 1 / -1; }
+.catalog-drawings__grid figcaption { padding: 0 24px 20px; color: var(--text-muted, #526a7d); font-size: 13px; line-height: 1.6; }
 .catalog-drawings__grid img { width: 100%; height: auto; max-height: 520px; object-fit: contain; padding: 24px; display: block; }
 .catalog-drawings__grid a > span, .catalog-documentation__certificate a > span { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px 24px; border-top: 1px solid #dce5ea; font-size: 13px; font-weight: 700; }
 .catalog-documentation__layout { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1fr); align-items: center; gap: clamp(32px, 7vw, 90px); }

@@ -1,6 +1,9 @@
 import { Link, useSearchParams } from 'react-router-dom';
 import { ArrowUpRight, BookOpen, Download } from 'lucide-react';
-import { certificates } from '../data/certificates.js';
+import { certificates, findModelCertificate } from '../data/certificates.js';
+import { modelDocumentationNote } from '../data/buyingGuides.js';
+import { findProduct } from '../data/products.js';
+import { findCatalogProduct } from '../data/catalogProducts.js';
 import { catalogueDocument } from '../data/documents.js';
 import { findLine, productLines } from '../data/lines.js';
 import { inquiryContactHref, resolveInquiryContext } from '../utils/inquiryContext.js';
@@ -19,7 +22,9 @@ function ResourceDocument({ document }) {
       <details>
         <summary>Scope &amp; document date</summary>
         <p>{document.scope}</p>
+        {document.report && <p>Report reference: {document.report}</p>}
         <p>Document issued: {document.issued}</p>
+        {document.modelPages && <p>Model addenda: PDF pages {document.modelPages.join(', ')}</p>}
       </details>
     </div>
     <div className="resources-document__actions">
@@ -40,6 +45,8 @@ export default function Resources() {
   const candidate = resolveInquiryContext(params.get('model'));
   const context = candidate && (!requestedFamily || requestedFamily.name === candidate.category) ? candidate : null;
   const family = requestedFamily || productLines.find(line => line.name === context?.category);
+  const product = context && (findProduct(context.model) || findCatalogProduct(family.slug, context.model));
+  const modelCertificate = product && findModelCertificate(product);
   const files = certificates.filter(file => file.family && (!family || file.family === family.slug));
   const qualityDocument = certificates.find(file => file.slug === 'iso-9001');
 
@@ -91,6 +98,10 @@ export default function Resources() {
           Comparing on/off switches?{' '}
           <Link className="company-text-link" to="/blog/light-switch-buying-guide">Read the light switch buying guide <ArrowUpRight size={16} aria-hidden="true" /></Link>
         </p>
+        <p className="resources-scope-note">
+          Specifying standard receptacles?{' '}
+          <Link className="company-text-link" to="/blog/standard-receptacle-buying-guide">Read the standard receptacle buying guide <ArrowUpRight size={16} aria-hidden="true" /></Link>
+        </p>
       </div>
     </header>
 
@@ -107,7 +118,11 @@ export default function Resources() {
           </div>
         </div>
         {context && <aside className="resources-context" aria-label="Source product">
-          <div><strong>Reviewing {context.model}</strong><p>Selecting a model does not confirm its certification coverage. Check the exact designation and configuration in the original document.</p></div>
+          <div>
+            <strong>Reviewing {context.model}</strong>
+            <p>{modelDocumentationNote(product)}</p>
+            {modelCertificate && <a className="company-text-link" href={publicAsset(modelCertificate.document)} target="_blank" rel="noreferrer">View original certificate PDF <ArrowUpRight size={16} aria-hidden="true" /></a>}
+          </div>
           <CompanyLink to={context.source} secondary>Return to {context.model}</CompanyLink>
         </aside>}
         <p className="resources-count" role="status">{files.length} product-family {files.length === 1 ? 'document' : 'documents'}{family ? ` · ${family.name}` : ''}</p>

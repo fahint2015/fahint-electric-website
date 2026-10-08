@@ -4,7 +4,7 @@ export const wallplateBuyingGuide = {
   title: 'Wallplate Buying Guide: Openings, Sizes and Finishes',
   excerpt: 'Compare wallplate openings, gang counts, exterior sizes and finishes. Use FAHINT model examples and a practical checklist to prepare a quotation request.',
   date: '2026-10-06',
-  updated: '2026-10-06',
+  updated: '2026-10-07',
   readMinutes: 6,
   category: 'Buying Guide',
   cover: 'assets/images/editorial-home/category-wallplates-scene.webp',
@@ -55,7 +55,8 @@ export const wallplateBuyingGuide = {
     },
     {
       type: 'p',
-      text: 'Use those names to narrow the range, then compare the intended device with the plate drawing. Include the device model in your inquiry even if the opening looks familiar. A front photograph cannot establish the mounting fit or clearance behind the plate.'
+      text: 'Use those names to narrow the range, then compare the intended device with the plate drawing. Include the device model in your inquiry even if the opening looks familiar. A front photograph cannot establish the mounting fit or clearance behind the plate.',
+      links: [{ label: 'Read the standard receptacle buying guide', href: '/blog/standard-receptacle-buying-guide' }]
     },
     { type: 'h2', text: 'Count the device mounting positions' },
     {
@@ -79,7 +80,7 @@ export const wallplateBuyingGuide = {
     },
     {
       type: 'p',
-      text: 'For example, BS1801 is 70 × 115 mm, BS1802 is 79.5 × 123.9 mm and BS1803-G is 75 × 120 mm, all written as width × height. Each is a one-gang decorator configuration. The Mid-Size label on BS1802 describes a larger outer frame within these examples.'
+      text: 'BS1801 is the standard 70 × 115 mm plate; BS1802 is the medium 80 × 124 mm plate. Both supplied product-library drawings show 6.5 mm thickness. They are separate models, not two sizes of BS1802. BS1803-G is a separate screwless configuration at 75 × 120 mm. All sizes here are exterior width × height.'
     },
     { type: 'h2', text: 'Compare eight FAHINT configurations' },
     {
@@ -92,7 +93,7 @@ export const wallplateBuyingGuide = {
       columns: ['Model', 'Opening / gangs', 'Finish / fixing', 'Exterior W × H (mm)'],
       rows: [
         [{ label: 'BS1801', href: '/products/wallplates/bs1801' }, 'Decorator / 1', 'Glossy / Screw-fixed', '70 × 115 mm'],
-        [{ label: 'BS1802', href: '/products/wallplates/bs1802' }, 'Mid-Size Decorator / 1', 'Glossy / Screw-fixed', '79.5 × 123.9 mm'],
+        [{ label: 'BS1802', href: '/products/wallplates/bs1802' }, 'Mid-Size Decorator / 1', 'Glossy / Screw-fixed', '80 × 124 mm'],
         [{ label: 'BS1804', href: '/products/wallplates/bs1804' }, 'Duplex / 1', 'Glossy / Screw-fixed', '70 × 115 mm'],
         [{ label: 'BS1806', href: '/products/wallplates/bs1806' }, 'Toggle / 1', 'Glossy / Screw-fixed', '70 × 115 mm'],
         [{ label: 'BS1807', href: '/products/wallplates/bs1807' }, 'Blank / 1', 'Glossy / Screw-fixed', '70 × 115 mm'],
@@ -127,7 +128,7 @@ export const wallplateBuyingGuide = {
     },
     {
       type: 'p',
-      text: 'Request the confirmed material and thickness for the exact configuration, along with the drawing and required model documents. If the project specifies a material or performance requirement, include it for review before approving the sample.'
+      text: 'FAHINT’s wallplate material reference identifies polycarbonate (PC) for these plates. Glossy and matte are surface finishes, not two different materials. BS1801 is shown in both finishes; BS1802 is shown in glossy. Specify the material, size and finish as separate fields, and include any additional performance requirement before approving the sample.'
     },
     {
       type: 'p',

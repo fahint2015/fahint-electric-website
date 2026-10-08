@@ -2,12 +2,16 @@
 // photograph scale. A changed/unreviewed source must not inherit these dimensions.
 const profiles = {
   conventional: { width: 43.5, overallHeight: 103.3, depth: 44.7, plateWidth: 70, plateHeight: 115 },
+  range4200: { width: 43.5, bodyHeight: 69, depth: 44.7, boxDepth: 37.5, mountingPitch: 83.5, tabPitch: 23.8, faceWidth: 33.1, faceHeight: 66.5,
+    scope: 'Shared non-65W dimensional reference supplied in the 4200mA product folder.' },
   fourPort: { width: 43.5, overallHeight: 103.3, depth: 41.1, plateWidth: 70, plateHeight: 115 },
   pd: { width: 43.5, bodyHeight: 69, depth: 44.7, mountingPitch: 83.5, tabPitch: 23.8, faceWidth: 33.1, faceHeight: 66.5 },
   pd65: { width: 43.5, bodyHeight: 69, overallHeight: 103.8, depth: 47, boxDepth: 39.8, mountingPitch: 83.5, tabPitch: 23.8 }
 };
 
 const sources = {
+  ...Object.fromEntries(['FTR15-4200', 'FTR15C-4200', 'FTR15DC-4200', 'FTR20-4200', 'FTR20C-4200', 'FTR20DC-4200']
+    .map(sku => [sku, ['2ffcc303e8934622', 'range4200']])),
   'F4P': ['1a6c5d181e1183f1', 'fourPort'],
   'FTR15-3100': ['fcb256f01acf3f42', 'conventional'],
   'FTR15-3600': ['258e96bbf8f5fe4b', 'conventional'],

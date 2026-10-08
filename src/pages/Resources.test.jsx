@@ -86,7 +86,7 @@ describe('Resources', () => {
     expect(screen.getByText(/E501377-20230919/)).toBeVisible();
     expect(screen.getAllByRole('link', { name: /^Download .* PDF$/ })).toHaveLength(4);
     expect(screen.getByRole('link', { name: 'Return to BS1805' })).toHaveAttribute('href', '/products/wallplates/bs1805');
-    expect(screen.getByText(/Selecting a model does not confirm its certification coverage/)).toBeVisible();
+    expect(screen.getByText(/BS1805 is not named in the supplied wallplate addenda/)).toBeVisible();
   });
 
   it.each(['dimmers', 'smart-switches'])('explains missing standalone files for %s without a fake download', async family => {
@@ -107,7 +107,7 @@ describe('Resources', () => {
     expect(screen.getByLabelText('Product family')).toHaveValue(family);
     expect(screen.getByRole('link', { name: `Return to ${model}` })).toHaveAttribute('href', source);
     expect(screen.getByRole('link', { name: 'Request model documents' })).toHaveAttribute('href', `/contact?topic=technical&model=${model}`);
-    expect(screen.getByText(/Selecting a model does not confirm its certification coverage/)).toBeVisible();
+    expect(screen.getByRole('complementary', { name: 'Source product' })).toHaveTextContent(/Confirm current coverage|under review/);
   });
 
   it.each(['family=invalid&model=unknown', 'family=receptacles&model=FLB20', 'family=usb-outlets&model=GF15'])('does not display untrusted, draft or mismatched model context: %s', async query => {
@@ -125,6 +125,28 @@ describe('Resources', () => {
     fireEvent.change(screen.getByLabelText('Product family'), { target: { value: '' } });
     expect(screen.getByRole('status')).toHaveTextContent('6 product-family documents');
     expect(screen.getByTestId('route')).toHaveTextContent(/^\/resources$/);
+  });
+
+  it('shows a model-specific dated reference while keeping the family library browsable', async () => {
+    vi.stubEnv('BASE_URL', '/fahint-electric-website/');
+    await show('/resources?family=usb-outlets&model=FTR15C-3100');
+    const source = screen.getByRole('complementary', { name: 'Source product' });
+    expect(source).toHaveTextContent(/FTR15C-3100 is named in the supplied.*April 26, 2022.*E498095-20180426/);
+    expect(source).toHaveTextContent(/current coverage/);
+    expect(within(source).getByRole('link', { name: 'View original certificate PDF' })).toHaveAttribute('href', '/fahint-electric-website/assets/documents/certificates/ul-usb.pdf');
+    const card = screen.getByRole('article', { name: 'UL — USB Outlets' });
+    fireEvent.click(within(card).getByText('Scope & document date'));
+    expect(card).toHaveTextContent('Report reference: E498095-20180426');
+    expect(card).toHaveTextContent('Model addenda: PDF pages 2, 3, 5, 6');
+  });
+
+  it('does not present the family PDF as a match for an unlisted suffix', async () => {
+    await show('/resources?family=usb-outlets&model=FTR15QC-AC65W');
+    const source = screen.getByRole('complementary', { name: 'Source product' });
+    expect(source).toHaveTextContent(/No matching certificate PDF for FTR15QC-AC65W.*library/);
+    expect(within(source).queryByRole('link', { name: 'View original certificate PDF' })).not.toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'Download UL — USB Outlets PDF' })).toBeVisible();
+    expect(screen.getByRole('link', { name: 'Request model documents' })).toHaveAttribute('href', '/contact?topic=technical&model=FTR15QC-AC65W');
   });
 
   it('preserves the model when opening the existing technical inquiry form', async () => {
@@ -157,6 +179,20 @@ describe('Resources', () => {
 });
 
 describe('Resource entry points', () => {
+  it('opens a matching catalog certificate as a complete PDF, not a cover image', () => {
+    render(wrap(<CatalogDocumentation product={findCatalogProduct('lighting-switches', 'ds15')} />));
+    expect(screen.getByRole('link', { name: 'Open DS15 original certificate PDF' })).toHaveAttribute('href', '/assets/documents/certificates/ul-switch.pdf');
+    expect(screen.getByText(/DS15 is named in the supplied/)).toHaveTextContent(/October 18, 2024.*E528137-20241016/);
+  });
+
+  it('removes the misleading family scan while retaining supplier source claims and the request link', () => {
+    const { container } = render(wrap(<CatalogDocumentation product={findCatalogProduct('usb-outlets', 'ftr15-5000')} />));
+    expect(container.querySelector('.catalog-documentation__certificate')).not.toBeInTheDocument();
+    expect(screen.getByText(/No matching certificate PDF for FTR15-5000/)).toBeVisible();
+    expect(screen.getByText(/Supplier-published reference:/)).toHaveTextContent('E498095');
+    expect(screen.getByRole('link', { name: 'Request model-specific documents' })).toHaveAttribute('href', '/contact?model=FTR15-5000');
+  });
+
   it.each(['GF15', 'GL20'])('connects the GFCI documentation section for %s', model => {
     render(wrap(<ProductCertification product={findProduct(model)} />));
     expect(screen.getByRole('link', { name: 'Browse product resources' })).toHaveAttribute('href', `/resources?family=gfci&model=${model}`);

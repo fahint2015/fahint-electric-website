@@ -6,7 +6,7 @@ const usb4200 = [15, 20].flatMap((amperage) => ['', 'C', 'DC'].map((ports) => {
   const folder = `${usbRoot}/4200mA/${model}/白底图+方特主图`;
   const interfaces = ports === 'DC' ? '2 × USB-C' : ports === 'C' ? 'USB-A + USB-C' : '2 × USB-A';
   return {
-    model, family: 'usb-outlets', referencePages: [10],
+    model, family: 'usb-outlets', referencePages: [10, 12],
     breadcrumb: 'Products / USB Outlet / Conventional USB Outlet 4200mA /',
     title: `${amperage}A ${interfaces} Outlet · 4.2A`, group: '4.2A USB',
     summary: `${amperage}A, 125V receptacle with ${interfaces} charging ports. Combined USB output is 5V DC, 4.2A (21W), shared across both ports.`,
@@ -15,10 +15,15 @@ const usb4200 = [15, 20].flatMap((amperage) => ['', 'C', 'DC'].map((ports) => {
       ['Model', model], ['Receptacle Rating', `${amperage}A, 125V · NEMA 5-${amperage}R`],
       ['USB Rating', '5V DC · 4.2A · 21W'], ['USB Type', interfaces],
       ['Pole & Wire', '2-Pole, 3-Wire'], ['Charging protocols', 'BC1.2 · Apple / Samsung'],
-      ['Quick charging', 'No'], ['Tamer-Resistant', 'Yes — marked on the model face']
+      ['Quick charging', 'No'], ['Tamer-Resistant', 'Yes — marked on the model face'],
+      ['Device width', '43.5 mm'], ['Body height', '69 mm'], ['Overall depth', '44.7 mm'],
+      ['Recessed depth', '37.5 mm'], ['Mounting centers', '83.5 mm']
     ],
-    notes: ['The catalogue specifies combined output, but not an individual-port current limit for this 4200mA model. Do not substitute the limits from a 3100mA or 5000mA model.'],
+    notes: ['The catalogue specifies combined output, but not an individual-port current limit for this 4200mA model. Do not substitute the limits from a 3100mA or 5000mA model.',
+      'Dimensions use the shared non-65W reference supplied in the 4200mA product folder. The 83.5 mm value is mounting-hole spacing, not overall height. Confirm the final model drawing and wiring instructions before installation.'],
     primaryIndex: 0, presentationIndices: [1, 2],
+    drawingSources: [`${usbRoot}/4200mA/5.png`],
+    drawingCaptions: ['Shared 4200mA folder reference · use the non-65W views, not the PD65W depth'],
     gallerySources: [`${folder}/0-白哑光单品.png`, `${folder}/1-白单品+亮面常规面板.png`, `${folder}/3-白单品-亮面无螺丝面板.png`]
   };
 }));
@@ -42,13 +47,19 @@ const standardDuplex = ['R15', 'R15Q', 'R20'].map((model) => {
   const wiring = model.endsWith('Q') ? 'Side Wire / Push-In Quick Wire' : 'Side Wire / Back Wire';
   const folder = `04-Standard Receptacle/R系列/${amperage === 20 ? 'R20' : 'R15-R15Q'}/白底图`;
   return {
-    model, family: 'receptacles', referencePages: [15],
+    model, family: 'receptacles', referencePages: [15, 18],
     title: `${amperage}A Standard Duplex Receptacle${model.endsWith('Q') ? ' · Quick-Wire' : ''}`,
     group: 'Duplex Receptacle', summary: `${amperage}A, 125V standard duplex receptacle with ${wiring.toLowerCase()}. Matte finish; non-TR standard version.`,
     keyFacts: [['Rating', `${amperage}A · 125V`], ['Wiring', wiring], ['Variant', 'Standard'], ['Surface', 'Matte']],
-    rows: [['Model', model], ['Rating', `${amperage}A · 125V`], ['Wiring', wiring], ['Spec', 'Non Tamper-Resistant'], ['Surface finish', 'Matte'], ['File No.', 'E498095']],
-    notes: model === 'R20' ? [] : ['R15 and R15Q share the front-face presentation in the source library. Their wiring methods are different; use the model-specific wiring configuration on the order.'],
+    rows: [['Model', model], ['Rating', `${amperage}A · 125V`], ['Wiring', wiring], ['Spec', 'Non Tamper-Resistant'], ['Surface finish', 'Matte'], ['File No.', 'E498095'],
+      ['Device width', '33.2 mm'], ['Overall height', '106 mm'], ['Overall depth', '23.8 mm'], ['Mounting centers', '83.5 mm']],
+    notes: [
+      ...(model === 'R20' ? [] : ['R15 and R15Q share the front-face presentation in the source library. Their wiring methods are different; use the model-specific wiring configuration on the order.']),
+      'Dimensions are transcribed from the shared receptacle range drawing in the supplied product library. Its illustrated TR/WR faces do not add those features to this standard model; confirm the approved model drawing for final fit.'
+    ],
     primaryIndex: 0, detailIndex: 1, presentationIndices: [1],
+    drawingSources: ['04-Standard Receptacle/副图/7.png'],
+    drawingCaptions: ['Shared receptacle range dimensions · not a model-specific TR/WR or wiring specification'],
     gallerySources: [`${folder}/白哑光单品.png`, `${folder}/白哑光单品+亮面面板.png`]
   };
 });
@@ -73,18 +84,32 @@ const dimmers = ['DM2010', 'DM2010S'].map((model) => {
         : [['Incandescent load', '20–600W'], ['LED / CFL load', '5–200W']]),
       ['Circuit configuration', 'Single-pole / 3-way'], ['Certification', 'UL / cUL marking on model'], ['File No.', 'E550002'],
       ['Device width', '1.73 in (44 mm)'], ['Device height', '4.14 in (105 mm)'], ['Overall depth', '1.14 in (28.8 mm)'],
-      ['Wall-plate face', '2.75 × 4.53 in (70 × 115 mm)']
+      ['Wall-plate face', '2.75 × 4.53 in (70 × 115 mm)'],
+      ['Operating Temp', '−20°C to 40°C'], ['Recessed depth', '21.5 mm']
     ],
     notes: [lowVoltageControl
       ? 'DM2010S uses a 0–10V control signal and is not interchangeable with DM2010. Confirm compatibility with the LED driver or ballast.'
       : 'The 600W incandescent limit does not apply to LED/CFL lamps. Their published load range is 5–200W.',
-      'Dimensions and wiring references are reproduced from the model-specific product-library drawings. Use approved installation instructions for the final installation.'],
+      'Dimensions and wiring references are reproduced from the model-specific product-library drawings. Use approved installation instructions for the final installation.',
+      'A multi-gang derating schedule, conductor limits and terminal torque are not specified in these references. Request the approved instructions for the intended installation.'],
     primaryIndex: 0, detailIndex: 3, presentationIndices: [1, 2],
     gallerySources: [`${folder}/白底图-方特主图/0-白单品.png`, `${folder}/白底图-方特主图/1-白配亮面常规面板.png`,
       `${folder}/白底图-方特主图/5-中性包装-白色配亮面常规面板.png`, `${folder}/副图/5.jpg`],
-    drawingSources: [`${folder}/副图/6.jpg`, `${folder}/副图/7.jpg`]
+    drawingSources: [`${folder}/副图/6.jpg`, `${folder}/副图/7.jpg`],
+    drawingKinds: ['dimensions', 'wiring'],
+    drawingCaptions: [`${model} dimensions · 44 × 105 × 28.8 mm, recessed depth 21.5 mm`, `${model} single-pole / 3-way wiring reference · follow approved instructions`]
   };
 });
+
+const wallplateDrawings = [
+  ['BS1801', '副图-1801尺寸.png', '70 × 115 × 6.5 mm'],
+  ['BS1801-M', '副图-1801哑光尺寸.png', '70 × 115 × 6.5 mm'],
+  ['BS1802', '副图-1802尺寸.png', '80 × 124 × 6.5 mm']
+].map(([model, file, size]) => ({
+  model, family: 'wallplates', imageOnly: true, gallerySources: [],
+  drawingSources: [`07-Wallplates/BS1801+BS1802/${file}`],
+  drawingCaptions: [`${model} · ${size} · supplied product-library drawing`]
+}));
 
 const smartRoot = '05-Smart Switch';
 const gangCodes = [[1, '8811'], [2, '8821'], [3, '8831'], [4, '8841']];
@@ -161,7 +186,7 @@ const smartSwitches = [...usSmart, ...usSpecial, ...euSmart, ...euSpecial].map((
   };
 });
 
-export const catalogueModelSources = [...usb4200, ...usbPhotoCorrections, ...standardDuplex, ...dimmers, ...smartSwitches];
+export const catalogueModelSources = [...usb4200, ...usbPhotoCorrections, ...standardDuplex, ...dimmers, ...smartSwitches, ...wallplateDrawings];
 
 // Explicit model folders and front-face colors from the product library. Do not
 // infer colors from gallery position or reuse a different amperage / port layout.

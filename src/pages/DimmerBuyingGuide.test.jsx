@@ -61,15 +61,20 @@ describe('Researched dimmer buying guide', () => {
     expect(post.coverCaption).toMatch(/illustrat/i);
     expect(post.coverSource).toMatch(/illustrat/i);
     const sources = post.sources.filter(source => source.href.startsWith('https:'));
-    expect(sources).toHaveLength(4);
-    expect(new Set(sources.map(source => new URL(source.href).hostname)).size).toBe(3);
+    expect(sources).toHaveLength(6);
+    expect(new Set(sources.map(source => new URL(source.href).hostname))).toEqual(new Set(['leviton.com', 'support.lutron.com', 'www.legrand.us', 'www.eaton.com', 'assets.lutron.com']));
+    expect(text).toMatch(/Eaton.*DF10P.*separates.*switched.*0–10V/);
+    expect(text).toMatch(/Lutron.*DVCLN-153P.*load type.*gang count/);
+    expect(text).toMatch(/not ratings for DM2010 or DM2010S/);
+    expect(JSON.stringify(table)).not.toMatch(/200\s*mA|1200\s*W|1660\s*W/);
+    for (const block of post.body.filter(block => Number.isInteger(block.source))) expect(post.sources[block.source]).toBeDefined();
   });
 
   it('appears in Blog alongside the existing USB guide', () => {
     render(wrap(<Blog />));
     expect(screen.getByRole('link', { name: 'Dimmer Buying Guide: LED Loads and 0–10V Compatibility' })).toHaveAttribute('href', path);
     expect(screen.getByRole('link', { name: 'USB Wall Outlet Buying Guide: Ports, PD and Power' })).toHaveAttribute('href', '/blog/usb-wall-outlet-buying-guide');
-    expect(screen.getByRole('status')).toHaveTextContent('10 articles');
+    expect(screen.getByRole('status')).toHaveTextContent('11 articles');
   });
 
   it('is linked from the dimmer family buying guide', () => {

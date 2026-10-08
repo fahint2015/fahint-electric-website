@@ -85,7 +85,7 @@ describe('Researched light switch buying guide', () => {
   it('appears in Blog alongside the existing guides', () => {
     render(wrap(<Blog />));
     expect(screen.getByRole('link', { name: 'Light Switch Buying Guide: Single-Pole, 3-Way and Combination' })).toHaveAttribute('href', path);
-    expect(screen.getByRole('status')).toHaveTextContent('10 articles');
+    expect(screen.getByRole('status')).toHaveTextContent('11 articles');
   });
 
   it('is linked from the lighting-switch family guide', () => {

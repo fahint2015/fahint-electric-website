@@ -3,6 +3,8 @@ import { ArrowUpRight } from 'lucide-react';
 import Faq from '../Faq.jsx';
 import { buyingGuides, modelDocumentationNote } from '../../data/buyingGuides.js';
 import { findLine } from '../../data/lines.js';
+import { findModelCertificate } from '../../data/certificates.js';
+import { publicAsset } from '../../utils/publicAsset.js';
 import '../../styles/buying-guide.css';
 
 export function BuyingGuide({ line }) {
@@ -24,6 +26,7 @@ export function BuyingGuide({ line }) {
 
 export function ModelBuyingChecklist({ product }) {
   const guide = buyingGuides[product.line || 'gfci'];
+  const certificate = findModelCertificate(product);
   return <section className="model-buying-checklist" aria-labelledby={`buying-${product.sku}`}>
     <h3 id={`buying-${product.sku}`}>Before you order {product.sku}</h3>
     <ul>
@@ -31,6 +34,10 @@ export function ModelBuyingChecklist({ product }) {
       <li><strong>Order breakdown.</strong> List quantities by finish, wallplate and packaging option, with the destination and requested timing.</li>
       <li><strong>Documentation.</strong> {modelDocumentationNote(product)}</li>
     </ul>
+    <div className="model-buying-checklist__links">
+      {certificate && <a className="textlink" href={publicAsset(certificate.document)} target="_blank" rel="noreferrer">View original certificate PDF <ArrowUpRight size={16} aria-hidden="true" /></a>}
+      <Link className="textlink" to={guide.resource.to}>{guide.resource.label} <ArrowUpRight size={16} aria-hidden="true" /></Link>
+    </div>
     <p>Sample arrangements, minimum quantities and lead times are confirmed in your quotation. Approve the sample and any authorized artwork before the order.</p>
   </section>;
 }

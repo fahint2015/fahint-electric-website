@@ -44,10 +44,12 @@ describe('USB comparison facts', () => {
     expect(values(['F4P'], 'Device depth')).toEqual(['41.1 mm']);
   });
 
-  it('does not infer 4200 wiring/dimensions or substitute body height for overall height', () => {
-    for (const label of ['Wiring method', 'Device width', 'Overall height', 'Device depth']) {
+  it('uses reviewed 4200 width/depth but does not infer wiring or overall height', () => {
+    for (const label of ['Wiring method', 'Overall height']) {
       expect(values(['FTR15C-4200'], label)).toEqual(['Not published — please confirm']);
     }
+    expect(values(['FTR15C-4200'], 'Device width')).toEqual(['43.5 mm']);
+    expect(values(['FTR15C-4200'], 'Device depth')).toEqual(['44.7 mm']);
     expect(values(['FTR15QC-DC20W', 'FTR15QC-DC36W'], 'Overall height'))
       .toEqual(['Not published — please confirm', 'Not published — please confirm']);
     expect(values(['FTR15-3100', 'FTR20QC-DC65W'], 'Overall height')).toEqual(['103.3 mm', '103.8 mm']);

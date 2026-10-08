@@ -2,6 +2,13 @@ import { describe, expect, it } from 'vitest';
 import { inquiryContactHref, resolveInquiryContext } from './inquiryContext.js';
 
 describe('validated inquiry context', () => {
+  it('resolves old commercial inquiry links to the catalogue model name and preserves the finish', () => {
+    for (const model of ['CT15Q', 'RT15Q-C']) {
+      expect(resolveInquiryContext(model, 'black')).toMatchObject({
+        model: 'CT15Q', finish: 'Black', finishSlug: 'black', source: '/products/receptacles/rt15q-c'
+      });
+    }
+  });
   it('keeps the published SKU, category, explicit finish and product path', () => {
     expect(resolveInquiryContext('gf15', 'black')).toEqual({
       model: 'GF15', category: 'GFCI Outlets', finish: 'Black',

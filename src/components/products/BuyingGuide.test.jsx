@@ -72,6 +72,22 @@ describe('Purchasing information', () => {
     expect(answer).not.toMatch(/does not establish/);
   });
 
+  it('connects the buying checklist to a dated original PDF and its existing buying guide', () => {
+    openPage('/products/usb-outlets/ftr15c-3100');
+    const checklist = screen.getByRole('region', { name: 'Before you order FTR15C-3100' });
+    expect(checklist).toHaveTextContent(/April 26, 2022.*E498095-20180426/);
+    expect(within(checklist).getByRole('link', { name: 'View original certificate PDF' })).toHaveAttribute('href', '/assets/documents/certificates/ul-usb.pdf');
+    expect(within(checklist).getByRole('link', { name: 'Read the USB outlet buying guide' })).toHaveAttribute('href', '/blog/usb-wall-outlet-buying-guide');
+  });
+
+  it('explains missing exact-model documents without calling the product uncertified', () => {
+    openPage('/products/usb-outlets/ftr15qc-ac65w');
+    const checklist = screen.getByRole('region', { name: 'Before you order FTR15QC-AC65W' });
+    expect(checklist).toHaveTextContent(/No matching certificate PDF for FTR15QC-AC65W.*library/);
+    expect(checklist).not.toHaveTextContent(/uncertified|not certified/i);
+    expect(within(checklist).queryByRole('link', { name: 'View original certificate PDF' })).not.toBeInTheDocument();
+  });
+
   it.each([
     ['bs1801-m', 'BS1801-M', 'E501377-20181016', 'August 16, 2022'],
     ['bs1803-g', 'BS1803-G', 'E501377-20181016', 'August 16, 2022'],

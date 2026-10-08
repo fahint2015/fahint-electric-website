@@ -13,7 +13,11 @@
 .model-buying-checklist ul { margin: 0 0 16px; padding-left: 20px; }
 .model-buying-checklist li { padding-left: 4px; margin-bottom: 12px; line-height: 1.65; }
 .model-buying-checklist strong { color: inherit; }
+.model-buying-checklist__links { display:flex; flex-wrap:wrap; gap:4px 24px; margin-bottom:16px; }
+.model-buying-checklist__links .textlink { min-height:44px; white-space:normal; }
+.model-buying-checklist__links svg { flex-shrink:0; }
 .product-inquiry .model-buying-checklist { border-color: rgba(255, 255, 255, .2); color: #c8d8e3; }
+.product-inquiry .model-buying-checklist .textlink { color:#a4c5d6; }
 .product-inquiry .model-buying-checklist h3, .product-inquiry .model-buying-checklist strong { color: #fff; }
 .product-inquiry .model-buying-checklist p { color: #c8d8e3; font-size: 15px; }
 @media (max-width: 760px) {

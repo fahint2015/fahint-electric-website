@@ -21,6 +21,24 @@ function renderSeries(line = 'usb-outlets', search = '') {
 }
 
 describe('model catalogue', () => {
+  it('explains an exact legacy name match without changing the input, route or configuration filter', async () => {
+    const user = userEvent.setup();
+    renderSeries('receptacles');
+    const search = screen.getByRole('searchbox', { name: 'Search models' });
+    await user.type(search, 'RT15Q-C');
+    expect(search).toHaveValue('RT15Q-C');
+    expect(screen.getByText('RT15Q-C is listed in the current catalog as CT15Q.')).toBeVisible();
+    expect(screen.getByRole('link', { name: 'View CT15Q details' })).toHaveAttribute('href', '/products/receptacles/rt15q-c');
+    expect(screen.getByText('1 of 30 models')).toBeVisible();
+    await user.selectOptions(screen.getByRole('combobox', { name: 'Configuration' }), 'Duplex Receptacle');
+    expect(screen.getByRole('status')).toHaveTextContent('No models match');
+    expect(screen.queryByText(/is listed in the current catalog as/)).not.toBeInTheDocument();
+    await user.click(screen.getByRole('button', { name: 'Clear filters' }));
+    await user.type(search, 'CT15Q');
+    expect(screen.getByRole('link', { name: 'View CT15Q details' })).toBeVisible();
+    expect(screen.queryByText(/is listed in the current catalog as/)).not.toBeInTheDocument();
+  });
+
   it('offers USB specification controls in place of the generic configuration field', () => {
     renderSeries();
     expect(screen.getByRole('combobox', { name: 'USB ports' }).options).toHaveLength(5);

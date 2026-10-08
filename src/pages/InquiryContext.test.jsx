@@ -111,7 +111,7 @@ describe('inquiry product continuity', () => {
   it.each([
     ['/products/gfci/gl20', 'GL20', 'Request a documentation review'],
     ['/products/usb-outlets/ftr15c-3100', 'FTR15C-3100', 'Request model-specific documents'],
-    ['/products/receptacles/r15', 'R15', 'Request dimensioned drawing']
+    ['/products/receptacles/r15', 'R15', 'Request model-specific documents']
   ])('keeps the selected finish on technical document links for %s', async (path, model, label) => {
     const user = userEvent.setup();
     renderJourney(path);

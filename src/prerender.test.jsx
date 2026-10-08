@@ -5,6 +5,45 @@ import { canHydratePage } from './utils/prerender.js';
 import { PUBLIC_ROUTES } from '../scripts/prepare-pages.mjs';
 
 describe('published page prerendering', () => {
+  it.each(['/', '/fahint-electric-website/'])('renders catalogue corrections while keeping commercial URLs under %s', async base => {
+    const commercial = await renderPage('/products/receptacles/rt15q-c', base);
+    expect(commercial).toContain('CT15Q');
+    expect(commercial).toContain('Commercial Duplex Receptacle');
+    expect(commercial).toContain('model=CT15Q');
+    expect(commercial).toContain('products/receptacles/rt15q-c');
+    expect(await renderPage('/products/receptacles/cr15', base)).toContain('15A · 125V/250V');
+    expect(await renderPage('/products/wallplates/bs1802', base)).toContain('80 × 124 × 6.5 mm');
+  });
+  it.each(['/', '/fahint-electric-website/'])('prerenders the receptacle guide and its entry points under %s', async base => {
+    const path = 'blog/standard-receptacle-buying-guide';
+    expect(PUBLIC_ROUTES).toContain(path);
+    const html = await renderPage('/' + path, base);
+    expect(html).toContain('FAHINT 125V receptacle comparison');
+    expect(html).toContain('Receptacle quotation checklist');
+    expect(html).toContain('E498095-20211123');
+    expect(html).toContain('href="' + base + 'products/receptacles/r15q"');
+    expect(html).toContain('href="' + base + 'resources?family=receptacles"');
+    expect(html).toContain('href="' + base + 'contact?topic=technical"');
+    expect(html).not.toContain('Loading page…');
+    for (const entry of ['/products/receptacles', '/products/receptacles/dt15', '/resources']) {
+      expect(await renderPage(entry, base)).toContain(`href="${base}${path}"`);
+    }
+  });
+
+  it.each(['/', '/fahint-electric-website/'])('includes model evidence and real PDF links in initial HTML under %s', async base => {
+    vi.stubEnv('BASE_URL', base);
+    try {
+      const matched = await renderPage('/products/usb-outlets/ftr15c-3100', base);
+      expect(matched).toContain('FTR15C-3100 is named in the supplied April 26, 2022 addendum (report E498095-20180426)');
+      expect(matched).toContain(`href="${base}assets/documents/certificates/ul-usb.pdf"`);
+      const missing = await renderPage('/products/usb-outlets/ftr15qc-ac65w', base);
+      expect(missing).toContain('No matching certificate PDF for FTR15QC-AC65W');
+      expect(missing).not.toContain('class="catalog-documentation__certificate"');
+      expect(missing).not.toContain(`href="${base}assets/documents/certificates/ul-usb.pdf"`);
+      expect(missing).toContain('Request model-specific documents');
+    } finally { vi.unstubAllEnvs(); }
+  });
+
   it('prerenders the light switch guide with base-safe model and purchasing links', async () => {
     expect(PUBLIC_ROUTES).toContain('blog/light-switch-buying-guide');
     const html = await renderPage('/blog/light-switch-buying-guide', '/fahint-electric-website/');
@@ -27,7 +66,7 @@ describe('published page prerendering', () => {
     const html = await renderPage('/blog/wallplate-buying-guide', '/fahint-electric-website/');
     expect(html).toContain('FAHINT wallplate configuration comparison');
     expect(html).toContain('<table>');
-    expect(html).toContain('79.5 × 123.9 mm');
+    expect(html).toContain('80 × 124 mm');
     expect(html).toContain('Wallplate quotation checklist');
     for (const model of ['bs1801', 'bs1802', 'bs1804', 'bs1806', 'bs1807', 'bs18012', 'bs1803-g', 'bs1803-m']) {
       expect(html).toContain(`href="/fahint-electric-website/products/wallplates/${model}"`);

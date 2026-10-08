@@ -4,11 +4,17 @@ import smartSwitchMedia from './catalog/smart-switch-media.json' with { type: 'j
 import { colors, products as gfciProducts } from './products.js';
 
 import { catalogueDocument } from './documents.js';
-import { findWallplateCertificate } from './certificates.js';
+import { findModelCertificate } from './certificates.js';
 export { catalogueDocument };
 const clean = (value) => String(value ?? '').replace(/\s+/g, ' ').trim();
 export const modelKey = (value) => clean(value).toLowerCase().replace(/[^a-z0-9]/g, '');
 export const modelSlug = (value) => clean(value).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+// Catalogue p.17 names. Preserve the library keys and deployed URLs below.
+const commercialModels = {
+  'R15-C': 'C15', 'R15Q-C': 'C15Q', 'R20-C': 'C20',
+  'RT15-C': 'CT15', 'RT15Q-C': 'CT15Q', 'RT20-C': 'CT20',
+  'RW15-C': 'CW15', 'RW15Q-C': 'CW15Q', 'RW20-C': 'CW20'
+};
 const finishPalette = Object.fromEntries([
   ...colors, { slug: 'graphite', name: 'Graphite', hex: '#484A4B' }, { slug: 'gold', name: 'Gold', hex: '#cbbb82' }
 ].map((finish) => [finish.slug, finish]));
@@ -164,7 +170,8 @@ const familyStories = {
 function describeLegacy(record, rows) {
   const values = new Map(rows);
   const rawModel = record.model;
-  const sku = rawModel.replace(/\s+/g, '-') + (record.breadcrumb.includes('Matte Finish') && !/ M$/.test(rawModel) ? '-M' : '');
+  const sourceSku = rawModel.replace(/\s+/g, '-') + (record.breadcrumb.includes('Matte Finish') && !/ M$/.test(rawModel) ? '-M' : '');
+  const sku = commercialModels[rawModel] || sourceSku;
   if (record.title) return { sku, slug: modelSlug(sku), group: record.group, name: record.title, summary: record.summary, keyFacts: record.keyFacts };
   const rating = values.get('Receptacle rating') || values.get('Input rating') || values.get('Device rating') || values.get('Amperage') || values.get('Rated voltage');
   const amp = rating?.match(/\d+\s?A/)?.[0] || '';
@@ -210,14 +217,13 @@ function describeLegacy(record, rows) {
     group = record.breadcrumb.split('/').at(-2)?.trim() || record.family;
     const variant = [values.get('Tamper-resistant') === 'Yes' && 'TR', values.get('Weather-resistant') === 'Yes' && 'WR'].filter(Boolean).join(' + ') || 'Standard';
     const descriptions = { DS15: 'Single-Pole Paddle Switch', 'DS15.3': '3-Way Paddle Switch', DS1502: 'Double Paddle Combination Switch', DS1503: 'Triple Paddle Combination Switch', T15: 'Single-Pole Toggle Switch', 'T15.3': '3-Way Toggle Switch' };
-    if (record.family === 'receptacles' && rawModel.endsWith('-C')) group = 'C-series Duplex Receptacle';
-    if (/^CR\d+$/.test(rawModel)) group = '250V Duplex Receptacle';
-    if (rawModel === 'CD20') group = 'Specialty Duplex Receptacle';
-    name = descriptions[rawModel] || `${amp} ${variant === 'Standard' ? '' : `${variant} `}${group}`;
+    if (commercialModels[rawModel]) group = 'Commercial Duplex Receptacles';
+    if (['CR15', 'CR20', 'CD20'].includes(rawModel)) group = 'Industrial Grade Duplex Receptacles';
+    name = descriptions[rawModel] || `${amp} ${variant === 'Standard' ? '' : `${variant} `}${group.replace(/Receptacles$/, 'Receptacle')}`;
     summary = `${sku}: ${group.toLowerCase()}. ${rows.filter(([label]) => /^(device rating|receptacle rating|rated voltage|amperage|wiring method)$/i.test(label)).map(([, value]) => value).join(' · ')}.`;
     facts = [['Rating', rating], ['Configuration', values.get('NEMA') || values.get('Pole & wire')], ['Variant', variant], ['Application', values.get('Application grade')]];
   }
-  return { sku, slug: modelSlug(sku), group, name: clean(name), summary, keyFacts: facts.filter(([, value]) => value) };
+  return { sku, slug: modelSlug(sourceSku), group, name: clean(name), summary, keyFacts: facts.filter(([, value]) => value) };
 }
 
 function legacyProduct(record) {
@@ -257,7 +263,20 @@ function legacyProduct(record) {
     }
     if (surface === 'Matte' && !/ M$/.test(record.model)) notes.push('The -M suffix on this website distinguishes the matte page from the glossy page. The original site uses the same base model designation for both finishes; specify the surface finish on the order.');
     referencePages.push(['BS1804', 'BS1805', 'BS1806', 'BS1807'].includes(record.model) ? 29 : 28);
-    notes.push('Dimensions and weight follow this exact model’s legacy specification table and drawing. Do not substitute the dimensions of a screw-fixed plate for the screwless version.');
+    if (['BS1801', 'BS1802'].includes(record.model)) {
+      referencePages.push(30);
+      const material = rows.findIndex(([label]) => label === 'Published construction material');
+      if (material !== -1) rows.splice(material, 1);
+      rows.push(['Material specification', 'Polycarbonate (PC)']);
+      if (record.model === 'BS1802') {
+        rows.find(([label]) => label === 'Product width')[1] = '3.15 in (80 mm)';
+        rows.find(([label]) => label === 'Product height')[1] = '4.88 in (124 mm)';
+      }
+      notes.push('BS1801 is the 70 × 115 mm standard plate (glossy or matte); BS1802 is the 80 × 124 mm medium plate (glossy). Both supplied library drawings show 6.5 mm thickness. They are separate models, not two sizes of BS1802.');
+      notes.push('The supplied wallplate material reference identifies polycarbonate (PC). Glossy and matte describe surface finishes, not different resins. Specify the size and finish separately on the order.');
+    } else {
+      notes.push('Dimensions and weight follow this exact model’s legacy specification table and drawing. Do not substitute the dimensions of a screw-fixed plate for the screwless version.');
+    }
   }
   if (record.family === 'lighting-switches') {
     referencePages.push(25);
@@ -269,16 +288,23 @@ function legacyProduct(record) {
       notes.push('This is a multi-rocker combination switch in a single-gang device opening, not a two- or three-gang wall plate. The original model page identifies ETL certification; a UL certificate for another switch must not be substituted.');
     }
   }
-  if (record.model === 'CD20') {
-    reviewNotice = 'Confirm voltage and plug configuration before specification: the original CD20 sources conflict.';
-    const publishedRating = rows.find(([label]) => label === 'Device rating');
-    if (publishedRating) {
-      publishedRating[0] = 'Legacy rating entry — requires confirmation';
-      rows.push(['Device rating', '20A · voltage / plug configuration requires confirmation']);
+  if (record.family === 'receptacles') {
+    const industrial = ['CR15', 'CR20', 'CD20'].includes(record.model);
+    const commercial = commercialModels[record.model];
+    const quick = /Q(?:-C)?$/.test(record.model);
+    rows.find(([label]) => label === 'Wiring method')[1] = quick ? 'Side Wire / Push-In Quick Wire' : 'Side Wire / Back Wire';
+    referencePages.push(industrial || commercial ? 17 : record.model.startsWith('D') ? 16 : 15, 18);
+    if (quick) rows.push(['Push-in terminal conductor', '#14 AWG only · 15A push-in terminal']);
+    if (commercial) rows.find(([label]) => label === 'Source model designation')[1] = commercial;
+    if (industrial) {
+      rows.find(([label]) => label === 'Device rating')[1] = `${record.model === 'CR15' ? 15 : 20}A · 125V/250V`;
+      rows.find(([label]) => label === 'Application grade')[1] = 'Industrial Grade';
+      const nema = rows.findIndex(([label]) => label === 'NEMA');
+      if (nema !== -1) rows.splice(nema, 1);
+      rows.push(['Plug configuration', 'Match the ordered device to its model photograph and approved specification']);
+      notes.push('Rating and industrial grade follow catalogue page 17. The printed 125V/250V rating does not establish interchangeable plug configurations; confirm the required configuration for the order. Legacy NEMA descriptions are not used as the selection specification.');
     }
-    const nema = rows.find(([label]) => label === 'NEMA');
-    if (nema) nema[1] = 'Legacy page states 5-20R — confirmation required';
-    notes.push('The CD20 legacy description states 125V / NEMA 5-20R, while its table states 125V/250V and the product image shows a different slot pattern. Do not select a supply voltage or plug from this inconsistent source; request an approved CD20 drawing and rating before purchase.');
+    notes.push('Wiring versions follow catalogue pages 15–18. The 15A push-in terminal is marked #14 AWG only. Confirm conductor material, solid/stranded suitability, strip length and torque in the approved model instructions; this push-in limit is not a specification for side/back terminals.');
   }
   // The old F4P page has a contradictory 2.5V entry. The supplied catalogue p.10
   // explicitly identifies F4P as a 5V / 4.2A / 21W charger, not an AC receptacle.
@@ -303,12 +329,11 @@ function legacyProduct(record) {
   const description = describeLegacy(record, rows);
   const values = new Map(rows);
   const file = values.get('Certification file') || record.features.join(' ').match(/E\d{6}/)?.[0];
-  const certImages = { 'usb-outlets': ['E498095', 'ul-usb'], receptacles: ['E498095', 'ul-receptacle'] };
-  const wallplateReference = record.family === 'wallplates' ? findWallplateCertificate(record.model) : null;
+  const modelReference = findModelCertificate({ line: record.family, sku: description.sku, draft });
   const certificate = file ? {
     file,
     label: `${values.get('Published certification') || 'Published certification'} · file ${file}`,
-    image: wallplateReference?.file === file ? wallplateReference.image : certImages[record.family]?.[0] === file ? `assets/images/certs/${certImages[record.family][1]}.webp` : null
+    image: modelReference?.file === file ? modelReference.image : null
   } : null;
   const photoCorrection = catalogueRecords.find((item) => item.imageOnly && item.gallery.length > 0 && item.model === record.model && item.family === record.family);
   const gallery = photoCorrection ? [...photoCorrection.gallery, ...record.gallery.filter((image) => !photoCorrection.gallery.some((photo) => photo.src === image.src))] : record.gallery;
@@ -327,9 +352,9 @@ function legacyProduct(record) {
   if (record.family === 'usb-outlets' && record.model !== 'F4P') {
     notes.push(record.model.includes('QC')
       ? 'USB-C values are published single-port maximums, not a promise that both ports supply their maximum simultaneously. Output depends on the connected device, cable and negotiated profile; confirm dual-port power sharing before ordering.'
-      : 'The combined USB output is shared across the charging ports. Individual port limits are listed separately and must not be added together.');
+      : 'The combined USB output is shared across the charging ports. Do not treat the combined total as the output available from each port.');
   }
-  const finishRecord = catalogueRecords.find((item) => item.family === record.family && modelKey(item.model) === modelKey(description.sku));
+  const finishRecord = catalogueRecords.find((item) => item.family === record.family && modelKey(item.model) === modelKey(description.slug));
   const smartMedia = record.family === 'smart-switches' ? smartSwitchMedia[record.model] : null;
   const finishNames = record.family === 'smart-switches'
     ? record.model.startsWith('EU') ? ['black', 'white', 'gold', 'grey'] : ['black', 'white', 'grey', 'gold'] : [];
@@ -357,7 +382,7 @@ function legacyProduct(record) {
       ...usbPlates]
     : dimmerScrewless ? [...gallery.slice(0, 2), dimmerScrewless, gallery[2], dimmerPackage, ...gallery.slice(3)] : gallery);
   const primaryView = lightingViews || smartMedia || record.family === 'usb-outlets' ? productViews[0] : hero;
-  const drawings = smartMedia?.drawings || record.drawings;
+  const drawings = smartMedia?.drawings || (finishRecord?.drawings?.length ? finishRecord.drawings : record.drawings);
   const detailViews = smartMedia?.detailViews || [];
   const presentation = dimmerPackage
     ? [dimmerPackage, { ...gallery[2], caption: 'Standard screw plate · packaged' }]
@@ -415,8 +440,16 @@ export function findCatalogProduct(line, slug) {
     && [product.slug, product.sku].some((value) => modelKey(value) === key));
 }
 
+export function findCatalogAliasMatch(query) {
+  const key = modelKey(query);
+  const alias = Object.entries(commercialModels).find(([name]) => modelKey(name) === key);
+  return alias ? getCatalogProducts('receptacles').find(product => product.sku === alias[1]) : undefined;
+}
+
 export function filterCatalogProducts(products, { query = '', group = '' } = {}) {
   const queryKey = modelKey(query);
+  const alias = findCatalogAliasMatch(query);
   return products.filter((product) => (!group || product.group === group)
-    && (!queryKey || modelKey([product.sku, product.name, product.group, product.summary].join(' ')).includes(queryKey)));
+    && (alias ? product.line === alias.line && product.sku === alias.sku
+      : !queryKey || modelKey([product.sku, product.sourceModel, product.name, product.group, product.summary].join(' ')).includes(queryKey)));
 }

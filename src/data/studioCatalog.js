@@ -1,6 +1,6 @@
 import { productLines } from './lines.js';
 import { colors, products } from './products.js';
-import { getCatalogProducts, modelKey, productHref } from './catalogProducts.js';
+import { findCatalogAliasMatch, getCatalogProducts, modelKey, productHref } from './catalogProducts.js';
 
 // Presentation only. Model facts, finishes and photographs remain in the verified catalogues.
 const selections = {
@@ -29,8 +29,10 @@ export const studioModels = studioRanges.flatMap((range) => range.models);
 
 export function searchStudioModels(query, family = 'all') {
   const terms = query.trim().split(/\s+/).map(modelKey).filter(Boolean);
+  const alias = findCatalogAliasMatch(query);
   return studioRanges.filter((r) => family === 'all' || r.slug === family).flatMap((range) => range.models.filter((p) => {
-    const text = modelKey([p.sku, p.name, p.summary, range.name, ...p.keyFacts.flat()].join(' '));
+    if (alias) return p.line === alias.line && p.sku === alias.sku;
+    const text = modelKey([p.sku, p.sourceModel, p.name, p.summary, range.name, ...p.keyFacts.flat()].join(' '));
     return terms.every((term) => text.includes(term));
   }));
 }

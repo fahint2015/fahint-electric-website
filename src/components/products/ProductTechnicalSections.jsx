@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import { isVerifiedListing } from '../../data/products.js';
 import { companyPhotos } from '../../data/companyProfile.js';
 import { resourcesHref } from '../../data/documents.js';
+import { findModelCertificate } from '../../data/certificates.js';
+import { modelDocumentationNote } from '../../data/buyingGuides.js';
 import { publicAsset } from '../../utils/publicAsset.js';
 import SafeImage from '../SafeImage.jsx';
 
@@ -347,7 +349,8 @@ function ProductDownloads({ documents }) {
 
 export function ProductCertification({ product, contactHref = `/contact?model=${encodeURIComponent(product.sku)}` }) {
   const verified = isVerifiedListing(product);
-  if (!verified) {
+  const certificate = findModelCertificate(product);
+  if (!verified || !certificate) {
     return (
       <section className="product-technical product-certification product-certification--review">
         <div className="container product-certification__review">
@@ -370,8 +373,8 @@ export function ProductCertification({ product, contactHref = `/contact?model=${
     );
   }
 
-  const certificatePath = 'assets/images/certs/ul-gfci.webp';
-  const certificateHref = publicAsset(certificatePath);
+  const certificatePath = certificate.image;
+  const certificateHref = publicAsset(certificate.document);
 
   return (
     <section
@@ -394,7 +397,7 @@ export function ProductCertification({ product, contactHref = `/contact?model=${
           >
             <SafeImage
               src={certificatePath}
-              alt={`${product.sku} UL certification certificate`}
+              alt={`Cover of the supplied ${certificate.report} certificate`}
               width={900}
               height={1165}
               loading="lazy"
@@ -416,7 +419,7 @@ export function ProductCertification({ product, contactHref = `/contact?model=${
 
           <div className="product-certification__status">
             <FileCheck2 size={20} aria-hidden="true" />
-            <span>Verified listing reference</span>
+            <span>Model named in supplied addendum</span>
           </div>
 
           <dl
@@ -426,14 +429,16 @@ export function ProductCertification({ product, contactHref = `/contact?model=${
           >
             <div role="listitem"><dt>Certificate number</dt><dd>UL-US-2016865-1</dd></div>
             <div role="listitem"><dt>UL file</dt><dd>{product.listing.file}</dd></div>
-            <div role="listitem"><dt>Report reference</dt><dd>{product.listing.reportReference}</dd></div>
+            <div role="listitem"><dt>Report reference</dt><dd>{certificate.report}</dd></div>
+            <div role="listitem"><dt>Document issued</dt><dd>{certificate.issued}</dd></div>
             <div role="listitem"><dt>Standard</dt><dd>UL 943 · 5th Edition</dd></div>
           </dl>
 
           <div className="product-certification__scope">
             <span>Document scope</span>
             <strong>KCXS · Ground-fault circuit interrupters</strong>
-            <p>Confirm the model designation in the applicable addendum before final specification or purchase.</p>
+            <p>{modelDocumentationNote(product)}</p>
+            <p>Model addenda: PDF pages {certificate.modelPages.join(', ')}. This supplied document is not a live certification-status check.</p>
           </div>
 
           <div className="product-certification__actions">

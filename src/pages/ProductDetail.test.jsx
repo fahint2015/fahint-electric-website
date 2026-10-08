@@ -93,7 +93,7 @@ describe('ProductDetail', () => {
     expect(section.querySelector('.product-certification__verification')).toBeInTheDocument();
 
     const fullCertificate = within(section).getByRole('link', { name: /Open full UL certificate/i });
-    expect(fullCertificate.getAttribute('href')).toContain('assets/images/certs/ul-gfci.webp');
+    expect(fullCertificate.getAttribute('href')).toContain('assets/documents/certificates/ul-gfci.pdf');
     expect(fullCertificate).toHaveAttribute('target', '_blank');
 
     const facts = within(section).getByRole('list', { name: 'Certificate verification details' });
@@ -101,6 +101,9 @@ describe('ProductDetail', () => {
     expect(facts).toHaveTextContent(/UL file.*E504391/i);
     expect(facts).toHaveTextContent(/Report reference.*E504391-20210212/i);
     expect(facts).toHaveTextContent(/Standard.*UL 943.*5th Edition/i);
+    expect(facts).toHaveTextContent(/Document issued.*August 16, 2022/i);
+    expect(section).toHaveTextContent(/GF15 is named in the supplied.*E504391-20210212/);
+    expect(section).toHaveTextContent(/Confirm current coverage/i);
     expect(container.querySelector('.product-certification__grid')).not.toBeInTheDocument();
   });
 

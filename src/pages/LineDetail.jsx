@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link, useParams, useSearchParams, Navigate } from 'react-router-dom';
 import { ArrowRight, Search } from 'lucide-react';
 import { findLine, productLines } from '../data/lines.js';
-import { filterCatalogProducts, getCatalogProducts } from '../data/catalogProducts.js';
+import { filterCatalogProducts, findCatalogAliasMatch, getCatalogProducts } from '../data/catalogProducts.js';
 import { filterUsbProducts, usbFilters } from '../data/usbFilters.js';
 import { resolveUsbComparison } from '../data/usbComparison.js';
 import CatalogModelCard from '../components/products/CatalogModelCard.jsx';
@@ -26,6 +26,8 @@ function ModelCatalogue({ line }) {
   const groups = [...new Set(models.map((product) => product.group))];
   const searched = filterCatalogProducts(models, { query, group });
   const filtered = isUsb ? filterUsbProducts(searched, selected) : searched;
+  const alias = findCatalogAliasMatch(query);
+  const aliasMatch = filtered.includes(alias) ? alias : null;
   const compared = isUsb ? resolveUsbComparison(params.get('compare') || '') : [];
   const updateUsbState = (filters, comparison) => {
     const next = new URLSearchParams(Object.entries(filters).filter(([, item]) => item));
@@ -79,7 +81,7 @@ function ModelCatalogue({ line }) {
       <div className="container">
         <div className={`catalog-filters${isUsb ? ' catalog-filters--usb' : ''}`}>
           <label className="catalog-filters__search"><span>Search models</span><div><Search size={18} aria-hidden="true" />
-            <input type="search" value={query} onChange={(event) => isUsb ? updateUsbFilter('q', event.target.value) : setLocalQuery(event.target.value)} placeholder="Model number or feature" />
+            <input type="search" value={query} onChange={(event) => isUsb ? updateUsbFilter('q', event.target.value) : setLocalQuery(event.target.value)} placeholder="Model number or feature" aria-describedby={aliasMatch ? 'catalog-alias-note' : undefined} />
           </div></label>
           {isUsb ? usbFilters.map(({ name, label, all, options }) => <label key={name} className={`catalog-filters__${name}`}>
             <span>{label}</span><select value={selected[name]} onChange={(event) => updateUsbFilter(name, event.target.value)} aria-describedby={name === 'ports' ? undefined : 'usb-output-note'}>
@@ -92,6 +94,7 @@ function ModelCatalogue({ line }) {
           <div className="catalog-filters__summary"><p className="catalog-filters__count" aria-live="polite">{filtered.length} of {models.length} models</p>
             {isUsb && <button type="button" className="catalog-filters__clear" onClick={clear} disabled={!query && !Object.values(selected).some(Boolean)}>Clear filters</button>}
             <Link className="textlink" to={`/products/${line.slug}${isUsb && params.size ? `?${params}` : ''}#buying-guide`}>Need help choosing?</Link></div>
+          {aliasMatch && <p id="catalog-alias-note" className="catalog-filters__note" aria-live="polite">{aliasMatch.sourceModel} is listed in the current catalog as {aliasMatch.sku}.</p>}
         </div>
         {isUsb && <UsbComparison products={compared} onChange={updateComparison} />}
         {filtered.length ? <div className="catalog-model-grid">{filtered.map((product) => <CatalogModelCard key={product.slug} product={product}>

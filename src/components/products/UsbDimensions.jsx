@@ -148,7 +148,7 @@ export default function UsbDimensions({ product, dimensions }) {
     <div className="container">
       <header className="catalog-section-heading">
         <div><p className="product-section-label">Dimensional reference</p><h2>Dimensions,<br />clearly drawn.</h2></div>
-        <p>Three clear views of {product.sku}. Key measurements from the original model drawing, with room to read every detail.</p>
+        <p>{dimensions.scope || `Three clear views of ${product.sku}. Key measurements from the original model drawing, with room to read every detail.`}</p>
       </header>
       <div className="usb-dimensions__sheet">
         <div className="usb-dimensions__sheet-head"><strong>{product.sku}</strong><span>Dimensions in millimeters · mm</span></div>

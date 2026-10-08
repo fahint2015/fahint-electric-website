@@ -61,12 +61,14 @@ describe('Researched wallplate buying guide', () => {
     const post = findPost(slug);
     expect(post).toBeDefined();
     const text = JSON.stringify(post.body);
-    expect(text).not.toMatch(/6\.[45]\s*mm|universal fit|fits all|guaranteed|21 (?:independent )?models|BS1805/);
+    expect(text).not.toMatch(/6\.4\s*mm|universal fit|fits all|guaranteed|21 (?:independent )?models|BS1805/);
+    expect(text).toMatch(/Both supplied product-library drawings show 6\.5 mm thickness/);
     expect(text).toMatch(/outer edges/);
     expect(text).toMatch(/mounting positions/);
     expect(text).toMatch(/BS1801-M/);
     expect(text).toMatch(/BS1803-G and BS1803-M/);
-    expect(text).toMatch(/material and thickness/);
+    expect(text).toMatch(/polycarbonate \(PC\)/);
+    expect(text).toMatch(/Glossy and matte are surface finishes, not two different materials/);
     expect(text).toMatch(/E501377-20181016.*August 16, 2022.*BS1801, BS1802, BS1803 and BS1804/);
     expect(text).toMatch(/E501377-20230919.*September 25, 2023.*BS1806, BS1807, BS18012, BS18013, BS18014, BS18032, BS18033 and BS18034/);
     expect(text).toMatch(/finish.*current listing status/);
@@ -83,7 +85,7 @@ describe('Researched wallplate buying guide', () => {
   it('appears in Blog alongside the existing guides', () => {
     render(wrap(<Blog />));
     expect(screen.getByRole('link', { name: 'Wallplate Buying Guide: Openings, Sizes and Finishes' })).toHaveAttribute('href', path);
-    expect(screen.getByRole('status')).toHaveTextContent('10 articles');
+    expect(screen.getByRole('status')).toHaveTextContent('11 articles');
   });
 
   it('is linked from the wallplate family buying guide', () => {

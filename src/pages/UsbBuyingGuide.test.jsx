@@ -58,7 +58,7 @@ describe('Researched USB buying guide', () => {
   it('appears in the existing blog', () => {
     render(wrap(<Blog />));
     expect(screen.getByRole('link', { name: 'USB Wall Outlet Buying Guide: Ports, PD and Power' })).toHaveAttribute('href', path);
-    expect(screen.getByRole('status')).toHaveTextContent('10 articles');
+    expect(screen.getByRole('status')).toHaveTextContent('11 articles');
   });
 
   it('is linked from the USB family buying guide', () => {

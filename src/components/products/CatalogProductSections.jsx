@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import SafeImage from '../SafeImage.jsx';
 import { publicAsset } from '../../utils/publicAsset.js';
 import { resourcesHref } from '../../data/documents.js';
+import { findModelCertificate } from '../../data/certificates.js';
+import { modelDocumentationNote } from '../../data/buyingGuides.js';
 import { usbDimensionReference } from '../../data/usbDimensions.js';
 import UsbDimensions from './UsbDimensions.jsx';
 import ReceptacleOutline from './ReceptacleOutline.jsx';
@@ -95,7 +97,7 @@ export function CatalogDrawings({ product, contactHref }) {
       <div className="container">
         <header className="catalog-section-heading">
           <div><p className="product-section-label">Model reference</p><h2>Dimensions &amp; installation reference.</h2></div>
-          <p>Open the original model drawing for a closer look. Follow the approved installation instructions for the exact model.</p>
+          <p>Open the supplied reference for a closer look and check its stated scope. Follow the approved installation instructions for the exact model.</p>
         </header>
         <div className="catalog-drawings__grid">
           {drawings.map((drawing, index) => <figure key={drawing.src}>
@@ -103,6 +105,7 @@ export function CatalogDrawings({ product, contactHref }) {
               <SafeImage src={drawing.src} alt={`${product.sku} original reference drawing ${index + 1}`} width={drawing.width} height={drawing.height} loading="lazy" />
               <span>Open full drawing <ExternalLink size={15} aria-hidden="true" /></span>
             </a>
+            {drawing.caption && <figcaption>{drawing.caption}</figcaption>}
           </figure>)}
         </div>
       </div>
@@ -111,21 +114,22 @@ export function CatalogDrawings({ product, contactHref }) {
 }
 
 export function CatalogDocumentation({ product, contactHref = `/contact?model=${encodeURIComponent(product.sku)}` }) {
-  const certificate = product.certificate;
+  const certificate = findModelCertificate(product);
   return (
     <section className="product-technical catalog-documentation" id="model-documentation">
       <div className={`container catalog-documentation__layout${certificate?.image ? '' : ' catalog-documentation__layout--text'}`}>
         {certificate?.image && <figure className="catalog-documentation__certificate">
-          <a href={publicAsset(certificate.image)} target="_blank" rel="noreferrer" aria-label={`Open ${product.sku} series certificate`}>
-            <SafeImage src={certificate.image} alt={`${product.sku} series certificate reference`} width={900} height={1165} loading="lazy" />
-            <span>Open full certificate <ExternalLink size={15} aria-hidden="true" /></span>
+          <a href={publicAsset(certificate.document)} target="_blank" rel="noreferrer" aria-label={`Open ${product.sku} original certificate PDF`}>
+            <SafeImage src={certificate.image} alt={`Cover of the supplied ${certificate.report} certificate`} width={900} height={1165} loading="lazy" />
+            <span>Open original certificate PDF <ExternalLink size={15} aria-hidden="true" /></span>
           </a>
         </figure>}
         <div>
           <p className="product-section-label">Source documentation</p>
           <h2>Details your team can review.</h2>
-          <p className="catalog-documentation__reference"><FileCheck2 size={20} aria-hidden="true" />{product.certificationLabel}</p>
-          <p>Specifications are recorded for {product.sku}. A series certificate is supporting documentation; confirm that the exact model is covered before final specification or purchase.</p>
+          {product.certificate && <p className="catalog-documentation__reference"><FileCheck2 size={20} aria-hidden="true" />Supplier-published reference: {product.certificationLabel}</p>}
+          <p>{modelDocumentationNote(product)}</p>
+          {certificate && <p>Model addenda: PDF pages {certificate.modelPages.join(', ')}. This supplied document is not a live certification-status check.</p>}
           <div className="catalog-documentation__links">
             <Link to={resourcesHref(product)}>Browse product resources <ArrowRight size={15} aria-hidden="true" /></Link>
             {product.sources.map((source) => <a key={source.href} href={source.kind === 'website' ? source.href : publicAsset(source.href)} target="_blank" rel="noreferrer">

@@ -21,6 +21,7 @@
 .resources-context > div { flex:1 1 360px; }
 .resources-context strong { font-weight:600; overflow-wrap:anywhere; }
 .resources-context p { font-size:15px; margin-top:4px; }
+.resources-context .company-text-link { min-height:44px; margin-top:8px; }
 .resources-page .resources-count { margin-bottom:16px; font-size:14px; }
 .resources-documents { display:grid; gap:16px; list-style:none; margin:0; padding:0; }
 .resources-document { display:grid; grid-template-columns:64px minmax(0,1fr); gap:16px; padding:20px; border:1px solid var(--site-line); border-radius:var(--site-radius); align-items:start; }

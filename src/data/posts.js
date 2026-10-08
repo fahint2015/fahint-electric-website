@@ -3,8 +3,10 @@ import { usbBuyingGuide } from './usbBuyingGuide.js';
 import { dimmerBuyingGuide } from './dimmerBuyingGuide.js';
 import { wallplateBuyingGuide } from './wallplateBuyingGuide.js';
 import { lightSwitchBuyingGuide } from './lightSwitchBuyingGuide.js';
+import { receptacleBuyingGuide } from './receptacleBuyingGuide.js';
 
 export const posts = [
+  receptacleBuyingGuide,
   lightSwitchBuyingGuide,
   wallplateBuyingGuide,
   dimmerBuyingGuide,

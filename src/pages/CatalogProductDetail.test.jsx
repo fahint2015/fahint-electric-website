@@ -136,17 +136,16 @@ describe('catalogue product details', () => {
     }
   });
 
-  it.each(['R15', 'R15Q', 'R20'])('supplies a model-specific unmeasured outline for %s', (sku) => {
+  it.each(['R15', 'R15Q', 'R20'])('replaces the unmeasured fallback with the supplied dimensional reference for %s', (sku) => {
     const { container } = renderModel(`/products/receptacles/${sku.toLowerCase()}`);
     const drawing = container.querySelector('#installation-reference');
     expect(drawing).not.toBeNull();
-    expect(drawing.querySelectorAll('svg[role="img"]')).toHaveLength(2);
-    expect(screen.getByRole('img', { name: `${sku} front view line drawing` })).toBeInTheDocument();
-    expect(screen.getByRole('img', { name: `${sku} rear view line drawing` })).toBeInTheDocument();
-    expect(drawing).toHaveTextContent(/not to scale/i);
-    expect(drawing).not.toHaveTextContent(/\d+(?:\.\d+)?\s*mm/);
-    expect(drawing.querySelector('[data-receptacle-type]')).toHaveAttribute('data-receptacle-type', sku === 'R20' ? '5-20R' : '5-15R');
-    expect(drawing.querySelector('[data-rear-wiring]')).toHaveAttribute('data-rear-wiring', sku === 'R15Q' ? 'push-in' : 'back-wire');
+    expect(drawing.querySelectorAll('svg[role="img"]')).toHaveLength(0);
+    const product = findCatalogProduct('receptacles', sku);
+    expect(screen.getByRole('img', { name: `${sku} original reference drawing 1` })).toHaveAttribute('src', publicAsset(product.assets.drawings[0].src));
+    expect(drawing).toHaveTextContent(/Shared receptacle range dimensions/);
+    expect(container.querySelector('#technical-details')).toHaveTextContent('106 mm');
+    expect(container.querySelector('#technical-details')).toHaveTextContent(sku === 'R15Q' ? 'Side Wire / Push-In Quick Wire' : 'Side Wire / Back Wire');
   });
 
   it('gives a supplied original drawing priority over a fallback outline', () => {

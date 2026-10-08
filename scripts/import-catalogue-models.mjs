@@ -43,7 +43,11 @@ function image(source) {
 
 for (const record of selected) {
   const gallery = record.gallerySources.map(image);
-  const drawings = (record.drawingSources || []).map(image);
+  const drawings = (record.drawingSources || []).map((source, index) => ({
+    ...image(source), source,
+    ...(record.drawingCaptions?.[index] ? { caption: record.drawingCaptions[index] } : {}),
+    ...(record.drawingKinds?.[index] ? { kind: record.drawingKinds[index] } : {})
+  }));
   records.set(recordKey(record), {
     features: [], materials: [], rows: [], breadcrumb: '', ...record,
     sourceKind: 'catalogue', sourceFile: 'FAHINT PRODUCT CATALOG -Louis 13MB.pdf',

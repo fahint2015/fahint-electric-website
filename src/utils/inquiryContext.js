@@ -4,7 +4,7 @@ import { findLine } from '../data/lines.js';
 
 export function resolveInquiryContext(model, finishSlug = '') {
   const product = findProduct(model) || catalogProducts.find(candidate =>
-    !candidate.draft && modelKey(candidate.sku) === modelKey(model));
+    !candidate.draft && [candidate.sku, candidate.slug].some(value => modelKey(value) === modelKey(model)));
   if (!product || product.draft) return null;
 
   const finish = (product.finishes ?? colors).find(item => item.slug === finishSlug);

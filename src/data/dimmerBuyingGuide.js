@@ -4,7 +4,7 @@ export const dimmerBuyingGuide = {
   "title": "Dimmer Buying Guide: LED Loads and 0–10V Compatibility",
   "excerpt": "Compare FAHINT DM2010 and DM2010S dimmers, including LED load limits, 0–10V control and the lamp or driver details needed for a quotation.",
   "date": "2026-10-04",
-  "updated": "2026-10-04",
+  "updated": "2026-10-07",
   "readMinutes": 6,
   "category": "Buying Guide",
   "cover": "assets/images/home-installations/dm2010-living-installed-v1.webp",
@@ -37,6 +37,14 @@ export const dimmerBuyingGuide = {
     {
       "label": "FAHINT — DM2010S model specifications and drawings",
       "href": "/products/dimmers/dm2010s"
+    },
+    {
+      "label": "Eaton — DF10P switched-load and control-circuit ratings (industry reference)",
+      "href": "https://www.eaton.com/content/dam/eaton/products/wiring-devices-and-connectivity/wiring-devices/dimmers/decorator-0-10v-dimmer-spec-sheet.pdf"
+    },
+    {
+      "label": "Lutron — DVCLN-153P multi-gang load table (industry reference)",
+      "href": "https://assets.lutron.com/a/documents/0302209.pdf"
     }
   ],
   "body": [
@@ -128,6 +136,11 @@ export const dimmerBuyingGuide = {
     },
     {
       "type": "p",
+      "text": "Eaton’s DF10P data sheet separates the switched lamp load from the 0–10V control-circuit current. They answer different questions: how much lighting load the switch can handle, and how much demand the connected drivers place on its control circuit. Request both limits for DM2010S; Eaton’s values apply to Eaton’s model, not to FAHINT.",
+      "source": 6
+    },
+    {
+      "type": "p",
       "text": "DM2010 and DM2010S are not interchangeable. Include the full model number, with the S suffix where applicable, on your inquiry and sample approval.",
       "links": [
         {
@@ -147,6 +160,11 @@ export const dimmerBuyingGuide = {
     {
       "type": "p",
       "text": "Have a qualified professional review the supply voltage, conductor requirements and wall-box space. If several devices will sit side by side, ask whether the arrangement requires a lower load limit, known as derating. Use the exact model’s drawing for dimensions and wallplate fit; a similar device is not a reliable guide to neutral requirements or installation clearances."
+    },
+    {
+      "type": "p",
+      "text": "Lutron’s DVCLN-153P instructions organize multi-gang limits by load type and gang count. Those are not ratings for DM2010 or DM2010S. For a FAHINT order, send the planned device arrangement and lamp load together, then request the applicable load limit before approval. Do not apply another manufacturer’s derating table.",
+      "source": 7
     },
     {
       "type": "p",

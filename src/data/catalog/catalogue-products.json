@@ -34,13 +34,34 @@
       [
         "Tamer-Resistant",
         "Yes — marked on the model face"
+      ],
+      [
+        "Device width",
+        "43.5 mm"
+      ],
+      [
+        "Body height",
+        "69 mm"
+      ],
+      [
+        "Overall depth",
+        "44.7 mm"
+      ],
+      [
+        "Recessed depth",
+        "37.5 mm"
+      ],
+      [
+        "Mounting centers",
+        "83.5 mm"
       ]
     ],
     "breadcrumb": "Products / USB Outlet / Conventional USB Outlet 4200mA /",
     "model": "FTR15-4200",
     "family": "usb-outlets",
     "referencePages": [
-      10
+      10,
+      12
     ],
     "title": "15A 2 × USB-A Outlet · 4.2A",
     "group": "4.2A USB",
@@ -64,12 +85,19 @@
       ]
     ],
     "notes": [
-      "The catalogue specifies combined output, but not an individual-port current limit for this 4200mA model. Do not substitute the limits from a 3100mA or 5000mA model."
+      "The catalogue specifies combined output, but not an individual-port current limit for this 4200mA model. Do not substitute the limits from a 3100mA or 5000mA model.",
+      "Dimensions use the shared non-65W reference supplied in the 4200mA product folder. The 83.5 mm value is mounting-hole spacing, not overall height. Confirm the final model drawing and wiring instructions before installation."
     ],
     "primaryIndex": 0,
     "presentationIndices": [
       1,
       2
+    ],
+    "drawingSources": [
+      "02-USB Outlet/主图/4200mA/5.png"
+    ],
+    "drawingCaptions": [
+      "Shared 4200mA folder reference · use the non-65W views, not the PD65W depth"
     ],
     "gallerySources": [
       "02-USB Outlet/主图/4200mA/FTR15-4200/白底图+方特主图/0-白哑光单品.png",
@@ -95,7 +123,15 @@
         "height": 800
       }
     ],
-    "drawings": [],
+    "drawings": [
+      {
+        "src": "assets/images/catalog/models/2ffcc303e8934622.webp",
+        "width": 800,
+        "height": 800,
+        "source": "02-USB Outlet/主图/4200mA/5.png",
+        "caption": "Shared 4200mA folder reference · use the non-65W views, not the PD65W depth"
+      }
+    ],
     "finishSources": [
       {
         "slug": "white",
@@ -206,13 +242,34 @@
       [
         "Tamer-Resistant",
         "Yes — marked on the model face"
+      ],
+      [
+        "Device width",
+        "43.5 mm"
+      ],
+      [
+        "Body height",
+        "69 mm"
+      ],
+      [
+        "Overall depth",
+        "44.7 mm"
+      ],
+      [
+        "Recessed depth",
+        "37.5 mm"
+      ],
+      [
+        "Mounting centers",
+        "83.5 mm"
       ]
     ],
     "breadcrumb": "Products / USB Outlet / Conventional USB Outlet 4200mA /",
     "model": "FTR15C-4200",
     "family": "usb-outlets",
     "referencePages": [
-      10
+      10,
+      12
     ],
     "title": "15A USB-A + USB-C Outlet · 4.2A",
     "group": "4.2A USB",
@@ -236,12 +293,19 @@
       ]
     ],
     "notes": [
-      "The catalogue specifies combined output, but not an individual-port current limit for this 4200mA model. Do not substitute the limits from a 3100mA or 5000mA model."
+      "The catalogue specifies combined output, but not an individual-port current limit for this 4200mA model. Do not substitute the limits from a 3100mA or 5000mA model.",
+      "Dimensions use the shared non-65W reference supplied in the 4200mA product folder. The 83.5 mm value is mounting-hole spacing, not overall height. Confirm the final model drawing and wiring instructions before installation."
     ],
     "primaryIndex": 0,
     "presentationIndices": [
       1,
       2
+    ],
+    "drawingSources": [
+      "02-USB Outlet/主图/4200mA/5.png"
+    ],
+    "drawingCaptions": [
+      "Shared 4200mA folder reference · use the non-65W views, not the PD65W depth"
     ],
     "gallerySources": [
       "02-USB Outlet/主图/4200mA/FTR15C-4200/白底图+方特主图/0-白哑光单品.png",
@@ -267,7 +331,15 @@
         "height": 800
       }
     ],
-    "drawings": [],
+    "drawings": [
+      {
+        "src": "assets/images/catalog/models/2ffcc303e8934622.webp",
+        "width": 800,
+        "height": 800,
+        "source": "02-USB Outlet/主图/4200mA/5.png",
+        "caption": "Shared 4200mA folder reference · use the non-65W views, not the PD65W depth"
+      }
+    ],
     "finishSources": [
       {
         "slug": "white",
@@ -378,13 +450,34 @@
       [
         "Tamer-Resistant",
         "Yes — marked on the model face"
+      ],
+      [
+        "Device width",
+        "43.5 mm"
+      ],
+      [
+        "Body height",
+        "69 mm"
+      ],
+      [
+        "Overall depth",
+        "44.7 mm"
+      ],
+      [
+        "Recessed depth",
+        "37.5 mm"
+      ],
+      [
+        "Mounting centers",
+        "83.5 mm"
       ]
     ],
     "breadcrumb": "Products / USB Outlet / Conventional USB Outlet 4200mA /",
     "model": "FTR15DC-4200",
     "family": "usb-outlets",
     "referencePages": [
-      10
+      10,
+      12
     ],
     "title": "15A 2 × USB-C Outlet · 4.2A",
     "group": "4.2A USB",
@@ -408,12 +501,19 @@
       ]
     ],
     "notes": [
-      "The catalogue specifies combined output, but not an individual-port current limit for this 4200mA model. Do not substitute the limits from a 3100mA or 5000mA model."
+      "The catalogue specifies combined output, but not an individual-port current limit for this 4200mA model. Do not substitute the limits from a 3100mA or 5000mA model.",
+      "Dimensions use the shared non-65W reference supplied in the 4200mA product folder. The 83.5 mm value is mounting-hole spacing, not overall height. Confirm the final model drawing and wiring instructions before installation."
     ],
     "primaryIndex": 0,
     "presentationIndices": [
       1,
       2
+    ],
+    "drawingSources": [
+      "02-USB Outlet/主图/4200mA/5.png"
+    ],
+    "drawingCaptions": [
+      "Shared 4200mA folder reference · use the non-65W views, not the PD65W depth"
     ],
     "gallerySources": [
       "02-USB Outlet/主图/4200mA/FTR15DC-4200/白底图+方特主图/0-白哑光单品.png",
@@ -439,7 +539,15 @@
         "height": 800
       }
     ],
-    "drawings": [],
+    "drawings": [
+      {
+        "src": "assets/images/catalog/models/2ffcc303e8934622.webp",
+        "width": 800,
+        "height": 800,
+        "source": "02-USB Outlet/主图/4200mA/5.png",
+        "caption": "Shared 4200mA folder reference · use the non-65W views, not the PD65W depth"
+      }
+    ],
     "finishSources": [
       {
         "slug": "white",
@@ -550,13 +658,34 @@
       [
         "Tamer-Resistant",
         "Yes — marked on the model face"
+      ],
+      [
+        "Device width",
+        "43.5 mm"
+      ],
+      [
+        "Body height",
+        "69 mm"
+      ],
+      [
+        "Overall depth",
+        "44.7 mm"
+      ],
+      [
+        "Recessed depth",
+        "37.5 mm"
+      ],
+      [
+        "Mounting centers",
+        "83.5 mm"
       ]
     ],
     "breadcrumb": "Products / USB Outlet / Conventional USB Outlet 4200mA /",
     "model": "FTR20-4200",
     "family": "usb-outlets",
     "referencePages": [
-      10
+      10,
+      12
     ],
     "title": "20A 2 × USB-A Outlet · 4.2A",
     "group": "4.2A USB",
@@ -580,12 +709,19 @@
       ]
     ],
     "notes": [
-      "The catalogue specifies combined output, but not an individual-port current limit for this 4200mA model. Do not substitute the limits from a 3100mA or 5000mA model."
+      "The catalogue specifies combined output, but not an individual-port current limit for this 4200mA model. Do not substitute the limits from a 3100mA or 5000mA model.",
+      "Dimensions use the shared non-65W reference supplied in the 4200mA product folder. The 83.5 mm value is mounting-hole spacing, not overall height. Confirm the final model drawing and wiring instructions before installation."
     ],
     "primaryIndex": 0,
     "presentationIndices": [
       1,
       2
+    ],
+    "drawingSources": [
+      "02-USB Outlet/主图/4200mA/5.png"
+    ],
+    "drawingCaptions": [
+      "Shared 4200mA folder reference · use the non-65W views, not the PD65W depth"
     ],
     "gallerySources": [
       "02-USB Outlet/主图/4200mA/FTR20-4200/白底图+方特主图/0-白哑光单品.png",
@@ -611,7 +747,15 @@
         "height": 800
       }
     ],
-    "drawings": [],
+    "drawings": [
+      {
+        "src": "assets/images/catalog/models/2ffcc303e8934622.webp",
+        "width": 800,
+        "height": 800,
+        "source": "02-USB Outlet/主图/4200mA/5.png",
+        "caption": "Shared 4200mA folder reference · use the non-65W views, not the PD65W depth"
+      }
+    ],
     "finishSources": [
       {
         "slug": "white",
@@ -722,13 +866,34 @@
       [
         "Tamer-Resistant",
         "Yes — marked on the model face"
+      ],
+      [
+        "Device width",
+        "43.5 mm"
+      ],
+      [
+        "Body height",
+        "69 mm"
+      ],
+      [
+        "Overall depth",
+        "44.7 mm"
+      ],
+      [
+        "Recessed depth",
+        "37.5 mm"
+      ],
+      [
+        "Mounting centers",
+        "83.5 mm"
       ]
     ],
     "breadcrumb": "Products / USB Outlet / Conventional USB Outlet 4200mA /",
     "model": "FTR20C-4200",
     "family": "usb-outlets",
     "referencePages": [
-      10
+      10,
+      12
     ],
     "title": "20A USB-A + USB-C Outlet · 4.2A",
     "group": "4.2A USB",
@@ -752,12 +917,19 @@
       ]
     ],
     "notes": [
-      "The catalogue specifies combined output, but not an individual-port current limit for this 4200mA model. Do not substitute the limits from a 3100mA or 5000mA model."
+      "The catalogue specifies combined output, but not an individual-port current limit for this 4200mA model. Do not substitute the limits from a 3100mA or 5000mA model.",
+      "Dimensions use the shared non-65W reference supplied in the 4200mA product folder. The 83.5 mm value is mounting-hole spacing, not overall height. Confirm the final model drawing and wiring instructions before installation."
     ],
     "primaryIndex": 0,
     "presentationIndices": [
       1,
       2
+    ],
+    "drawingSources": [
+      "02-USB Outlet/主图/4200mA/5.png"
+    ],
+    "drawingCaptions": [
+      "Shared 4200mA folder reference · use the non-65W views, not the PD65W depth"
     ],
     "gallerySources": [
       "02-USB Outlet/主图/4200mA/FTR20C-4200/白底图+方特主图/0-白哑光单品.png",
@@ -783,7 +955,15 @@
         "height": 800
       }
     ],
-    "drawings": [],
+    "drawings": [
+      {
+        "src": "assets/images/catalog/models/2ffcc303e8934622.webp",
+        "width": 800,
+        "height": 800,
+        "source": "02-USB Outlet/主图/4200mA/5.png",
+        "caption": "Shared 4200mA folder reference · use the non-65W views, not the PD65W depth"
+      }
+    ],
     "finishSources": [
       {
         "slug": "white",
@@ -894,13 +1074,34 @@
       [
         "Tamer-Resistant",
         "Yes — marked on the model face"
+      ],
+      [
+        "Device width",
+        "43.5 mm"
+      ],
+      [
+        "Body height",
+        "69 mm"
+      ],
+      [
+        "Overall depth",
+        "44.7 mm"
+      ],
+      [
+        "Recessed depth",
+        "37.5 mm"
+      ],
+      [
+        "Mounting centers",
+        "83.5 mm"
       ]
     ],
     "breadcrumb": "Products / USB Outlet / Conventional USB Outlet 4200mA /",
     "model": "FTR20DC-4200",
     "family": "usb-outlets",
     "referencePages": [
-      10
+      10,
+      12
     ],
     "title": "20A 2 × USB-C Outlet · 4.2A",
     "group": "4.2A USB",
@@ -924,12 +1125,19 @@
       ]
     ],
     "notes": [
-      "The catalogue specifies combined output, but not an individual-port current limit for this 4200mA model. Do not substitute the limits from a 3100mA or 5000mA model."
+      "The catalogue specifies combined output, but not an individual-port current limit for this 4200mA model. Do not substitute the limits from a 3100mA or 5000mA model.",
+      "Dimensions use the shared non-65W reference supplied in the 4200mA product folder. The 83.5 mm value is mounting-hole spacing, not overall height. Confirm the final model drawing and wiring instructions before installation."
     ],
     "primaryIndex": 0,
     "presentationIndices": [
       1,
       2
+    ],
+    "drawingSources": [
+      "02-USB Outlet/主图/4200mA/5.png"
+    ],
+    "drawingCaptions": [
+      "Shared 4200mA folder reference · use the non-65W views, not the PD65W depth"
     ],
     "gallerySources": [
       "02-USB Outlet/主图/4200mA/FTR20DC-4200/白底图+方特主图/0-白哑光单品.png",
@@ -955,7 +1163,15 @@
         "height": 800
       }
     ],
-    "drawings": [],
+    "drawings": [
+      {
+        "src": "assets/images/catalog/models/2ffcc303e8934622.webp",
+        "width": 800,
+        "height": 800,
+        "source": "02-USB Outlet/主图/4200mA/5.png",
+        "caption": "Shared 4200mA folder reference · use the non-65W views, not the PD65W depth"
+      }
+    ],
     "finishSources": [
       {
         "slug": "white",
@@ -1634,13 +1850,30 @@
       [
         "File No.",
         "E498095"
+      ],
+      [
+        "Device width",
+        "33.2 mm"
+      ],
+      [
+        "Overall height",
+        "106 mm"
+      ],
+      [
+        "Overall depth",
+        "23.8 mm"
+      ],
+      [
+        "Mounting centers",
+        "83.5 mm"
       ]
     ],
     "breadcrumb": "",
     "model": "R15",
     "family": "receptacles",
     "referencePages": [
-      15
+      15,
+      18
     ],
     "title": "15A Standard Duplex Receptacle",
     "group": "Duplex Receptacle",
@@ -1664,12 +1897,19 @@
       ]
     ],
     "notes": [
-      "R15 and R15Q share the front-face presentation in the source library. Their wiring methods are different; use the model-specific wiring configuration on the order."
+      "R15 and R15Q share the front-face presentation in the source library. Their wiring methods are different; use the model-specific wiring configuration on the order.",
+      "Dimensions are transcribed from the shared receptacle range drawing in the supplied product library. Its illustrated TR/WR faces do not add those features to this standard model; confirm the approved model drawing for final fit."
     ],
     "primaryIndex": 0,
     "detailIndex": 1,
     "presentationIndices": [
       1
+    ],
+    "drawingSources": [
+      "04-Standard Receptacle/副图/7.png"
+    ],
+    "drawingCaptions": [
+      "Shared receptacle range dimensions · not a model-specific TR/WR or wiring specification"
     ],
     "gallerySources": [
       "04-Standard Receptacle/R系列/R15-R15Q/白底图/白哑光单品.png",
@@ -1689,7 +1929,15 @@
         "height": 800
       }
     ],
-    "drawings": [],
+    "drawings": [
+      {
+        "src": "assets/images/catalog/models/c23f2593432b98a9.webp",
+        "width": 800,
+        "height": 800,
+        "source": "04-Standard Receptacle/副图/7.png",
+        "caption": "Shared receptacle range dimensions · not a model-specific TR/WR or wiring specification"
+      }
+    ],
     "finishSources": [
       {
         "slug": "white",
@@ -1792,13 +2040,30 @@
       [
         "File No.",
         "E498095"
+      ],
+      [
+        "Device width",
+        "33.2 mm"
+      ],
+      [
+        "Overall height",
+        "106 mm"
+      ],
+      [
+        "Overall depth",
+        "23.8 mm"
+      ],
+      [
+        "Mounting centers",
+        "83.5 mm"
       ]
     ],
     "breadcrumb": "",
     "model": "R15Q",
     "family": "receptacles",
     "referencePages": [
-      15
+      15,
+      18
     ],
     "title": "15A Standard Duplex Receptacle · Quick-Wire",
     "group": "Duplex Receptacle",
@@ -1822,12 +2087,19 @@
       ]
     ],
     "notes": [
-      "R15 and R15Q share the front-face presentation in the source library. Their wiring methods are different; use the model-specific wiring configuration on the order."
+      "R15 and R15Q share the front-face presentation in the source library. Their wiring methods are different; use the model-specific wiring configuration on the order.",
+      "Dimensions are transcribed from the shared receptacle range drawing in the supplied product library. Its illustrated TR/WR faces do not add those features to this standard model; confirm the approved model drawing for final fit."
     ],
     "primaryIndex": 0,
     "detailIndex": 1,
     "presentationIndices": [
       1
+    ],
+    "drawingSources": [
+      "04-Standard Receptacle/副图/7.png"
+    ],
+    "drawingCaptions": [
+      "Shared receptacle range dimensions · not a model-specific TR/WR or wiring specification"
     ],
     "gallerySources": [
       "04-Standard Receptacle/R系列/R15-R15Q/白底图/白哑光单品.png",
@@ -1847,7 +2119,15 @@
         "height": 800
       }
     ],
-    "drawings": [],
+    "drawings": [
+      {
+        "src": "assets/images/catalog/models/c23f2593432b98a9.webp",
+        "width": 800,
+        "height": 800,
+        "source": "04-Standard Receptacle/副图/7.png",
+        "caption": "Shared receptacle range dimensions · not a model-specific TR/WR or wiring specification"
+      }
+    ],
     "finishSources": [
       {
         "slug": "white",
@@ -1950,13 +2230,30 @@
       [
         "File No.",
         "E498095"
+      ],
+      [
+        "Device width",
+        "33.2 mm"
+      ],
+      [
+        "Overall height",
+        "106 mm"
+      ],
+      [
+        "Overall depth",
+        "23.8 mm"
+      ],
+      [
+        "Mounting centers",
+        "83.5 mm"
       ]
     ],
     "breadcrumb": "",
     "model": "R20",
     "family": "receptacles",
     "referencePages": [
-      15
+      15,
+      18
     ],
     "title": "20A Standard Duplex Receptacle",
     "group": "Duplex Receptacle",
@@ -1979,11 +2276,19 @@
         "Matte"
       ]
     ],
-    "notes": [],
+    "notes": [
+      "Dimensions are transcribed from the shared receptacle range drawing in the supplied product library. Its illustrated TR/WR faces do not add those features to this standard model; confirm the approved model drawing for final fit."
+    ],
     "primaryIndex": 0,
     "detailIndex": 1,
     "presentationIndices": [
       1
+    ],
+    "drawingSources": [
+      "04-Standard Receptacle/副图/7.png"
+    ],
+    "drawingCaptions": [
+      "Shared receptacle range dimensions · not a model-specific TR/WR or wiring specification"
     ],
     "gallerySources": [
       "04-Standard Receptacle/R系列/R20/白底图/白哑光单品.png",
@@ -2003,7 +2308,15 @@
         "height": 800
       }
     ],
-    "drawings": [],
+    "drawings": [
+      {
+        "src": "assets/images/catalog/models/c23f2593432b98a9.webp",
+        "width": 800,
+        "height": 800,
+        "source": "04-Standard Receptacle/副图/7.png",
+        "caption": "Shared receptacle range dimensions · not a model-specific TR/WR or wiring specification"
+      }
+    ],
     "finishSources": [
       {
         "slug": "white",
@@ -2134,6 +2447,14 @@
       [
         "Wall-plate face",
         "2.75 × 4.53 in (70 × 115 mm)"
+      ],
+      [
+        "Operating Temp",
+        "−20°C to 40°C"
+      ],
+      [
+        "Recessed depth",
+        "21.5 mm"
       ]
     ],
     "breadcrumb": "",
@@ -2165,7 +2486,8 @@
     ],
     "notes": [
       "The 600W incandescent limit does not apply to LED/CFL lamps. Their published load range is 5–200W.",
-      "Dimensions and wiring references are reproduced from the model-specific product-library drawings. Use approved installation instructions for the final installation."
+      "Dimensions and wiring references are reproduced from the model-specific product-library drawings. Use approved installation instructions for the final installation.",
+      "A multi-gang derating schedule, conductor limits and terminal torque are not specified in these references. Request the approved instructions for the intended installation."
     ],
     "primaryIndex": 0,
     "detailIndex": 3,
@@ -2182,6 +2504,14 @@
     "drawingSources": [
       "03-Dimmer & sensor switch-目前只卖Dimmer/DM2010-Digital Dimmer Light Switch/副图/6.jpg",
       "03-Dimmer & sensor switch-目前只卖Dimmer/DM2010-Digital Dimmer Light Switch/副图/7.jpg"
+    ],
+    "drawingKinds": [
+      "dimensions",
+      "wiring"
+    ],
+    "drawingCaptions": [
+      "DM2010 dimensions · 44 × 105 × 28.8 mm, recessed depth 21.5 mm",
+      "DM2010 single-pole / 3-way wiring reference · follow approved instructions"
     ],
     "sourceKind": "catalogue",
     "sourceFile": "FAHINT PRODUCT CATALOG -Louis 13MB.pdf",
@@ -2211,12 +2541,18 @@
       {
         "src": "assets/images/catalog/models/2af617b459063bd1.webp",
         "width": 800,
-        "height": 800
+        "height": 800,
+        "source": "03-Dimmer & sensor switch-目前只卖Dimmer/DM2010-Digital Dimmer Light Switch/副图/6.jpg",
+        "caption": "DM2010 dimensions · 44 × 105 × 28.8 mm, recessed depth 21.5 mm",
+        "kind": "dimensions"
       },
       {
         "src": "assets/images/catalog/models/750149bff56f76e2.webp",
         "width": 800,
-        "height": 800
+        "height": 800,
+        "source": "03-Dimmer & sensor switch-目前只卖Dimmer/DM2010-Digital Dimmer Light Switch/副图/7.jpg",
+        "caption": "DM2010 single-pole / 3-way wiring reference · follow approved instructions",
+        "kind": "wiring"
       }
     ],
     "finishSources": [
@@ -2349,6 +2685,14 @@
       [
         "Wall-plate face",
         "2.75 × 4.53 in (70 × 115 mm)"
+      ],
+      [
+        "Operating Temp",
+        "−20°C to 40°C"
+      ],
+      [
+        "Recessed depth",
+        "21.5 mm"
       ]
     ],
     "breadcrumb": "",
@@ -2380,7 +2724,8 @@
     ],
     "notes": [
       "DM2010S uses a 0–10V control signal and is not interchangeable with DM2010. Confirm compatibility with the LED driver or ballast.",
-      "Dimensions and wiring references are reproduced from the model-specific product-library drawings. Use approved installation instructions for the final installation."
+      "Dimensions and wiring references are reproduced from the model-specific product-library drawings. Use approved installation instructions for the final installation.",
+      "A multi-gang derating schedule, conductor limits and terminal torque are not specified in these references. Request the approved instructions for the intended installation."
     ],
     "primaryIndex": 0,
     "detailIndex": 3,
@@ -2397,6 +2742,14 @@
     "drawingSources": [
       "03-Dimmer & sensor switch-目前只卖Dimmer/DM2010S-Digital Dimmer Light switch/副图/6.jpg",
       "03-Dimmer & sensor switch-目前只卖Dimmer/DM2010S-Digital Dimmer Light switch/副图/7.jpg"
+    ],
+    "drawingKinds": [
+      "dimensions",
+      "wiring"
+    ],
+    "drawingCaptions": [
+      "DM2010S dimensions · 44 × 105 × 28.8 mm, recessed depth 21.5 mm",
+      "DM2010S single-pole / 3-way wiring reference · follow approved instructions"
     ],
     "sourceKind": "catalogue",
     "sourceFile": "FAHINT PRODUCT CATALOG -Louis 13MB.pdf",
@@ -2426,12 +2779,18 @@
       {
         "src": "assets/images/catalog/models/925d74c3a9d61057.webp",
         "width": 800,
-        "height": 800
+        "height": 800,
+        "source": "03-Dimmer & sensor switch-目前只卖Dimmer/DM2010S-Digital Dimmer Light switch/副图/6.jpg",
+        "caption": "DM2010S dimensions · 44 × 105 × 28.8 mm, recessed depth 21.5 mm",
+        "kind": "dimensions"
       },
       {
         "src": "assets/images/catalog/models/5bde33c955a9bdea.webp",
         "width": 800,
-        "height": 800
+        "height": 800,
+        "source": "03-Dimmer & sensor switch-目前只卖Dimmer/DM2010S-Digital Dimmer Light switch/副图/7.jpg",
+        "caption": "DM2010S single-pole / 3-way wiring reference · follow approved instructions",
+        "kind": "wiring"
       }
     ],
     "finishSources": [
@@ -13051,12 +13410,32 @@
     ]
   },
   {
+    "features": [],
+    "materials": [],
+    "rows": [],
+    "breadcrumb": "",
     "model": "BS1801",
     "family": "wallplates",
     "imageOnly": true,
-    "sourceKind": "product-library",
+    "gallerySources": [],
+    "drawingSources": [
+      "07-Wallplates/BS1801+BS1802/副图-1801尺寸.png"
+    ],
+    "drawingCaptions": [
+      "BS1801 · 70 × 115 × 6.5 mm · supplied product-library drawing"
+    ],
+    "sourceKind": "catalogue",
+    "sourceFile": "FAHINT PRODUCT CATALOG -Louis 13MB.pdf",
     "gallery": [],
-    "drawings": [],
+    "drawings": [
+      {
+        "src": "assets/images/catalog/models/b63098eef2441a8e.webp",
+        "width": 800,
+        "height": 800,
+        "source": "07-Wallplates/BS1801+BS1802/副图-1801尺寸.png",
+        "caption": "BS1801 · 70 × 115 × 6.5 mm · supplied product-library drawing"
+      }
+    ],
     "finishSources": [
       {
         "slug": "white",
@@ -13133,12 +13512,32 @@
     ]
   },
   {
+    "features": [],
+    "materials": [],
+    "rows": [],
+    "breadcrumb": "",
     "model": "BS1801-M",
     "family": "wallplates",
     "imageOnly": true,
-    "sourceKind": "product-library",
+    "gallerySources": [],
+    "drawingSources": [
+      "07-Wallplates/BS1801+BS1802/副图-1801哑光尺寸.png"
+    ],
+    "drawingCaptions": [
+      "BS1801-M · 70 × 115 × 6.5 mm · supplied product-library drawing"
+    ],
+    "sourceKind": "catalogue",
+    "sourceFile": "FAHINT PRODUCT CATALOG -Louis 13MB.pdf",
     "gallery": [],
-    "drawings": [],
+    "drawings": [
+      {
+        "src": "assets/images/catalog/models/fedb1193ce7b3c7c.webp",
+        "width": 800,
+        "height": 800,
+        "source": "07-Wallplates/BS1801+BS1802/副图-1801哑光尺寸.png",
+        "caption": "BS1801-M · 70 × 115 × 6.5 mm · supplied product-library drawing"
+      }
+    ],
     "finishSources": [
       {
         "slug": "white",
@@ -14363,12 +14762,32 @@
     ]
   },
   {
+    "features": [],
+    "materials": [],
+    "rows": [],
+    "breadcrumb": "",
     "model": "BS1802",
     "family": "wallplates",
     "imageOnly": true,
-    "sourceKind": "product-library",
+    "gallerySources": [],
+    "drawingSources": [
+      "07-Wallplates/BS1801+BS1802/副图-1802尺寸.png"
+    ],
+    "drawingCaptions": [
+      "BS1802 · 80 × 124 × 6.5 mm · supplied product-library drawing"
+    ],
+    "sourceKind": "catalogue",
+    "sourceFile": "FAHINT PRODUCT CATALOG -Louis 13MB.pdf",
     "gallery": [],
-    "drawings": [],
+    "drawings": [
+      {
+        "src": "assets/images/catalog/models/64703839b40aed1e.webp",
+        "width": 800,
+        "height": 800,
+        "source": "07-Wallplates/BS1801+BS1802/副图-1802尺寸.png",
+        "caption": "BS1802 · 80 × 124 × 6.5 mm · supplied product-library drawing"
+      }
+    ],
     "finishSources": [
       {
         "slug": "white",

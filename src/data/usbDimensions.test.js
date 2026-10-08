@@ -5,15 +5,18 @@ import { usbDimensionReference } from './usbDimensions.js';
 const model = (sku) => findCatalogProduct('usb-outlets', sku);
 
 describe('model-specific USB dimensional references', () => {
-  it('covers the 31 reviewed original drawings and does not guess sizes for 4200mA models', () => {
+  it('covers original drawings and the reviewed shared reference for six 4200mA models', () => {
     const models = getCatalogProducts('usb-outlets');
-    expect(models.filter((p) => usbDimensionReference(p))).toHaveLength(31);
+    expect(models.filter((p) => usbDimensionReference(p))).toHaveLength(37);
     for (const p of models) {
       const dimensions = usbDimensionReference(p);
-      if (p.sku.endsWith('-4200')) expect(dimensions, p.sku).toBeNull();
-      else {
-        expect(dimensions.source, p.sku).toBe(p.assets.drawings[0].src);
-        expect(dimensions.width, p.sku).toBe(43.5);
+      expect(dimensions.source, p.sku).toBe(p.assets.drawings[0].src);
+      expect(dimensions.width, p.sku).toBe(43.5);
+      if (p.sku.endsWith('-4200')) {
+        expect(dimensions).toMatchObject({ bodyHeight: 69, depth: 44.7, boxDepth: 37.5, mountingPitch: 83.5 });
+        expect(dimensions.overallHeight).toBeUndefined();
+        expect(dimensions.scope).toMatch(/shared.*4200mA/i);
+        expect(p.assets.drawings[0].caption).toMatch(/non-65W/);
       }
     }
   });

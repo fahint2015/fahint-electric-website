@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest';
 import { existsSync, readFileSync } from 'node:fs';
-import { catalogProducts, findCatalogProduct, getCatalogProducts, modelKey, productHref } from './catalogProducts.js';
+import { catalogProducts, findCatalogProduct, filterCatalogProducts, getCatalogProducts, modelKey, productHref } from './catalogProducts.js';
 import { products } from './products.js';
 import { findLine } from './lines.js';
-import { studioRanges } from './studioCatalog.js';
+import { searchStudioModels, studioRanges } from './studioCatalog.js';
 import { PUBLIC_ROUTES } from '../../scripts/prepare-pages.mjs';
 
 const rows = (product) => new Map(product.specificationGroups.flatMap((group) => group.rows));
@@ -150,16 +150,61 @@ describe('complete, model-specific catalogue', () => {
     ]);
   });
 
-  it('keeps Q wiring, TR/WR variants and 250V receptacles distinct', () => {
+  it('keeps Q wiring, TR/WR variants and catalogue industrial ratings distinct', () => {
     expect(rows(model('receptacles', 'R15Q')).get('Wiring method')).toMatch(/Push-In/);
     expect(rows(model('receptacles', 'R15')).get('Wiring method')).toMatch(/Back Wire/);
     expect(rows(model('receptacles', 'RT20')).get('Tamper-resistant')).toBe('Yes');
     expect(rows(model('receptacles', 'RT20')).get('Weather-resistant')).toBe('No');
     expect(rows(model('receptacles', 'RW20')).get('Weather-resistant')).toBe('Yes');
-    expect(rows(model('receptacles', 'CR15')).get('NEMA')).toBe('6-15R');
-    expect(rows(model('receptacles', 'CR20')).get('Device rating')).toMatch(/250V/);
-    expect(model('receptacles', 'CR20').certificate).toBeNull();
-    expect(model('receptacles', 'CD20').reviewNotice).toMatch(/conflict/);
+    for (const sku of ['CR15', 'CR20', 'CD20']) {
+      const product = model('receptacles', sku);
+      expect(rows(product).get('Device rating')).toBe(`${sku === 'CR15' ? 15 : 20}A · 125V/250V`);
+      expect(rows(product).get('Application grade')).toBe('Industrial Grade');
+      expect(rows(product).has('NEMA')).toBe(false);
+      expect(product.name).toMatch(/Industrial Grade Duplex Receptacle/);
+      expect(product.sources.some(source => source.href.endsWith('#page=17'))).toBe(true);
+      expect(product.certificate).toBeNull();
+      expect(product.reviewNotice || '').not.toMatch(/sources conflict/);
+    }
+  });
+
+  it('uses catalogue commercial names without breaking old routes, finishes or search', () => {
+    const aliases = { 'R15-C': 'C15', 'R15Q-C': 'C15Q', 'R20-C': 'C20', 'RT15-C': 'CT15', 'RT15Q-C': 'CT15Q', 'RT20-C': 'CT20', 'RW15-C': 'CW15', 'RW15Q-C': 'CW15Q', 'RW20-C': 'CW20' };
+    for (const [oldSku, sku] of Object.entries(aliases)) {
+      const product = model('receptacles', sku);
+      expect(product, sku).toBeDefined();
+      expect(product).toBe(model('receptacles', oldSku));
+      expect(product.sku).toBe(sku);
+      expect(productHref(product)).toBe(`/products/receptacles/${oldSku.toLowerCase()}`);
+      expect(rows(product).get('Source model designation')).toBe(sku);
+      expect(product.group).toBe('Commercial Duplex Receptacles');
+      expect(product.finishes).toHaveLength(7);
+      expect(product.sources.some(source => source.href.endsWith('#page=17'))).toBe(true);
+      for (const query of [oldSku, sku]) expect(filterCatalogProducts(getCatalogProducts('receptacles'), { query })).toContain(product);
+    }
+  });
+
+  it('applies catalogue terminal distinctions to all thirty receptacle models', () => {
+    for (const product of getCatalogProducts('receptacles')) {
+      const fields = rows(product);
+      const quick = product.sku.endsWith('Q');
+      expect(fields.get('Wiring method'), product.sku).toBe(quick ? 'Side Wire / Push-In Quick Wire' : 'Side Wire / Back Wire');
+      expect(fields.has('Push-in terminal conductor'), product.sku).toBe(quick);
+      if (quick) expect(fields.get('Push-in terminal conductor')).toBe('#14 AWG only · 15A push-in terminal');
+      expect(product.sources.some(source => source.href.endsWith('#page=18'))).toBe(true);
+    }
+  });
+
+  it('attaches the reviewed range drawing and measurements to the three standard R models', () => {
+    for (const sku of ['R15', 'R15Q', 'R20']) {
+      const product = model('receptacles', sku);
+      expect(rows(product).get('Device width')).toBe('33.2 mm');
+      expect(rows(product).get('Overall height')).toBe('106 mm');
+      expect(rows(product).get('Overall depth')).toBe('23.8 mm');
+      expect(product.assets.drawings).toHaveLength(1);
+      expect(product.assets.drawings[0].caption).toMatch(/Shared receptacle range/);
+      expect(product.notes.join(' ')).toMatch(/range drawing/);
+    }
   });
 
   it('does not interchange DM2010 and DM2010S load or control ratings', () => {
@@ -168,6 +213,13 @@ describe('complete, model-specific catalogue', () => {
     expect(rows(model('dimmers', 'DM2010S')).get('Operating voltage')).toMatch(/277V/);
     expect(rows(model('dimmers', 'DM2010S')).get('Control output')).toMatch(/0–10V/);
     expect(rows(model('dimmers', 'DM2010S')).has('Incandescent load')).toBe(false);
+    for (const sku of ['DM2010', 'DM2010S']) {
+      const product = model('dimmers', sku);
+      expect(rows(product).get('Operating temperature')).toBe('−20°C to 40°C');
+      expect(rows(product).get('Recessed depth')).toBe('21.5 mm');
+      expect(product.assets.drawings.map(drawing => drawing.kind)).toEqual(['dimensions', 'wiring']);
+      expect(product.notes.join(' ')).toMatch(/derating/);
+    }
   });
 
   it.each(['DM2010', 'DM2010S'])('adds the matching screwless dimmer views for %s', (sku) => {
@@ -300,6 +352,49 @@ describe('complete, model-specific catalogue', () => {
     expect(rows(standard).get('Warranty')).toBe('3 years limited');
   });
 
+  it('uses the supplied PC material reference separately from standard/medium size and glossy/matte finish', () => {
+    for (const sku of ['BS1801', 'BS1801-M', 'BS1802']) {
+      const product = model('wallplates', sku);
+      const medium = sku === 'BS1802';
+      expect(rows(product).get('Product width')).toBe(medium ? '3.15 in (80 mm)' : '2.75 in (70mm)');
+      expect(rows(product).get('Product height')).toBe(medium ? '4.88 in (124 mm)' : '4.52 in (115mm)');
+      expect(rows(product).get('Thickness')).toBe('0.26 in (6.5mm)');
+      expect(rows(product).get('Material specification')).toBe('Polycarbonate (PC)');
+      expect(rows(product).get('Surface finish')).toBe(sku === 'BS1801-M' ? 'Matte' : 'Glossy');
+      expect(product.notes.join(' ')).toMatch(/Glossy and matte describe surface finishes, not different resins/);
+      expect(rows(product).has('Published construction material')).toBe(false);
+      expect(product.sources.some(source => source.href.endsWith('#page=30'))).toBe(true);
+      expect(product.assets.drawings).toHaveLength(1);
+      expect(product.assets.drawings[0].caption).toContain(medium ? '80 × 124 × 6.5 mm' : '70 × 115 × 6.5 mm');
+    }
+  });
+
+  it('prioritizes exact legacy commercial names in the full catalogue without crossing family filters', () => {
+    const aliases = { 'R15-C': 'C15', 'R15Q-C': 'C15Q', 'R20-C': 'C20', 'RT15-C': 'CT15', 'RT15Q-C': 'CT15Q', 'RT20-C': 'CT20', 'RW15-C': 'CW15', 'RW15Q-C': 'CW15Q', 'RW20-C': 'CW20' };
+    for (const [alias, sku] of Object.entries(aliases)) {
+      expect(searchStudioModels(alias).map(p => p.sku), alias).toEqual([sku]);
+      expect(searchStudioModels(alias, 'receptacles').map(p => p.sku), alias).toEqual([sku]);
+      expect(filterCatalogProducts(getCatalogProducts('receptacles'), { query: alias }).map(p => p.sku), alias).toEqual([sku]);
+    }
+    expect(searchStudioModels(' rt15q c ').map(p => p.sku)).toEqual(['CT15Q']);
+    expect(searchStudioModels('RT15Q-C', 'dimmers')).toEqual([]);
+    expect(searchStudioModels('R15-C', 'usb-outlets')).toEqual([]);
+    expect(searchStudioModels('FTR15C-3100').map(p => p.sku)).toEqual(['FTR15C-3100']);
+    expect(searchStudioModels('CT15Q').map(p => p.sku)).toEqual(['CT15Q']);
+    expect(searchStudioModels('BS1801', 'wallplates').map(p => p.sku)).toEqual(expect.arrayContaining(['BS1801', 'BS1801-M']));
+  });
+
+  it('publishes all six catalogue 4200 models without claiming unpublished port limits are listed', () => {
+    const models = getCatalogProducts('usb-outlets').filter(p => p.sku.endsWith('-4200'));
+    expect(models.map(p => p.sku)).toEqual(['FTR15-4200', 'FTR15C-4200', 'FTR15DC-4200', 'FTR20-4200', 'FTR20C-4200', 'FTR20DC-4200']);
+    for (const product of models) {
+      expect(Object.fromEntries(product.keyFacts)['Combined USB output']).toBe('5V DC · 4.2A · 21W');
+      expect(product.sources.some(source => source.href.endsWith('#page=10'))).toBe(true);
+      expect(product.notes.join(' ')).toMatch(/not an individual-port current limit/);
+      expect(product.notes.join(' ')).not.toMatch(/Individual port limits are listed separately/);
+    }
+  });
+
   it('matches wallplate scans to the documented base model instead of the family alone', () => {
     for (const sku of ['BS1801', 'BS1801-M', 'BS1802', 'BS1803-G', 'BS1803-M', 'BS1804']) {
       expect(model('wallplates', sku).certificate.image, sku).toBe('assets/images/certs/ul-wallplate-2018.jpg');
@@ -314,7 +409,7 @@ describe('complete, model-specific catalogue', () => {
     for (const sku of ['GTN15', 'GTN20']) {
       const p = model('gfci', sku);
       expect(rows(p).get('Feed-through terminals')).toMatch(/^None/);
-      expect(p.certificate.image).toBeNull();
+      expect(p.certificate.image).toBe('assets/images/certs/ul-gfci.webp');
       expect(p.summary).toMatch(/nylon/);
       expect(p.notes.join(' ')).toMatch(/August 16, 2022.*E504391-20210212.*GTN15.*GTN20/);
       expect(p.notes.join(' ')).toMatch(/current.*coverage/i);

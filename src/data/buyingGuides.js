@@ -1,4 +1,4 @@
-import { findWallplateCertificate } from './certificates.js';
+import { findModelCertificate } from './certificates.js';
 
 // Purchasing guidance based on the published model data, not installation instructions.
 export const buyingGuides = {
@@ -25,11 +25,11 @@ export const buyingGuides = {
   receptacles: {
     intro: 'Match the electrical configuration first, then refine the face style, finish and wallplate.',
     questions: [
-      { q: 'Which voltage and current should I specify?', a: 'Use the exact current, voltage and NEMA configuration required by the project. Compare those entries on the model page rather than selecting by face appearance alone. Specialty 250V configurations are separate from the standard 125V range.' },
+      { q: 'Which voltage and current should I specify?', a: 'Use the exact current, voltage and plug configuration required by the project. The catalogue lists the standard and commercial range at 125V, and industrial CR15/CR20/CD20 at 125V/250V. That voltage label does not establish plug compatibility; confirm the exact ordered configuration.' },
       { q: 'How do face style and TR / WR affect the shortlist?', a: 'Compare duplex or decorator openings, tamper-resistant and weather-resistant features, and the stated wiring method for each model. A similar-looking face does not make two configurations interchangeable. Confirm location and installation requirements with a qualified professional.' },
       { q: 'What do I need to approve before ordering?', a: 'Confirm the model designation, electrical ratings, wiring method, finish and matching wallplate. Request the relevant model documents and record the agreed sample, markings and packaging in the quotation.' },
     ],
-    resource: { label: 'Prepare a finish specification', to: '/blog/gfci-colour-finishes-specification' },
+    resource: { label: 'Read the standard receptacle buying guide', to: '/blog/standard-receptacle-buying-guide' },
     modelCheck: 'Confirm voltage, current, NEMA configuration, TR / WR features and wiring method for the exact model.',
   },
   dimmers: {
@@ -76,13 +76,12 @@ export const buyingGuides = {
 
 export function modelDocumentationNote(product) {
   if (product.listing?.status === 'review') return `${product.sku} documentation remains under review. Request the exact model listing record before specifying it.`;
-  if (/^GTN(?:15|20)$/.test(product.sku)) return `${product.sku} is listed in the August 16, 2022 E504391-20210212 addendum. Confirm current coverage for the ordered configuration.`;
+  const reference = findModelCertificate(product);
   if (product.line === 'wallplates') {
-    const reference = findWallplateCertificate(product.sourceModel || product.sku);
     return reference
       ? `The base model for ${product.sku} appears in report ${reference.report}, issued ${reference.issued}. Confirm the finish designation and current coverage for the ordered configuration.`
       : `${product.sku} is not named in the supplied wallplate addenda. Request the matching model document before specifying it.`;
   }
-  if (product.listing?.file) return `Match ${product.sku} to the available ${product.listing.file} report and confirm current coverage for the ordered configuration.`;
-  return `Request documentation for ${product.sku} and its ordered configuration. A company or product-family certificate does not automatically cover every model.`;
+  if (reference) return `${product.sku} is named in the supplied ${reference.issued} addendum (report ${reference.report}). Confirm current coverage for the ordered configuration.`;
+  return `No matching certificate PDF for ${product.sku} is currently published in this library. Request the exact-model document; a file number or family reference alone does not establish coverage.`;
 }

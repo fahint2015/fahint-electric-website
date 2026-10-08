@@ -31,14 +31,14 @@ describe('Buyer reading pages', () => {
     expect(screen.getByRole('link', { name:'Browse products' })).toHaveAttribute('href','/products');
   });
   it('removes unsourced universal specifications and retains original article URLs', () => {
-    expect(posts).toHaveLength(10);
+    expect(posts).toHaveLength(11);
     const content = posts.map(post => `${post.title} ${post.body.map(block=>block.text).join(' ')}`).join(' ');
     expect(content).not.toMatch(/every 15 minutes|400 cartons|98 percent|without Compliance Risk|seven-finish|Current production should be to UL 943 5th/i);
     expect(posts.find(post => post.slug === 'nec-406-8-weather-resistant-receptacles').title).not.toContain('406.8');
     for (const post of posts) expect(post.sources?.length).toBeGreaterThan(0);
   });
   it('gives every guide a distinct editorial cover with a source-aware description', () => {
-    expect(new Set(posts.map(post => JSON.stringify([post.cover, post.coverRegion])))).toHaveProperty('size', 10);
+    expect(new Set(posts.map(post => JSON.stringify([post.cover, post.coverRegion])))).toHaveProperty('size', 11);
     for (const post of posts) {
       expect(post.coverAlt).toBeTruthy();
       expect(post.coverCaption).toBeTruthy();

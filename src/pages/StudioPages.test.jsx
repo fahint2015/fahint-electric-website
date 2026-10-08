@@ -823,6 +823,24 @@ describe('studio homepage and catalog', () => {
     expect(screen.getAllByRole('link', { name: /^View / })).toHaveLength(6);
   });
 
+  it('explains legacy commercial searches and removes the message on reset or a different family', () => {
+    show(ProductsStudio, '/products-studio');
+    const search = screen.getByRole('searchbox', { name: 'Search model or feature' });
+    fireEvent.change(search, { target: { value: 'R15-C' } });
+    expect(screen.getByRole('status')).toHaveTextContent('1 model');
+    expect(screen.getByText('R15-C is listed in the current catalog as C15.')).toBeVisible();
+    expect(screen.getByRole('link', { name: 'View C15' })).toHaveAttribute('href', '/products/receptacles/r15-c');
+    fireEvent.click(screen.getByRole('button', { name: 'Filter USB Outlets' }));
+    expect(screen.getByRole('heading', { name: 'No matching products' })).toBeVisible();
+    expect(screen.queryByText(/is listed in the current catalog as/)).not.toBeInTheDocument();
+    fireEvent.click(screen.getByRole('button', { name: 'Reset filters' }));
+    expect(search).toHaveValue('');
+    expect(screen.queryByText(/is listed in the current catalog as/)).not.toBeInTheDocument();
+    fireEvent.change(search, { target: { value: 'CT15Q' } });
+    expect(screen.getByRole('link', { name: 'View CT15Q' })).toBeVisible();
+    expect(screen.queryByText(/is listed in the current catalog as/)).not.toBeInTheDocument();
+  });
+
   it('marks each experimental route noindex and restores metadata on exit', () => {
     const oldTitle = document.title;
     const { unmount } = show(HomeStudio);

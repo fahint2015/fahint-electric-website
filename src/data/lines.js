@@ -44,13 +44,14 @@ export const productLines = [
     cover: 'assets/images/lines/recep-decora-plate.webp',
     tagline: 'Duplex, Decora, commercial and industrial grade',
     summary:
-      'Compare duplex and decorator receptacles by current, voltage, TR/WR protection and wiring method. Specialty 250V models and source discrepancies are documented separately from the standard 125V range.',
+      'Compare duplex and decorator receptacles by current, voltage, TR/WR protection and wiring method. The commercial C range and industrial CR/CD range follow the product catalogue; confirm the configuration for your project.',
     standard: 'Model-specific certification',
     highlights: ['R / D / C series', 'TR and WR variants', '15A and 20A'],
     groups: [
       { name: 'R series duplex', items: ['R15', 'R15Q', 'R20', 'RT15', 'RT15Q', 'RT20', 'RW15', 'RW15Q', 'RW20'] },
       { name: 'D series Decora', items: ['D15', 'D15Q', 'D20', 'DT15', 'DT15Q', 'DT20', 'DW15', 'DW15Q', 'DW20'] },
-      { name: 'C series and specialty', items: ['R15-C', 'R15Q-C', 'R20-C', 'RT15-C', 'RT20-C', 'RW15-C', 'RW20-C', 'CR15', 'CR20', 'CD20'] }
+      { name: 'Commercial Duplex Receptacles', items: ['C15', 'C15Q', 'C20', 'CT15', 'CT15Q', 'CT20', 'CW15', 'CW15Q', 'CW20'] },
+      { name: 'Industrial Grade Duplex Receptacles', items: ['CR15', 'CR20', 'CD20'] }
     ],
     gallery: ['assets/images/lines/recep-decora-plate.webp', 'assets/images/lines/recep-decora.webp', 'assets/images/lines/recep-duplex.webp', 'assets/images/lines/recep-duplex-plate.webp']
   },

@@ -2,7 +2,7 @@ import { useMemo, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowDown, ArrowRight, ArrowUpRight, Download, Search, X } from 'lucide-react';
 import { studioModels, studioRanges, searchStudioModels } from '../data/studioCatalog.js';
-import { catalogueDocument } from '../data/catalogProducts.js';
+import { catalogueDocument, findCatalogAliasMatch } from '../data/catalogProducts.js';
 import { publicAsset } from '../utils/publicAsset.js';
 import { StudioImage, StudioLink, useStudioPageMeta } from '../components/studio/StudioShared.jsx';
 import '../styles/studio.css';
@@ -37,6 +37,8 @@ export default function ProductsStudio() {
   const [limit, setLimit] = useState(12);
   const searchRef = useRef(null);
   const results = useMemo(() => searchStudioModels(query, family), [query, family]);
+  const alias = findCatalogAliasMatch(query);
+  const aliasMatch = results.find(product => product.line === alias?.line && product.sku === alias?.sku);
   const showModels = mode === 'models' || query.trim() || family !== 'all';
   const activeRange = studioRanges.find((range) => range.slug === family);
   function chooseFamily(value) { setFamily(value); setMode('models'); setLimit(12); }
@@ -74,6 +76,7 @@ export default function ProductsStudio() {
           </aside>
           <div id="studio-catalog-results" className="studio-catalog-results">
             <div className="studio-results-head"><p role="status" aria-live="polite">{showModels ? `${results.length} ${results.length === 1 ? 'model' : 'models'}${activeRange ? ` in ${activeRange.name}` : ''}` : 'Seven families. Every detail considered.'}</p>{showModels && <button type="button" onClick={reset}>Reset filters <X size={14} aria-hidden="true" /></button>}</div>
+            {aliasMatch && <p className="studio-model-note" aria-live="polite">{aliasMatch.sourceModel} is listed in the current catalog as {aliasMatch.sku}.</p>}
             {!showModels ? <section className="studio-range-grid" aria-label="Product ranges">{studioRanges.map((range) => <RangeTile key={range.slug} range={range} />)}<article className="studio-catalog-guide"><Download size={32} aria-hidden="true" /><h3>A closer look.<br />All in one place.</h3><p>Keep the FAHINT product catalog on hand for your next project.</p><a href={publicAsset(catalogueDocument)} download>Get the catalog <ArrowDown size={19} aria-hidden="true" /></a></article></section>
               : <>{activeRange && <div className="studio-active-range"><div><h2>{activeRange.name}</h2><p>{activeRange.tagline}</p></div><Link className="studio-text-link" to={`/products/${family}`}>Full range details <ArrowUpRight size={17} aria-hidden="true" /></Link></div>}
                 <div className="studio-model-grid">{results.slice(0, limit).map((product) => <ModelTile key={`${product.line}-${product.sku}`} product={product} />)}</div>
