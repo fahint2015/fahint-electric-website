@@ -1,7 +1,7 @@
 import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
-import { describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import GfciSeries from '../../pages/GfciSeries.jsx';
 import LineDetail from '../../pages/LineDetail.jsx';
 import ProductDetail from '../../pages/ProductDetail.jsx';
@@ -16,6 +16,8 @@ function openPage(path) {
     <Route path="/capabilities" element={<Capabilities />} />
   </Routes></MemoryRouter>);
 }
+
+afterEach(() => vi.unstubAllEnvs());
 
 describe('Purchasing information', () => {
   it.each([
@@ -72,11 +74,12 @@ describe('Purchasing information', () => {
     expect(answer).not.toMatch(/does not establish/);
   });
 
-  it('connects the buying checklist to a dated original PDF and its existing buying guide', () => {
+  it.each(['/', '/fahint-electric-website/'])('connects the buying checklist to a dated original PDF and its existing buying guide under %s', base => {
+    vi.stubEnv('BASE_URL', base);
     openPage('/products/usb-outlets/ftr15c-3100');
     const checklist = screen.getByRole('region', { name: 'Before you order FTR15C-3100' });
     expect(checklist).toHaveTextContent(/April 26, 2022.*E498095-20180426/);
-    expect(within(checklist).getByRole('link', { name: 'View original certificate PDF' })).toHaveAttribute('href', '/assets/documents/certificates/ul-usb.pdf');
+    expect(within(checklist).getByRole('link', { name: 'View original certificate PDF' })).toHaveAttribute('href', `${base}assets/documents/certificates/ul-usb.pdf`);
     expect(within(checklist).getByRole('link', { name: 'Read the USB outlet buying guide' })).toHaveAttribute('href', '/blog/usb-wall-outlet-buying-guide');
   });
 

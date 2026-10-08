@@ -179,9 +179,10 @@ describe('Resources', () => {
 });
 
 describe('Resource entry points', () => {
-  it('opens a matching catalog certificate as a complete PDF, not a cover image', () => {
+  it.each(['/', '/fahint-electric-website/'])('opens a matching catalog certificate as a complete PDF under %s', base => {
+    vi.stubEnv('BASE_URL', base);
     render(wrap(<CatalogDocumentation product={findCatalogProduct('lighting-switches', 'ds15')} />));
-    expect(screen.getByRole('link', { name: 'Open DS15 original certificate PDF' })).toHaveAttribute('href', '/assets/documents/certificates/ul-switch.pdf');
+    expect(screen.getByRole('link', { name: 'Open DS15 original certificate PDF' })).toHaveAttribute('href', `${base}assets/documents/certificates/ul-switch.pdf`);
     expect(screen.getByText(/DS15 is named in the supplied/)).toHaveTextContent(/October 18, 2024.*E528137-20241016/);
   });
 
