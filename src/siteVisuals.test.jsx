@@ -49,7 +49,7 @@ describe('Shared visual finish and original company imagery', () => {
     expect(styles.match(/\.product-manufacturing__grid figure\s*\{([^}]*)\}/)?.[1]).toContain('border-radius: 0;');
     expect(styles.match(/\.product-manufacturing__grid figure img\s*\{([^}]*)\}/)?.[1]).toContain('border-radius: var(--site-radius);');
   });
-  it('illustrates each visible manufacturing stage with a distinct original factory photograph', () => {
+  it('illustrates each visible manufacturing stage with a distinct, disclosed photo-based editorial image', () => {
     show(Capabilities);
     const production=document.getElementById('production');
     const stages=within(production).getAllByRole('article');
@@ -57,10 +57,11 @@ describe('Shared visual finish and original company imagery', () => {
     const images=stages.map(stage=>within(stage).getByRole('img'));
     expect(new Set(images.map(image=>image.getAttribute('src'))).size).toBe(3);
     for(const image of images) {
-      expect(image.getAttribute('src')).toContain('company/factory/');
+      expect(image.getAttribute('src')).toContain('company/capabilities/');
       expect(Number(image.getAttribute('width'))).toBeGreaterThan(700);
       expect(existsSync(publicAssetFile(image.getAttribute('src')))).toBe(true);
     }
+    expect(production).toHaveTextContent('AI-refined from FAHINT factory photographs.');
   });
   it('loads a shared system without altering the retained homepage source', () => {
     expect(existsSync('src/styles/site-system.css')).toBe(true);

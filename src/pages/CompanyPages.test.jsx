@@ -5,7 +5,8 @@ import Capabilities from './Capabilities.jsx';
 import About from './About.jsx';
 import { certificates } from '../data/certificates.js';
 import { publicAsset } from '../utils/publicAsset.js';
-import { existsSync, readFileSync } from 'node:fs';
+import { staticMetadata } from '../seo/metadata.js';
+import { existsSync, readFileSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 
 function renderPage(Page) {
@@ -13,12 +14,16 @@ function renderPage(Page) {
 }
 
 describe('Manufacturing and company information', () => {
-  it('introduces manufacturing with actual factory images and an OEM anchor', () => {
+  it('introduces manufacturing with a photo-based workshop visual and an OEM anchor', () => {
     renderPage(Capabilities);
     expect(screen.getByRole('heading', { level: 1, name: 'Your product. Our production.' })).toBeInTheDocument();
-    expect(screen.getByAltText('FAHINT staff assembling wiring-device components')).toHaveAttribute('src', publicAsset('assets/images/company/factory/device-assembly-v1.webp'));
-    expect(screen.getByRole('heading', { name: 'Assembly & automation' })).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: 'Aging tests' })).toBeVisible();
+    const hero = screen.getByAltText('Electronics assembly equipment along the FAHINT workshop aisle');
+    expect(hero).toHaveAttribute('src', publicAsset('assets/images/company/capabilities/workshop-editorial-v1.webp'));
+    expect(hero).toHaveAttribute('loading', 'eager');
+    expect(hero).toHaveAttribute('fetchpriority', 'high');
+    expect(staticMetadata['/capabilities'].image).toBe('assets/images/company/capabilities/workshop-editorial-v1.webp');
+    expect(screen.getByRole('heading', { name: 'Component assembly' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'GFCI functional testing' })).toBeVisible();
     expect(screen.getByRole('heading', { name: 'Laboratory verification' })).toBeVisible();
     expect(document.getElementById('oem')).toBeInTheDocument();
     expect(screen.getByRole('link', { name: 'Discuss your OEM / ODM project' })).toHaveAttribute('href', '/contact?topic=oem');
@@ -31,8 +36,10 @@ describe('Manufacturing and company information', () => {
     expect(stages).toHaveLength(3);
     for (const stage of stages) expect(within(stage).getByRole('img')).toBeVisible();
     expect(screen.queryByRole('tab')).not.toBeInTheDocument();
-    expect(screen.getByRole('article', { name: 'Aging tests' })).toHaveTextContent('Test conditions and duration');
-    expect(screen.getByRole('article', { name: 'Laboratory verification' })).toHaveTextContent('temperature and humidity');
+    expect(screen.getByRole('article', { name: 'GFCI functional testing' })).toHaveTextContent('separate from component assembly');
+    expect(screen.getByRole('article', { name: 'Laboratory verification' })).toHaveTextContent('instruments');
+    expect(screen.getByRole('article', { name: 'Laboratory verification' })).not.toHaveTextContent('temperature and humidity');
+    expect(screen.getByText(/AI-refined from FAHINT factory photographs/)).toBeVisible();
     expect(screen.getByRole('link', { name: 'See our testing stations' })).toHaveAttribute('href', '/#studio-making');
   });
   it('keeps chapter navigation on the manufacturing route and joins documentation with the project inquiry', () => {
@@ -91,7 +98,7 @@ describe('Manufacturing and company information', () => {
     expect(within(nav).getByRole('link', { name:'Our markets' })).toHaveAttribute('href','/about#our-markets');
     expect(within(nav).getByRole('link', { name:'Inside FAHINT' })).toHaveAttribute('href','/about#inside-fahint');
   });
-  it('uses separate, traceable factory photographs across the three updated surfaces', () => {
+  it('preserves the original factory assets and About photograph selections', () => {
     const factoryDirectory = join('public', 'assets', 'images', 'company', 'factory');
     const manifest = JSON.parse(readFileSync(join(factoryDirectory, 'manifest.json'), 'utf8').replace(/^\uFEFF/, ''));
     expect(manifest).toHaveLength(13);
@@ -100,7 +107,7 @@ describe('Manufacturing and company information', () => {
       expect(existsSync(join(factoryDirectory, photo.asset))).toBe(true);
       expect(photo.bytes).toBeLessThan(500000);
     }
-    for (const [Page, page] of [[Capabilities, 'Capabilities'], [About, 'About']]) {
+    for (const [Page, page] of [[About, 'About']]) {
       const { container, unmount } = renderPage(Page);
       const images = Array.from(container.querySelectorAll('img[src*="/company/factory/"]'));
       const expected = manifest.filter(photo => photo.page === page);
@@ -113,5 +120,29 @@ describe('Manufacturing and company information', () => {
       expect(container.querySelector('img[src*="factory-optimized"],img[src*="catalog-production"],img[src*="catalog-tooling"]')).toBeNull();
       unmount();
     }
+  });
+  it('uses four distinct, lightweight editorial images with source provenance and consistent story ratios', () => {
+    const directory = join('public', 'assets', 'images', 'company', 'capabilities');
+    const manifest = JSON.parse(readFileSync(join(directory, 'manifest.json'), 'utf8'));
+    expect(manifest).toHaveLength(4);
+    expect(new Set(manifest.map(photo => photo.source_sha256)).size).toBe(4);
+    const { container } = renderPage(Capabilities);
+    const images = Array.from(container.querySelectorAll('img[src*="/company/capabilities/"]'));
+    expect(images).toHaveLength(4);
+    expect(container.querySelector('img[src*="/company/factory/"]')).toBeNull();
+    for (const photo of manifest) {
+      const file = join(directory, photo.asset);
+      expect(existsSync(file)).toBe(true);
+      expect(statSync(file).size).toBe(photo.bytes);
+      expect(photo.bytes).toBeLessThan(500000);
+      expect(photo.processing).toMatch(/AI-refined/);
+      expect(photo.source_sha256).toMatch(/^[a-f0-9]{64}$/);
+      const image = images.find(item => item.getAttribute('src') === publicAsset(`assets/images/company/capabilities/${photo.asset}`));
+      expect(image).toHaveAttribute('width', String(photo.width));
+      expect(image).toHaveAttribute('height', String(photo.height));
+      expect(photo.width / photo.height).toBe(photo.role === 'workshop' ? 16 / 9 : 3 / 2);
+      if (photo.role !== 'workshop') expect(image).toHaveAttribute('loading', 'lazy');
+    }
+    expect(screen.getByAltText('FAHINT GF15 retail packaging and white wall plate')).toHaveAttribute('src', publicAsset('assets/images/products/gf15-package-standard-white-v1.jpg'));
   });
 });

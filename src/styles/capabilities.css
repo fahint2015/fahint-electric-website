@@ -29,22 +29,19 @@
 .capabilities-page .cap-hero h1 > span { color: #a4c5d6; }
 .capabilities-page .cap-hero__copy > p { max-width: 38ch; margin-top: 28px; font-size: 19px; }
 .capabilities-page .cap-hero__copy > .company-button { margin-top: 32px; }
-.capabilities-page .cap-hero__photo > img { width: 100%; }
+.capabilities-page .cap-hero__photo > img { width: 100%; border-radius: var(--site-radius); }
 .capabilities-page .cap-hero__photo figcaption { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 20px; padding-top: 16px; }
 .capabilities-page .cap-hero__photo figcaption > span:first-child { color: #fff; }
 .capabilities-page .cap-chapters { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; border-top: 1px solid #40576a; }
 .capabilities-page .cap-chapters a { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 76px; color: #c4d5df; font-size: 17px; text-decoration: none; }
 .capabilities-page .cap-chapters a:hover { color: #fff; text-decoration: underline; }
 
-.capabilities-page .cap-factory-stories { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 32px var(--cap-gap); margin-top: 40px; }
-.capabilities-page .cap-stage { display: grid; grid-template-columns: minmax(0, 0.7fr) minmax(0, 1fr); gap: 24px; align-items: center; }
-.capabilities-page .cap-stage--lead { display: block; grid-row: span 2; }
-.capabilities-page .cap-stage__photo > img { width: 100%; }
-.capabilities-page .cap-stage--lead .cap-stage__copy { padding-top: 28px; }
+.capabilities-page .cap-factory-stories { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(24px, 2.5vw, 40px); margin-top: 40px; }
+.capabilities-page .cap-stage__photo > img { width: 100%; border-radius: var(--site-radius); }
+.capabilities-page .cap-stage__copy { padding-top: 24px; }
 .capabilities-page .cap-stage p { margin-top: 12px; font-size: 17px; }
-.capabilities-page .cap-stage--lead h3 { font-size: 29px; }
-.capabilities-page .cap-stage .cap-stage__note { margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--cp-line); }
 .capabilities-page .cap-stage .company-text-link { margin-top: 12px; }
+.capabilities-page .cap-photo-note { margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--cp-line); color: var(--cp-muted); font-size: 14px; }
 
 .capabilities-page .cap-oem { background: var(--cp-paper); }
 .capabilities-page .cap-oem__layout { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: var(--cap-gap); align-items: center; }
@@ -53,7 +50,7 @@
 .capabilities-page .cap-oem__options h3 { font-size: 22px; }
 .capabilities-page .cap-oem__options p { margin-top: 12px; font-size: 17px; }
 .capabilities-page .cap-oem__options + .company-text-link { margin-top: 28px; }
-.capabilities-page .cap-oem__photo > div { padding: 28px; background: #fff; }
+.capabilities-page .cap-oem__photo > div { padding: 28px; background: #fff; border-radius: var(--site-radius); }
 .capabilities-page .cap-oem__photo img { width: 100%; }
 .capabilities-page .cap-oem__photo figcaption { padding-top: 20px; color: var(--cp-muted); font-size: 15px; }
 
@@ -81,11 +78,7 @@
 @media (max-width: 1100px) {
   .capabilities-page .cap-hero__layout { grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); }
   .capabilities-page .cap-hero h1 { font-size: clamp(40px, 4.7vw, 52px); }
-  .capabilities-page .cap-factory-stories { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 36px; }
-  .capabilities-page .cap-stage--lead { display: grid; grid-column: 1 / -1; grid-row: auto; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 32px; }
-  .capabilities-page .cap-stage--lead .cap-stage__copy { padding-top: 0; }
-  .capabilities-page .cap-stage:not(.cap-stage--lead) { grid-template-columns: minmax(0, 0.7fr) minmax(0, 1fr); gap: 20px; align-items: start; }
-  .capabilities-page .cap-stage h3 { font-size: 24px; }
+  .capabilities-page .cap-stage h3 { font-size: 23px; }
   .capabilities-page .cap-oem__layout { grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr); }
   .capabilities-page .cap-oem__options { grid-template-columns: 1fr; gap: 20px; }
   .capabilities-page .cap-process__layout { gap: 40px; }
@@ -104,13 +97,11 @@
   .capabilities-page .cap-chapters { gap: 16px; }
   .capabilities-page .cap-chapters a { min-height: 72px; justify-content: flex-start; font-size: 15px; line-height: 1.35; }
   .capabilities-page .cap-chapters a svg { display: none; }
-  .capabilities-page .cap-factory-stories { grid-template-columns: 1fr; gap: 32px; margin-top: 28px; }
-  .capabilities-page .cap-stage--lead { display: block; grid-column: auto; }
-  .capabilities-page .cap-stage--lead .cap-stage__copy { padding-top: 24px; }
-  .capabilities-page .cap-stage--lead h3 { font-size: 27px; }
-  .capabilities-page .cap-stage:not(.cap-stage--lead) { grid-template-columns: minmax(0, 0.65fr) minmax(0, 1fr); gap: 20px; padding-top: 28px; border-top: 1px solid var(--cp-line); }
+  .capabilities-page .cap-factory-stories { grid-template-columns: 1fr; gap: 40px; margin-top: 28px; }
+  .capabilities-page .cap-stage__copy { padding-top: 20px; }
+  .capabilities-page .cap-stage h3 { font-size: 25px; }
   .capabilities-page .cap-stage p { font-size: 16px; }
-  .capabilities-page .cap-stage--lead p { font-size: 17px; }
+  .capabilities-page .cap-photo-note { margin-top: 28px; }
   .capabilities-page .cap-oem__layout { grid-template-columns: 1fr; gap: 32px; }
   .capabilities-page .cap-oem__options { margin-top: 28px; }
   .capabilities-page .cap-oem__options p { font-size: 16px; }

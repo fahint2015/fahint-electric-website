@@ -1,0 +1,61 @@
+{
+  "date": "2026-10-08",
+  "page": "/capabilities",
+  "method": "Built-in image_gen edits using one inspected local reference per image. No external image API.",
+  "purpose": "AI-refined editorial image based on a supplied FAHINT factory photograph; not an unmodified documentary photograph or technical test record.",
+  "export": "FFmpeg WebP quality 86, compression level 6, Lanczos resize; original source and generated PNG files preserved.",
+  "assets": [
+    {
+      "role": "workshop",
+      "source": "D:\\国际站运营平台\\方特插座\\网站资料\\工厂视频+照片\\照片\\生产车间\\2023_04_03_15_27_IMG_8117.JPG",
+      "generated": "C:/Users/XuWanPi/.codex/generated_images/01a04405-36a7-7a42-b27e-2ac0183d79b6/exec-5472fad5-48f4-4e1e-8359-123d1999fda5.png",
+      "asset": "workshop-editorial-v1.webp",
+      "prompt": "Use case: lighting-weather / precise photographic refinement. Image 1 is the EDIT TARGET: a real FAHINT electronics workshop. Produce one polished photorealistic industrial editorial photograph for a premium manufacturing website, landscape 16:9. Use THIS actual room and equipment, not an invented factory. Correct tilted verticals and camera perspective gently; compose a balanced view down the actual aisle, reduce excessive empty ceiling/floor by reframing within the photograph. Refine dull fluorescent light into soft clean neutral daylight, with luminous white machine panels, restrained steel-gray shadows and natural cobalt-blue bins. Add photographic depth and local detail without HDR or cinematic gimmicks. Keep exact machine types, shapes, number and relative positions, existing windows and columns, safety markings, and visible signage; do not relabel, add machines or make the facility larger. Preserve the actual working environment and believable material wear. No added people, slogans, logos, text overlays or watermark. Photorealistic architectural-industrial photography, clean, calm, precise, credible. Output a single full-bleed photograph, not a collage or website mockup.",
+      "width": 1600,
+      "height": 900,
+      "bytes": 221944,
+      "source_sha256": "84d3a9fe3c1f247441932637ba037df444c259e0166fc2fb30800f6ff7bdb74f",
+      "generated_sha256": "d552037f203e6bb8b44a4c82f95eb3af2389989d45c51c9d496530221ee566bf",
+      "asset_sha256": "15128aa2fc6eded9472b519428d23349c3301c96dd8ed767ce0b2d9f762f3754"
+    },
+    {
+      "role": "assembly",
+      "source": "D:\\国际站运营平台\\方特插座\\网站资料\\工厂视频+照片\\照片\\生产车间\\微信图片_20230323160550.jpg",
+      "generated": "C:/Users/XuWanPi/.codex/generated_images/01a04405-36a7-7a42-b27e-2ac0183d79b6/exec-a8ea2b64-7bb2-4dc1-bfcd-edecf3b04a75.png",
+      "asset": "assembly-editorial-v1.webp",
+      "prompt": "Use case: identity-preserve / photographic refinement. Image 1 is the EDIT TARGET: a FAHINT employee working with green PCB assemblies at a real workbench. Produce one photorealistic premium industrial editorial photograph, landscape 3:2. Reframe slightly closer around the employee's existing hands, PCB and workstation so the actual task is the clear subject; retain her real pose, identity, mask, blue workwear and wrist strap. Do not invent a different action or change hand anatomy, PCB layout, tools or electrical connections. Refine harsh flat light to soft balanced daylight with realistic skin and fabric texture; neutralize color cast, gently restrain bright background clutter and give subtle natural depth of field while hands, PCB and extraction grille remain sharp. Preserve the real green bench, blue containers, tools, materials and safety equipment. Keep recognizably the same real workplace; do not make a sci-fi laboratory. Calm steel-blue and neutral tones suitable beside a navy website. No new equipment, no extra fingers, no jewelry changes, no lettering, no watermark. Single full-bleed photograph only.",
+      "width": 960,
+      "height": 640,
+      "bytes": 114128,
+      "source_sha256": "a54778656a94776d494c2c989c7331ea20b870ce92803eca6ab72561640ea164",
+      "generated_sha256": "104bedaf17619cf00dfd6738a993ac8317dacf3242025ba49893126815037bf5",
+      "asset_sha256": "957047dbcadfd1456f34071284e2558e937112acba8851424780680663e70cee"
+    },
+    {
+      "role": "testing",
+      "source": "D:\\国际站运营平台\\方特插座\\网站资料\\工厂视频+照片\\照片\\生产车间\\2023_04_01_23_16_IMG_8087.JPG",
+      "generated": "C:/Users/XuWanPi/.codex/generated_images/01a04405-36a7-7a42-b27e-2ac0183d79b6/exec-81d48a6b-632b-433f-aef4-e01681842462.png",
+      "asset": "testing-editorial-v1.webp",
+      "prompt": "Use case: precise-object-edit / photographic refinement. Image 1 is the EDIT TARGET: the real FAHINT GFCI functional testing stations. Produce a premium photorealistic industrial editorial photograph, landscape 3:2, using this actual photo. Reframe toward the middle and left testing benches so the row of real cabinets, test controls, fixtures and blue trays becomes the main subject, avoiding the large cropped foreground man's back dominating the picture; do not invent what is obscured, instead choose a tighter view of the visible middle stations. Correct roll/perspective modestly. Use soft neutral balanced light, clear white panels, restrained blue trays and controlled reflections. Preserve exact visible equipment construction, cabinet count within the crop, trays, fixture arrangement and all legible original signage without adding or rewriting it. Do not add machinery, people or certifications. This is functional testing, NOT an assembly or production line image. Make it quietly precise and high-end through photographic composition and light, not fake futuristic additions. No overlay text, logo or watermark. Single full-bleed photograph, no collage.",
+      "width": 960,
+      "height": 640,
+      "bytes": 112738,
+      "source_sha256": "2da4f4d16252306a9c900bc56ef2f893975c939d9ccf9e6f27a0f47c66f9aec0",
+      "generated_sha256": "79ebdcb10a7e92995a8068d1c9bb65c0de876d46752cf6876202388801b5d506",
+      "asset_sha256": "c7ee614c552ccc70ba47a20db317ea83ad4e71580b707de4b3fbce8ebe96b6ee"
+    },
+    {
+      "role": "laboratory",
+      "source": "D:\\国际站运营平台\\方特插座\\网站资料\\工厂视频+照片\\照片\\生产车间\\微信图片_20230404104624.jpg",
+      "generated": "C:/Users/XuWanPi/.codex/generated_images/01a04405-36a7-7a42-b27e-2ac0183d79b6/exec-dfd802db-5b75-498a-ada6-569dd1cc8b9b.png",
+      "asset": "laboratory-editorial-v1.webp",
+      "prompt": "Use case: lighting-weather / photographic refinement. Image 1 is the EDIT TARGET: a real FAHINT laboratory workbench with electrical test instruments and a window on the right. Produce a single photorealistic high-end industrial editorial photograph, landscape 3:2. Make the existing instruments and test leads the subject through a closer balanced crop and gentle perspective correction; exclude most empty ceiling and floor while retaining the complete major instruments on the green bench. Balance the blown-out window light and dark instruments into soft daylight, preserve readable screens and real metal/plastic finishes. Keep the exact instrument shapes, knobs, displays, cables and connections, brand markings, wood wall and curtains from the source. Do not change readings, invent test results, add devices, move wires, or substitute a different laboratory. Retain realistic wear but reduce distracting glare and color casts. A consistent clean silver, neutral white, blue-display and subtle teal palette, refined commercial documentary photography, never CGI. No added people, logos, copy, watermark, borders or collage.",
+      "width": 960,
+      "height": 640,
+      "bytes": 88408,
+      "source_sha256": "e32cff546ed83590524ae7fac69635deb9bdb86601122bae75f0b6ed2498c192",
+      "generated_sha256": "1dbb8ec109bf55c3667dd4ffbb70912d2a2c046de5a2258717333e2e89dcc158",
+      "asset_sha256": "1d5d0558d5a97e9294c189995de2cdf90413c68cbb735788cf051b942c59e704"
+    }
+  ]
+}

@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
 import { CompanyBreadcrumb, CompanyImage, CompanyLink, usePageMeta } from '../components/company/CompanyShared.jsx';
-import { companyPhotos } from '../data/companyProfile.js';
+import { capabilitiesPhotos } from '../data/capabilitiesPhotos.js';
 import '../styles/capabilities.css';
 
 const steps = [
@@ -13,17 +13,17 @@ const steps = [
 
 const factoryStages = [
   {
-    id: 'assembly', title: 'Assembly & automation', photo: companyPhotos.automatedAssembly,
-    description: 'Components come together through hands-on assembly and dedicated equipment. Device construction, assembly steps and product identification follow the selected model.',
-    note: 'Functional inspection is a separate stage, with dedicated GFCI and USB test stations.',
+    id: 'assembly', title: 'Component assembly', photo: capabilitiesPhotos.assembly,
+    description: 'Circuit boards and device components are assembled at dedicated workstations. The construction and assembly steps follow the selected model.',
   },
   {
-    id: 'aging', title: 'Aging tests', photo: companyPhotos.agingTests,
-    description: 'Devices are connected to an aging-test rack. Test conditions and duration are confirmed for the relevant product.',
+    id: 'testing', title: 'GFCI functional testing', photo: capabilitiesPhotos.testing,
+    description: 'Dedicated stations check GFCI functions, separate from component assembly. Confirm the inspection requirements for the model you choose.',
+    link: { to: '/#studio-making', label: 'See our testing stations' },
   },
   {
-    id: 'laboratory', title: 'Laboratory verification', photo: companyPhotos.environmentalChamber,
-    description: 'A temperature and humidity chamber supports product verification. Test requirements and certification coverage are model-specific.',
+    id: 'laboratory', title: 'Laboratory verification', photo: capabilitiesPhotos.laboratory,
+    description: 'Bench instruments support electrical verification. The test plan, supporting records and certification scope are confirmed for each model.',
   },
 ];
 
@@ -47,8 +47,8 @@ export default function Capabilities() {
             <CompanyLink to="/contact?topic=oem" light>Discuss your OEM / ODM project</CompanyLink>
           </div>
           <figure className="cap-hero__photo">
-            <CompanyImage {...companyPhotos.deviceAssembly} priority />
-            <figcaption><span>Component assembly</span><span>FAHINT workshop · Wenzhou, China</span></figcaption>
+            <CompanyImage {...capabilitiesPhotos.workshop} priority fetchpriority="high" />
+            <figcaption><span>FAHINT workshop · Wenzhou, China</span><span>AI-refined image</span></figcaption>
           </figure>
         </div>
         <nav className="cap-chapters" aria-label="Manufacturing sections">
@@ -66,16 +66,16 @@ export default function Capabilities() {
           <p>Different stages, different equipment. A closer look at the work behind each device.</p>
         </div>
         <div className="cap-factory-stories">
-          {factoryStages.map((stage, index) => <article key={stage.id} className={index === 0 ? 'cap-stage cap-stage--lead' : 'cap-stage'} aria-labelledby={'stage-' + stage.id}>
+          {factoryStages.map(stage => <article key={stage.id} className="cap-stage" aria-labelledby={'stage-' + stage.id}>
             <div className="cap-stage__photo"><CompanyImage {...stage.photo} /></div>
             <div className="cap-stage__copy">
               <h3 id={'stage-' + stage.id}>{stage.title}</h3>
               <p>{stage.description}</p>
-              {stage.note && <p className="cap-stage__note">{stage.note}</p>}
-              {index === 0 && <CompanyLink to="/#studio-making" secondary>See our testing stations</CompanyLink>}
+              {stage.link && <CompanyLink to={stage.link.to} secondary>{stage.link.label}</CompanyLink>}
             </div>
           </article>)}
         </div>
+        <p className="cap-photo-note">AI-refined from FAHINT factory photographs. For test records and model documentation, please contact our team.</p>
       </div>
     </section>
 

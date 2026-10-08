@@ -15,7 +15,7 @@ export const staticMetadata = {
   '/capabilities': {
     title: 'Wiring Device Manufacturing & OEM/ODM | FAHINT',
     description: 'Explore FAHINT assembly, product testing and OEM/ODM support. Prepare model, finish, packaging and documentation requirements for your wiring-device order.',
-    image: 'assets/images/company/factory/device-assembly-v1.webp', imageAlt: 'FAHINT staff assembling wiring-device components', label: 'Manufacturing & OEM / ODM',
+    image: 'assets/images/company/capabilities/workshop-editorial-v1.webp', imageAlt: 'FAHINT electronics workshop — AI-refined from a factory photograph', label: 'Manufacturing & OEM / ODM',
   },
   '/about': {
     title: 'About FAHINT | Wiring Device Manufacturer in Wenzhou',

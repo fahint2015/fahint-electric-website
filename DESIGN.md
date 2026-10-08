@@ -34,7 +34,7 @@ components:
 
 FAHINT uses a clear navy-and-blue frame, Source Sans 3, generous margins and familiar pill actions. Real product and company evidence gives the visual system its character.
 
-The documentary treatment recorded here applies to Home's #studio-making chapter, /capabilities and /about. Their larger headings, square-cornered photographs and broad editorial layouts are scoped treatments; product pages, forms, Blog and Contact retain their own implemented patterns.
+The company editorial treatment recorded here applies to Home's #studio-making chapter, /capabilities and /about. Their larger headings and broad editorial layouts are scoped treatments; product pages, forms, Blog and Contact retain their own implemented patterns. Home and About retain documentary photographs. Capabilities uses visibly disclosed, AI-refined editorial images based on supplied factory photographs, as requested by the user on 2026-10-08.
 
 **Key Characteristics:**
 
@@ -66,7 +66,7 @@ The shared content frame caps at 1600px using the gutter token. Company sections
 
 About opens with a roughly 60/40 title-and-summary grid and a broad workshop photograph, capped at 1920px with 24px outer margins. The desktop hero uses a 2.35:1 workshop crop. At 760px the title grid stacks and the hero photograph returns to its complete natural aspect ratio, edge to edge; captions keep the page gutter.
 
-Capabilities caps content at 1440px, retaining the shared gutter. Its navy hero groups the title, summary and action beside a natural-ratio assembly photograph. The manufacturing chapter presents one dominant assembly story and two smaller equipment stories together; images remain uncropped at every breakpoint. The pale-paper OEM chapter pairs grouped options with packaging, followed by a vertical four-step process and a combined navy inquiry/documentation ending. At 760px the major grids stack in DOM order and section padding becomes 56px. Every rule is scoped to `.capabilities-page`.
+Capabilities caps content at 1440px, retaining the shared gutter. Its navy hero groups the title, summary and action beside a 16:9 workshop overview. The manufacturing chapter presents three equally sized 3:2 images with adjacent descriptions: component assembly, GFCI functional testing and laboratory verification. All four generated compositions remain uncropped at every breakpoint. The pale-paper OEM chapter pairs grouped options with the unchanged product packaging photograph, followed by a vertical four-step process and a combined navy inquiry/documentation ending. At 760px the major grids and three image-led stories stack in DOM order and section padding becomes 56px. Every rule is scoped to `.capabilities-page`.
 
 The About team gallery uses unequal columns and natural image ratios, then stacks on mobile. Home testing pairs a dominant intact GFCI photo with navy copy; mobile moves the copy above the photograph and stacks the USB support area.
 
@@ -76,7 +76,7 @@ The company editorial chapters are flat: navy and pale-paper fields, whitespace 
 
 ## Shapes
 
-Pill actions remain the familiar brand control. The shared rounded media/card token remains available for incumbent modules, including certificate cards. Company editorial photographs, OEM packaging and the scoped documentation callout use straight corners. “Square” describes the corners, not a forced 1:1 photograph.
+Pill actions remain the familiar brand control. The shared rounded media/card token remains available for incumbent modules, including certificate cards. Capabilities photographs and the packaging frame use the shared 14px radius on all four corners. Home/About editorial photographs and the scoped documentation callout retain straight corners. “Square” describes the corners, not a forced 1:1 photograph.
 
 ## Components
 
@@ -84,13 +84,15 @@ Pill actions remain the familiar brand control. The shared rounded media/card to
 
 **Chapter navigation.** About section links wrap across lines and target real section anchors. Capabilities has three equal-width links on navy, with full route-and-hash destinations. About uses a bottom rule; Capabilities uses a top rule. Anchored company sections retain a header offset (110px).
 
-**Factory stories.** Three named articles show assembly, aging tests and laboratory verification simultaneously. There are no tabs, hidden panels or automatic transitions. Each photograph stays beside its own description; the lead assembly article explicitly distinguishes functional inspection and links to Home's testing chapter.
+**Factory stories.** Three named articles show component assembly, GFCI functional testing and laboratory verification simultaneously. There are no tabs, hidden panels or automatic transitions. The functional-testing article explicitly distinguishes inspection from assembly and links to Home's original testing photographs. The laboratory copy describes bench instruments, not the environmental chamber that used to appear here.
 
 **Documentation.** Capabilities places the model-scope explanation and certificate link alongside the closing inquiry, separated by a thin vertical rule on desktop and a horizontal rule on mobile. The shared pale company callout remains available to other incumbent modules.
 
 **Documentary photography.** Keep captions adjacent to the actual image and explicit intrinsic dimensions. The selected factory photographs and their sources are recorded in [the manifest](public/assets/images/company/factory/manifest.json) and adjacent .webp.json files. The broad About workshop uses electronics-workshop-v2.webp (1920 × 1440). Home's existing scroll reveal moves the complete photograph; unsupported and reduced-motion environments receive the complete static image. Reduced-motion styles also disable company transitions and animations.
 
 **The Evidence Rule.** Photographs show specific work. Their captions and neighboring copy must describe the pictured activity and preserve model-specific qualification.
+
+**Capabilities editorial-image exception.** The four AI-refined promotional images are separate from original evidence assets. Their generation prompts and source/output hashes are recorded in [the generation record](docs/assets/capabilities-photography-2026-10-08.json), with webpage dimensions and file hashes in [their manifest](public/assets/images/company/capabilities/manifest.json). The hero caption and factory-section note disclose AI refinement. These visuals are not technical records; do not use generated screen readings, labels or fine equipment details to establish specifications, test results or certification. The original photographs, Home/About/product evidence and actual packaging remain unchanged.
 
 **GFCI factory context.** The seven GFCI detail pages share three dedicated workshop photographs from `companyPhotos`: assembly benches, GFCI functional-testing stations and the laboratory. All three originals are 4032 × 2268; their webpage exports are 1600 × 900. The existing three-column gallery displays them at their natural 16:9 ratio, with no cropping or letterboxing, and stacks on phones. Captions distinguish these activities; the accompanying note makes test requirements model-specific. This does not add the module to other product families or replace Home/About/Capabilities imagery.
 
@@ -100,5 +102,5 @@ Pill actions remain the familiar brand control. The shared rounded media/card to
 - Do show complete mobile photographs and preserve the natural aspect ratios of equipment images.
 - Do retain visible focus, semantic article and navigation labels, and reduced-motion alternatives for incumbent animation.
 - Don't spread company editorial heading sizes or square photo corners to products, forms, Blog or Contact.
-- Don't label GFCI functional testing as assembly, alter factory evidence with generated content, or substitute lower-resolution catalog crops for the supplied originals.
+- Don't label GFCI functional testing as assembly, replace original factory evidence with generated content, or substitute lower-resolution catalog crops for the supplied originals. Only the explicitly disclosed Capabilities editorial visuals use the AI-refinement exception above.
 - Don't turn photographs or certificates into unsupported production, performance, partnership, delivery or range-wide certification claims.

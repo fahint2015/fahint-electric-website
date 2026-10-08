@@ -1,0 +1,50 @@
+[
+  {
+    "role": "workshop",
+    "asset": "workshop-editorial-v1.webp",
+    "width": 1600,
+    "height": 900,
+    "bytes": 221944,
+    "source_sha256": "84d3a9fe3c1f247441932637ba037df444c259e0166fc2fb30800f6ff7bdb74f",
+    "generated_sha256": "d552037f203e6bb8b44a4c82f95eb3af2389989d45c51c9d496530221ee566bf",
+    "asset_sha256": "15128aa2fc6eded9472b519428d23349c3301c96dd8ed767ce0b2d9f762f3754",
+    "source": "2023_04_03_15_27_IMG_8117.JPG",
+    "processing": "AI-refined editorial image based on a supplied FAHINT factory photograph; not an unmodified documentary photograph or technical test record."
+  },
+  {
+    "role": "assembly",
+    "asset": "assembly-editorial-v1.webp",
+    "width": 960,
+    "height": 640,
+    "bytes": 114128,
+    "source_sha256": "a54778656a94776d494c2c989c7331ea20b870ce92803eca6ab72561640ea164",
+    "generated_sha256": "104bedaf17619cf00dfd6738a993ac8317dacf3242025ba49893126815037bf5",
+    "asset_sha256": "957047dbcadfd1456f34071284e2558e937112acba8851424780680663e70cee",
+    "source": "微信图片_20230323160550.jpg",
+    "processing": "AI-refined editorial image based on a supplied FAHINT factory photograph; not an unmodified documentary photograph or technical test record."
+  },
+  {
+    "role": "testing",
+    "asset": "testing-editorial-v1.webp",
+    "width": 960,
+    "height": 640,
+    "bytes": 112738,
+    "source_sha256": "2da4f4d16252306a9c900bc56ef2f893975c939d9ccf9e6f27a0f47c66f9aec0",
+    "generated_sha256": "79ebdcb10a7e92995a8068d1c9bb65c0de876d46752cf6876202388801b5d506",
+    "asset_sha256": "c7ee614c552ccc70ba47a20db317ea83ad4e71580b707de4b3fbce8ebe96b6ee",
+    "source": "2023_04_01_23_16_IMG_8087.JPG",
+    "processing": "AI-refined editorial image based on a supplied FAHINT factory photograph; not an unmodified documentary photograph or technical test record."
+  },
+  {
+    "role": "laboratory",
+    "asset": "laboratory-editorial-v1.webp",
+    "width": 960,
+    "height": 640,
+    "bytes": 88408,
+    "source_sha256": "e32cff546ed83590524ae7fac69635deb9bdb86601122bae75f0b6ed2498c192",
+    "generated_sha256": "1dbb8ec109bf55c3667dd4ffbb70912d2a2c046de5a2258717333e2e89dcc158",
+    "asset_sha256": "1d5d0558d5a97e9294c189995de2cdf90413c68cbb735788cf051b942c59e704",
+    "source": "微信图片_20230404104624.jpg",
+    "processing": "AI-refined editorial image based on a supplied FAHINT factory photograph; not an unmodified documentary photograph or technical test record."
+  }
+]
