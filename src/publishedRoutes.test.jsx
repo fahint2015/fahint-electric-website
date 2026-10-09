@@ -9,6 +9,23 @@ import Header from './components/Header.jsx';
 const show = (Component, path) => render(<MemoryRouter initialEntries={[path]} future={{ v7_startTransition: true, v7_relativeSplatPath: true }}><Component /></MemoryRouter>);
 
 describe('published homepage and product overview', () => {
+  it('keeps the favicon square and the original wordmark proportions intact', () => {
+    const parser = new DOMParser();
+    const html = parser.parseFromString(readFileSync('index.html', 'utf8'), 'text/html');
+    const iconPath = html.querySelector('link[rel="icon"]').getAttribute('href');
+    const svg = parser.parseFromString(readFileSync(`public/${iconPath}`, 'utf8'), 'image/svg+xml').documentElement;
+    expect(svg.localName).toBe('svg');
+    const [, , width, height] = svg.getAttribute('viewBox').split(/\s+/).map(Number);
+    expect(width).toBeGreaterThan(0);
+    expect(width).toBe(height);
+    expect(svg.getAttribute('width')).toBe(svg.getAttribute('height'));
+    const image = svg.querySelector('image');
+    const original = readFileSync('public/assets/images/brand/fahint-logo-navy.png');
+    expect(Number(image.getAttribute('width')) / Number(image.getAttribute('height'))).toBeCloseTo(original.readUInt32BE(16) / original.readUInt32BE(20));
+    expect(image.getAttribute('preserveAspectRatio')).toBe('xMidYMid meet');
+    expect(Buffer.from(image.getAttribute('href').split(',')[1], 'base64').equals(original)).toBe(true);
+  });
+
   it('loads company and editorial pages only with their route', () => {
     const source = readFileSync('src/App.jsx', 'utf8');
     for (const name of ['Blog', 'BlogPost', 'Capabilities', 'About']) {
