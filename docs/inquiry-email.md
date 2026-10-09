@@ -6,7 +6,7 @@
 
 1. 注册并登录 [Resend](https://resend.com/signup)。
 2. 打开 Domains → Add Domain，填写 `notify.fahint.com`。
-3. 只启用 Sending。按照 Resend 实际提供的记录，在 Cloudflare DNS 添加该子域的 DKIM、发信 SPF 和回信路径 MX；TXT/MX 本身无代理开关，如出现 CNAME 则使用 DNS only。
+3. 只启用 Sending。按照 Resend 页面实际提供的类型、名称和完整内容，在 Cloudflare DNS 新增记录。本次 `notify.fahint.com` 配置为 1 条 DKIM TXT 和 2 条 CNAME（`rsend.notify`、`send.notify`）；两条 CNAME 使用 DNS only，TTL 使用自动。页面的 `[…]` 是省略显示，记录值需直接复制完整内容。
 4. 不覆盖 `fahint.com` 根域的网易企业邮箱 MX/SPF，不删除现有 `sh.fahint.com` SendCloud 或 `mail`/`smtp`/`imap`/`pop` 记录。
 5. 回到 Resend 检查验证，等待发信域状态为 Verified。
 

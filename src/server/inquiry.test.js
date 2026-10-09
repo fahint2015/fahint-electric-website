@@ -23,13 +23,17 @@ afterEach(() => { vi.unstubAllGlobals(); vi.useRealTimers(); });
 
 describe('Cloudflare inquiry email', () => {
   it('forwards a verified inquiry to the fixed business inbox with the customer as reply-to', async () => {
-    const fetcher = vi.fn(async url => url.includes('siteverify')
-      ? Response.json(verified) : Response.json({ id: 'accepted-email-id' }));
+    const fetcher = vi.fn(async (url, options) => {
+      // workerd rejects redirect: 'error' before sending any request.
+      if (!['follow', 'manual'].includes(options.redirect)) throw new TypeError('Invalid redirect value');
+      return url.includes('siteverify') ? Response.json(verified) : Response.json({ id: 'accepted-email-id' });
+    });
     vi.stubGlobal('fetch', fetcher);
     const response = await onRequest({ request: requestFor({ ...inquiry, to: 'attacker@example.com' }), env });
     expect(response.status).toBe(200);
     expect(await response.json()).toEqual({ ok: true });
     expect(response.headers.get('Cache-Control')).toBe('no-store');
+    for (const [, options] of fetcher.mock.calls) expect(options.redirect).toBe('manual');
     const [url, options] = fetcher.mock.calls.find(([url]) => url === 'https://api.resend.com/emails');
     expect(url).toBe('https://api.resend.com/emails');
     expect(options.headers.Authorization).toBe('Bearer test-server-secret');

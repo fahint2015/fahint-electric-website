@@ -62,7 +62,7 @@ async function fetchJson(url, options, timeoutMs) {
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), timeoutMs);
   try {
-    const response = await fetch(url, { ...options, signal: controller.signal, redirect: 'error' });
+    const response = await fetch(url, { ...options, signal: controller.signal, redirect: 'manual' });
     return { response, data: await response.json() };
   } finally { clearTimeout(timeout); }
 }
