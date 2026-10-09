@@ -1,6 +1,6 @@
 // @vitest-environment node
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { onRequest } from '../../functions/api/inquiry.js';
+import { onRequest } from './inquiry.js';
 
 const env = {
   RESEND_API_KEY: 'test-server-secret',

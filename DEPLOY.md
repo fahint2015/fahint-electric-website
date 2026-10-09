@@ -12,6 +12,8 @@
 
 `functions/api/inquiry.js` 提供 Cloudflare Pages 后台发信接口。使用 Resend 的 `notify.fahint.com` 发信子域和 Turnstile 人机验证，通知固定发到 `louis@fahint.com`，邮件回复地址为客户填写的邮箱。
 
+接口实现在 `src/server/inquiry.js`。`npm run build` 使用现有 Vite 将它预打包到 `output/functions/inquiry.mjs`，再由 Pages 的 Functions 编译器处理入口，兼容云端 Wrangler 3.114.17。无需修改 Pages 的构建命令或输出目录。
+
 配置步骤、生产环境变量和收信验证见 [docs/inquiry-email.md](docs/inquiry-email.md)。发信域名及密钥配置完成后再同时启用 `VITE_INQUIRY_ENDPOINT` 和 `VITE_TURNSTILE_SITE_KEY`；未启用时网站沿用打开邮件软件的表单流程。
 
 以下章节保留原 GitHub Pages 部署方案作为迁移参考；当前正式网站使用上面的 Cloudflare Pages 配置。

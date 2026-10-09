@@ -105,7 +105,7 @@ describe('GitHub Pages deployment', () => {
 
     expect(testStep).toBeGreaterThan(-1);
     expect(buildStep).toBeGreaterThan(testStep);
-    expect(scripts.build).toBe('vite build && node scripts/prepare-pages.mjs');
+    expect(scripts.build).toBe('vite build && node scripts/prepare-pages.mjs && node scripts/build-inquiry-function.mjs');
     expect(workflow).not.toContain('run: node scripts/prepare-pages.mjs');
     expect(workflow).toContain('CUSTOM_DOMAIN: ${{ vars.CUSTOM_DOMAIN }}');
     expect(workflow).not.toMatch(/run:\s*(?:echo|printf)[^\n]*CUSTOM_DOMAIN/i);

@@ -58,4 +58,5 @@ API 返回 `{ "ok": true }` 代表 Resend 接受发送，实际投递还需以�
 - 每个草稿使用同一发送编号重试，Resend 的 Idempotency-Key 在 24 小时内防止网络故障重试产生重复邮件；修改草稿生成新编号。
 - 表单请求限制 12 秒，后台验证/发信请求分别限制 3 秒/7 秒。服务失败、额度不足或未配置时不返回成功。
 - `public/_routes.json` 仅把询盘接口交给 Functions，普通静态页面和资源直接返回。
+- 构建时由现有 Vite 预打包后台及产品数据，兼容 Cloudflare 使用的旧版 Functions 编译器；Pages 仍执行 `npm run build` 并发布 `dist`。
 - 单元检查使用模拟服务，不发送真实邮件：`npm test`。构建：`SITE_BASE=/ npm run build`（PowerShell：`$env:SITE_BASE='/'` 后执行 `npm run build`）。

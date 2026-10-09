@@ -31,6 +31,8 @@ Production is hosted by Cloudflare Pages at `https://fahint.com`. The `fahint-el
 
 The optional inquiry email backend is a Pages Function at `/api/inquiry`, using Resend and server-validated Turnstile. Enable it after verifying the sending subdomain and configuring the production bindings in [docs/inquiry-email.md](docs/inquiry-email.md). Without an endpoint, the form keeps its email-app handoff. Static pages bypass Functions via `public/_routes.json`.
 
+The build also uses Vite to bundle `src/server/inquiry.js` into `output/functions/inquiry.mjs`. The Pages Function re-exports this module so Cloudflare's older Functions compiler can consume shared catalog data without parsing JSON import attributes.
+
 The GitHub Pages workflow in `.github/workflows/deploy.yml` remains available for a project-path deployment:
 
 ```text
