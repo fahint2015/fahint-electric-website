@@ -12,8 +12,9 @@ export function useStudioPageMeta(title, description) {
     : staticMetadata[path] || { title: `FAHINT | ${title}`, description });
 }
 
-export function StudioImage({ src, alt = '', className = '', width = 800, height = 800, priority = false, ...props }) {
-  return <img className={className} src={publicAsset(src)} alt={alt} width={width} height={height} loading={priority ? 'eager' : 'lazy'} fetchpriority={priority ? 'high' : 'low'} decoding="async" {...props} />;
+export function StudioImage({ src, alt = '', className = '', width = 800, height = 800, priority = false, responsive = false, ...props }) {
+  const srcSet = responsive ? [768, 1200, width].map(size => `${publicAsset(size === width ? src : src.replace(/\.webp$/, `-${size}w.webp`))} ${size}w`).join(', ') : undefined;
+  return <img className={className} src={publicAsset(src)} srcSet={srcSet} sizes={responsive ? '100vw' : undefined} alt={alt} width={width} height={height} loading={priority ? 'eager' : 'lazy'} fetchpriority={priority ? 'high' : 'low'} decoding="async" {...props} />;
 }
 
 export function StudioLink({ to, children, light = false, className = '', ...props }) {

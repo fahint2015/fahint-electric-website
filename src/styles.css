@@ -7477,7 +7477,8 @@ ul {
   gap: 20px;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
+  /* Let the initial snap settle immediately; navigation buttons request smooth scrolling. */
+  scroll-behavior: auto;
   padding: 4px 2px 10px;
   flex: 1;
   scrollbar-width: none;

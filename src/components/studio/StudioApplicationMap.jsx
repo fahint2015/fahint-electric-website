@@ -115,6 +115,7 @@ export default function StudioApplicationMap() {
         alt="Cutaway North American home showing a kitchen, bedroom, living area and entry"
         width={1664}
         height={936}
+        responsive
       />
       <div className="studio-application-map__shade" aria-hidden="true" />
       <div className="studio-application-map__locations">

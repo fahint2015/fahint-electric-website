@@ -88,7 +88,7 @@ function RoomHero() {
     }}
   >
     <div className="studio-hero__photo" id="studio-room-scene">
-      {scenes.map((item, index) => <StudioImage key={item.line} src={`assets/images/editorial-products/${item.image}`} alt={item.alt} width={1536} height={1024} priority={index === active} className={index === active ? 'is-current' : ''} aria-hidden={index !== active} />)}
+      {scenes.map((item, index) => <StudioImage key={item.line} src={`assets/images/editorial-products/${item.image}`} alt={item.alt} width={1536} height={1024} responsive priority={index === active} className={index === active ? 'is-current' : ''} aria-hidden={index !== active} />)}
     </div>
     <div className="studio-wrap studio-hero__layout">
       <div className="studio-hero__copy">
@@ -124,7 +124,7 @@ function BrandIntroduction() {
   // Perspective-corrected version of the supplied FAHINT sample-room photograph.
   return <section className="studio-brand" id="studio-brand" aria-labelledby="studio-brand-title">
     <figure className="studio-brand-visual">
-      <StudioImage src="assets/images/company/fahint-showroom-front-v1.webp" alt="FAHINT product display wall in the sample showroom, with corrected perspective" width={1920} height={1080} />
+      <StudioImage src="assets/images/company/fahint-showroom-front-v1.webp" alt="FAHINT product display wall in the sample showroom, with corrected perspective" width={1920} height={1080} responsive />
       <figcaption><strong>Inside FAHINT</strong><span>Sample showroom · Wenzhou, China</span></figcaption>
     </figure>
     <div className="studio-wrap studio-brand-layout">

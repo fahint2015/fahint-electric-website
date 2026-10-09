@@ -81,6 +81,24 @@ describe('studio homepage and catalog', () => {
     ]);
   });
 
+  it('offers smaller photographs for phones while keeping full-size originals', () => {
+    const { container } = show(HomeStudio);
+    const images = [...container.querySelectorAll('.studio-hero__photo img, .studio-selection-card img, .studio-application-map__image, .studio-brand-visual > img')];
+    expect(images).toHaveLength(11);
+    for (const image of images) {
+      const source = image.getAttribute('src');
+      const candidates = image.getAttribute('srcset')?.split(', ').map(entry => entry.split(' '));
+      expect(candidates).toEqual([
+        [source.replace(/\.webp$/, '-768w.webp'), '768w'],
+        [source.replace(/\.webp$/, '-1200w.webp'), '1200w'],
+        [source, `${image.getAttribute('width')}w`]
+      ]);
+      expect(image.getAttribute('sizes')).toBeTruthy();
+      for (const [url] of candidates) expect(existsSync(publicAssetFile(url)), url).toBe(true);
+      expect(image).toHaveAttribute('height');
+    }
+  });
+
   it('prioritizes the active poster without competing category and inactive scene downloads', () => {
     const { container } = show(HomeStudio);
     const images = [...container.querySelectorAll('.studio-hero__photo img')];

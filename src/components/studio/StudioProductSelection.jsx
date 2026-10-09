@@ -26,7 +26,7 @@ export default function StudioProductSelection() {
           return <Reveal as="li" className="studio-installation-reveal" key={slug} delay={index % 3 * 80}>
             <Link className="studio-selection-card" to={`/products/${slug}`} aria-label={`Explore ${name}`}>
               <div className="studio-selection-card__image">
-                <StudioImage src={`assets/images/home-installations/${image}`} alt={`${name}, illustrative installation at ${setting}`} width={1536} height={1024} />
+                <StudioImage src={`assets/images/home-installations/${image}`} alt={`${name}, illustrative installation at ${setting}`} width={1536} height={1024} responsive sizes="(max-width: 760px) calc(100vw - 44px), (max-width: 1150px) calc(50vw - 56px), min(40vw, 667px)" />
               </div>
               <div className="studio-selection-card__caption"><h3>{name}</h3><span className="studio-selection-card__action" aria-hidden="true"><ArrowUpRight size={22} /></span></div>
             </Link>
