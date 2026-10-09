@@ -5,88 +5,16 @@ import { products } from '../data/products.js';
 import { resolveInquiryContext } from '../utils/inquiryContext.js';
 import { resolveUsbInquiryItems, serializeUsbInquiryItems, validInquiryQuantity } from '../utils/inquiryList.js';
 import InquiryList from './InquiryList.jsx';
+import InquiryVerification from './InquiryVerification.jsx';
+import { EMPTY_INQUIRY as EMPTY, normalizeInquiry, validateInquiry, buildMailtoUrl, buildInquiryText } from '../utils/inquiry.js';
 import './inquiry-context.css';
 
-const EMPTY = {
-  name: '',
-  email: '',
-  company: '',
-  country: '',
-  model: '',
-  category: '',
-  quantity: '',
-  message: ''
-};
+export { validateInquiry, buildMailtoUrl, buildInquiryText } from '../utils/inquiry.js';
 
-const EMAIL_PATTERN = /^\S+@\S+\.\S+$/;
 const SUCCESS_MESSAGE = 'Your email app should now be open with the inquiry pre-filled.';
 const MINIMUM_HANDOFF_LOCK_MS = 1_500;
 const MAX_MAILTO_URL_LENGTH = 1_800;
 const REQUEST_TIMEOUT_MS = 12_000;
-
-const clean = (value) => String(value ?? '').trim();
-const normalizeInquiry = (form) => {
-  const fields = Object.keys(EMPTY).filter(key => key !== 'category'
-    && !(key === 'model' && Object.hasOwn(form, 'category') && !clean(form.model)));
-  for (const key of ['category', 'finish', 'topic', 'source']) {
-    if (Object.hasOwn(form, key)) fields.push(key);
-  }
-  const values = Object.fromEntries(fields.map(key => [key, clean(form[key])]));
-  const items = resolveUsbInquiryItems(form.items);
-  if (items.length) {
-    values.items = items;
-    values.category = 'USB Outlets';
-    for (const key of ['model', 'finish', 'source', 'quantity']) delete values[key];
-  }
-  return values;
-};
-
-const buildInquiryBody = (form) => {
-  const values = normalizeInquiry(form);
-
-  return [
-    `Name: ${values.name}`,
-    `Email: ${values.email}`,
-    `Company: ${values.company}`,
-    `Country: ${values.country}`,
-    ...(Object.hasOwn(values, 'category') ? [`Product category: ${values.category || 'Not specified'}`] : []),
-    ...(Object.hasOwn(values, 'model') ? [`Model of interest: ${values.model || 'Not specified'}`] : []),
-    ...(Object.hasOwn(values, 'finish') ? [`Finish: ${values.finish || 'Not specified'}`] : []),
-    ...(values.topic ? [`Inquiry type: ${values.topic}`] : []),
-    ...(values.source ? [`Product page: ${values.source}`] : []),
-    ...(values.items ? [
-      '', `Inquiry list (${values.items.length} ${values.items.length === 1 ? 'model' : 'models'}):`,
-      ...values.items.map((item, index) => `${index + 1}. ${item.model}\nQuantity: ${item.quantity ? `${item.quantity} pcs` : 'Not specified'}\nFinish: ${item.finish}\nProduct page: ${item.source}`)
-    ] : [`Estimated quantity: ${values.quantity || 'Not specified'}`]),
-    '',
-    'Requirements:',
-    values.message
-  ].join('\n');
-};
-
-export function validateInquiry(form) {
-  const errors = {};
-
-  if (!clean(form.name)) errors.name = 'Enter your name.';
-  if (!EMAIL_PATTERN.test(clean(form.email))) errors.email = 'Enter a valid business email.';
-  if (!clean(form.message)) errors.message = 'Describe the product or project you need.';
-  if (resolveUsbInquiryItems(form.items).some(item => !validInquiryQuantity(item.quantity))) errors.items = 'Check each model quantity.';
-
-  return errors;
-}
-
-export function buildMailtoUrl(form) {
-  const values = normalizeInquiry(form);
-  const sender = values.company || values.name || 'website visitor';
-  const subject = encodeURIComponent(`Product inquiry from ${sender}`);
-  const body = encodeURIComponent(buildInquiryBody(values));
-
-  return `mailto:${company.email}?subject=${subject}&body=${body}`;
-}
-
-export function buildInquiryText(form) {
-  return `To: ${company.email}\n\n${buildInquiryBody(form)}`;
-}
 
 const defaultDelivery = (url) => window.location.assign(url);
 const defaultRequest = (...args) => fetch(...args);
@@ -115,10 +43,16 @@ export default function InquiryForm({
   categoryOptions = null,
   delivery = defaultDelivery,
   endpoint = import.meta.env.VITE_INQUIRY_ENDPOINT || '',
+  turnstileSiteKey = import.meta.env.VITE_TURNSTILE_SITE_KEY || '',
   request = defaultRequest,
   clipboardWriter = defaultClipboardWriter
 }) {
   const submissionEndpoint = secureEndpoint(endpoint);
+  const verificationRequired = Boolean(submissionEndpoint && turnstileSiteKey)
+    || submissionEndpoint === 'https://fahint.com/api/inquiry';
+  const [turnstileToken, setTurnstileToken] = useState('');
+  const [verificationReset, setVerificationReset] = useState(0);
+  const requestIdentityRef = useRef(null);
   const [form, setForm] = useState({ ...EMPTY, model: defaultModel, category: defaultCategory });
   const items = form.category === 'USB Outlets' ? resolveUsbInquiryItems(inquiryItems) : [];
   const itemsKey = serializeUsbInquiryItems(items);
@@ -166,6 +100,10 @@ export default function InquiryForm({
   useEffect(() => {
     if (defaultCategory) setForm(current => ({ ...current, category: defaultCategory }));
   }, [defaultCategory]);
+
+  useEffect(() => {
+    if (turnstileToken) setStatus(current => current === 'verification-required' ? '' : current);
+  }, [turnstileToken]);
 
   useEffect(() => {
     modelVersionRef.current += 1;
@@ -257,6 +195,11 @@ export default function InquiryForm({
       return;
     }
 
+    if (verificationRequired && !turnstileToken) {
+      setStatus(turnstileSiteKey ? 'verification-required' : 'verification-unavailable');
+      return;
+    }
+
     const mailtoUrl = buildMailtoUrl(inquiry);
     if (!submissionEndpoint && mailtoUrl.length > MAX_MAILTO_URL_LENGTH) {
       setStatus('too-long');
@@ -274,10 +217,19 @@ export default function InquiryForm({
         const controller = new AbortController();
         requestControllerRef.current = controller;
         requestTimeout = window.setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
+        const values = normalizeInquiry(inquiry);
+        if (verificationRequired) {
+          const draft = JSON.stringify(values);
+          if (requestIdentityRef.current?.draft !== draft) {
+            requestIdentityRef.current = { draft, id: crypto.randomUUID() };
+          }
+          values.requestId = requestIdentityRef.current.id;
+          values.turnstileToken = turnstileToken;
+        }
         const response = await request(submissionEndpoint, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-          body: JSON.stringify(normalizeInquiry(inquiry)),
+          body: JSON.stringify(values),
           signal: controller.signal,
           credentials: 'omit',
           redirect: 'error'
@@ -294,6 +246,10 @@ export default function InquiryForm({
     } finally {
       window.clearTimeout(requestTimeout);
       requestControllerRef.current = null;
+      if (verificationRequired && mountedRef.current) {
+        setTurnstileToken('');
+        setVerificationReset(value => value + 1);
+      }
       const remainingLockMs = Math.max(0, MINIMUM_HANDOFF_LOCK_MS - (Date.now() - handoffStartedAt));
       if (remainingLockMs > 0 && mountedRef.current) {
         await new Promise((resolve) => {
@@ -336,6 +292,12 @@ export default function InquiryForm({
           We could not confirm delivery. Your details are still here. Retry or <a href={`mailto:${company.email}`}>email us directly</a>.
         </div>
       )}
+      {status === 'verification-required' && (
+        <div className="alert alert--error" role="alert">Please complete the verification before sending your inquiry.</div>
+      )}
+      {status === 'verification-unavailable' && (
+        <div className="alert alert--error" role="alert">Online inquiries are temporarily unavailable. Please <a href={`mailto:${company.email}`}>email us directly</a>.</div>
+      )}
       {status === 'failure' && (
         <div className="alert alert--error" role="alert">
           We could not open your email app. <a href={`mailto:${company.email}`}>Email us directly</a> or try again.
@@ -373,6 +335,7 @@ export default function InquiryForm({
           <input
             id={ids.name}
             name="name"
+            maxLength={120}
             autoComplete="name"
             required
             value={form.name}
@@ -391,6 +354,7 @@ export default function InquiryForm({
           <input
             id={ids.email}
             name="email"
+            maxLength={254}
             type="email"
             autoComplete="email"
             spellCheck={false}
@@ -414,6 +378,7 @@ export default function InquiryForm({
           <input
             id={ids.company}
             name="company"
+            maxLength={160}
             autoComplete="organization"
             value={form.company}
             onChange={update('company')}
@@ -425,6 +390,7 @@ export default function InquiryForm({
           <input
             id={ids.country}
             name="country"
+            maxLength={80}
             autoComplete="country-name"
             value={form.country}
             onChange={update('country')}
@@ -458,6 +424,7 @@ export default function InquiryForm({
           <input
             id={ids.quantity}
             name="quantity"
+            maxLength={64}
             value={form.quantity}
             onChange={update('quantity')}
             placeholder="e.g. 5,000 pcs"
@@ -486,6 +453,7 @@ export default function InquiryForm({
         <textarea
           id={ids.message}
           name="message"
+          maxLength={5000}
           required
           value={form.message}
           onChange={update('message')}
@@ -498,6 +466,10 @@ export default function InquiryForm({
           </p>
         )}
       </div>
+
+      {verificationRequired && turnstileSiteKey && <InquiryVerification
+        siteKey={turnstileSiteKey} onToken={setTurnstileToken} resetKey={verificationReset}
+      />}
 
       <button
         type="submit"

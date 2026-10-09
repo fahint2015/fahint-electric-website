@@ -8,9 +8,15 @@
 - `.env.production` 中的 `VITE_SITE_URL=https://fahint.com` 同时供浏览器构建和静态 SEO 生成使用；若在 Cloudflare 配置同名环境变量，值也应为 `https://fahint.com`。
 - 修改网站后推送到 `main`，由 Pages 自动构建部署。域名迁移时同步更新 `public/robots.txt`、`public/sitemap.xml` 和正式网址配置。
 
+## 询盘邮件配置
+
+`functions/api/inquiry.js` 提供 Cloudflare Pages 后台发信接口。使用 Resend 的 `notify.fahint.com` 发信子域和 Turnstile 人机验证，通知固定发到 `louis@fahint.com`，邮件回复地址为客户填写的邮箱。
+
+配置步骤、生产环境变量和收信验证见 [docs/inquiry-email.md](docs/inquiry-email.md)。发信域名及密钥配置完成后再同时启用 `VITE_INQUIRY_ENDPOINT` 和 `VITE_TURNSTILE_SITE_KEY`；未启用时网站沿用打开邮件软件的表单流程。
+
 以下章节保留原 GitHub Pages 部署方案作为迁移参考；当前正式网站使用上面的 Cloudflare Pages 配置。
 
-本站是**纯静态站点**（React + Vite 构建成 HTML/CSS/JS/图片），不需要任何服务器或数据库。
+下面的旧 GitHub Pages 方案仅发布静态页面；Cloudflare 正式站点另可运行上面的询盘 Function。
 
 ---
 

@@ -29,6 +29,8 @@ The active homepage poster is eager/high priority; inactive scenes and other `St
 
 Production is hosted by Cloudflare Pages at `https://fahint.com`. The `fahint-electric-website` Pages project builds pushes to `main` with `npm run build`, publishes `dist/`, and uses `SITE_BASE=/`. Both `fahint.com` and `www.fahint.com` are bound in Pages; the Cloudflare redirect rule sends WWW traffic to the root domain.
 
+The optional inquiry email backend is a Pages Function at `/api/inquiry`, using Resend and server-validated Turnstile. Enable it after verifying the sending subdomain and configuring the production bindings in [docs/inquiry-email.md](docs/inquiry-email.md). Without an endpoint, the form keeps its email-app handoff. Static pages bypass Functions via `public/_routes.json`.
+
 The GitHub Pages workflow in `.github/workflows/deploy.yml` remains available for a project-path deployment:
 
 ```text
