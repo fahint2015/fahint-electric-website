@@ -202,7 +202,7 @@ function Manufacturing() {
 }
 
 export default function HomeStudio() {
-  useStudioPageMeta('Wiring Devices & OEM/ODM Manufacturing', 'FAHINT develops and manufactures North American wiring devices, with seven product families and OEM/ODM support for brands, distributors and project buyers.');
+  useStudioPageMeta('Safer Power. Better Living.', 'FAHINT develops and manufactures North American wiring devices, with seven product families and OEM/ODM support for brands, distributors and project buyers.');
   return <div className="studio-page studio-home" data-home-version="studio">
     <RoomHero />
     <div className="studio-product-transition">

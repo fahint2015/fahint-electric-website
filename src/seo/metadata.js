@@ -3,7 +3,7 @@ const organization = { '@type': 'Organization', name: 'FAHINT', legalName: 'Wenz
 const homeImage = 'assets/images/hero/hero-interior.webp';
 export const staticMetadata = {
   '/': {
-    title: 'FAHINT | Wiring Devices & OEM/ODM Manufacturing',
+    title: 'FAHINT | Safer Power. Better Living.',
     description: 'Explore FAHINT wiring devices for North American markets. Compare seven product families, model documentation and OEM/ODM options for your brand.',
     image: homeImage, imageAlt: 'FAHINT wiring devices in an interior setting', organization: true,
   },
