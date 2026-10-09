@@ -1,6 +1,6 @@
 # FAHINT 询盘邮件：Cloudflare Pages + Resend
 
-客户提交现有表单，经 Turnstile 验证后，由 `/api/inquiry` 发送一封通知到 `louis@fahint.com`。点击邮件的回复按钮即可回复客户。多款 USB 产品的型号、数量、颜色和产品页一起进入通知正文。
+客户提交现有表单，经 Turnstile 验证后，由 `/api/inquiry` 先保存到 D1，再发送一封通知到 `louis@fahint.com`。点击邮件的回复按钮即可回复客户。多款 USB 产品的型号、数量、颜色和产品页一起进入通知正文。数据库创建、绑定、跟进和导出见 [D1 询盘记录](inquiry-d1.md)。
 
 ## 1. 验证发信子域
 
@@ -36,7 +36,9 @@ Workers & Pages → `fahint-electric-website` → Settings → Variables and Sec
 | `VITE_INQUIRY_ENDPOINT` | Text | `https://fahint.com/api/inquiry` |
 | `VITE_TURNSTILE_SITE_KEY` | Text | Turnstile Site key（公开值） |
 
-已有 `SITE_BASE=/` 和 `VITE_SITE_URL=https://fahint.com` 继续使用。上述配置完整后重新构建生产部署；前端公开变量会在构建时写入 JavaScript。仅保存变量不会更新已构建的页面。
+另外在 Production 添加 D1 数据库绑定 **`INQUIRY_DB`**，选择已建好表的 `fahint-inquiries`，见 [D1 配置步骤](inquiry-d1.md)。
+
+已有 `SITE_BASE=/` 和 `VITE_SITE_URL=https://fahint.com` 继续使用。上述配置和 D1 绑定完整后重新构建生产部署；前端公开变量会在构建时写入 JavaScript。仅保存变量不会更新已构建的页面。
 
 不要把生产发信密钥添加到 Preview 环境。本接口只接收 `https://fahint.com` 来源；未配置的预览站点继续使用邮件软件流程。
 
@@ -44,19 +46,19 @@ Workers & Pages → `fahint-electric-website` → Settings → Variables and Sec
 
 配置后的首页/联系页按钮应显示 Send inquiry。由网站负责人使用自己的邮箱提交一条标注为测试的询盘，完成以下确认：
 
-- 页面收到确认后显示成功提示；邮件服务接受前不会提示成功。
+- 页面收到确认后显示成功提示，D1 中存在完整询盘记录。
 - Resend Emails 中存在该通知，并显示投递结果。
 - `louis@fahint.com` 的收件箱（及垃圾邮件箱）中收到完整通知。
 - 回复地址为测试时填写的客户邮箱；多款产品的型号、数量和颜色完整。
-- 发送失败时保留草稿，可以重试、复制详情或直接发邮件。
+- 保存失败时保留草稿，可以重试、复制详情或直接发邮件；已保存但邮件通知失败的询盘在后台继续可见。
 
-API 返回 `{ "ok": true }` 代表 Resend 接受发送，实际投递还需以上收件箱检查。本站不自动向客户发回执，每条询盘发送一封通知；当前 Resend 免费额度为每月 3,000 封且每天最多 100 封：[官方套餐](https://resend.com/pricing)。
+API 返回 `{ "ok": true }` 代表 D1 已保存询盘。通知状态 `accepted` 代表 Resend 接受发送，实际投递还需以上收件箱检查。本站不自动向客户发回执，每条新增询盘尝试发送一封通知；当前 Resend 免费额度为每月 3,000 封且每天最多 100 封：[官方套餐](https://resend.com/pricing)。
 
 ## 实现与验证
 
 - `/api/inquiry` 使用服务器端密钥和固定收件人，验证来源、JSON 类型、请求大小、字段内容以及 Turnstile 的 hostname/action。
-- 每个草稿使用同一发送编号重试，Resend 的 Idempotency-Key 在 24 小时内防止网络故障重试产生重复邮件；修改草稿生成新编号。
-- 表单请求限制 12 秒，后台验证/发信请求分别限制 3 秒/7 秒。服务失败、额度不足或未配置时不返回成功。
+- 每个草稿使用同一发送编号重试，D1 去重不会重复保存或重新通知，Resend 的 Idempotency-Key 额外防止重复邮件；修改草稿生成新编号。
+- 表单请求限制 12 秒，后台验证/发信请求分别限制 3 秒/7 秒。保存成功后通知在后台完成；邮件服务失败、额度不足或发信未配置时，询盘仍然保存并标记通知失败。
 - `public/_routes.json` 仅把询盘接口交给 Functions，普通静态页面和资源直接返回。
 - 构建时由现有 Vite 预打包后台及产品数据，兼容 Cloudflare 使用的旧版 Functions 编译器；Pages 仍执行 `npm run build` 并发布 `dist`。
 - 单元检查使用模拟服务，不发送真实邮件：`npm test`。构建：`SITE_BASE=/ npm run build`（PowerShell：`$env:SITE_BASE='/'` 后执行 `npm run build`）。

@@ -29,7 +29,7 @@ The active homepage poster is eager/high priority; inactive scenes and other `St
 
 Production is hosted by Cloudflare Pages at `https://fahint.com`. The `fahint-electric-website` Pages project builds pushes to `main` with `npm run build`, publishes `dist/`, and uses `SITE_BASE=/`. Both `fahint.com` and `www.fahint.com` are bound in Pages; the Cloudflare redirect rule sends WWW traffic to the root domain.
 
-The optional inquiry email backend is a Pages Function at `/api/inquiry`, using Resend and server-validated Turnstile. Enable it after verifying the sending subdomain and configuring the production bindings in [docs/inquiry-email.md](docs/inquiry-email.md). Without an endpoint, the form keeps its email-app handoff. Static pages bypass Functions via `public/_routes.json`.
+The optional inquiry backend is a Pages Function at `/api/inquiry`, using D1 storage, Resend notifications and server-validated Turnstile. Enable it after verifying the sending subdomain and configuring the production bindings in [docs/inquiry-email.md](docs/inquiry-email.md). Private inquiry management and CSV export are documented in [docs/inquiry-d1.md](docs/inquiry-d1.md). Without an endpoint, the form keeps its email-app handoff. Static pages bypass Functions via `public/_routes.json`.
 
 The build also uses Vite to bundle `src/server/inquiry.js` into `output/functions/inquiry.mjs`. The Pages Function re-exports this module so Cloudflare's older Functions compiler can consume shared catalog data without parsing JSON import attributes.
 

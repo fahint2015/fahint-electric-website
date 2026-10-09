@@ -1,6 +1,7 @@
 import { company } from '../data/company.js';
 import { buildInquiryBody, normalizeInquiry, validateInquiry } from '../utils/inquiry.js';
 import { resolveUsbInquiryItems } from '../utils/inquiryList.js';
+import { recordNotification, saveInquiry } from './inquiry-store.js';
 
 const SITE_ORIGIN = 'https://fahint.com';
 const MAX_BODY_BYTES = 32_768;
@@ -67,12 +68,42 @@ async function fetchJson(url, options, timeoutMs) {
   } finally { clearTimeout(timeout); }
 }
 
-export async function onRequest({ request, env }) {
+async function notifyInquiry(env, requestId, values) {
+  let status = 'failed';
+  let emailId = '';
+  try {
+    if (env.RESEND_API_KEY && typeof env.INQUIRY_FROM === 'string'
+      && env.INQUIRY_FROM.trim() && !/[\r\n]/.test(env.INQUIRY_FROM)) {
+      const sent = await fetchJson('https://api.resend.com/emails', {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${env.RESEND_API_KEY}`, 'Content-Type': 'application/json',
+          'Idempotency-Key': `fahint-inquiry/${requestId}`
+        },
+        body: JSON.stringify({
+          from: env.INQUIRY_FROM, to: [company.email], reply_to: values.email,
+          subject: `FAHINT inquiry from ${values.company || values.name}`,
+          text: `${buildInquiryBody(values)}\n\nInquiry reference: ${requestId}`
+        })
+      }, 7_000);
+      // Accepted means Resend accepted the send request, not mailbox delivery.
+      if (sent.response.ok && typeof sent.data?.id === 'string' && sent.data.id) {
+        status = 'accepted';
+        emailId = sent.data.id;
+      }
+    }
+  } catch { /* The stored inquiry remains available when notification fails. */ }
+
+  try { await recordNotification(env.INQUIRY_DB, requestId, status, emailId); }
+  catch { console.error('Inquiry notification status could not be saved', requestId); }
+}
+
+export async function onRequest(context) {
+  const { request, env } = context;
   if (request.method !== 'POST') return json(405);
   if (request.headers.get('Origin') !== SITE_ORIGIN) return json(403);
   if (request.headers.get('Content-Type')?.split(';')[0].trim().toLowerCase() !== 'application/json') return json(415);
-  if (!env.RESEND_API_KEY || !env.TURNSTILE_SECRET_KEY || typeof env.INQUIRY_FROM !== 'string'
-    || !env.INQUIRY_FROM.trim() || /[\r\n]/.test(env.INQUIRY_FROM)) return json(503);
+  if (!env.TURNSTILE_SECRET_KEY || typeof env.INQUIRY_DB?.prepare !== 'function') return json(503);
 
   const payload = await readPayload(request);
   if (payload instanceof Response) return payload;
@@ -88,23 +119,19 @@ export async function onRequest({ request, env }) {
     if (!verification.response.ok) return json(502);
     if (verification.data?.success !== true || verification.data.hostname !== 'fahint.com'
       || verification.data.action !== 'inquiry') return json(403);
-
-    const values = normalizeInquiry(payload);
-    const sent = await fetchJson('https://api.resend.com/emails', {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${env.RESEND_API_KEY}`, 'Content-Type': 'application/json',
-        'Idempotency-Key': `fahint-inquiry/${payload.requestId}`
-      },
-      body: JSON.stringify({
-        from: env.INQUIRY_FROM, to: [company.email], reply_to: values.email,
-        subject: `FAHINT inquiry from ${values.company || values.name}`,
-        text: buildInquiryBody(values)
-      })
-    }, 7_000);
-    if (sent.response.status === 429) return json(429);
-    if (!sent.response.ok || typeof sent.data?.id !== 'string' || !sent.data.id) return json(502);
-    // This confirms provider acceptance; mailbox delivery is checked separately.
-    return json(200);
   } catch { return json(502); }
+
+  const values = normalizeInquiry(payload);
+  const requestId = payload.requestId.toLowerCase();
+  let saved;
+  try { saved = await saveInquiry(env.INQUIRY_DB, requestId, values); }
+  catch { return json(503); }
+  if (saved.conflict) return json(409);
+  if (saved.inserted) {
+    const notification = notifyInquiry(env, requestId, values);
+    if (typeof context.waitUntil === 'function') context.waitUntil(notification);
+    else await notification;
+  }
+  // Receipt is confirmed by durable storage, independently of email delivery.
+  return json(200);
 }

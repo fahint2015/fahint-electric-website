@@ -1,0 +1,10 @@
+# Administrative D1 commands only; Pages bindings remain managed in the dashboard.
+name = "fahint-inquiry-admin"
+compatibility_date = "2025-03-01"
+account_id = "4ff9af0792e40735ef17aabe6cd8a230"
+
+[[d1_databases]]
+binding = "INQUIRY_DB"
+database_name = "fahint-inquiries"
+database_id = "d52c47c0-17d1-4d6f-90ce-6f32b3abdc66"
+migrations_dir = "../migrations"
