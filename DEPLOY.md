@@ -1,4 +1,14 @@
-# 部署指南 — GitHub Pages + Cloudflare
+# 部署指南 — Cloudflare Pages
+
+## 当前正式部署
+
+- GitHub 仓库：`fahint2015/fahint-electric-website`，生产分支为 `main`。
+- Cloudflare Pages 项目：`fahint-electric-website`，构建命令 `npm run build`，输出目录 `dist`，环境变量 `SITE_BASE=/`。
+- 主网址：`https://fahint.com`；`www.fahint.com` 已绑定同一 Pages 项目，并通过 Cloudflare 301 规则跳转到根域。
+- `.env.production` 中的 `VITE_SITE_URL=https://fahint.com` 同时供浏览器构建和静态 SEO 生成使用；若在 Cloudflare 配置同名环境变量，值也应为 `https://fahint.com`。
+- 修改网站后推送到 `main`，由 Pages 自动构建部署。域名迁移时同步更新 `public/robots.txt`、`public/sitemap.xml` 和正式网址配置。
+
+以下章节保留原 GitHub Pages 部署方案作为迁移参考；当前正式网站使用上面的 Cloudflare Pages 配置。
 
 本站是**纯静态站点**（React + Vite 构建成 HTML/CSS/JS/图片），不需要任何服务器或数据库。
 

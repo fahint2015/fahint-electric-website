@@ -27,9 +27,9 @@ The active homepage poster is eager/high priority; inactive scenes and other `St
 
 ## Deployment
 
-Every push to the `main` branch is built and deployed automatically by the GitHub Pages workflow in `.github/workflows/deploy.yml`.
+Production is hosted by Cloudflare Pages at `https://fahint.com`. The `fahint-electric-website` Pages project builds pushes to `main` with `npm run build`, publishes `dist/`, and uses `SITE_BASE=/`. Both `fahint.com` and `www.fahint.com` are bound in Pages; the Cloudflare redirect rule sends WWW traffic to the root domain.
 
-The workflow is preconfigured for this GitHub project path:
+The GitHub Pages workflow in `.github/workflows/deploy.yml` remains available for a project-path deployment:
 
 ```text
 /fahint-electric-website/
@@ -43,9 +43,9 @@ For a custom domain, add a repository variable named `SITE_BASE` with the value 
 
 Matching static pages are hydrated; URL filters, comparison selections and inquiry lists use client rendering so the initial state matches the URL. A shared stylesheet keeps generated pages styled before route JavaScript loads. Interactive filters, galleries and forms still require JavaScript. Inquiry submission stays disabled until the form is interactive, preventing a native GET submission of customer details when JavaScript is unavailable; direct email and WhatsApp links remain available.
 
-Canonical URLs are intentionally omitted until the production address is confirmed. To enable them later, provide **`VITE_SITE_URL`** to `npm run build` (which includes Pages preparation). Use the complete site base, including the repository path for project Pages (for example, `https://example.github.io/project/`), or the approved custom-domain root. Setting a GitHub repository variable alone is not enough: it must also be exposed to the workflow's build-job environment.
+The approved production address is `https://fahint.com`. The public `.env.production` file sets **`VITE_SITE_URL`** for production builds; Vite and the Pages preparation command both load it, so canonical URLs, share images and structured data use the same root domain before and after hydration. Provider environment variables can override this value; keep any production override set to `https://fahint.com`. Development builds without a configured site URL omit canonical links.
 
-Without `VITE_SITE_URL`, share-image URLs and structured-data URLs use the actual deployment address inferred from `CUSTOM_DOMAIN`, `GITHUB_REPOSITORY` and `SITE_BASE`. Confirm the sitemap and robots domain at the same time as any domain migration; these files are not rewritten by the metadata step. Product metadata deliberately omits unverified prices, stock, reviews and ratings, and does not promise rich-result eligibility.
+For a different deployment, override `VITE_SITE_URL` with the complete approved site base, including the repository path for project Pages (for example, `https://example.github.io/project/`). Confirm the sitemap and robots domain at the same time as any domain migration; these files are not rewritten by the metadata step. Product metadata deliberately omits unverified prices, stock, reviews and ratings, and does not promise rich-result eligibility.
 
 To inspect the prepared route HTML locally after a root-base build:
 

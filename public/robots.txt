@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.fahint.com/sitemap.xml
+Sitemap: https://fahint.com/sitemap.xml

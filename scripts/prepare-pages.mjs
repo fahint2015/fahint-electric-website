@@ -176,10 +176,13 @@ const isDirectRun = process.argv[1]
   && import.meta.url === pathToFileURL(resolve(process.argv[1])).href;
 
 if (isDirectRun) {
+  const { loadEnv } = await import('vite');
   const expectedBase = process.env.SITE_BASE || '/';
+  const { VITE_SITE_URL: siteUrl } = loadEnv('production', process.cwd(), 'VITE_');
   import('./build-page-renderer.mjs')
     .then(async ({ buildPageRenderer }) => preparePages({
       expectedBase,
+      siteUrl,
       clientManifest: JSON.parse(await readFile('dist/.vite/manifest.json', 'utf8')),
       renderPage: await buildPageRenderer(expectedBase)
     }))

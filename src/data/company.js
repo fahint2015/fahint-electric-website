@@ -7,7 +7,7 @@ export const company = {
   email: 'louis@fahint.com',
   phone: '+86 188 5734 9189',
   whatsapp: '+8618857349189',
-  website: 'www.fahint.com',
+  website: 'fahint.com',
   location: 'Wenzhou, Zhejiang Province, China',
   address: 'Wenzhou, Zhejiang Province, China — 25 minutes from Wenzhou International Airport',
   ulFile: 'E504391',
