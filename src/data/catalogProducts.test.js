@@ -28,7 +28,8 @@ describe('complete, model-specific catalogue', () => {
   it('uses real, complete local images with dimensions and traceable sources', () => {
     for (const p of catalogProducts) {
       expect(p.name, p.sku).not.toMatch(/undefined|NaN|\bnull\b/);
-      expect(p.sources.length, p.sku).toBeGreaterThan(0);
+      expect(Boolean(p.sourceUrl) || p.sources.length > 0, p.sku).toBe(true);
+      expect(p.sources.some(source => source.kind === 'website'), p.sku).toBe(false);
       expect(p.specificationGroups.length, p.sku).toBeGreaterThan(1);
       expect(p.assets.gallery, p.sku).toContain(p.assets.hero);
       const assets = [...p.assets.gallery, ...p.assets.drawings.map((image) => image.src), ...p.assets.presentation.map((image) => image.src)];

@@ -94,6 +94,7 @@ describe('GitHub Pages deployment', () => {
   it('ships a sitemap for every published route without preview or draft pages', async () => {
     const { PUBLIC_ROUTES } = await loadPreparePages();
     const sitemap = await readFile('public/sitemap.xml', 'utf8');
+    for (const [, url] of sitemap.matchAll(/<loc>(.*?)<\/loc>/g)) expect(url.endsWith('/'), url).toBe(true);
     const paths = [...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map(match => new URL(match[1]).pathname.replace(/^\/|\/$/g, ''));
     expect(new Set(paths)).toEqual(new Set(['', ...PUBLIC_ROUTES]));
     expect(sitemap).not.toMatch(/home-studio|home-next|products-studio|flb20/);

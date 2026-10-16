@@ -1,5 +1,5 @@
 {
   "version": 1,
-  "include": ["/api/inquiry", "/api/inquiry/"],
+  "include": ["/", "/static/index.php*", "/yineng/index.php*", "/api.php*", "/core/code.php*", "/api/inquiry", "/api/inquiry/"],
   "exclude": []
 }

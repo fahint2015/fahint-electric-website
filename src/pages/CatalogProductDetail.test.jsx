@@ -94,8 +94,8 @@ describe('catalogue product details', () => {
     expect(specs).not.toHaveTextContent(/Trip level|4–6 mA|UL 943/);
     expect(screen.getByRole('link', { name: 'Technical details' })).toHaveAttribute('href', '/products/usb-outlets/ftr15-3100#technical-details');
     expect(screen.getByRole('heading', { name: 'Request a quotation for FTR15-3100.' })).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: /View original model specifications/i }))
-      .toHaveAttribute('href', 'https://www.fahint.com/?pro3/175.html');
+    expect(screen.queryByRole('link', { name: /View original model specifications/i })).not.toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /Request model-specific documents/i })).toBeInTheDocument();
     expect(container.querySelectorAll('img:not([width]), img:not([height])')).toHaveLength(0);
   });
 

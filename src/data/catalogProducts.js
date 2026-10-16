@@ -394,8 +394,7 @@ function legacyProduct(record) {
   if (/^GTN(?:15|20)$/.test(record.model)) features.push('Nylon front cover, body and buttons', 'PCB designed for vibration and high-frequency interference resistance');
   return {
     ...description, line: record.family, sourceModel: record.model, sourceUrl: record.sourceUrl,
-    sources: [...(record.sourceUrl ? [{ label: 'Original model specifications', href: record.sourceUrl, kind: 'website' }] : []),
-      ...[...new Set(referencePages)].map((page) => ({ label: `Product catalogue · page ${page}`, href: `${catalogueDocument}#page=${page}`, kind: 'catalogue' }))],
+    sources: [...new Set(referencePages)].map((page) => ({ label: `Product catalogue · page ${page}`, href: `${catalogueDocument}#page=${page}`, kind: 'catalogue' })),
     ...familyStories[record.family],
     specificationGroups: makeGroups([['Model', description.sku], ...rows], materialRows, record.family),
     specificationSummary: description.keyFacts,
