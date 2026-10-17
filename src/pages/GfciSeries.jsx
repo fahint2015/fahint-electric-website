@@ -72,7 +72,7 @@ export default function GfciSeries() {
       <section className="gfci-series__catalog section" aria-labelledby="gfci-models-heading">
         <div className="container">
           <div className="gfci-series__catalog-head">
-            <h2 id="gfci-models-heading">Explore GFCI models</h2>
+            <div><h2 id="gfci-models-heading">Explore GFCI models</h2><p className="gfci-series__catalog-intro">Compare 15A and 20A self-test GFCI outlets for your range. GF15/GF20 are standard models, GT15/GT20 add tamper resistance, and GW15/GW20 combine tamper and weather resistance. Review the blank-face GL20 separately and confirm the documents for each model.</p></div>
             <div><p>{products.length} published models</p><Link className="textlink" to="/products/gfci#buying-guide">Need help choosing?</Link></div>
           </div>
           <div className="prod-grid gfci-series__product-grid gfci-product-grid">

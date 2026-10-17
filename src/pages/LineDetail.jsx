@@ -79,6 +79,10 @@ function ModelCatalogue({ line }) {
     </section>
     <section className="catalog-series__models" aria-label={`${line.name} models`}>
       <div className="container">
+        {isUsb && <header className="catalog-section-heading">
+          <div><h2>Compare USB wall outlets</h2><p>Choose USB-A, USB-A + USB-C or dual USB-C ports for your product range. Compare conventional 5V charging with 20W, 36W and 65W Power Delivery models, then check the separate AC receptacle rating and single-port output.</p></div>
+          <Link className="textlink" to="/blog/usb-wall-outlet-buying-guide">Compare ports and charging power <ArrowRight size={16} aria-hidden="true" /></Link>
+        </header>}
         <div className={`catalog-filters${isUsb ? ' catalog-filters--usb' : ''}`}>
           <label className="catalog-filters__search"><span>Search models</span><div><Search size={18} aria-hidden="true" />
             <input type="search" value={query} onChange={(event) => isUsb ? updateUsbFilter('q', event.target.value) : setLocalQuery(event.target.value)} placeholder="Model number or feature" aria-describedby={aliasMatch ? 'catalog-alias-note' : undefined} />

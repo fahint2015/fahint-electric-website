@@ -3,19 +3,20 @@ import { findModelCertificate } from './certificates.js';
 // Purchasing guidance based on the published model data, not installation instructions.
 export const buyingGuides = {
   gfci: {
-    intro: 'Start with the device configuration, then check the documentation for the exact model you plan to order.',
+    intro: 'Build your GFCI outlet shortlist around ratings, tamper resistance and weather resistance. Then check the documents and order requirements for each model.',
     questions: [
       { q: 'How do I compare standard, TR / WR and blank-face models?', a: 'GF15/GF20 are the standard-face models; GT15/GT20 add tamper resistance; GW15/GW20 combine tamper and weather resistance. GL20 is a blank-face device, not a plug-in receptacle. Use the comparison table to shortlist the rating and configuration, then have a qualified professional confirm suitability for the project.' },
       { q: 'Does the same certificate cover every GFCI model?', a: 'No. The August 16, 2022 E504391-20210212 addendum names GF15, GF20, GT15, GT20, GW15 and GW20, plus GTN15 and GTN20 as tamper-resistant models with no feed-through. GL20 documentation remains under review. Confirm current listing status and coverage for the ordered configuration.' },
       { q: 'What should I confirm with the sample?', a: 'Record the complete model number, face rating, finish, wallplate and required markings. Compare the sample with the relevant specifications and documents. Confirm packaging and any authorized private-label artwork before approving an order.' },
+      { q: 'What should I include in a bulk GFCI outlet inquiry?', a: 'Send the full model numbers, quantities by finish, destination market and required documents. Specify the wallplate and packaging format, any authorized brand artwork, sample needs and requested delivery date. FAHINT confirms minimum quantities, customization and lead times for the actual order.' },
     ],
     resource: { label: 'Read the GFCI sourcing checklist', to: '/blog/how-to-source-ul-listed-gfci-from-china' },
     modelCheck: 'Confirm the face rating, TR / WR or blank-face configuration, and required model documents.',
   },
   'usb-outlets': {
-    intro: 'Compare the charging ports, input rating and any AC receptacle separately. The highest wattage is not the only selection criterion.',
+    intro: 'Choose USB wall outlets for the devices and cables your customers use. Compare port mix, charging profiles and AC receptacle rating as separate requirements.',
     questions: [
-      { q: 'Should I choose a USB-A, USB-C or Power Delivery outlet?', a: 'List the devices and cables your customers use, then compare the port arrangement and published output profiles. The catalogue includes USB-A, USB-C and PD configurations, including 65W GaN models. A USB-C connector alone does not establish a particular PD output.' },
+      { q: 'Should I choose a USB-A, USB-C or Power Delivery outlet?', a: 'Use the port arrangement and published profiles to narrow the range. FTR15C-3100 combines USB-A and USB-C with 3.1A at 5V shared output; it is non-PD. FTR15QC-DC20W, DC36W and DC65W offer dual USB-C Power Delivery with different single-port limits. A USB-C connector alone does not establish a particular PD output.' },
       { q: 'How should I compare total output and power sharing?', a: 'Check combined USB output, single-port limits and the behaviour with multiple ports in use. Do not add individual maximum ratings together. Charging output depends on the connected device, cable and negotiated profile; confirm simultaneous-port power sharing for the selected model.' },
       { q: 'What belongs in a USB outlet quotation request?', a: 'Send the complete model, input rating, any AC receptacle rating, required port mix, target charging profile and quantity. Include finish, wallplate, destination and packaging requirements. Review the model documentation and approve the requested configuration with a sample.' },
     ],

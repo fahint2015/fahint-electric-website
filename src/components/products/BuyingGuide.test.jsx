@@ -27,7 +27,7 @@ describe('Purchasing information', () => {
     openPage(`/products/${line}`);
     const guide = screen.getByRole('region', { name: /Buying guide:/ });
     expect(guide.textContent.toLowerCase()).toContain(topic.toLowerCase());
-    expect(within(guide).getAllByRole('button')).toHaveLength(3);
+    expect(within(guide).getAllByRole('button')).toHaveLength(line === 'gfci' ? 4 : 3);
     expect(within(guide).getByRole('link', { name: /Discuss your selection/ })).toHaveAttribute('href', '/contact?topic=technical');
   });
 

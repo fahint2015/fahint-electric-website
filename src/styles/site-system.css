@@ -133,6 +133,7 @@
 .catalog-series :is(h1,h2,h3) { color: var(--site-ink); }
 .gfci-series__catalog-head { margin-bottom: 36px; }
 .gfci-series__catalog-head > p { color: var(--site-muted); font-size: 16px; white-space: nowrap; }
+.gfci-series__catalog-intro { max-width:75ch; margin-top:16px; color:var(--site-muted); font-size:16px; line-height:1.65; white-space:normal; }
 .catalog-series .catalog-section-heading { gap: clamp(32px, 6vw, 96px); }
 .catalog-series .catalog-section-heading > p { max-width: 48ch; font-size: 18px; line-height: 1.65; color: var(--site-muted); }
 .catalog-series__intro { padding-block: 22px 56px; }

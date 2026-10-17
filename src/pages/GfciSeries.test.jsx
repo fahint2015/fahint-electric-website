@@ -16,7 +16,7 @@ function renderSeries() {
 describe('GfciSeries', () => {
   it('sets a category-specific page title', () => {
     renderSeries();
-    expect(document.title).toBe('GFCI Outlets · Models & Specifications | FAHINT');
+    expect(document.title).toBe('GFCI Outlet Manufacturer | 15A & 20A Models | FAHINT');
   });
   it('shows complete poster artwork above the copy on phones', () => {
     const styles = readFileSync('src/styles/product-experience.css', 'utf8');

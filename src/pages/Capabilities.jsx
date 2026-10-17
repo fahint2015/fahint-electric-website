@@ -28,9 +28,9 @@ const factoryStages = [
 ];
 
 const oemOptions = [
-  ['Products & finishes', 'Select device families, electrical ratings, available colors and matching wall plates. Confirm combinations with actual samples.'],
+  ['Products & finishes', 'Build your range from GFCI outlets, USB charging outlets, receptacles, switches, dimmers and wallplates. Confirm electrical ratings, available finishes and combinations with actual samples.'],
   ['Branding & identification', 'Review authorized logos, product markings and artwork placement together with model-specific identification requirements.'],
-  ['Packaging & instructions', 'Coordinate retail or neutral packaging, carton information and product literature around your distribution needs.'],
+  ['Packaging & instructions', 'Review OEM packaging for each wiring-device model: retail or neutral packs, carton information, instructions and authorized artwork. Confirm the agreed pack format with the sample.'],
   ['Product development', 'Share requirements beyond the existing range so our team can assess technical feasibility, tooling and verification needs.'],
 ];
 
@@ -43,7 +43,7 @@ export default function Capabilities() {
         <div className="cap-hero__layout">
           <div className="cap-hero__copy">
             <h1>Your product.<br /><span>Our production.</span></h1>
-            <p>From component assembly to product testing. Wiring-device manufacturing and OEM / ODM support, from our team in Wenzhou.</p>
+            <p>Wiring-device manufacturing and OEM / ODM support for brands and distributors. Review product selection, assembly, testing and private-label packaging with our Wenzhou team.</p>
             <CompanyLink to="/contact?topic=oem" light>Discuss your OEM / ODM project</CompanyLink>
           </div>
           <figure className="cap-hero__photo">
@@ -83,12 +83,13 @@ export default function Capabilities() {
       <div className="cap-wrap cap-oem__layout">
         <div>
           <div className="cap-intro">
-            <h2 id="oem-title">Your range.<br />Down to the details.</h2>
-            <p>Start with FAHINT product platforms. Then discuss the product, finish and presentation your market needs. Availability and customization are confirmed per model.</p>
+            <h2 id="oem-title">OEM wiring devices.<br />Built around your range.</h2>
+            <p>Start with FAHINT product platforms for your brand or distribution range. Discuss the models, finishes, markings and packaging your market needs. Availability and customization are confirmed per model.</p>
           </div>
           <div className="cap-oem__options">
             {oemOptions.map(([title, description]) => <div key={title}><h3>{title}</h3><p>{description}</p></div>)}
           </div>
+          <p><Link to="/products/gfci">Compare GFCI outlet models</Link> or <Link to="/products/usb-outlets">explore USB wall outlets</Link> to prepare your shortlist.</p>
           <CompanyLink to="/contact?topic=oem" secondary>Send your requirements</CompanyLink>
         </div>
         <figure className="cap-oem__photo">

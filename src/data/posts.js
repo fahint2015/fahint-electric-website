@@ -275,10 +275,10 @@ export const posts = [
   {
     "slug": "how-to-source-ul-listed-gfci-from-china",
     "title": "Sourcing GFCI Outlets: A Model-by-Model Review",
-    "excerpt": "Match the GFCI model on your quote with its certification record and approved sample. Check the configuration, packaging and order terms.",
+    "excerpt": "Choose a GFCI outlet manufacturer with a model-specific checklist. Compare 15A/20A, TR/WR, certification documents and OEM details for your bulk order.",
     "date": "2026-07-22",
-    "updated": "2026-08-31",
-    "readMinutes": 4,
+    "updated": "2026-10-17",
+    "readMinutes": 5,
     "category": "Sourcing",
     "cover": "assets/images/editorial-home/factory-optimized.webp",
     "coverAlt": "GFCI functional test stations on the FAHINT production floor",
@@ -292,12 +292,41 @@ export const posts = [
       {
         "label": "FAHINT — Original certificate library",
         "href": "/about#certifications"
+      },
+      {
+        "label": "FAHINT — GFCI outlet models and specifications",
+        "href": "/products/gfci"
       }
     ],
     "body": [
       {
         "type": "p",
-        "text": "Keep the quoted GFCI model, certification documents and approved sample together through the order review. A certificate image or factory photograph alone is not enough to approve the purchase."
+        "text": "When choosing a GFCI outlet manufacturer for a private-label range or bulk order, start with the configurations your buyers need. Keep the quoted model, certification documents and approved sample together through the order review. A certificate image or factory photograph alone is not enough to approve the purchase."
+      },
+      {
+        "type": "h2",
+        "text": "Build a 15A and 20A GFCI model shortlist"
+      },
+      {
+        "type": "p",
+        "text": "Separate the receptacle rating from the required protection features. FAHINT's standard, tamper-resistant and tamper- plus weather-resistant receptacles have distinct model numbers. Use the following pairs to start a shortlist, then review the full specifications for your intended market and application."
+      },
+      {
+        "type": "table",
+        "caption": "FAHINT GFCI receptacle sourcing shortlist",
+        "columns": ["Configuration", "15A model", "20A model"],
+        "rows": [
+          ["Standard", { "label": "GF15", "href": "/products/gfci/gf15" }, { "label": "GF20", "href": "/products/gfci/gf20" }],
+          ["Tamper-resistant (TR)", { "label": "GT15", "href": "/products/gfci/gt15" }, { "label": "GT20", "href": "/products/gfci/gt20" }],
+          ["Tamper- and weather-resistant (TR/WR)", { "label": "GW15", "href": "/products/gfci/gw15" }, { "label": "GW20", "href": "/products/gfci/gw20" }]
+        ]
+      },
+      {
+        "type": "p",
+        "text": "GL20 is a blank-face device without plug-in receptacle openings, and its certification documentation remains under review. Industrial GTN models have a different construction and no feed-through terminals. Review those configurations separately from the receptacle pairs above.",
+        "links": [
+          { "label": "Compare the complete GFCI outlet range", "href": "/products/gfci" }
+        ]
       },
       {
         "type": "h2",
@@ -310,11 +339,14 @@ export const posts = [
       },
       {
         "type": "p",
-        "text": "FAHINT’s document library holds original product-family certificates. File E504391 relates to the listed GFCI models, not every product in the FAHINT range. Read the addendum and confirm current coverage for your model before ordering."
+        "text": "FAHINT's library includes the August 16, 2022 addendum to E504391-20210212. It names GF15, GF20, GT15, GT20, GW15 and GW20, with GTN15 and GTN20 identified as tamper-resistant models with no feed-through. GL20 is not part of this documented shortlist. Use the original file as a reference and confirm current listing status for the ordered configuration.",
+        "links": [
+          { "label": "Review GFCI product-family documents", "href": "/resources?family=gfci" }
+        ]
       },
       {
         "type": "h2",
-        "text": "Does the sample match the quotation?"
+        "text": "Review OEM packaging and sample approval"
       },
       {
         "type": "p",
@@ -323,6 +355,16 @@ export const posts = [
       {
         "type": "p",
         "text": "Check the sample’s appearance alongside its packaging, required identification and authorized brand artwork. Leave electrical performance evaluation to qualified personnel using the appropriate procedures and equipment."
+      },
+      {
+        "type": "list",
+        "label": "GFCI OEM sample approval checklist",
+        "items": [
+          "Match the full model designation and electrical ratings across the quotation, device and product documents.",
+          "Check the ordered finish and wallplate together against the approved sample.",
+          "Review authorized brand artwork, required identification, instructions and retail or neutral packaging.",
+          "Record the approved sample and artwork revision so production and inspection use the same reference."
+        ]
       },
       {
         "type": "h2",
@@ -339,6 +381,29 @@ export const posts = [
       {
         "type": "p",
         "text": "Agree on order quantities, sample arrangements, production timing, delivery terms and warranty terms for the actual model and order. Availability and lead times can vary between configurations, so a statement about one model should not be applied to the whole range."
+      },
+      {
+        "type": "h2",
+        "text": "What to include in a bulk GFCI outlet inquiry"
+      },
+      {
+        "type": "list",
+        "label": "Bulk GFCI outlet inquiry checklist",
+        "items": [
+          "Full model numbers, receptacle ratings and required TR or WR features.",
+          "Quantities split by model, device finish, wallplate and pack format.",
+          "Destination market, intended application and required model documents.",
+          "Authorized brand artwork and any labeling or instruction requirements.",
+          "Sample quantities, agreed inspection requirements and requested delivery timing."
+        ]
+      },
+      {
+        "type": "p",
+        "text": "Send the shortlist even if some details are undecided, and identify the questions to resolve. FAHINT reviews the selected models, packaging and document requirements before confirming sample arrangements, minimum quantities and lead times in the quotation.",
+        "links": [
+          { "label": "Explore OEM manufacturing and packaging", "href": "/capabilities#oem" },
+          { "label": "Send your GFCI sourcing brief", "href": "/contact?topic=oem" }
+        ]
       }
     ]
   },

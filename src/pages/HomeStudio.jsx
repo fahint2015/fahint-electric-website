@@ -132,7 +132,7 @@ function BrandIntroduction() {
         <h2 id="studio-brand-title">Everyday power.<br /><span>Made by FAHINT.</span></h2>
         <div className="studio-company-summary">
           <h3>{company.name}</h3>
-          <p>Based in Wenzhou, China, we develop and manufacture wiring devices for the North American market, bringing product development, manufacturing and quality control together.</p>
+          <p>FAHINT is a wiring device manufacturer in Wenzhou, China. We make GFCI outlets, USB wall outlets, receptacles, switches and dimmers for North American brands and distributors, with support for model selection and OEM / ODM projects.</p>
         </div>
         <div className="studio-brand-details">
           <dl className="studio-brand-paths">
@@ -154,7 +154,7 @@ function PrivateLabel() {
     <div className="studio-wrap">
       <Reveal as="header" className="studio-section-head studio-section-head--oem">
         <h2 id="studio-oem-title">Your product range.<br /><span>Our manufacturing.</span></h2>
-        <div><p>Choose the products, finishes and packaging for your market. We coordinate the details from your first brief to the approved order.</p></div>
+        <div><p>Build an OEM or private-label wiring-device range around your market. Choose the models, finishes, authorized artwork and packaging, then confirm product documents and samples before approving the order.</p></div>
       </Reveal>
       <div className="studio-program">
         <figure className="studio-program__image">

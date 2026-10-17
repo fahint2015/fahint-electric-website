@@ -2,10 +2,10 @@
 export const usbBuyingGuide = {
   "slug": "usb-wall-outlet-buying-guide",
   "title": "USB Wall Outlet Buying Guide: Ports, PD and Power",
-  "excerpt": "Choose USB wall outlets by port type, PD profile and shared output. Compare seven FAHINT models and the details to include in a quotation request.",
+  "excerpt": "Compare USB-A and USB-C wall outlets, 20W/36W/65W PD profiles and shared-output limits. Build a FAHINT model shortlist for your project or OEM inquiry.",
   "date": "2026-10-04",
-  "updated": "2026-10-04",
-  "readMinutes": 6,
+  "updated": "2026-10-17",
+  "readMinutes": 7,
   "category": "Buying Guide",
   "cover": "assets/images/editorial-home/product-usb-optimized.webp",
   "coverAlt": "USB charging outlet beside a laptop on a desk in an illustrated interior",
@@ -206,6 +206,43 @@ export const usbBuyingGuide = {
       "text": "*Each PD figure is the published maximum for one port. Do not add the two port ratings together. Ask for the output available with both ports in use before specifying two-device charging."
     },
     {
+      "type": "h2",
+      "text": "20W, 36W or 65W: which USB-C wall outlet should you choose?"
+    },
+    {
+      "type": "p",
+      "text": "Start with the voltage and current required by the intended devices. The three 15A dual USB-C models below offer different Power Delivery profiles. Use these published single-port figures to narrow the shortlist, then confirm the device, cable and simultaneous-port requirements."
+    },
+    {
+      "type": "table",
+      "caption": "Published single-port USB-C PD profiles",
+      "columns": ["FAHINT model", "Single-port maximum", "Published voltage / current profiles"],
+      "rows": [
+        [
+          { "label": "FTR15QC-DC20W", "href": "/products/usb-outlets/ftr15qc-dc20w" },
+          "Up to 20W",
+          "5V / 3A · 9V / 2.22A · 12V / 1.67A"
+        ],
+        [
+          { "label": "FTR15QC-DC36W", "href": "/products/usb-outlets/ftr15qc-dc36w" },
+          "Up to 36W",
+          "5V / 3A · 9V / 3A · 12V / 3A · 15V / 2.4A · 20V / 1.8A"
+        ],
+        [
+          { "label": "FTR15QC-DC65W", "href": "/products/usb-outlets/ftr15qc-dc65w" },
+          "Up to 65W",
+          "5V / 3A · 9V / 3A · 12V / 3A · 15V / 3A · 20V / 3.25A"
+        ]
+      ]
+    },
+    {
+      "type": "p",
+      "text": "For laptop use, match an available voltage/current pair with the laptop manufacturer's requirements and the cable rating. These are published outlet profiles, not device-compatibility test results. Confirm the charging performance of the intended combination during sample review.",
+      "links": [
+        { "label": "Compare the 20W, 36W and 65W models", "href": "/products/usb-outlets?compare=FTR15QC-DC20W,FTR15QC-DC36W,FTR15QC-DC65W" }
+      ]
+    },
+    {
       "type": "p",
       "text": "You can filter the USB range by ports, AC rating and charging output, then compare two or three models side by side. Add your choices to the inquiry list with quantities and finishes.",
       "links": [
@@ -266,7 +303,11 @@ export const usbBuyingGuide = {
     },
     {
       "type": "p",
-      "text": "We confirm sample arrangements, minimum quantities, customization options and lead times in the quotation. Keep the agreed model documents and approved sample with the order so the charging requirements, finish and pack details remain clear."
+      "text": "We confirm sample arrangements, minimum quantities, customization options and lead times in the quotation. Keep the agreed model documents and approved sample with the order so the charging requirements, finish and pack details remain clear.",
+      "links": [
+        { "label": "Review OEM wiring-device options", "href": "/capabilities#oem" },
+        { "label": "Send your USB outlet sourcing brief", "href": "/contact?topic=oem" }
+      ]
     }
   ]
 };

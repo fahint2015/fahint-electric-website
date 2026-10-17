@@ -604,7 +604,7 @@ describe('studio homepage and catalog', () => {
     show(HomeStudio);
     const section = screen.getByRole('region', { name: 'Everyday power. Made by FAHINT.' });
     expect(within(section).getByRole('heading', { name: company.name })).toBeInTheDocument();
-    expect(within(section).getByText(/Based in Wenzhou, China/)).toHaveTextContent('North American market');
+    expect(within(section).getByText(/wiring device manufacturer in Wenzhou, China/)).toHaveTextContent('North American brands and distributors');
     expect(within(section).getByText('FAHINT products')).toBeInTheDocument();
     expect(within(section).getByText('Your brand, our manufacturing')).toBeInTheDocument();
     const companyPhoto = within(section).getByRole('img', { name: 'FAHINT product display wall in the sample showroom, with corrected perspective' });

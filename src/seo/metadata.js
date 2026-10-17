@@ -3,8 +3,8 @@ const organization = { '@type': 'Organization', name: 'FAHINT', legalName: 'Wenz
 const homeImage = 'assets/images/hero/hero-interior.webp';
 export const staticMetadata = {
   '/': {
-    title: 'FAHINT | Safer Power. Better Living.',
-    description: 'Explore FAHINT wiring devices for North American markets. Compare seven product families, model documentation and OEM/ODM options for your brand.',
+    title: 'Wiring Device Manufacturer | GFCI & USB Outlets | FAHINT',
+    description: 'FAHINT manufactures GFCI outlets, USB wall outlets, switches and dimmers for North American markets, with OEM/ODM support for brands and distributors.',
     image: homeImage, imageAlt: 'FAHINT wiring devices in an interior setting', organization: true,
   },
   '/products': {
@@ -13,8 +13,8 @@ export const staticMetadata = {
     image: 'assets/images/editorial-home/brand-system-family-final-optimized.webp', imageAlt: 'FAHINT wiring-device collection', label: 'Products',
   },
   '/capabilities': {
-    title: 'Wiring Device Manufacturing & OEM/ODM | FAHINT',
-    description: 'Explore FAHINT assembly, product testing and OEM/ODM support. Prepare model, finish, packaging and documentation requirements for your wiring-device order.',
+    title: 'OEM Wiring Devices & Private-Label Manufacturing | FAHINT',
+    description: 'Source OEM wiring devices from FAHINT. Review model selection, private-label packaging, samples and manufacturing support for your distribution range.',
     image: 'assets/images/company/capabilities/workshop-editorial-v1.webp', imageAlt: 'FAHINT electronics workshop — AI-refined from a factory photograph', label: 'Manufacturing & OEM / ODM',
   },
   '/about': {
@@ -44,9 +44,13 @@ export const notFoundMetadata = {
 };
 
 export function familyMetadata(line) {
+  const titles = {
+    gfci: 'GFCI Outlet Manufacturer | 15A & 20A Models | FAHINT',
+    'usb-outlets': 'USB-C Wall Outlets | USB-A & Power Delivery | FAHINT',
+  };
   const descriptions = {
-    gfci: 'Compare 15A and 20A GFCI outlets, TR/WR variants and blank-face models. Review ratings, model-specific documentation and OEM options with FAHINT.',
-    'usb-outlets': 'Compare USB-A, USB-C and PD charging outlets, from 3.1A USB to 65W GaN models. Check port outputs, receptacle ratings and model documentation.',
+    gfci: 'Compare FAHINT 15A and 20A self-test GFCI outlets, including TR and WR models. Review model documents and prepare your bulk or OEM inquiry.',
+    'usb-outlets': 'Compare USB-A and USB-C wall outlets, from conventional 5V to 20W, 36W and 65W Power Delivery. Check model outputs, AC ratings and OEM options.',
     receptacles: 'Compare FAHINT duplex and decorator receptacles by voltage, current, TR/WR features and wiring method. Review the exact model before ordering.',
     dimmers: 'Compare FAHINT digital slide and 0-10V dimmers. Check load-specific ratings, control type, wiring requirements and product documentation.',
     'smart-switches': 'Compare Wi-Fi, Zigbee and touch-only switches by wiring, control function and US/EU format. Review the exact FAHINT model and required accessories.',
@@ -54,7 +58,7 @@ export function familyMetadata(line) {
     wallplates: 'Compare FAHINT standard and screwless wallplates by opening, gang count and finish. Review dimensions and the matching device before ordering.',
   };
   return {
-    path: `/products/${line.slug}`, title: `${line.name} · Models & Specifications | FAHINT`, description: descriptions[line.slug] || line.summary,
+    path: `/products/${line.slug}`, title: titles[line.slug] || `${line.name} · Models & Specifications | FAHINT`, description: descriptions[line.slug] || line.summary,
     image: line.cover, imageAlt: `${line.name} from FAHINT`,
     breadcrumbs: [['Home', '/'], ['Products', '/products'], [line.name, `/products/${line.slug}`]],
   };
