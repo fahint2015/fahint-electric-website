@@ -6,6 +6,7 @@ import { resolveInquiryContext } from '../utils/inquiryContext.js';
 import { resolveUsbInquiryItems, serializeUsbInquiryItems, validInquiryQuantity } from '../utils/inquiryList.js';
 import InquiryList from './InquiryList.jsx';
 import InquiryVerification from './InquiryVerification.jsx';
+import { trackEvent } from '../utils/analytics.js';
 import { EMPTY_INQUIRY as EMPTY, normalizeInquiry, validateInquiry, buildMailtoUrl, buildInquiryText } from '../utils/inquiry.js';
 import './inquiry-context.css';
 
@@ -53,6 +54,7 @@ export default function InquiryForm({
   const [turnstileToken, setTurnstileToken] = useState('');
   const [verificationReset, setVerificationReset] = useState(0);
   const requestIdentityRef = useRef(null);
+  const trackedRequestIdRef = useRef(null);
   const [form, setForm] = useState({ ...EMPTY, model: defaultModel, category: defaultCategory });
   const items = form.category === 'USB Outlets' ? resolveUsbInquiryItems(inquiryItems) : [];
   const itemsKey = serializeUsbInquiryItems(items);
@@ -237,6 +239,10 @@ export default function InquiryForm({
         if (!response.ok) throw new Error('Delivery failed');
         const receipt = await response.json();
         if (receipt.ok !== true && receipt.success !== true) throw new Error('Delivery not confirmed');
+        if (!values.requestId || trackedRequestIdRef.current !== values.requestId) {
+          trackEvent('generate_lead');
+          trackedRequestIdRef.current = values.requestId;
+        }
       } else {
         await delivery(mailtoUrl);
       }

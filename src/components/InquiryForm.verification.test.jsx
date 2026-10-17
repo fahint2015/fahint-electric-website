@@ -1,10 +1,14 @@
 import { act, fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import InquiryForm from './InquiryForm.jsx';
+import { trackEvent } from '../utils/analytics.js';
+
+vi.mock('../utils/analytics.js', () => ({ trackEvent: vi.fn() }));
 
 let widgets;
 let turnstile;
 beforeEach(() => {
+  trackEvent.mockClear();
   widgets = [];
   turnstile = {
     render: vi.fn((element, options) => { widgets.push(options); return `widget-${widgets.length}`; }),
@@ -23,6 +27,25 @@ const submit = () => fireEvent.submit(screen.getByRole('button', { name: 'Send i
 const endpoint = 'https://fahint.com/api/inquiry';
 
 describe('Verified inquiry submission', () => {
+  it('counts a confirmed inquiry once when the same request is resubmitted', async () => {
+    vi.useFakeTimers();
+    const request = vi.fn().mockResolvedValue({ ok: true, json: async () => ({ ok: true }) });
+    render(<InquiryForm endpoint={endpoint} turnstileSiteKey="public-site-key" request={request} />);
+    await act(async () => {});
+    fillInquiry();
+    for (let attempt = 0; attempt < 2; attempt += 1) {
+      act(() => widgets[attempt].callback(`token-${attempt}`));
+      submit();
+      await act(async () => vi.advanceTimersByTimeAsync(1500));
+    }
+    expect(trackEvent.mock.calls).toEqual([['generate_lead']]);
+    fireEvent.change(screen.getByLabelText('Requirements *'), { target: { value: 'A separate order for 2400 units.' } });
+    act(() => widgets[2].callback('new-inquiry-token'));
+    submit();
+    await act(async () => vi.advanceTimersByTimeAsync(1500));
+    expect(trackEvent.mock.calls).toEqual([['generate_lead'], ['generate_lead']]);
+  });
+
   it('requires human verification before posting valid buyer data', async () => {
     const request = vi.fn();
     render(<InquiryForm endpoint={endpoint} turnstileSiteKey="public-site-key" request={request} />);

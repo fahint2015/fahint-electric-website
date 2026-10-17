@@ -3,6 +3,9 @@ import userEvent from '@testing-library/user-event';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import InquiryForm, { buildInquiryText, buildMailtoUrl, validateInquiry } from './InquiryForm.jsx';
 import { productLines } from '../data/lines.js';
+import { trackEvent } from '../utils/analytics.js';
+
+vi.mock('../utils/analytics.js', () => ({ trackEvent: vi.fn() }));
 
 const validForm = {
   name: 'Avery Chen',
@@ -106,6 +109,7 @@ describe('InquiryForm helpers', () => {
 
 describe('InquiryForm', () => {
   beforeEach(() => {
+    trackEvent.mockClear();
     vi.stubGlobal('requestAnimationFrame', (callback) => setTimeout(callback, 0));
   });
 
@@ -155,6 +159,7 @@ describe('InquiryForm', () => {
     await user.click(await screen.findByRole('button', { name: 'Copy inquiry details' }));
     expect(clipboardWriter.mock.calls[0][0]).toContain('Product category: USB Outlets');
     expect(clipboardWriter.mock.calls[0][0]).not.toContain('Model of interest:');
+    expect(trackEvent).not.toHaveBeenCalled();
   });
 
   it('sends the selected category instead of a model to a configured inquiry service', async () => {
@@ -414,6 +419,7 @@ describe('InquiryForm', () => {
     const button = screen.getByRole('button', { name: 'Send inquiry' });
     fireEvent.submit(button.closest('form'));
     expect(request).not.toHaveBeenCalled();
+    expect(trackEvent).not.toHaveBeenCalled();
     fireEvent.change(screen.getByLabelText('Your name *'), { target: { value: ' Avery Chen ' } });
     fireEvent.change(screen.getByLabelText('Business email *'), { target: { value: validForm.email } });
     fireEvent.change(screen.getByLabelText('Requirements *'), { target: { value: 'x'.repeat(2000) } });
@@ -427,6 +433,8 @@ describe('InquiryForm', () => {
     expect(await screen.findByRole('status')).toHaveTextContent('Your inquiry has been received.');
     expect(delivery).not.toHaveBeenCalled();
     expect(screen.getByLabelText('Your name *')).toHaveValue(' Avery Chen ');
+    expect(trackEvent).toHaveBeenCalledTimes(1);
+    expect(trackEvent).toHaveBeenCalledWith('generate_lead');
   });
 
   it.each([
@@ -444,6 +452,7 @@ describe('InquiryForm', () => {
     expect(screen.getByRole('button', { name: 'Copy inquiry details' })).toBeEnabled();
     expect(screen.getByLabelText('Requirements *')).toHaveValue(validForm.message);
     expect(screen.queryByText('Your inquiry has been received.')).not.toBeInTheDocument();
+    expect(trackEvent).not.toHaveBeenCalled();
   });
 
   it('does not expose buyer information to an insecure or malformed service URL', () => {
