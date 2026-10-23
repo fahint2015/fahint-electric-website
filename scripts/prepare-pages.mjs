@@ -8,6 +8,10 @@ import { pageHtml, routeMetadata } from './page-metadata.mjs';
 import { escapeHtml, notFoundMetadata, validateSiteUrl } from '../src/seo/metadata.js';
 
 const STATIC_ROUTES = [
+  'applications',
+  'applications/residential',
+  'applications/workplace',
+  'applications/hospitality',
   'products',
   'products/gfci',
   'products/usb-outlets',
@@ -37,7 +41,8 @@ function withPageModules(html, path, manifest, base) {
   const page = section === 'products'
     ? model ? 'ProductDetail' : family === 'gfci' ? 'GfciSeries' : family ? 'LineDetail' : 'ProductsStudio'
     : section === 'blog' ? family ? 'BlogPost' : 'Blog'
-      : { '': 'HomeStudio', about: 'About', capabilities: 'Capabilities', resources: 'Resources', contact: 'Contact' }[section];
+      : section === 'applications' ? family ? 'ApplicationDetail' : 'Applications'
+      : { '': 'HomeBrand', applications: 'Applications', about: 'About', capabilities: 'Capabilities', resources: 'Resources', contact: 'Contact' }[section];
   if (!page) throw new Error(`Missing page module mapping for ${path}.`);
 
   const entry = `src/pages/${page}.jsx`;

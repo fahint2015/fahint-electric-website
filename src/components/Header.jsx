@@ -3,6 +3,7 @@ import { Link, NavLink, useLocation } from 'react-router-dom';
 import { Menu, X, ArrowRight, ChevronDown } from 'lucide-react';
 import { company } from '../data/company.js';
 import { productLines } from '../data/lines.js';
+import { normalizePathname } from '../utils/prerender.js';
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -10,11 +11,12 @@ export default function Header() {
   const [dropdown, setDropdown] = useState(false);
   const [mobileProducts, setMobileProducts] = useState(false);
   const closeTimer = useRef(null);
-  const { pathname } = useLocation();
-  const overHero = ['/', '/home-studio'].includes(pathname);
-  const homePath = pathname.replace(/\/$/, '') === '/home-next' ? '/home-next' : '/';
+  const { pathname, search } = useLocation();
+  const routePath = normalizePathname(pathname);
+  const overHero = ['/', '/home-studio', '/home-previous'].includes(routePath);
+  const homePath = ['/home-studio', '/home-previous'].includes(routePath) ? routePath : routePath === '/home-next' ? '/home-next' : '/';
   const productsPath = '/products';
-  const inquiryPath = ['/', '/home-studio'].includes(pathname) ? '/#studio-inquiry' : '/contact';
+  const inquiryPath = ['/', '/home-studio', '/home-previous'].includes(routePath) ? `${homePath}#studio-inquiry` : '/contact';
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -42,7 +44,7 @@ export default function Header() {
 
   return (
     <>
-      <a className="skip-link" href="#main-content">Skip to main content</a>
+      <Link className="skip-link" to={{ pathname:routePath, search, hash:'#main-content' }}>Skip to main content</Link>
       <header className={`header${overHero ? ' header--home' : ''} ${solid ? 'header--solid' : 'header--transparent'}`}>
         <div className="header__inner">
           <Link to={homePath} className="logo" aria-label={company.shortName}>

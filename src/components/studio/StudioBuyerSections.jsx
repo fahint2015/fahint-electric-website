@@ -17,7 +17,7 @@ export default function StudioBuyerSections() {
       <div className="studio-wrap">
         <Reveal as="header" className="studio-section-head">
           <h2 id="studio-certificates-title">Confidence,<br /> documented.</h2>
-          <div><p>Review the original certificates, then check the exact model and its specifications. The details matter.</p><Link className="studio-text-link" to="/about#certifications">Explore certification details <ArrowUpRight size={18} aria-hidden="true" /></Link></div>
+          <div><p>Review the original certificates, then check the exact model and its specifications. The details matter.</p><Link className="studio-text-link" to="/resources#certifications">Explore certification details <ArrowUpRight size={18} aria-hidden="true" /></Link></div>
         </Reveal>
         <CertCarousel />
         <div className="studio-document-foot">
@@ -31,7 +31,7 @@ export default function StudioBuyerSections() {
         <Reveal className="studio-faq-intro">
           <h2 id="studio-faq-title">Before<br /> we begin.</h2>
           <p>A few answers to help with your next product order or private-label project.</p>
-          <Link className="studio-text-link" to="/#studio-inquiry">Have another question? <ArrowUpRight size={19} aria-hidden="true" /></Link>
+          <Link className="studio-text-link" to="#studio-inquiry">Have another question? <ArrowUpRight size={19} aria-hidden="true" /></Link>
         </Reveal>
         <Faq items={faqs} />
       </div>

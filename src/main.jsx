@@ -19,3 +19,9 @@ const app = <BrowserRouter
 
 if (canHydratePage(root, window.location)) hydrateRoot(root, app);
 else createRoot(root).render(app);
+
+import './styles/brand-home.css';
+import './styles/brand-site.css';
+import './styles/residential-application.css';
+import './styles/brand-motion.css';
+import './styles/brand-contact.css';

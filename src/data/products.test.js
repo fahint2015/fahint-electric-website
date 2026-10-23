@@ -11,6 +11,37 @@ import {
 } from './products.js';
 
 describe('verified GFCI product data', () => {
+  it('retains the thirteen archived residential GFCI feature topics in the concise page data', () => {
+    const product = products.find((item) => item.sku === 'GF15');
+    expect(product.functionalFeatures).toHaveLength(13);
+    expect(product.functionalFeatures).toEqual(expect.arrayContaining([
+      expect.stringMatching(/E504391.*current coverage/i),
+      expect.stringMatching(/3 seconds.*15 minutes/i),
+      expect.stringMatching(/MCU/i),
+      expect.stringMatching(/regular.*20K.*20A.*33K/i),
+      expect.stringMatching(/torque.*2 N·m/i),
+      expect.stringMatching(/LED.*stated.*5 years/i),
+      expect.stringMatching(/100%.*stated.*99\.99%/i),
+      expect.stringMatching(/legacy.*patent.*China.*USA/i),
+      expect.stringMatching(/Warranty.*3 years/i)
+    ]));
+    expect(product.features).toHaveLength(7);
+  });
+
+  it('keeps recovered residential features scoped to the face variant and corrected source evidence', () => {
+    for (const product of products) {
+      expect(product.functionalFeatures.length, product.sku).toBeGreaterThanOrEqual(13);
+      expect(product.functionalFeatures.join(' '), product.sku).toMatch(/phosphor bronze.*silver-alloy/i);
+      expect(product.functionalFeatures.join(' '), product.sku).not.toMatch(/0\.4\s?mm|brass|green.*incorrect wiring|green.*line-load/i);
+    }
+    expect(products.find((p) => p.sku === 'GT15').functionalFeatures.join(' ')).toMatch(/tamper-resistant/i);
+    expect(products.find((p) => p.sku === 'GW20').functionalFeatures.join(' ')).toMatch(/weather-resistant/i);
+    const blank = products.find((p) => p.sku === 'GL20').functionalFeatures.join(' ');
+    expect(blank).toMatch(/certification.*under review/i);
+    expect(blank).toMatch(/blank-face/i);
+    expect(blank).not.toMatch(/UL.*certified|E504391|receptacle face/i);
+  });
+
   it('publishes only the seven models backed by local source folders', () => {
     expect(products.map((product) => product.sku)).toEqual([
       'GF15',

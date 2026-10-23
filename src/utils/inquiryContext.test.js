@@ -33,5 +33,9 @@ describe('validated inquiry context', () => {
       .toBe('/contact?topic=technical&model=FTR15C-3100&finish=black');
     expect(inquiryContactHref(resolveInquiryContext('GF15'), 'unknown')).toBe('/contact?model=GF15');
     expect(inquiryContactHref(null)).toBe('/contact');
+    expect(inquiryContactHref(null, 'technical', 'residential'))
+      .toBe('/contact?topic=technical&application=residential');
+    expect(inquiryContactHref(null, 'technical', 'unknown'))
+      .toBe('/contact?topic=technical');
   });
 });

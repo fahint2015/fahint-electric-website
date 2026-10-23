@@ -31,7 +31,7 @@ export function buildInquiryBody(form) {
     ...(Object.hasOwn(values, 'model') ? [`Model of interest: ${values.model || 'Not specified'}`] : []),
     ...(Object.hasOwn(values, 'finish') ? [`Finish: ${values.finish || 'Not specified'}`] : []),
     ...(values.topic ? [`Inquiry type: ${values.topic}`] : []),
-    ...(values.source ? [`Product page: ${values.source}`] : []),
+    ...(values.source ? [`${values.source.startsWith('/applications/') ? 'Application' : 'Product'} page: ${values.source}`] : []),
     ...(values.items ? [
       '', `Inquiry list (${values.items.length} ${values.items.length === 1 ? 'model' : 'models'}):`,
       ...values.items.map((item, index) => `${index + 1}. ${item.model}\nQuantity: ${item.quantity ? `${item.quantity} pcs` : 'Not specified'}\nFinish: ${item.finish}\nProduct page: ${item.source}`)

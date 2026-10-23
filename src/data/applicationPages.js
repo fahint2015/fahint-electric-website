@@ -1,0 +1,77 @@
+import { ShieldCheck, Usb, SlidersHorizontal, Wifi, House, Palette, Files, Plug, Building2, BedDouble } from 'lucide-react';
+
+// Loaded only by application detail pages; keep the header and homepage lightweight.
+export const applicationPages = {
+  residential: {
+    name: 'Residential',
+    description: 'Protection, charging and lighting for your home.',
+    bannerAlt: 'Bright kitchen and dining space — residential application concept.',
+    scene: 'residential-cutaway-v2',
+    sceneAlt: 'Illustrated home cutaway showing a kitchen, living room and bedroom.',
+    introTitle: 'Power throughout the home.',
+    intro: 'Protection in the kitchen. Charging by the bed. Lighting that fits the moment.',
+    featuresTitle: 'Designed for home.',
+    capabilities: [
+      { icon: ShieldCheck, title: 'GFCI protection', text: 'Self-test outlets. 15A & 20A.', family: 'gfci' },
+      { icon: Usb, title: 'USB charging', text: 'USB-A, USB-C and Power Delivery.', family: 'usb-outlets' },
+      { icon: SlidersHorizontal, title: 'Lighting control', text: 'Switches and dimmers for everyday light.', family: 'dimmers' },
+      { icon: Wifi, title: 'Smart control', text: 'Touch, Wi-Fi and Zigbee options.', family: 'smart-switches' },
+    ],
+    features: [
+      { icon: House, title: 'Room by room', text: 'Power, charging and lighting for each room.' },
+      { icon: Palette, title: 'Matching finishes', text: 'Devices and wallplates to suit your interior.' },
+      { icon: Files, title: 'Model documents', text: 'Ratings, wiring and load details.' },
+    ],
+    models: [['gfci','gt15'], ['usb-outlets','ftr15c-3100'], ['lighting-switches','ds15'], ['dimmers','dm2010'], ['smart-switches','usw8811'], ['wallplates','bs1801']],
+    contactTitle: 'Planning a residential project?',
+    contactText: 'Share your rooms, models and quantities.',
+  },
+  workplace: {
+    name: 'Workplace',
+    description: 'Power, charging and lighting for the workday.',
+    bannerAlt: 'Bright office with shared desks and meeting areas — workplace application concept.',
+    scene: 'workplace-cutaway-v2',
+    sceneAlt: 'Commercial office cutaway with open workstations, a glass meeting room, reception and a coffee point.',
+    introTitle: 'Power for every workday.',
+    intro: 'From focused desks to shared meeting rooms, keep power and lighting within reach.',
+    featuresTitle: 'Across the office.',
+    capabilities: [
+      { icon: Plug, title: 'Power access', text: 'Receptacles for desks and shared spaces.', family: 'receptacles' },
+      { icon: Usb, title: 'USB charging', text: 'USB-C Power Delivery options up to 65W.', family: 'usb-outlets' },
+      { icon: SlidersHorizontal, title: 'Lighting control', text: 'Switches and 0–10V dimming options.', family: 'dimmers' },
+      { icon: ShieldCheck, title: 'GFCI protection', text: 'Self-test outlets. 15A & 20A.', family: 'gfci' },
+    ],
+    features: [
+      { icon: Building2, title: 'Work zones', text: 'Power for desks, meetings and shared spaces.' },
+      { icon: SlidersHorizontal, title: 'Lighting options', text: 'Controls matched to fixtures and loads.' },
+      { icon: Files, title: 'Project details', text: 'Ratings, wiring and finishes by model.' },
+    ],
+    models: [['receptacles','rt20-c'], ['usb-outlets','ftr15qc-dc65w'], ['lighting-switches','ds15-3'], ['dimmers','dm2010s'], ['gfci','gt20'], ['wallplates','bs1802']],
+    contactTitle: 'Planning a workplace project?',
+    contactText: 'Share your spaces, models and quantities.',
+  },
+  hospitality: {
+    name: 'Hospitality',
+    description: 'Charging and controls for a welcoming stay.',
+    bannerAlt: 'Contemporary hotel lounge — hospitality application concept.',
+    scene: 'hospitality-cutaway-v3',
+    sceneAlt: 'Hotel guest-floor cutaway with a shared corridor, two king rooms, one twin room and private ensuite bathrooms.',
+    introTitle: 'Comfort in every room.',
+    intro: 'Thoughtful charging and lighting, from the entrance to the bedside.',
+    featuresTitle: 'Made for your guests.',
+    capabilities: [
+      { icon: Usb, title: 'USB charging', text: 'USB-A and USB-C options for guest devices.', family: 'usb-outlets' },
+      { icon: SlidersHorizontal, title: 'Lighting control', text: 'Switches and dimmers for guest rooms.', family: 'dimmers' },
+      { icon: ShieldCheck, title: 'GFCI protection', text: 'Self-test outlets. 15A & 20A.', family: 'gfci' },
+      { icon: Wifi, title: 'Smart control', text: 'Touch and Wi-Fi room controls.', family: 'smart-switches' },
+    ],
+    features: [
+      { icon: BedDouble, title: 'Bedside charging', text: 'Power and USB ports within easy reach.' },
+      { icon: Palette, title: 'Room finishes', text: 'Devices and wallplates to suit each room.' },
+      { icon: Files, title: 'Model documents', text: 'Ratings, wiring and lighting details.' },
+    ],
+    models: [['usb-outlets','ftr15c-3100'], ['gfci','gt15'], ['lighting-switches','ds15-3'], ['dimmers','dm2010'], ['smart-switches','usw8811'], ['wallplates','bs1801']],
+    contactTitle: 'Planning a hospitality project?',
+    contactText: 'Share your room count, models and finishes.',
+  },
+};

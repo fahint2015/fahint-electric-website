@@ -73,7 +73,7 @@ export default function Footer() {
                 <Link to="/capabilities#oem">OEM &amp; ODM</Link>
               </li>
               <li>
-                <Link to="/about#certifications">Certifications</Link>
+                <Link to="/resources#certifications">Certifications</Link>
               </li>
               <li>
                 <Link to="/resources">Resources</Link>

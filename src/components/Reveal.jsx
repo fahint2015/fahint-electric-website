@@ -15,15 +15,23 @@ export default function Reveal({ children, as: Tag = 'div', className = '', dela
     }
     const io = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true);
-          io.unobserve(entry.target);
-        }
+        if (entry.isIntersecting) setVisible(true);
       },
-      { threshold: 0.1, rootMargin: '0px 0px -32px 0px' }
+      { threshold: 0.1, rootMargin: '0px' }
+    );
+    const resetObserver = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting && !el.contains(document.activeElement)) setVisible(false);
+      },
+      // Keep the reset boundary beyond the entrance travel to avoid edge flicker.
+      { threshold: 0, rootMargin: '96px 0px' }
     );
     io.observe(el);
-    return () => io.disconnect();
+    resetObserver.observe(el);
+    return () => {
+      io.disconnect();
+      resetObserver.disconnect();
+    };
   }, []);
 
   return (

@@ -156,7 +156,7 @@ export default function HomeNext() {
           <div className="next-document-list">
             {[certificates[0], certificates[2], certificates[5]].map((cert) => <a key={cert.slug} href={publicAsset(cert.document)} target="_blank" rel="noreferrer"><div><strong>{cert.name}</strong><span>{cert.file} · Original PDF</span></div><ArrowUpRight size={24} aria-hidden="true" /></a>)}
             <p>Certification applies to the models named in each document. Check the complete scope and addendum before specifying.</p>
-            <Link className="next-text-link" to="/about#certifications">View the full certificate library <ArrowRight size={18} /></Link>
+            <Link className="next-text-link" to="/resources#certifications">View the full certificate library <ArrowRight size={18} /></Link>
           </div>
         </div>
       </section>

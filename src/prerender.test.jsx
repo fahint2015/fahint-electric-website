@@ -3,8 +3,39 @@ import { describe, expect, it, vi } from 'vitest';
 import { renderPage } from './entry-server.jsx';
 import { canHydratePage } from './utils/prerender.js';
 import { PUBLIC_ROUTES } from '../scripts/prepare-pages.mjs';
+import { findProduct } from './data/products.js';
+import { findCatalogProduct } from './data/catalogProducts.js';
 
 describe('published page prerendering', () => {
+  it.each(['/', '/fahint-electric-website/'])('prerenders complete workplace and hospitality pages and connects their entry points under %s', async base => {
+    for (const [slug, name, title, models] of [
+      ['workplace', 'Workplace', 'Across the office.', ['receptacles/rt20-c','usb-outlets/ftr15qc-dc65w','lighting-switches/ds15-3','dimmers/dm2010s','gfci/gt20','wallplates/bs1802']],
+      ['hospitality', 'Hospitality', 'Made for your guests.', ['usb-outlets/ftr15c-3100','gfci/gt15','lighting-switches/ds15-3','dimmers/dm2010','smart-switches/usw8811','wallplates/bs1801']],
+    ]) {
+      expect(PUBLIC_ROUTES).toContain(`applications/${slug}`);
+      const html = await renderPage(`/applications/${slug}`, base);
+      expect(html).toMatch(new RegExp(`<h1[^>]*>${name}</h1>`));
+      expect(html).not.toContain('Loading page…');
+      expect(html).toContain(title);
+      expect(html).toContain(`applications/${slug}-cutaway-${slug === 'hospitality' ? 'v3' : 'v2'}.webp`);
+      expect(html).toContain(`id="${slug}-products"`);
+      expect(html).toContain(`${name} application concept`);
+      for (const model of models) expect(html).toContain(`href="${base}products/${model}"`);
+      expect(html).toContain(`href="${base}contact?topic=technical&amp;application=${slug}"`);
+      expect(await renderPage('/applications', base)).toContain(`href="${base}applications/${slug}"`);
+    }
+  });
+  it.each(['/', '/fahint-electric-website/'])('renders the complete residential application and real model links under %s', async base => {
+    expect(PUBLIC_ROUTES).toContain('applications/residential');
+    const html = await renderPage('/applications/residential', base);
+    expect(html).toMatch(/<h1[^>]*>Residential<\/h1>/);
+    expect(html).not.toContain('Loading page…');
+    for (const heading of ['What we offer.', 'Designed for home.', 'Recommended Products', 'Planning a residential project?']) expect(html).toContain(heading);
+    expect(html).toContain(`${import.meta.env.BASE_URL}assets/images/brand-home/applications/residential-cutaway-v2.webp`);
+    for (const model of ['gfci/gt15', 'usb-outlets/ftr15c-3100', 'lighting-switches/ds15', 'dimmers/dm2010', 'smart-switches/usw8811', 'wallplates/bs1801']) expect(html).toContain(`href="${base}products/${model}"`);
+    expect(html).toContain(`href="${base}contact?topic=technical&amp;application=residential"`);
+    expect(html).toContain(`href="${base}blog/outlet-planning-by-room"`);
+  });
   it.each(['/', '/fahint-electric-website/'])('renders catalogue corrections while keeping commercial URLs under %s', async base => {
     const commercial = await renderPage('/products/receptacles/rt15q-c', base);
     expect(commercial).toContain('CT15Q');
@@ -12,7 +43,10 @@ describe('published page prerendering', () => {
     expect(commercial).toContain('model=CT15Q');
     expect(commercial).toContain('products/receptacles/rt15q-c');
     expect(await renderPage('/products/receptacles/cr15', base)).toContain('15A · 125V/250V');
-    expect(await renderPage('/products/wallplates/bs1802', base)).toContain('80 × 124 × 6.5 mm');
+    const plate = await renderPage('/products/wallplates/bs1802', base);
+    expect(plate).toContain('Product width</th><td>3.15 in (80 mm)');
+    expect(plate).toContain('Product height</th><td>4.88 in (124 mm)');
+    expect(plate).toContain('Thickness</th><td>0.26 in (6.5mm)');
   });
   it.each(['/', '/fahint-electric-website/'])('prerenders the receptacle guide and its entry points under %s', async base => {
     const path = 'blog/standard-receptacle-buying-guide';
@@ -25,7 +59,7 @@ describe('published page prerendering', () => {
     expect(html).toContain('href="' + base + 'resources?family=receptacles"');
     expect(html).toContain('href="' + base + 'contact?topic=technical"');
     expect(html).not.toContain('Loading page…');
-    for (const entry of ['/products/receptacles', '/products/receptacles/dt15', '/resources']) {
+    for (const entry of ['/products/receptacles', '/resources']) {
       expect(await renderPage(entry, base)).toContain(`href="${base}${path}"`);
     }
   });
@@ -101,13 +135,13 @@ describe('published page prerendering', () => {
 
   it.each(['/', '/fahint-electric-website/'])('waits for the actual lazy homepage with product and company links under %s', async (base) => {
     const html = await renderPage('/', base);
-    expect(html).toContain('Wiring devices.');
-    expect(html).toContain('Built for your market.');
+    expect(html).toContain('Safer Power.');
+    expect(html).toContain('Better Living.');
     expect(html).toContain('Wenzhou Fahint Electric');
     expect(html).toContain(`href="${base}products/usb-outlets"`);
     expect(html).not.toContain('Loading page…');
     expect(html).not.toContain('data-motion="ready"');
-    expect(html).toContain('class="studio-hero"');
+    expect(html).toContain('class="hero"');
   });
 
   it.each([
@@ -152,6 +186,20 @@ describe('published page prerendering', () => {
       for (const route of PUBLIC_ROUTES) {
         const html = await renderPage(`/${route}`);
         expect(html.match(/<h1(?:\s|>)/g), route).toHaveLength(1);
+        expect(html.match(/<nav class="rail" aria-label="Quick contact">/g), route).toHaveLength(1);
+        const [, line, slug] = route.split('/');
+        const product = route.startsWith('products/') && slug
+          ? ((line === 'gfci' ? findProduct(slug) : null) || findCatalogProduct(line, slug)) : null;
+        const rail = html.match(/<nav class="rail"[^>]*>(.*?)<\/nav>/s)?.[1];
+        if (product) {
+          const message = `Hi FAHINT, I'm interested in ${product.sku} (${product.name}). Could you share pricing and availability?`;
+          expect(decodeURIComponent(rail).replaceAll('&#x27;', "'").replaceAll('&amp;', '&'), route).toContain(`?text=${message}`);
+          expect(decodeURIComponent(rail), route).toContain(`subject=Inquiry about ${product.sku}&amp;body=`);
+        } else {
+          expect(rail, route).toContain('href="https://wa.me/8618857349189"');
+          expect(rail, route).toContain('href="mailto:louis@fahint.com"');
+        }
+        expect(html, route).toContain('aria-label="Email louis@fahint.com"');
         expect(html.includes('Loading page…'), route).toBe(false);
         expect(html.includes('This page isn’t here.'), route).toBe(false);
         expect(errors.mock.calls.map(([message]) => message), route).toEqual([]);
@@ -175,12 +223,14 @@ describe('published page prerendering', () => {
     expect(html).toContain('href="mailto:louis@fahint.com"');
   });
 
-  it('renders USB drawing titles without React text-node warnings', async () => {
+  it('renders USB parameters and drawing download links without React warnings', async () => {
     const errors = vi.spyOn(console, 'error').mockImplementation(() => {});
     try {
       const html = await renderPage('/products/usb-outlets/ftr15-3100');
       expect(errors.mock.calls.map(([message]) => message)).toEqual([]);
-      expect(html).toMatch(/<title[^>]*>FTR15-3100 front[^<]*dimension drawing<\/title>/);
+      expect(html).toContain('Technical Parameters');
+      expect(html).toContain('Dimensions &amp; wiring reference');
+      expect(html).not.toContain('class="catalog-drawings__grid"');
     } finally { errors.mockRestore(); }
   });
 });

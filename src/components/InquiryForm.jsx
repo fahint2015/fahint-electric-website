@@ -34,6 +34,7 @@ export default function InquiryForm({
   defaultModel = '',
   defaultCategory = '',
   productContext = null,
+  application = null,
   inquiryItems = [],
   onItemsChange,
   topic = 'Product inquiry',
@@ -62,7 +63,8 @@ export default function InquiryForm({
     ? (productContext?.category === form.category ? productContext : null)
     : resolveInquiryContext(form.model, productContext?.model === form.model ? productContext.finishSlug : '');
   const { model, category, ...details } = form;
-  const inquiry = { ...details, ...(categoryOptions ? { category } : { model }), ...context, topic, ...(items.length ? { items } : {}) };
+  const inquiry = { ...details, ...(categoryOptions ? { category } : { model }), ...context, topic,
+    ...(application && !context ? { source: `/applications/${application.id}` } : {}), ...(items.length ? { items } : {}) };
   const [errors, setErrors] = useState({});
   const [status, setStatus] = useState('');
   const [copyStatus, setCopyStatus] = useState('');
@@ -119,7 +121,7 @@ export default function InquiryForm({
       const { items: _itemError, ...remaining } = current;
       return remaining;
     });
-  }, [context?.model, context?.finishSlug, topic, itemsKey]);
+  }, [context?.model, context?.finishSlug, application?.id, topic, itemsKey]);
 
   useEffect(() => {
     mountedRef.current = true;
@@ -442,6 +444,10 @@ export default function InquiryForm({
         removedItemRef.current = next.length < items.length;
         onItemsChange?.(next);
       }} />}
+
+      {application && <div className="inquiry-product-context" role="group" aria-label="Project setting">
+        <div><span className="inquiry-product-context__label">Project setting</span><p><strong>{application.name}</strong></p></div>
+      </div>}
 
       {context && <div className="inquiry-product-context" role="group" aria-label="Selected product">
         <div aria-live="polite" aria-atomic="true">

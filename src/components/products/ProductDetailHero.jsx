@@ -3,8 +3,9 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { colors, isVerifiedListing, productFinishImage } from '../../data/products.js';
 import ProductGallery from './ProductGallery.jsx';
+import Reveal from '../Reveal.jsx';
 
-export default function ProductDetailHero({ product, anchorPath, anchorSearch, inquiryFinish, onFinishChange }) {
+export default function ProductDetailHero({ product, anchorPath, anchorSearch, inquiryFinish, onFinishChange, compact = false, quoteHref }) {
   const listed = isVerifiedListing(product);
   const [selectedImage, setSelectedImage] = useState(product.assets.hero);
   const [selectedFinish, setSelectedFinish] = useState(null);
@@ -46,12 +47,12 @@ export default function ProductDetailHero({ product, anchorPath, anchorSearch, i
 
         <div className="product-detail-hero__content">
           <span className="product-detail-hero__model">Model {product.sku}</span>
-          <h1>{product.name.split(/(USB-[AC]|Type-C)/g).map((part, index) =>
+          <Reveal as="h1">{product.name.split(/(USB-[AC]|Type-C)/g).map((part, index) =>
             /^(USB-[AC]|Type-C)$/.test(part)
               ? <span className="product-name-token" key={index}>{part}</span>
               : part
-          )}</h1>
-          <p className="product-detail-hero__summary">{product.summary}</p>
+          )}</Reveal>
+          <Reveal as="p" className="product-detail-hero__summary" delay={160}>{product.summary}</Reveal>
           {product.reviewNotice && <p className="catalog-model-notice" role="note">{product.reviewNotice}</p>}
 
           {availableFinishes.length > 0 && <fieldset className="product-detail-hero__finishes">
@@ -76,7 +77,7 @@ export default function ProductDetailHero({ product, anchorPath, anchorSearch, i
             </div>
           </fieldset>}
 
-          <div className="product-detail-hero__specifications">
+          {!compact && <div className="product-detail-hero__specifications">
             <p>Key specifications</p>
             <dl className="product-detail-hero__facts product-key-facts">
               {facts.map(([term, description]) => (
@@ -86,7 +87,7 @@ export default function ProductDetailHero({ product, anchorPath, anchorSearch, i
                 </div>
               ))}
             </dl>
-          </div>
+          </div>}
 
           <p className={`product-detail-hero__certification${listed ? ' is-verified' : ''}`}>
             {listed ? <ShieldCheck size={19} aria-hidden="true" /> : <FileCheck2 size={19} aria-hidden="true" />}
@@ -96,14 +97,14 @@ export default function ProductDetailHero({ product, anchorPath, anchorSearch, i
           </p>
 
           <div className="product-detail-hero__actions">
-            <Link to={anchorTarget('#inquiry')} className="btn btn--primary">
+            <Link to={quoteHref || anchorTarget('#inquiry')} className="btn btn--primary">
               {product.draft ? 'Request documentation' : 'Request a quote'} <ArrowRight size={16} aria-hidden="true" />
             </Link>
             <Link
               to={anchorTarget('#technical-details')}
               className="btn btn--ghost"
             >
-              Technical details
+              {compact ? 'Technical Parameters' : 'Technical details'}
             </Link>
           </div>
         </div>

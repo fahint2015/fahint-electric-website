@@ -7,7 +7,7 @@ import { usePageMetadata } from '../../seo/usePageMetadata.js';
 export function useStudioPageMeta(title, description) {
   const { pathname } = useLocation();
   const path = pathname.replace(/\/$/, '') || '/';
-  const preview = ['/home-studio', '/products-studio'].includes(path);
+  const preview = ['/home-studio', '/home-previous', '/products-studio'].includes(path);
   usePageMetadata(preview ? { title: `FAHINT | ${title} — Preview`, description, noindex: true, robots: 'noindex, nofollow' }
     : staticMetadata[path] || { title: `FAHINT | ${title}`, description });
 }

@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { productImage } from '../data/products.js';
 import SafeImage from './SafeImage.jsx';
+import Reveal from './Reveal.jsx';
 
 const VARIANT_LABELS = {
   standard: 'STANDARD',
@@ -19,7 +20,7 @@ export default function ProductCard({ product }) {
   const receptacleType = product.nema === 'Blank face' ? product.nema : `NEMA ${product.nema}`;
 
   return (
-    <Link
+    <Reveal as={Link}
       to={`/products/gfci/${product.sku.toLowerCase()}`}
       className="pcard"
       aria-label={productLabel}
@@ -27,7 +28,7 @@ export default function ProductCard({ product }) {
       <div className="pcard__media">
         <span className="pcard__tag">{productVariantLabel(product)}</span>
         <SafeImage
-          src={productImage(product.sku, 'hero')}
+          src={product.assets?.hero || productImage(product.sku, 'hero')}
           alt={productLabel}
           width={800}
           height={800}
@@ -47,6 +48,6 @@ export default function ProductCard({ product }) {
           </span>
         </div>
       </div>
-    </Link>
+    </Reveal>
   );
 }

@@ -1,0 +1,220 @@
+{
+  "purpose": "Original FAHINT complete product-and-wallplate photographs composited into illustrative interiors.",
+  "productMethod": "Complete original factory product-and-plate images, each processed as one unit. Source mask, whole-unit daylight colour match and perspective only. No separate plate, inserted device or generated product parts. Smart glass face retains native camera perspective.",
+  "sourceArchive": "output/imagegen/catalog-whole-products-2026-10-12",
+  "sources": [
+    {
+      "family": "gfci",
+      "model": "GF15",
+      "source": "D:\\国际站运营平台\\方特插座\\网站资料\\公司资料&产品\\产品图片\\07-Wallplates\\BS1803+BS18032+BS18033+BS18034\\面板+GFCI\\方特\\GF15\\白哑光.png",
+      "sourceSha256": "dd051e35d335787fcd554897061a6b3fc44565857dc0657492c2451a82d51c3a",
+      "archivedOriginal": "gfci-factory-original.png",
+      "background": "gfci-background.png",
+      "backgroundSha256": "ac1762b2eac3fae3c8a3c5f370dc810e4392a8a0cfc5b83f08347f3f6b01b503",
+      "composite": "gfci-application.png",
+      "sha256": "646f1ca859b208757b33f47fb8a38293f01a004b013be1cbd1005311fd0fe636",
+      "completeOriginal": true
+    },
+    {
+      "family": "usb-outlets",
+      "model": "FTR15C-3100",
+      "source": "D:\\国际站运营平台\\方特插座\\网站资料\\公司资料&产品\\产品图片\\07-Wallplates\\BS1803+BS18032+BS18033+BS18034\\面板+USB\\方特\\1-FTR15C-3100\\白哑光.png",
+      "sourceSha256": "5d66d74b9235a59a0ba2e165a12b5b09f22ebb6ec953c431bc85a5111c9eab66",
+      "archivedOriginal": "usb-outlets-factory-original.png",
+      "background": "usb-outlets-background.png",
+      "backgroundSha256": "b8ed8a67d03ac580ee3b84e5f0ef18e9cb120954274747fbc53c8aa775b04024",
+      "composite": "usb-outlets-application.png",
+      "sha256": "762022f5c34955f7253ae31c30ea973dff83ce9767e61d8e8a2d5df4ad9d53de",
+      "completeOriginal": true
+    },
+    {
+      "family": "receptacles",
+      "model": "DT15",
+      "source": "D:\\国际站运营平台\\方特插座\\网站资料\\公司资料&产品\\产品图片\\04-Standard Receptacle\\D系列\\DT15-DT15Q\\5-白-亮面单品+亮面无螺丝面板.png",
+      "sourceSha256": "baa12ec9cfdab7f89db55a9bd1922b89c8e48dabc62c9ed6135750189f4708df",
+      "archivedOriginal": "receptacles-factory-original.png",
+      "background": "receptacles-background.png",
+      "backgroundSha256": "969ec33af6465404e99aa84d4174bd8e2da067420d7ee81adaafbdea3cda7720",
+      "composite": "receptacles-application.png",
+      "sha256": "694ff792bee132226a3f6494d23dac724e70c7607c2e4e39e87d5a777e3e2785",
+      "completeOriginal": true
+    },
+    {
+      "family": "dimmers",
+      "model": "DM2010",
+      "source": "D:\\国际站运营平台\\方特插座\\网站资料\\公司资料&产品\\产品图片\\03-Dimmer & sensor switch-目前只卖Dimmer\\DM2010-Digital Dimmer Light Switch\\4-白配哑光无螺丝面板.png",
+      "sourceSha256": "3cd3406e06676bd7a86458220a5afcf0f197319ec3beb0f33c9e8bdbb201b8c4",
+      "archivedOriginal": "dimmers-factory-original.png",
+      "background": "dimmers-background.png",
+      "backgroundSha256": "aef2f6c3be964f201628174e26cc2a737af6210c6a4867a484489745d486a3eb",
+      "composite": "dimmers-application.png",
+      "sha256": "2ecaef72671d6b142c7c658377b37e1e8d08ecdab3351bd03f7f8f1b6ca7dacd",
+      "completeOriginal": true
+    },
+    {
+      "family": "smart-switches",
+      "model": "UST8811",
+      "source": "D:\\国际站运营平台\\方特插座\\网站资料\\公司资料&产品\\产品图片\\05-Smart Switch\\美规\\Touch Switch\\Single Life Wire\\UST8811\\2.png",
+      "sourceSha256": "f0bcab45fa8134878c772050632266f1f1b2558ff5c96a411f65e7b71944db28",
+      "archivedOriginal": "smart-switches-factory-original.png",
+      "background": "smart-switches-background.png",
+      "backgroundSha256": "c1dadba963dac29bbb7427f42b219dca59fd1c4740a2898d8d89ce94e06d218b",
+      "composite": "smart-switches-application.png",
+      "sha256": "7f0f5451fd305c860c2145c5c3af354d05406de286277ad68d6746983acd8a32",
+      "completeOriginal": true
+    },
+    {
+      "family": "lighting-switches",
+      "model": "DS15",
+      "source": "D:\\国际站运营平台\\方特插座\\网站资料\\公司资料&产品\\产品图片\\06-Lighting Switches\\1开\\DS15单控\\哑光白+无螺丝面板.png",
+      "sourceSha256": "b1bee6d56f0a4747c375f499c9e8960ba7df5c1bc5245a60695c89a47b8ac773",
+      "archivedOriginal": "lighting-switches-factory-original.png",
+      "background": "lighting-switches-background.png",
+      "backgroundSha256": "7b3a2aad455c90d385fea04a28871c976edefdaf9e01b8ed2db438c30bed0972",
+      "composite": "lighting-switches-application.png",
+      "sha256": "1c5c9a2985374459ad3157d1a4680efff9253d27f2951a45096471f72eef5241",
+      "completeOriginal": true
+    },
+    {
+      "family": "wallplates",
+      "model": "BS1803-M with factory two-button switch",
+      "source": "D:\\国际站运营平台\\方特插座\\网站资料\\公司资料&产品\\产品图片\\07-Wallplates\\BS1803+BS18032+BS18033+BS18034\\面板+开关\\方特\\2开白哑光.png",
+      "sourceSha256": "e4d2bea135bca17b810caf9bbe547318f343f45826430f49bee81cf683d04421",
+      "archivedOriginal": "wallplates-factory-original.png",
+      "background": "wallplates-background.png",
+      "backgroundSha256": "c9986e9f67e3b1815d5e296b775f26bdb4f749adc4272a943c7e83cf231f7764",
+      "composite": "wallplates-application.png",
+      "sha256": "812f0743149b5953f3073eb2035d7d8ef7bdf83c9d2c94fd6795dc69c6276a78",
+      "completeOriginal": true
+    }
+  ],
+  "variants": [
+    {
+      "family": "gfci",
+      "model": "GF15",
+      "file": "gfci-application.webp",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 136024,
+      "sha256": "ca269275452e34fada550846b85e14449218ffa4b137b0f12a6699419d26cc62"
+    },
+    {
+      "family": "gfci",
+      "model": "GF15",
+      "file": "gfci-application-768w.webp",
+      "width": 768,
+      "height": 512,
+      "bytes": 52746,
+      "sha256": "615a528500eefa1bf4431b1bcec65a2ed66a90962b97ab085f63264d880f133b"
+    },
+    {
+      "family": "usb-outlets",
+      "model": "FTR15C-3100",
+      "file": "usb-outlets-application.webp",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 163818,
+      "sha256": "b761dba1bc9986f3ff4326299549ecc71511dd4a55b8f8bee29ed7af8d08d4d5"
+    },
+    {
+      "family": "usb-outlets",
+      "model": "FTR15C-3100",
+      "file": "usb-outlets-application-768w.webp",
+      "width": 768,
+      "height": 512,
+      "bytes": 53040,
+      "sha256": "0b96d16b7b3312ee03707b92a63a178b2e0cabbf65f45069e1bb0928932b1328"
+    },
+    {
+      "family": "receptacles",
+      "model": "DT15",
+      "file": "receptacles-application.webp",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 140772,
+      "sha256": "07715650f1a29b99ee7ef49e117e685270ab34b41882bee3c79e65fdf98845b3"
+    },
+    {
+      "family": "receptacles",
+      "model": "DT15",
+      "file": "receptacles-application-768w.webp",
+      "width": 768,
+      "height": 512,
+      "bytes": 53554,
+      "sha256": "6145199dca8ab4402366a5179f490043201ca38189c3eea8129513802628df54"
+    },
+    {
+      "family": "dimmers",
+      "model": "DM2010",
+      "file": "dimmers-application.webp",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 135910,
+      "sha256": "dc92c29558edda2f09e1f552f555c1f5e4f7b5c2ea6ce979c36ce1dddd2836eb"
+    },
+    {
+      "family": "dimmers",
+      "model": "DM2010",
+      "file": "dimmers-application-768w.webp",
+      "width": 768,
+      "height": 512,
+      "bytes": 48506,
+      "sha256": "c65096fc4b8676ddbc4e1d0c0c654f4ab88e8bed12f08ec58b921369e4e7cf73"
+    },
+    {
+      "family": "smart-switches",
+      "model": "UST8811",
+      "file": "smart-switches-application.webp",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 173542,
+      "sha256": "24d7db5bb410c9f2308cb2dc689214876ee1eaee49f86831c5f382fded60bf88"
+    },
+    {
+      "family": "smart-switches",
+      "model": "UST8811",
+      "file": "smart-switches-application-768w.webp",
+      "width": 768,
+      "height": 512,
+      "bytes": 58038,
+      "sha256": "a84b8d50e11b0ee633890b2f1ea8640d808dcd33399868af999e4168f9800947"
+    },
+    {
+      "family": "lighting-switches",
+      "model": "DS15",
+      "file": "lighting-switches-application.webp",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 150482,
+      "sha256": "c3908271a9b28e29de9a2ab764eafe70c0fdaf6c416eb24b04c000ca0d851f22"
+    },
+    {
+      "family": "lighting-switches",
+      "model": "DS15",
+      "file": "lighting-switches-application-768w.webp",
+      "width": 768,
+      "height": 512,
+      "bytes": 52060,
+      "sha256": "38c8531f7b5e0abfb6a54bb58efe5d44e458d7c4105456fe8624fae394ce58b8"
+    },
+    {
+      "family": "wallplates",
+      "model": "BS1803-M with factory two-button switch",
+      "file": "wallplates-application.webp",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 163696,
+      "sha256": "a049e392e3b6d037e2c035e1ec6fce80197de774a472e4e28ece1063f293a1b5"
+    },
+    {
+      "family": "wallplates",
+      "model": "BS1803-M with factory two-button switch",
+      "file": "wallplates-application-768w.webp",
+      "width": 768,
+      "height": 512,
+      "bytes": 55116,
+      "sha256": "e6234ab40a950185fd27305d09366ab2202fed123fbe2bf8f4658c5dd1688748"
+    }
+  ],
+  "totalBytes": 1437304
+}

@@ -3,7 +3,7 @@ import { MemoryRouter } from 'react-router-dom';
 import { describe, expect, it } from 'vitest';
 import Capabilities from './Capabilities.jsx';
 import About from './About.jsx';
-import { certificates } from '../data/certificates.js';
+import { companyPhotos } from '../data/companyProfile.js';
 import { publicAsset } from '../utils/publicAsset.js';
 import { staticMetadata } from '../seo/metadata.js';
 import { existsSync, readFileSync, statSync } from 'node:fs';
@@ -40,7 +40,7 @@ describe('Manufacturing and company information', () => {
     expect(screen.getByRole('article', { name: 'Laboratory verification' })).toHaveTextContent('instruments');
     expect(screen.getByRole('article', { name: 'Laboratory verification' })).not.toHaveTextContent('temperature and humidity');
     expect(screen.getByText(/AI-refined from FAHINT factory photographs/)).toBeVisible();
-    expect(screen.getByRole('link', { name: 'See our testing stations' })).toHaveAttribute('href', '/#studio-making');
+    expect(screen.getByRole('link', { name: 'See our testing stations' })).toHaveAttribute('href', '/capabilities#production');
   });
   it('keeps chapter navigation on the manufacturing route and joins documentation with the project inquiry', () => {
     renderPage(Capabilities);
@@ -51,14 +51,14 @@ describe('Manufacturing and company information', () => {
     }
     const nextStep = screen.getByRole('region', { name: 'Bring us your product brief.' });
     expect(within(nextStep).getByRole('link', { name: 'Start a project' })).toHaveAttribute('href', '/contact?topic=oem');
-    expect(within(nextStep).getByRole('link', { name: 'Review certificates' })).toHaveAttribute('href', '/about#certifications');
+    expect(within(nextStep).getByRole('link', { name: 'Review certificates' })).toHaveAttribute('href', '/resources#certifications');
     expect(nextStep).toHaveTextContent('A company certificate does not certify every product in the range.');
   });
   it('provides a sequenced cooperation process and model-scoped documentation', () => {
     renderPage(Capabilities);
     const process = screen.getByRole('list', { name: 'From brief to production' });
     expect(within(process).getAllByRole('listitem')).toHaveLength(4);
-    expect(screen.getByRole('link', { name: /Review certificates/ })).toHaveAttribute('href', '/about#certifications');
+    expect(screen.getByRole('link', { name: /Review certificates/ })).toHaveAttribute('href', '/resources#certifications');
     expect(document.body).not.toHaveTextContent(/400 cartons|within 6 hours|98%|3-day shipment|10-day delivery|exceeds the UL/i);
   });
   it('distinguishes the FAHINT brand from private-label manufacturing', () => {
@@ -68,35 +68,32 @@ describe('Manufacturing and company information', () => {
     expect(screen.getByRole('heading', { name: 'Your brand, our manufacturing' })).toBeInTheDocument();
     expect(document.body).not.toHaveTextContent(/400 cartons|6-hour|3-year warranty|ALDI|zero Category A|98%/i);
   });
-  it('provides every original certificate with model scope and PDF access', () => {
+  it('keeps the certification documents in Resources instead of repeating them on About', () => {
     renderPage(About);
-    const library = document.getElementById('certifications');
-    expect(library).toBeInTheDocument();
-    for (const certificate of certificates) {
-      expect(within(library).getByRole('link', { name: `Open ${certificate.name} PDF` })).toHaveAttribute('href', publicAsset(certificate.document));
-      expect(within(library).getByRole('link', { name: `Download ${certificate.name} PDF` })).toHaveAttribute('download');
-      expect(within(library).getByText(certificate.scope)).toBeInTheDocument();
-    }
+    expect(document.getElementById('certifications')).not.toBeInTheDocument();
+    expect(screen.queryByRole('link', { name: /^Open .* PDF$/ })).not.toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'Explore our standards' })).toHaveAttribute('href', '/resources#certifications');
+    expect(screen.getByRole('link', { name: /ISO 9001:2015/ })).toHaveAttribute('href', '/resources#quality-management');
   });
   it('explains the company background, actual manufacturing stages and export relationships', () => {
     renderPage(About);
-    expect(screen.getByText('2015')).toBeInTheDocument();
+    expect(screen.getAllByText('2015')[0]).toBeInTheDocument();
     expect(screen.getByText('Yueqing, Wenzhou, Zhejiang, China')).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'The people behind the product.' })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'Built in Wenzhou. Working across markets.' })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'A conversation around real products.' })).toBeInTheDocument();
     expect(screen.getByText(/United States, Canada and Mexico/)).toBeInTheDocument();
     expect(screen.getByAltText('The FAHINT team in front of the company product display')).toBeInTheDocument();
-    expect(screen.getByAltText('FAHINT colleagues reviewing a product drawing together')).toBeInTheDocument();
+    expect(screen.queryByAltText('FAHINT colleagues reviewing a product drawing together')).not.toBeInTheDocument();
     expect(screen.getByAltText('Electronic assembly equipment in the FAHINT workshop')).toHaveAttribute('width', '1920');
     expect(screen.getByAltText('Wiring-device samples in the FAHINT showroom')).toBeInTheDocument();
     expect(document.body).not.toHaveTextContent(/70,000|2,400|5500|100\+|20\+ patents|2005/);
   });
-  it('keeps section navigation on the About route when a deployment base URL is present', () => {
+  it('removes the chapter strip and redundant brand labels from About', () => {
     render(<MemoryRouter initialEntries={['/about']} future={{ v7_startTransition:true, v7_relativeSplatPath:true }}><About /></MemoryRouter>);
-    const nav = screen.getByRole('navigation', { name:'About FAHINT sections' });
-    expect(within(nav).getByRole('link', { name:'Our markets' })).toHaveAttribute('href','/about#our-markets');
-    expect(within(nav).getByRole('link', { name:'Inside FAHINT' })).toHaveAttribute('href','/about#inside-fahint');
+    expect(screen.queryByRole('navigation', { name:'About FAHINT sections' })).not.toBeInTheDocument();
+    expect(screen.queryByText('FAHINT · Brand vision')).not.toBeInTheDocument();
+    expect(screen.queryByText('WHY FAHINT')).not.toBeInTheDocument();
   });
   it('preserves the original factory assets and About photograph selections', () => {
     const factoryDirectory = join('public', 'assets', 'images', 'company', 'factory');
@@ -110,7 +107,8 @@ describe('Manufacturing and company information', () => {
     for (const [Page, page] of [[About, 'About']]) {
       const { container, unmount } = renderPage(Page);
       const images = Array.from(container.querySelectorAll('img[src*="/company/factory/"]'));
-      const expected = manifest.filter(photo => photo.page === page);
+      const selected = [companyPhotos.workshop, companyPhotos.team, companyPhotos.showroomSamples];
+      const expected = manifest.filter(photo => photo.page === page && selected.some(image => image.src.endsWith(`/${photo.asset}`)));
       expect(images).toHaveLength(expected.length);
       for (const photo of expected) {
         const image = images.find(item => item.getAttribute('src') === publicAsset(`assets/images/company/factory/${photo.asset}`));

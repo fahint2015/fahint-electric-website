@@ -5,7 +5,7 @@ import Blog from './Blog.jsx';
 import BlogPost from './BlogPost.jsx';
 import Resources from './Resources.jsx';
 import { BuyingGuide } from '../components/products/BuyingGuide.jsx';
-import { findPost } from '../data/posts.js';
+import { findPost, posts } from '../data/posts.js';
 import { findCatalogProduct } from '../data/catalogProducts.js';
 
 const slug = 'wallplate-buying-guide';
@@ -85,7 +85,7 @@ describe('Researched wallplate buying guide', () => {
   it('appears in Blog alongside the existing guides', () => {
     render(wrap(<Blog />));
     expect(screen.getByRole('link', { name: 'Wallplate Buying Guide: Openings, Sizes and Finishes' })).toHaveAttribute('href', path);
-    expect(screen.getByRole('status')).toHaveTextContent('11 articles');
+    expect(screen.getByRole('status')).toHaveTextContent(`${posts.length} articles`);
   });
 
   it('is linked from the wallplate family buying guide', () => {

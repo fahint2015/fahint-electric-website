@@ -1,0 +1,128 @@
+/* The shared contact links keep their original layout on legacy pages. */
+.rail__whatsapp-mark { filter: brightness(0) invert(1); }
+
+.brand-site {
+  --contact-size: 56px;
+  --contact-gap: 16px;
+  --contact-edge: 28px;
+  --contact-bottom: calc(28px + env(safe-area-inset-bottom, 0px));
+}
+.brand-site .rail {
+  position: fixed;
+  inset: 0;
+  z-index: 8;
+  display: block;
+  transform: none;
+  pointer-events: none;
+}
+.brand-site .rail__item {
+  --contact-color: #177792;
+  --pulse-offset: 1.6s;
+  position: absolute;
+  right: max(var(--contact-edge), env(safe-area-inset-right, 0px));
+  bottom: var(--contact-bottom);
+  width: var(--contact-size);
+  height: var(--contact-size);
+  border-radius: 50%;
+  color: #fff;
+  pointer-events: auto;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.brand-site .rail__item--wa {
+  --contact-color: #15945e;
+  --pulse-offset: 0s;
+  bottom: calc(var(--contact-bottom) + var(--contact-size) + var(--contact-gap));
+}
+.brand-site .rail__item .rail__icon {
+  width: 100%;
+  height: 100%;
+  border: 1px solid #ffffff40;
+  border-radius: inherit;
+  background: var(--contact-color);
+  box-shadow: 0 6px 22px #071b3026, inset 0 1px 0 #ffffff26;
+}
+.brand-site .rail__whatsapp-mark { width: 27px; height: 27px; }
+.brand-site .rail__item--top {
+  --contact-color: #fff;
+  right: calc(max(var(--contact-edge), env(safe-area-inset-right, 0px)) + 6px);
+  bottom: calc(var(--contact-bottom) + 2 * (var(--contact-size) + var(--contact-gap)));
+  width: 44px;
+  height: 44px;
+  color: var(--ink);
+}
+.brand-site .rail__item--top .rail__icon { border-color: #d9e4e9; box-shadow: 0 4px 16px #071b301a; }
+.brand-site .rail .rail__panel {
+  display: flex;
+  top: 50%;
+  right: calc(100% + 14px);
+  height: auto;
+  min-height: 52px;
+  padding: 10px 16px;
+  gap: 4px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #fff;
+  color: var(--ink);
+  box-shadow: 0 6px 24px #071b301a;
+  opacity: 0;
+  transform: translate(6px, -50%);
+}
+.brand-site .rail__panel span { color: var(--muted); }
+.brand-site .rail__item:focus-visible { outline: 3px solid #79c8dc; outline-offset: 5px; }
+.brand-site .rail__item:focus-visible .rail__panel { opacity: 1; transform: translate(0, -50%); }
+.brand-site:has(.navigation.is-open) .rail { visibility: hidden; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .brand-site .rail__item:not(.rail__item--top)::before,
+  .brand-site .rail__item:not(.rail__item--top)::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border: 2px solid var(--contact-color);
+    border-radius: inherit;
+    opacity: 0;
+    pointer-events: none;
+    animation: contact-pulse 4.8s ease-out infinite;
+    animation-delay: var(--pulse-offset);
+  }
+  .brand-site .rail__item:not(.rail__item--top)::after { animation-delay: calc(var(--pulse-offset) + .65s); }
+  .brand-site .rail__icon { transition: transform 220ms ease, box-shadow 220ms ease; }
+  .brand-site .rail__item:focus-visible::before,
+  .brand-site .rail__item:focus-visible::after { animation-play-state: paused; }
+}
+@media (hover: hover) and (pointer: fine) {
+  .brand-site .rail__item:hover .rail__panel { opacity: 1; transform: translate(0, -50%); }
+  .brand-site .rail__item:hover .rail__icon { transform: translateY(-3px); box-shadow: 0 10px 26px #071b3030; }
+  .brand-site .rail__item:hover::before,
+  .brand-site .rail__item:hover::after { animation-play-state: paused; }
+}
+@media (max-width: 1080px) {
+  .brand-site .hero-copy { top: min(42%, calc(100svh - var(--header-height) - 400px)); }
+  .brand-site .hero-controls {
+    bottom: max(calc(var(--contact-size) + var(--contact-bottom) + 24px), calc(100% - 100svh + var(--header-height) + var(--contact-size) + var(--contact-bottom) + 24px));
+  }
+}
+@media (max-width: 920px) {
+  .brand-site .hero-copy { top: min(59%, calc(100svh - var(--header-height) - 380px)); }
+  .brand-site .hero-down { position: static; margin-left: 8px; }
+}
+@media (max-width: 640px) {
+  .brand-site { --contact-size: 48px; --contact-gap: 12px; --contact-edge: 18px; --contact-bottom: calc(18px + env(safe-area-inset-bottom, 0px)); }
+  .brand-site .rail__item--top { right: calc(max(var(--contact-edge), env(safe-area-inset-right, 0px)) + 2px); }
+  .brand-site .rail__whatsapp-mark { width: 25px; height: 25px; }
+  .brand-site .hero-copy { top: min(58%, calc(100svh - var(--header-height) - 320px)); }
+  .brand-site .footer { padding-bottom: calc(var(--contact-size) + var(--contact-bottom) + 24px); }
+  .brand-site .footer-bottom a { align-self: flex-start; }
+}
+@media (max-width: 760px) {
+  .brand-site:has(.company-contact-form) .rail { display: none; }
+  .brand-site:has(.why-fahint) .rail { display: none; }
+}
+@media print { .brand-site .rail { display: none; } }
+
+@keyframes contact-pulse {
+  0% { opacity: 0; transform: scale(.96); }
+  8% { opacity: .35; }
+  45%, 100% { opacity: 0; transform: scale(1.55); }
+}

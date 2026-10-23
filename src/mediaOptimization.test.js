@@ -38,7 +38,7 @@ describe('site typography', () => {
   const styles = ['src/styles.css', 'src/styles/product-experience.css', 'src/styles/catalog.css']
     .map((file) => readFileSync(file, 'utf8'));
 
-  it('ships one licensed, locally hosted variable font without external font requests', () => {
+  it('preloads a licensed local variable subset and retains the full font fallback', () => {
     const font = 'public/assets/fonts/source-sans-3-variable.woff2';
     expect(existsSync(font)).toBe(true);
     expect(readFileSync(font).subarray(0, 4).toString()).toBe('wOF2');
@@ -46,17 +46,22 @@ describe('site typography', () => {
     expect(readFileSync('public/assets/fonts/source-sans-3-LICENSE.txt', 'utf8')).toContain('SIL OPEN FONT LICENSE');
     expect(styles[0]).toMatch(/@font-face\s*\{[^}]*font-family:\s*'Source Sans 3';[^}]*font-style:\s*normal;[^}]*font-weight:\s*200 900;[^}]*font-display:\s*swap;/);
     expect(styles[0]).toContain("url('/assets/fonts/source-sans-3-variable.woff2')");
+    const subset = 'public/assets/fonts/fahint-latin-variable.woff2';
+    expect(readFileSync(subset).subarray(0, 4).toString()).toBe('wOF2');
+    expect(statSync(subset).size).toBeLessThan(100 * 1024);
+    expect(styles[0]).toContain("url('/assets/fonts/fahint-latin-variable.woff2')");
+    expect(styles[0]).toMatch(/font-family:\s*'FAHINT Latin';[^}]*font-weight:\s*200 900;[^}]*font-display:\s*swap;[^}]*unicode-range:/);
     const html = readFileSync('index.html', 'utf8');
     const preload = [...html.matchAll(/<link\b[^>]*>/g)].map(([tag]) => tag).find((tag) => tag.includes('as="font"'));
-    expect(preload).toContain('href="assets/fonts/source-sans-3-variable.woff2"');
+    expect(preload).toContain('href="assets/fonts/fahint-latin-variable.woff2"');
     expect(preload).toContain('crossorigin');
     expect(styles.join('\n') + html).not.toMatch(/fonts\.(googleapis|gstatic)\.com/);
   });
 
   it('uses the shared font for every section and native form control', () => {
-    expect(/--font:\s*'Source Sans 3',/.test(styles[0]), 'Shared Source Sans 3 font token').toBe(true);
+    expect(/--font:\s*'FAHINT Latin',\s*'Source Sans 3',/.test(styles[0]), 'Shared subset with the original font fallback').toBe(true);
     const families = styles.flatMap((css) => [...css.matchAll(/font-family:\s*([^;]+);/g)].map((match) => match[1]));
-    expect(families.every((family) => ["'Source Sans 3'", 'var(--font)', 'inherit'].includes(family))).toBe(true);
+    expect(families.every((family) => ["'FAHINT Latin'", "'Source Sans 3'", 'var(--font)', 'inherit'].includes(family))).toBe(true);
     expect(styles[0]).toMatch(/button,\s*input,\s*select,\s*textarea,\s*optgroup\s*\{\s*font-family:\s*inherit;/);
   });
 

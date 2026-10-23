@@ -12,7 +12,7 @@ export default function HomeCertifications() {
           </div>
           <div>
             <p>View a certificate or download the original PDF, including its model addendum. Coverage is specific to the listed models.</p>
-            <Link to="/about#certifications" className="home-arrow-link">
+            <Link to="/resources#certifications" className="home-arrow-link">
               View certification details <ArrowRight size={16} />
             </Link>
           </div>

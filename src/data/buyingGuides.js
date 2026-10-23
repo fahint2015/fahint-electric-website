@@ -5,7 +5,7 @@ export const buyingGuides = {
   gfci: {
     intro: 'Build your GFCI outlet shortlist around ratings, tamper resistance and weather resistance. Then check the documents and order requirements for each model.',
     questions: [
-      { q: 'How do I compare standard, TR / WR and blank-face models?', a: 'GF15/GF20 are the standard-face models; GT15/GT20 add tamper resistance; GW15/GW20 combine tamper and weather resistance. GL20 is a blank-face device, not a plug-in receptacle. Use the comparison table to shortlist the rating and configuration, then have a qualified professional confirm suitability for the project.' },
+      { q: 'How do I compare standard, TR / WR and blank-face models?', a: 'GF15/GF20 are the standard-face models; GT15/GT20 add tamper resistance; GW15/GW20 combine tamper and weather resistance. GL20 is a blank-face device, not a plug-in receptacle. Filter the model directory by rating and variant, then review the model specifications and have a qualified professional confirm suitability for the project.' },
       { q: 'Does the same certificate cover every GFCI model?', a: 'No. The August 16, 2022 E504391-20210212 addendum names GF15, GF20, GT15, GT20, GW15 and GW20, plus GTN15 and GTN20 as tamper-resistant models with no feed-through. GL20 documentation remains under review. Confirm current listing status and coverage for the ordered configuration.' },
       { q: 'What should I confirm with the sample?', a: 'Record the complete model number, face rating, finish, wallplate and required markings. Compare the sample with the relevant specifications and documents. Confirm packaging and any authorized private-label artwork before approving an order.' },
       { q: 'What should I include in a bulk GFCI outlet inquiry?', a: 'Send the full model numbers, quantities by finish, destination market and required documents. Specify the wallplate and packaging format, any authorized brand artwork, sample needs and requested delivery date. FAHINT confirms minimum quantities, customization and lead times for the actual order.' },
@@ -50,7 +50,7 @@ export const buyingGuides = {
       { q: 'What should I confirm about Wi-Fi, Zigbee or touch-only operation?', a: 'Specify the required protocol and function, then confirm the app, gateway and accessories for the chosen model. Touch-only controls should not be assumed to provide network features. Switching, dimming, curtain, fan and heater controls serve different loads.' },
       { q: 'How do I specify the format and finish?', a: 'Include US or EU format, dimensions, control functions, finish, quantity and destination. Review model-specific approvals and the intended connected system with a sample. Artwork, packaging and any customization require separate confirmation.' },
     ],
-    resource: { label: 'Review the OEM approval process', to: '/capabilities#process' },
+    resource: { label: 'Read the smart switch buying guide', to: '/blog/smart-switch-buying-guide-wifi-zigbee' },
     modelCheck: 'Confirm neutral requirements, protocol, control function, US/EU format and any gateway or accessory requirements.',
   },
   'lighting-switches': {

@@ -1,12 +1,17 @@
 import { lazy, Suspense } from 'react';
-import { Routes, Route, useLocation } from 'react-router-dom';
+import { Routes, Route, useLocation, matchPath } from 'react-router-dom';
 import { normalizePathname } from './utils/prerender.js';
-import Header from './components/Header.jsx';
-import Footer from './components/Footer.jsx';
 import FloatingRail from './components/FloatingRail.jsx';
 import RouteFocusManager from './components/RouteFocusManager.jsx';
 import NotFound from './pages/NotFound.jsx';
+import BrandHeader from './components/BrandHeader.jsx';
+import BrandFooter from './components/BrandFooter.jsx';
 
+const Header = lazy(() => import('./components/Header.jsx'));
+const Footer = lazy(() => import('./components/Footer.jsx'));
+const HomeBrand = lazy(() => import('./pages/HomeBrand.jsx'));
+const Applications = lazy(() => import('./pages/Applications.jsx'));
+const ApplicationDetail = lazy(() => import('./pages/ApplicationDetail.jsx'));
 const Blog = lazy(() => import('./pages/Blog.jsx'));
 const BlogPost = lazy(() => import('./pages/BlogPost.jsx'));
 const Capabilities = lazy(() => import('./pages/Capabilities.jsx'));
@@ -24,13 +29,19 @@ const ProductsStudio = lazy(() => import('./pages/ProductsStudio.jsx'));
 
 export default function App() {
   const location = useLocation();
-  return <>
-    <Header />
+  const legacy = ['/home-studio', '/home-previous', '/home-next', '/home-legacy', '/products-legacy'].includes(normalizePathname(location.pathname));
+  return <div className={legacy ? 'legacy-site' : 'brand-site'}>
+    {legacy ? <Suspense fallback={null}><Header /></Suspense> : <BrandHeader />}
     <main id="main-content" tabIndex={-1}>
       <Suspense fallback={<div className="catalog-loading" role="status">Loading page…</div>}>
         <RouteFocusManager />
         <Routes location={{ ...location, pathname: normalizePathname(location.pathname) }}>
-          <Route path="/" element={<HomeStudio />} />
+          <Route path="/" element={<HomeBrand />} />
+          {import.meta.env.DEV && <Route path="/home-previous" element={<HomeStudio />} />}
+          <Route path="/applications" element={<Applications />} />
+          <Route path="/applications/residential" element={<ApplicationDetail key="residential" application="residential" />} />
+          <Route path="/applications/workplace" element={<ApplicationDetail key="workplace" application="workplace" />} />
+          <Route path="/applications/hospitality" element={<ApplicationDetail key="hospitality" application="hospitality" />} />
           {import.meta.env.DEV && <Route path="/home-next" element={<HomeNext />} />}
           {import.meta.env.DEV && <Route path="/home-legacy" element={<HomeLegacy />} />}
           {import.meta.env.DEV && <Route path="/products-legacy" element={<ProductsOverview />} />}
@@ -51,7 +62,8 @@ export default function App() {
         </Routes>
       </Suspense>
     </main>
-    <Footer />
-    <FloatingRail />
-  </>;
+    {legacy ? <Suspense fallback={null}><Footer /></Suspense> : <BrandFooter />}
+    {/* Product pages supply their resolved model without loading the catalogue on other pages. */}
+    {!matchPath('/products/:line/:sku', normalizePathname(location.pathname)) && <FloatingRail />}
+  </div>;
 }

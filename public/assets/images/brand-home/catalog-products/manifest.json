@@ -1,0 +1,234 @@
+{
+  "purpose": "Front-facing original complete FAHINT product and cover plate on white; Wallplates uses only a standalone BS1807 blank cover.",
+  "sourceArchive": "output/imagegen/catalog-front-products-2026-10-12",
+  "sources": [
+    {
+      "family": "gfci",
+      "model": "GF15",
+      "source": "D:\\国际站运营平台\\方特插座\\网站资料\\公司资料&产品\\产品图片\\07-Wallplates\\BS1803+BS18032+BS18033+BS18034\\面板+GFCI\\方特\\GF15\\白哑光.png",
+      "sourceSha256": "dd051e35d335787fcd554897061a6b3fc44565857dc0657492c2451a82d51c3a",
+      "method": "Complete original front product and cover on white; blank cover has no device."
+    },
+    {
+      "family": "usb-outlets",
+      "model": "FTR15C-3100",
+      "source": "D:\\国际站运营平台\\方特插座\\网站资料\\公司资料&产品\\产品图片\\07-Wallplates\\BS1803+BS18032+BS18033+BS18034\\面板+USB\\方特\\1-FTR15C-3100\\白哑光.png",
+      "sourceSha256": "5d66d74b9235a59a0ba2e165a12b5b09f22ebb6ec953c431bc85a5111c9eab66",
+      "method": "Complete original front product and cover on white; blank cover has no device."
+    },
+    {
+      "family": "receptacles",
+      "model": "DT15",
+      "source": "D:\\国际站运营平台\\方特插座\\网站资料\\公司资料&产品\\产品图片\\04-Standard Receptacle\\D系列\\DT15-DT15Q\\5-白-亮面单品+亮面无螺丝面板.png",
+      "sourceSha256": "baa12ec9cfdab7f89db55a9bd1922b89c8e48dabc62c9ed6135750189f4708df",
+      "method": "Complete original front product and cover on white; blank cover has no device."
+    },
+    {
+      "family": "dimmers",
+      "model": "DM2010",
+      "source": "D:\\国际站运营平台\\方特插座\\网站资料\\公司资料&产品\\产品图片\\03-Dimmer & sensor switch-目前只卖Dimmer\\DM2010-Digital Dimmer Light Switch\\4-白配哑光无螺丝面板.png",
+      "sourceSha256": "3cd3406e06676bd7a86458220a5afcf0f197319ec3beb0f33c9e8bdbb201b8c4",
+      "method": "Complete original front product and cover on white; blank cover has no device."
+    },
+    {
+      "family": "smart-switches",
+      "model": "UST8811",
+      "source": "D:\\国际站运营平台\\方特插座\\网站资料\\公司资料&产品\\产品图片\\05-Smart Switch\\美规\\Touch Switch\\Single Life Wire\\UST8811\\11.png",
+      "sourceSha256": "45dd830bf5a7fe5c0dc94bd196b6ffd1d03c683a5f8b48a5c76d7cb65ea4249a",
+      "method": "Frontal integral glass panel cropped from original UST8811 size image; uniform scaling only.",
+      "crop": [
+        62,
+        222,
+        396,
+        746
+      ]
+    },
+    {
+      "family": "lighting-switches",
+      "model": "DS15",
+      "source": "D:\\国际站运营平台\\方特插座\\网站资料\\公司资料&产品\\产品图片\\06-Lighting Switches\\1开\\DS15单控\\哑光白+无螺丝面板.png",
+      "sourceSha256": "b1bee6d56f0a4747c375f499c9e8960ba7df5c1bc5245a60695c89a47b8ac773",
+      "method": "Complete original front product and cover on white; blank cover has no device."
+    },
+    {
+      "family": "wallplates",
+      "model": "BS1807",
+      "source": "D:\\国际站运营平台\\方特插座\\网站资料\\公司资料&产品\\产品图片\\07-Wallplates\\BS1807-Blank\\白底图-主图\\白.png",
+      "sourceSha256": "60e306d0de8f35b4b0fb0eb67a305c9af4a44538ebe1edd1dbe477890194bea8",
+      "method": "Complete original front product and cover on white; blank cover has no device."
+    }
+  ],
+  "variants": [
+    {
+      "family": "gfci",
+      "file": "gfci-product.webp",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 12398,
+      "sha256": "d5a082855070b3adf314a3c46dde0b68d6cb9d7e5baeaa87e9b73b8ab35dd1bd"
+    },
+    {
+      "family": "gfci",
+      "file": "gfci-product-768w.webp",
+      "width": 768,
+      "height": 512,
+      "bytes": 4748,
+      "sha256": "53051f63e110104c110ad33174783cf5a73af33c3c14f6090989fe17201802b5"
+    },
+    {
+      "family": "usb-outlets",
+      "file": "usb-outlets-product.webp",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 10022,
+      "sha256": "a94b1a85ada835d3e69c1b06473f714b240dc57d5265e92dff80ff331472f907"
+    },
+    {
+      "family": "usb-outlets",
+      "file": "usb-outlets-product-768w.webp",
+      "width": 768,
+      "height": 512,
+      "bytes": 3818,
+      "sha256": "3b4a901a4e5ed074e390ed870695b1a87d12930efcf3a20b9effe9e2f971166e"
+    },
+    {
+      "family": "receptacles",
+      "file": "receptacles-product.webp",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 10406,
+      "sha256": "0c66d225a1f327e5126b640a62c495db378e38850be6feffc426cf8e62cbec5c"
+    },
+    {
+      "family": "receptacles",
+      "file": "receptacles-product-768w.webp",
+      "width": 768,
+      "height": 512,
+      "bytes": 3730,
+      "sha256": "15f61181fe90c2166f06ed3f0b9c66e90b2084ba5c046a702e4869d99adc233b"
+    },
+    {
+      "family": "dimmers",
+      "file": "dimmers-product.webp",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 7054,
+      "sha256": "a146808dc0e5e05ad675f268ace8bc0232c05955812c4d73c3afe9903608e984"
+    },
+    {
+      "family": "dimmers",
+      "file": "dimmers-product-768w.webp",
+      "width": 768,
+      "height": 512,
+      "bytes": 2606,
+      "sha256": "ff234278662d3b61d7b7bf4c4ae14be372c46fcd84b3a65cc486eb22f8e23a21"
+    },
+    {
+      "family": "smart-switches",
+      "file": "smart-switches-product.webp",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 7600,
+      "sha256": "35732266d22076ad98c38105efb2f94361022c6d2e35c000b70ab985c8d5894c"
+    },
+    {
+      "family": "smart-switches",
+      "file": "smart-switches-product-768w.webp",
+      "width": 768,
+      "height": 512,
+      "bytes": 2172,
+      "sha256": "045b9b1bc51f15e4796c0909069b3eb8795edac6b77b02c085a567dd000f82a7"
+    },
+    {
+      "family": "lighting-switches",
+      "file": "lighting-switches-product.webp",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 6750,
+      "sha256": "9767f25683fc0bfd2995a4eb52b57a32ce833c5d8d796c2ee7451e6ed0501a14"
+    },
+    {
+      "family": "lighting-switches",
+      "file": "lighting-switches-product-768w.webp",
+      "width": 768,
+      "height": 512,
+      "bytes": 2386,
+      "sha256": "b135bbde4a87b6502c33da48cfff42c6f109a0de3f26f271fe0604eac9ea04ee"
+    },
+    {
+      "family": "wallplates",
+      "file": "wallplates-product.webp",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 5198,
+      "sha256": "fac917c162fa041122d810f61034dfba318297fe13f684f4d6b52f23617068ae"
+    },
+    {
+      "family": "wallplates",
+      "file": "wallplates-product-768w.webp",
+      "width": 768,
+      "height": 512,
+      "bytes": 1612,
+      "sha256": "8529df56b8daf225d705223a388f36ab198d80fa0a5d168b9affe72832586d95"
+    }
+  ],
+  "menuVariants": [
+    {
+      "family": "gfci",
+      "file": "gfci-menu.webp",
+      "width": 256,
+      "height": 256,
+      "bytes": 1814,
+      "sha256": "d8b4772875886de66062ba955b329f2b203c345d7f35870505b1ec30bbdbcd90"
+    },
+    {
+      "family": "usb-outlets",
+      "file": "usb-outlets-menu.webp",
+      "width": 256,
+      "height": 256,
+      "bytes": 1578,
+      "sha256": "44e1d93577b5de027f7587f29496018775796fe9e59dfbf8d7a4bbf61185fdf8"
+    },
+    {
+      "family": "receptacles",
+      "file": "receptacles-menu.webp",
+      "width": 256,
+      "height": 256,
+      "bytes": 1528,
+      "sha256": "845d9cc137028f938bcc31860e77d67eb750804e60d2437183fcac3d2dd588f5"
+    },
+    {
+      "family": "dimmers",
+      "file": "dimmers-menu.webp",
+      "width": 256,
+      "height": 256,
+      "bytes": 1074,
+      "sha256": "26eb6f01960cc030e40616fe6642efa7dc2d821f4b4b135dd30d2e3f2909d568"
+    },
+    {
+      "family": "smart-switches",
+      "file": "smart-switches-menu.webp",
+      "width": 256,
+      "height": 256,
+      "bytes": 864,
+      "sha256": "bb02ed13b11c6ff20edd158f27c7846f449bc64d38ba9dc9c4fa60e550eb0a55"
+    },
+    {
+      "family": "lighting-switches",
+      "file": "lighting-switches-menu.webp",
+      "width": 256,
+      "height": 256,
+      "bytes": 964,
+      "sha256": "7d6298662921ee03ab16a756e2237879dc1acd8b96c034c21d695e59fced3bd1"
+    },
+    {
+      "family": "wallplates",
+      "file": "wallplates-menu.webp",
+      "width": 256,
+      "height": 256,
+      "bytes": 528,
+      "sha256": "5b9a5a0e60ac93714cb2c95b6c35a24c2bb614c74b73f954f864e24358dd49e4"
+    }
+  ],
+  "totalBytes": 88850
+}

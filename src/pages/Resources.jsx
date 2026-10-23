@@ -1,3 +1,4 @@
+import BrandBanner from '../components/BrandBanner.jsx';
 import { Link, useSearchParams } from 'react-router-dom';
 import { ArrowUpRight, BookOpen, Download } from 'lucide-react';
 import { certificates, findModelCertificate } from '../data/certificates.js';
@@ -10,11 +11,15 @@ import { inquiryContactHref, resolveInquiryContext } from '../utils/inquiryConte
 import { publicAsset } from '../utils/publicAsset.js';
 import { CompanyBreadcrumb, CompanyLink, usePageMeta } from '../components/company/CompanyShared.jsx';
 import './resources.css';
+import Reveal from '../components/Reveal.jsx';
 
 function ResourceDocument({ document }) {
   const titleId = `resource-${document.slug}`;
-  return <article className="resources-document" aria-labelledby={titleId}>
-    <img className="resources-document__scan" src={publicAsset(document.image)} alt="" width="90" height={document.slug === 'iso-9001' ? '121' : '117'} loading="lazy" decoding="async" />
+  return <Reveal as="article" className="resources-document" aria-labelledby={titleId}>
+    <a className="resources-document__scan" href={publicAsset(document.document)} target="_blank" rel="noreferrer" aria-label={`Open ${document.name} PDF`}>
+      <img src={publicAsset(document.image)} alt={`${document.name} certificate scan`} width="900" height={document.slug === 'iso-9001' ? '1214' : '1165'} loading="lazy" decoding="async" />
+      <span>Open original PDF <ArrowUpRight size={16} aria-hidden="true" /></span>
+    </a>
     <div className="resources-document__body">
       <p className="resources-document__type">PDF · {document.file}</p>
       <h3 id={titleId}>{document.name}</h3>
@@ -28,14 +33,11 @@ function ResourceDocument({ document }) {
       </details>
     </div>
     <div className="resources-document__actions">
-      <a href={publicAsset(document.document)} target="_blank" rel="noreferrer" aria-label={`Open ${document.name} PDF`}>
-        View PDF <ArrowUpRight size={17} aria-hidden="true" />
-      </a>
       <a href={publicAsset(document.document)} download aria-label={`Download ${document.name} PDF`}>
         Download <Download size={17} aria-hidden="true" />
       </a>
     </div>
-  </article>;
+  </Reveal>;
 }
 
 export default function Resources() {
@@ -59,14 +61,16 @@ export default function Resources() {
   };
 
   return <div className="company-page resources-page">
+    <BrandBanner title="Product resources." label="RESOURCES & SUPPORT" description="Catalogs, original certification documents and model references, all in one place." image="assets/images/brand-home/generated/application-workplace-scene.webp" />
     <header className="resources-opening">
       <div className="company-wrap">
         <CompanyBreadcrumb current="Resources" />
         <div className="resources-lead">
-          <div><p className="resources-eyebrow">FAHINT document library</p><h1>Product resources.</h1></div>
+          <div><p className="resources-eyebrow">FAHINT document library</p><h2>Find your product documents.</h2></div>
           <p>Find our product catalog, original certificates and model references. Start with the family, then confirm the details for your device.</p>
         </div>
-        <section className="resources-catalog" aria-labelledby="resources-catalog-title">
+        <div className="resources-entry-grid">
+        <Reveal as="section" className="resources-catalog" aria-labelledby="resources-catalog-title">
           <BookOpen className="resources-catalog__icon" size={44} strokeWidth={1.25} aria-hidden="true" />
           <div className="resources-catalog__copy">
             <p className="resources-eyebrow">The complete collection · PDF · 13.9 MB</p>
@@ -81,32 +85,23 @@ export default function Resources() {
               View PDF <ArrowUpRight size={17} aria-hidden="true" />
             </a>
           </div>
-        </section>
-        <p className="resources-scope-note">
-          Choosing USB charging outlets?{' '}
-          <Link className="company-text-link" to="/blog/usb-wall-outlet-buying-guide">Read the USB outlet buying guide <ArrowUpRight size={16} aria-hidden="true" /></Link>
-        </p>
-        <p className="resources-scope-note">
-          Choosing lighting controls?{' '}
-          <Link className="company-text-link" to="/blog/dimmer-buying-guide-led-0-10v">Read the dimmer buying guide <ArrowUpRight size={16} aria-hidden="true" /></Link>
-        </p>
-        <p className="resources-scope-note">
-          Matching devices and wallplates?{' '}
-          <Link className="company-text-link" to="/blog/wallplate-buying-guide">Read the wallplate buying guide <ArrowUpRight size={16} aria-hidden="true" /></Link>
-        </p>
-        <p className="resources-scope-note">
-          Comparing on/off switches?{' '}
-          <Link className="company-text-link" to="/blog/light-switch-buying-guide">Read the light switch buying guide <ArrowUpRight size={16} aria-hidden="true" /></Link>
-        </p>
-        <p className="resources-scope-note">
-          Specifying standard receptacles?{' '}
-          <Link className="company-text-link" to="/blog/standard-receptacle-buying-guide">Read the standard receptacle buying guide <ArrowUpRight size={16} aria-hidden="true" /></Link>
-        </p>
+        </Reveal>
+        <nav className="resources-guides" aria-labelledby="resources-guides-title">
+          <h3 id="resources-guides-title">Product buying guides</h3>
+          <ul>
+            <li><Link to="/blog/usb-wall-outlet-buying-guide" aria-label="Read the USB outlet buying guide">USB charging outlets <ArrowUpRight size={18} aria-hidden="true" /></Link></li>
+            <li><Link to="/blog/dimmer-buying-guide-led-0-10v" aria-label="Read the dimmer buying guide">Dimmers & lighting control <ArrowUpRight size={18} aria-hidden="true" /></Link></li>
+            <li><Link to="/blog/wallplate-buying-guide" aria-label="Read the wallplate buying guide">Matching wallplates <ArrowUpRight size={18} aria-hidden="true" /></Link></li>
+            <li><Link to="/blog/light-switch-buying-guide" aria-label="Read the light switch buying guide">Light switches <ArrowUpRight size={18} aria-hidden="true" /></Link></li>
+            <li><Link to="/blog/standard-receptacle-buying-guide" aria-label="Read the standard receptacle buying guide">Standard receptacles <ArrowUpRight size={18} aria-hidden="true" /></Link></li>
+          </ul>
+        </nav>
+        </div>
       </div>
     </header>
 
     <div className="company-wrap resources-library">
-      <section aria-labelledby="resources-family-title">
+      <section id="certifications" aria-labelledby="resources-family-title">
         <div className="resources-section-heading">
           <div><h2 id="resources-family-title">Product-family documents</h2><p>Original reference files. Review the full PDF and its model addendum before specifying.</p></div>
           <div className="resources-filter">
@@ -136,7 +131,7 @@ export default function Resources() {
         <p className="resources-scope-note">These are supplied reference documents, not a live certification-status check. Confirm current status, exact model coverage and any conditions with the issuing body and our team before ordering.</p>
       </section>
 
-      <section className="resources-quality" aria-labelledby="resources-quality-title">
+      <section id="quality-management" className="resources-quality" aria-labelledby="resources-quality-title">
         <div className="resources-section-heading"><div><h2 id="resources-quality-title">Quality management</h2><p>ISO 9001 relates to the quality management system, not a product listing.</p></div></div>
         <ResourceDocument document={qualityDocument} />
       </section>

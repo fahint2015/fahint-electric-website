@@ -1,9 +1,10 @@
-import { render, screen, within } from '@testing-library/react';
+import { fireEvent, render, screen, within } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { describe, expect, it } from 'vitest';
 import { existsSync, readFileSync } from 'node:fs';
 import GfciSeries from './GfciSeries.jsx';
 import { publicAsset } from '../utils/publicAsset.js';
+import { getCatalogProducts } from '../data/catalogProducts.js';
 
 function renderSeries() {
   return render(
@@ -58,64 +59,76 @@ describe('GfciSeries', () => {
     expect(existsSync(`public/${gfciSeriesHeroVisual.product}`)).toBe(true);
   });
 
-  it('shows full-card links for exactly the seven published public models', () => {
+  it('shows all nine published models in the same full-card grid', () => {
     const { container } = renderSeries();
     const grid = container.querySelector('.gfci-series__product-grid');
 
     expect(grid).not.toBeNull();
     expect(grid).toHaveClass('prod-grid', 'gfci-series__product-grid');
-    ['GF15', 'GF20', 'GT15', 'GT20', 'GW15', 'GW20', 'GL20'].forEach((sku) => {
+    ['GF15', 'GF20', 'GT15', 'GT20', 'GW15', 'GW20', 'GL20', 'GTN15', 'GTN20'].forEach((sku) => {
       expect(within(grid).getByRole('link', { name: new RegExp(`^${sku} `) })).toHaveAttribute(
         'href',
         `/products/gfci/${sku.toLowerCase()}`
       );
     });
-    expect(within(grid).getAllByRole('link')).toHaveLength(7);
+    expect(within(grid).getAllByRole('link')).toHaveLength(9);
+    expect(grid.querySelectorAll('.pcard')).toHaveLength(9);
+    for (const product of getCatalogProducts('gfci')) {
+      const card = within(grid).getByRole('link', { name: `${product.sku} ${product.name}` });
+      expect(within(card).getByRole('img')).toHaveAttribute('src', publicAsset(product.assets.hero));
+      expect(card).toHaveTextContent(Object.fromEntries(product.keyFacts).Rating);
+      expect(card).toHaveTextContent(Object.fromEntries(product.keyFacts).Configuration);
+      expect(card.querySelector('.pcard__tag')).toHaveTextContent('TR');
+    }
+    expect(container.querySelector('#industrial-models')).toBeNull();
+    expect(screen.queryByText('A different industrial configuration.')).not.toBeInTheDocument();
+    expect(screen.queryByText(/Nylon construction and no feed-through terminals/)).not.toBeInTheDocument();
     expect(screen.queryByText('FLB20')).not.toBeInTheDocument();
   });
 
-  it('shows the short range directly without search, dropdown filters or a mobile filter drawer', () => {
-    const { container } = renderSeries();
-
-    expect(screen.queryByRole('search')).not.toBeInTheDocument();
-    expect(screen.queryByRole('searchbox')).not.toBeInTheDocument();
-    expect(screen.queryByRole('combobox')).not.toBeInTheDocument();
-    expect(screen.queryByRole('button', { name: /Filter GFCI models/i })).not.toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: 'Explore GFCI models' })).toBeInTheDocument();
-    expect(screen.getByText('7 published models')).toBeInTheDocument();
-    expect(container.querySelector('.gfci-series__filters')).toBeNull();
+  it('includes GTN models in rating, variant and search filters and resets to all nine', () => {
+    const {container}=renderSeries();
+    fireEvent.change(screen.getByRole('combobox',{name:'Receptacle rating'}),{target:{value:'15A'}});
+    expect(screen.getByRole('status')).toHaveTextContent('4 of 9 models');
+    const grid=container.querySelector('.gfci-product-grid');
+    expect(within(grid).getAllByRole('link')).toHaveLength(4);
+    fireEvent.change(screen.getByRole('combobox',{name:'Variant'}),{target:{value:'TR'}});
+    expect(screen.getByRole('status')).toHaveTextContent('2 of 9 models');
+    fireEvent.change(screen.getByRole('searchbox',{name:'Search models'}),{target:{value:'gtn'}});
+    expect(screen.getByRole('status')).toHaveTextContent('1 of 9 models');
+    expect(within(grid).getByRole('link', { name: /^GTN15 / })).toBeVisible();
+    fireEvent.change(screen.getByRole('combobox',{name:'Receptacle rating'}),{target:{value:'20A'}});
+    expect(within(grid).getByRole('link', { name: /^GTN20 / })).toBeVisible();
+    fireEvent.change(screen.getByRole('searchbox',{name:'Search models'}),{target:{value:'unknown'}});
+    expect(screen.getByText('No models match your selection.')).toBeVisible();
+    fireEvent.click(screen.getByRole('button',{name:'Clear filters'}));
+    expect(screen.getByRole('status')).toHaveTextContent('9 of 9 models');
     expect(container.querySelector('.gfci-series__empty')).toBeNull();
   });
 
-  it('keeps the approved series evidence and program language intact', () => {
+  it('keeps the model directory and platform evidence while omitting the three paused sections', () => {
     const { container } = renderSeries();
 
     expect(container.querySelector('.gfci-series-hero')).toBeInTheDocument();
     expect(container.querySelector('.gfci-product-grid')).toBeInTheDocument();
-    expect(container.querySelector('.gfci-comparison')).toBeInTheDocument();
+    expect(container.querySelector('.gfci-comparison')).not.toBeInTheDocument();
     expect(container.querySelector('.gfci-proof-grid')).toBeInTheDocument();
-    expect(container.querySelector('.gfci-series__oem-rail')).toBeInTheDocument();
+    expect(container.querySelector('.gfci-series__poster--application')).not.toBeInTheDocument();
+    expect(container.querySelector('.gfci-series__poster--oem')).not.toBeInTheDocument();
 
     expect(screen.queryByText('GFCI product family')).not.toBeInTheDocument();
     expect(screen.getByRole('heading', {
       level: 1,
-      name: 'GFCI Product Range'
+      name: 'GFCI Outlets'
     })).toBeInTheDocument();
     const styles = readFileSync('src/styles/product-experience.css', 'utf8');
     expect(styles).not.toMatch(/\.gfci-series-hero h1\s*\{[^}]*max-width:\s*15ch/);
-    expect(screen.getByText(
+    expect(screen.queryByText(
       'Compare seven published models, then confirm the finish and program requirements for your market.'
-    )).toBeInTheDocument();
+    )).not.toBeInTheDocument();
     expect(screen.queryByText(/seven verified models/i)).not.toBeInTheDocument();
 
-    const comparison = screen.getByRole('region', { name: 'GFCI model comparison' });
-    ['Model', 'Rating', 'NEMA', 'Variant', 'Application'].forEach((heading) => {
-      expect(within(comparison).getByRole('columnheader', { name: heading })).toBeInTheDocument();
-    });
-    expect(within(comparison).getAllByRole('rowheader')).toHaveLength(7);
-    expect(within(comparison).getByRole('rowheader', { name: 'GF15' }))
-      .toContainElement(within(comparison).getByRole('link', { name: 'GF15' }));
-    expect(within(comparison).getAllByRole('link')).toHaveLength(7);
+    expect(screen.queryByRole('region', { name: 'GFCI model comparison' })).not.toBeInTheDocument();
 
     [
       ['Self-test protection', 'Automatic protection monitoring across the published GFCI platform.'],
@@ -129,101 +142,33 @@ describe('GfciSeries', () => {
       expect(screen.getByText(body)).toBeInTheDocument();
     });
 
-    expect(screen.getByText(/Match the published model, rating and variant to the project brief/)).toBeInTheDocument();
+    expect(screen.queryByText(/Match the published model, rating and variant to the project brief/)).not.toBeInTheDocument();
     ['Finish coordination', 'Brand marking', 'Packaging coordination', 'Documentation support'].forEach((option) => {
-      expect(screen.getByText(option)).toBeInTheDocument();
+      expect(screen.queryByText(option)).not.toBeInTheDocument();
     });
   });
 
-  it('emits only known lowercase deployment paths for product cards and comparison links', () => {
+  it('emits only known lowercase deployment paths for residential and industrial product links', () => {
     const { container } = renderSeries();
     const productLinks = [...container.querySelectorAll('a[href^="/products/gfci/"]')];
 
-    expect(productLinks).toHaveLength(18);
+    expect(productLinks).toHaveLength(9);
     ['gtn15', 'gtn20'].forEach((sku) => {
-      expect(screen.getByRole('link', { name: `View ${sku.toUpperCase()} details` })).toHaveAttribute('href', `/products/gfci/${sku}`);
+      expect(screen.getByRole('link', { name: new RegExp(`^${sku.toUpperCase()} `) })).toHaveAttribute('href', `/products/gfci/${sku}`);
     });
     productLinks.forEach((link) => {
       expect(link.getAttribute('href')).toMatch(/^\/products\/gfci\/[a-z0-9]+$/);
     });
   });
 
-  it('renders a full-bleed looping GFCI hero video instead of the static hero product card', async () => {
+  it('uses the approved scene banner without rendering the paused poster assets', () => {
     const { container } = renderSeries();
-    const { gfciSeriesVisuals } = await import('../data/productPageVisuals.js');
-    const markup = container.innerHTML;
-    const video = screen.getByTestId('gfci-hero-video');
-    const source = video.querySelector('source');
-
-    expect.soft(markup).not.toContain('editorial-home');
-    [
-      gfciSeriesVisuals.applicationPoster,
-      gfciSeriesVisuals.oemPoster
-    ].forEach((visual) => {
-      expect.soft(markup).toContain(visual);
-    });
-    expect(video).toHaveProperty('autoplay', true);
-    expect(video).toHaveProperty('muted', true);
-    expect(video).toHaveProperty('loop', true);
-    expect(video).toHaveProperty('playsInline', true);
-    expect(source).toHaveAttribute('src', publicAsset('assets/videos/gfci-product-video-optimized.mp4'));
-    expect(source).toHaveAttribute('type', 'video/mp4');
-    expect(video).toHaveAttribute('poster', publicAsset('assets/videos/gfci-product-video-poster.webp'));
-    expect(video).toHaveAttribute('preload', 'metadata');
-    expect(container.querySelector('.gfci-series__hero-product')).not.toBeInTheDocument();
-    expect(screen.queryByTestId('gfci-hero-scene')).not.toBeInTheDocument();
-    expect(screen.queryByTestId('gfci-hero-product')).not.toBeInTheDocument();
-    expect(screen.getByTestId('gfci-application-poster')).toHaveAttribute(
-      'src',
-      publicAsset(gfciSeriesVisuals.applicationPoster)
-    );
-    expect(screen.getByTestId('gfci-application-poster')).toHaveAttribute('width', '1536');
-    expect(screen.getByTestId('gfci-application-poster')).toHaveAttribute('height', '1024');
-    expect(screen.getByTestId('gfci-application-poster')).toHaveAttribute('loading', 'lazy');
-    expect(screen.getByTestId('gfci-oem-poster')).toHaveAttribute(
-      'src',
-      publicAsset(gfciSeriesVisuals.oemPoster)
-    );
-    expect(screen.getByTestId('gfci-oem-poster')).toHaveAttribute('width', '1000');
-    expect(screen.getByTestId('gfci-oem-poster')).toHaveAttribute('height', '1000');
-    expect(screen.getByTestId('gfci-oem-poster')).toHaveAccessibleName('FAHINT GF15 retail box and white wall plate');
-    expect(container.querySelector('.gfci-series__poster--application')).toBeInTheDocument();
-    expect(container.querySelector('.gfci-series__poster-copy--left')).toBeInTheDocument();
-    expect(container.querySelector('.gfci-series__poster--oem')).toBeInTheDocument();
-    expect(container.querySelector('.gfci-series__poster-copy--right')).toBeInTheDocument();
-    expect(container.querySelector('.gfci-series__oem-rail')).toBeInTheDocument();
-    expect(container.querySelector('.gfci-series__application-product-stage')).not.toBeInTheDocument();
-    expect(container.querySelector('.gfci-series__oem-platform')).not.toBeInTheDocument();
-  });
-
-  it('uses constrained comparison and full-width application and OEM posters', () => {
-    const { container } = renderSeries();
-    const comparison = screen.getByRole('region', { name: 'GFCI model comparison' });
-
-    expect(comparison).toHaveClass('gfci-series__table-wrap');
-    expect(comparison.parentElement).toHaveClass('gfci-series__comparison-panel');
-    expect(container.querySelector('.gfci-series__poster--application')).toBeInTheDocument();
-    expect(container.querySelector('.gfci-series__poster--oem')).toBeInTheDocument();
-
-    const styles = readFileSync('src/styles/product-experience.css', 'utf8');
-    expect(styles).toMatch(/\.pcard__media\s*\{[^}]*aspect-ratio:\s*1/s);
-    expect(styles).toMatch(/\.pcard__media img\s*\{[^}]*object-fit:\s*contain[^}]*padding:/s);
-    expect(styles).toMatch(/\.pcard__name\s*\{[^}]*overflow-wrap:\s*anywhere/s);
-    expect(styles).toMatch(/\.gfci-series__comparison-panel\s*\{[^}]*border-radius:/s);
-    expect(styles).toMatch(/\.gfci-comparison \.spec-table\s*\{[^}]*min-width:\s*760px/s);
-    expect(styles).toMatch(/\.gfci-comparison tbody tr:nth-child\(even\)/);
-    expect(styles).toMatch(/\.gfci-series__poster\s*\{[^}]*min-height:\s*clamp\(/s);
-    expect(styles).toMatch(/\.gfci-series__poster-image\s*\{[^}]*position:\s*absolute[^}]*inset:\s*0/s);
-    expect(styles).toMatch(/\.gfci-series__poster--application \.gfci-series__poster-shade\s*\{[^}]*background:/s);
-    expect(styles).toMatch(/\.gfci-series__poster--oem \.gfci-series__poster-shade\s*\{[^}]*background:/s);
-    expect(styles).toMatch(/\.gfci-series__poster-copy--right\s*\{[^}]*justify-self:\s*end/s);
-    expect(styles).not.toMatch(/\.gfci-series__oem::before\s*\{/s);
-    expect(styles).toMatch(/@media \(max-width: 520px\)[\s\S]*?\.gfci-series__poster-copy\s*\{[^}]*padding-right:\s*max\(78px,[^}]*safe-area-inset-right/s);
-    expect(styles).toMatch(/@media \(prefers-reduced-motion:\s*reduce\)[\s\S]*?\.gfci-series__poster-image/s);
-    expect(styles).toMatch(/\.gfci-series__poster-section--oem\s*\{[^}]*margin-bottom:\s*-1px/s);
-    expect(styles).not.toContain('.gfci-series__application-product-stage');
-    expect(styles).not.toContain('.gfci-series__oem-platform');
-    expect(styles).not.toMatch(/\.gfci-series__oem(?:-panel)?\s*\{[^}]*(?:#f7f5f0|#ece8e1|beige)/is);
+    const hero = container.querySelector('.gfci-series__hero img');
+    expect(hero).toHaveAttribute('src', publicAsset('assets/images/lines/gfci-series-kitchen-wide-v1.webp'));
+    expect(hero).toHaveAttribute('fetchpriority', 'high');
+    expect(screen.queryByTestId('gfci-hero-video')).not.toBeInTheDocument();
+    expect(screen.queryByTestId('gfci-application-poster')).not.toBeInTheDocument();
+    expect(screen.queryByTestId('gfci-oem-poster')).not.toBeInTheDocument();
   });
 
   it('keeps the series route ahead of product and generic family routes', () => {

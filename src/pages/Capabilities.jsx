@@ -1,3 +1,5 @@
+import BrandBanner from '../components/BrandBanner.jsx';
+import Reveal from '../components/Reveal.jsx';
 import { Link } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
 import { CompanyBreadcrumb, CompanyImage, CompanyLink, usePageMeta } from '../components/company/CompanyShared.jsx';
@@ -19,7 +21,7 @@ const factoryStages = [
   {
     id: 'testing', title: 'GFCI functional testing', photo: capabilitiesPhotos.testing,
     description: 'Dedicated stations check GFCI functions, separate from component assembly. Confirm the inspection requirements for the model you choose.',
-    link: { to: '/#studio-making', label: 'See our testing stations' },
+    link: { to: '/capabilities#production', label: 'See our testing stations' },
   },
   {
     id: 'laboratory', title: 'Laboratory verification', photo: capabilitiesPhotos.laboratory,
@@ -37,20 +39,8 @@ const oemOptions = [
 export default function Capabilities() {
   usePageMeta('Manufacturing & OEM / ODM', 'Explore FAHINT manufacturing, functional testing and private-label support for wiring devices. Review products, samples and model-specific documentation.');
   return <div className="company-page capabilities-page">
-    <header className="cap-hero">
-      <div className="cap-wrap">
-        <CompanyBreadcrumb current="Manufacturing & OEM / ODM" />
-        <div className="cap-hero__layout">
-          <div className="cap-hero__copy">
-            <h1>Your product.<br /><span>Our production.</span></h1>
-            <p>Wiring-device manufacturing and OEM / ODM support for brands and distributors. Review product selection, assembly, testing and private-label packaging with our Wenzhou team.</p>
-            <CompanyLink to="/contact?topic=oem" light>Discuss your OEM / ODM project</CompanyLink>
-          </div>
-          <figure className="cap-hero__photo">
-            <CompanyImage {...capabilitiesPhotos.workshop} priority fetchpriority="high" />
-            <figcaption><span>FAHINT workshop · Wenzhou, China</span><span>AI-refined image</span></figcaption>
-          </figure>
-        </div>
+    <BrandBanner title={<>Your product.<br /><span>Our production.</span></>} label="MANUFACTURING & OEM / ODM" description="Wiring-device manufacturing and OEM / ODM support for brands and distributors. Review product selection, assembly, testing and private-label packaging with our Wenzhou team." image={capabilitiesPhotos.workshop.src} width={capabilitiesPhotos.workshop.width} height={capabilitiesPhotos.workshop.height} alt={capabilitiesPhotos.workshop.alt}><CompanyLink to="/contact?topic=oem" light>Discuss your OEM / ODM project</CompanyLink></BrandBanner>
+    <header className="cap-hero"><div className="cap-wrap"><CompanyBreadcrumb current="Manufacturing & OEM / ODM" />
         <nav className="cap-chapters" aria-label="Manufacturing sections">
           <Link to="/capabilities#production">Inside production <ArrowUpRight size={19} aria-hidden="true" /></Link>
           <Link to="/capabilities#oem">OEM / ODM <ArrowUpRight size={19} aria-hidden="true" /></Link>
@@ -66,14 +56,14 @@ export default function Capabilities() {
           <p>Different stages, different equipment. A closer look at the work behind each device.</p>
         </div>
         <div className="cap-factory-stories">
-          {factoryStages.map(stage => <article key={stage.id} className="cap-stage" aria-labelledby={'stage-' + stage.id}>
+          {factoryStages.map(stage => <Reveal as="article" key={stage.id} className="cap-stage" aria-labelledby={'stage-' + stage.id}>
             <div className="cap-stage__photo"><CompanyImage {...stage.photo} /></div>
             <div className="cap-stage__copy">
               <h3 id={'stage-' + stage.id}>{stage.title}</h3>
               <p>{stage.description}</p>
               {stage.link && <CompanyLink to={stage.link.to} secondary>{stage.link.label}</CompanyLink>}
             </div>
-          </article>)}
+          </Reveal>)}
         </div>
         <p className="cap-photo-note">AI-refined from FAHINT factory photographs. For test records and model documentation, please contact our team.</p>
       </div>
@@ -92,10 +82,10 @@ export default function Capabilities() {
           <p><Link to="/products/gfci">Compare GFCI outlet models</Link> or <Link to="/products/usb-outlets">explore USB wall outlets</Link> to prepare your shortlist.</p>
           <CompanyLink to="/contact?topic=oem" secondary>Send your requirements</CompanyLink>
         </div>
-        <figure className="cap-oem__photo">
+        <Reveal as="figure" className="cap-oem__photo">
           <div><CompanyImage src="assets/images/products/gf15-package-standard-white-v1.jpg" alt="FAHINT GF15 retail packaging and white wall plate" width={800} height={800} /></div>
           <figcaption>FAHINT packaging example.<br />Private-label artwork requires authorization and approval.</figcaption>
-        </figure>
+        </Reveal>
       </div>
     </section>
 
@@ -115,10 +105,10 @@ export default function Capabilities() {
           <CompanyLink to="/blog/how-to-source-ul-listed-gfci-from-china" secondary>Read the sourcing checklist</CompanyLink>
         </div>
         <ol className="cap-process" aria-label="From brief to production">
-          {steps.map(([title, description], index) => <li key={title}>
+          {steps.map(([title, description], index) => <Reveal as="li" key={title} delay={index * 60}>
             <span className="cap-process__number" aria-hidden="true">0{index + 1}</span>
             <div><h3>{title}</h3><p>{description}</p></div>
-          </li>)}
+          </Reveal>)}
         </ol>
       </div>
     </section>
@@ -134,7 +124,7 @@ export default function Capabilities() {
           <h3>Documentation for the model you choose.</h3>
           <p>Review the original UL product-family files and ISO 9001 quality-system document, then confirm the exact model, finish and construction for your order.</p>
           <p>A company certificate does not certify every product in the range.</p>
-          <CompanyLink to="/about#certifications" secondary light>Review certificates</CompanyLink>
+          <CompanyLink to="/resources#certifications" secondary light>Review certificates</CompanyLink>
         </div>
       </div>
     </section>

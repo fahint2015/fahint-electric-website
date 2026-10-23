@@ -27,7 +27,7 @@ const createClientManifest = () => ({
   '_vendor.js': { file: 'assets/vendor.js' },
   '_shared.js': { file: 'assets/shared.js', imports: ['_vendor.js'] },
   '_not-needed.js': { file: 'assets/not-needed.js' },
-  ...Object.fromEntries(['HomeStudio', 'ProductsStudio', 'GfciSeries', 'LineDetail', 'ProductDetail', 'Blog', 'BlogPost', 'About', 'Capabilities', 'Resources', 'Contact']
+  ...Object.fromEntries(['Applications', 'ApplicationDetail', 'HomeBrand', 'ProductsStudio', 'GfciSeries', 'LineDetail', 'ProductDetail', 'Blog', 'BlogPost', 'About', 'Capabilities', 'Resources', 'Contact']
     .map(name => [`src/pages/${name}.jsx`, { file: `assets/${name}.js`, imports: ['_shared.js', '_vendor.js'], dynamicImports: ['_not-needed.js'] }])),
 });
 
@@ -40,7 +40,7 @@ describe('GitHub Pages deployment', () => {
     const { preparePages } = await loadPreparePages();
     const distDir = await createDist(`<!doctype html><html><head><base href="${expectedBase}"><link rel="modulepreload" crossorigin href="${expectedBase}assets/vendor.js"></head><body><div id="root"></div></body></html>`);
     await preparePages({ distDir, expectedBase, clientManifest: createClientManifest() });
-    for (const [route, page] of [['', 'HomeStudio'], ['products', 'ProductsStudio'], ['products/gfci', 'GfciSeries'],
+    for (const [route, page] of [['', 'HomeBrand'], ['applications', 'Applications'], ['applications/residential', 'ApplicationDetail'], ['applications/workplace', 'ApplicationDetail'], ['applications/hospitality', 'ApplicationDetail'], ['products', 'ProductsStudio'], ['products/gfci', 'GfciSeries'],
       ['products/usb-outlets', 'LineDetail'], ['products/usb-outlets/ftr15-3100', 'ProductDetail'], ['products/gfci/gf15', 'ProductDetail'],
       ['blog', 'Blog'], ['blog/gfci-vs-afci-whats-the-difference', 'BlogPost'], ['about', 'About'], ['capabilities', 'Capabilities'],
       ['resources', 'Resources'], ['contact', 'Contact']]) {
@@ -53,7 +53,7 @@ describe('GitHub Pages deployment', () => {
       expect(links.filter(link => !link.href.endsWith('/vendor.js')).every(link => link.getAttribute('fetchpriority') === 'low'), route).toBe(true);
     }
     const fallback = await readFile(join(distDir, '404.html'), 'utf8');
-    expect(fallback).not.toContain('assets/HomeStudio.js');
+    expect(fallback).not.toContain('assets/HomeBrand.js');
     expect(fallback).not.toContain('assets/shared.js');
   });
 
@@ -61,8 +61,8 @@ describe('GitHub Pages deployment', () => {
     const { preparePages } = await loadPreparePages();
     const manifest = createClientManifest();
     if (failure === 'missing-page') delete manifest['src/pages/About.jsx'];
-    if (failure === 'missing-file') delete manifest['src/pages/HomeStudio.jsx'].file;
-    if (failure === 'unsafe-path') manifest['src/pages/HomeStudio.jsx'].file = 'assets/../server.js';
+    if (failure === 'missing-file') delete manifest['src/pages/HomeBrand.jsx'].file;
+    if (failure === 'unsafe-path') manifest['src/pages/HomeBrand.jsx'].file = 'assets/../server.js';
     const distDir = await createDist(failure === 'missing-head' ? '<base href="/">' : '<head><base href="/"></head>');
     const initial = await readFile(join(distDir, 'index.html'), 'utf8');
     await expect(preparePages({ distDir, expectedBase: '/', clientManifest: manifest })).rejects.toThrow(/module|manifest|head/i);

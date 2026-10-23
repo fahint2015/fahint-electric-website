@@ -138,6 +138,33 @@ function archivedProductDetails(specification) {
   };
 }
 
+function residentialFunctionalFeatures(product) {
+  const materials = Object.fromEntries(product.construction.materials);
+  const performance = Object.fromEntries(product.construction.performance);
+  const documentation = product.listing.status === 'verified'
+    ? `UL / cUL documentation: file ${product.listing.file}, supplied report ${product.listing.reportReference}; confirm current coverage for the ordered model.`
+    : `${product.sku} certification documentation remains under review; request the exact-model listing record.`;
+  const variants = product.features.filter(feature => /^(Tamper-resistant|Weather-resistant|Blank-face)/i.test(feature));
+  return [
+    documentation,
+    'Initial self-test within 3 seconds after power-up. Self-test every 15 minutes.',
+    `MCU-controlled self-test program. ${materials['Circuit protection']}.`,
+    product.category === 'blank'
+      ? 'No power is delivered to the controlled load when line-load wiring is reversed.'
+      : 'No power to the receptacle face or downstream receptacle when line-load wiring is reversed.',
+    'Legacy temperature-rise conditions: regular operation below 20K; a 20A full-load test below 33K. The test condition does not change the ordered device\'s current rating.',
+    `High-strength, flame-retardant ${materials['Face & body'].toLowerCase()} face and body; ${materials.Flammability} flammability rating.`,
+    `Integrated current-carrying components: ${materials['Current-carrying components']}; ${materials.Contacts.toLowerCase()}; ${materials['Mounting yoke']}.`,
+    `Reinforced terminal screws reduce slipping; terminal screw torque: ${performance['Terminal screw torque']}.`,
+    `Dual LED indicator lights: ${performance['Indicator system']}; soft brightness for night-time use.`,
+    `Factory inspection: ${performance['Factory inspection']}.`,
+    `Trip response: ${performance['Trip response']}.`,
+    `Legacy patent statement: ${performance['Patent protection']}.`,
+    `Warranty: ${performance.Warranty}.`,
+    ...variants
+  ];
+}
+
 function buildPackagingAssets(sku) {
   const key = String(sku).toLowerCase();
   return {
@@ -333,7 +360,7 @@ export const products = [
     }),
     assets: buildEditorialAssets('GL20')
   }
-];
+].map(product => ({ ...product, functionalFeatures: residentialFunctionalFeatures(product) }));
 
 export const productReviewQueue = [
   {

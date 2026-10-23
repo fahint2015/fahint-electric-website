@@ -1,3 +1,4 @@
+import BrandBanner, { BrandBreadcrumb } from '../components/BrandBanner.jsx';
 import { useState } from 'react';
 import { posts, postCategories } from '../data/posts.js';
 import { CompanyBreadcrumb, CompanyClosing, usePageMeta } from '../components/company/CompanyShared.jsx';
@@ -9,7 +10,8 @@ export default function Blog() {
   const filtered = category === 'All' ? posts : posts.filter(post => post.category === category);
   const [lead, ...rest] = filtered;
   return <div className="company-page reading-page">
-    <header className="company-masthead company-section--paper"><div className="company-wrap"><CompanyBreadcrumb current="Guides & insights" /><div className="company-heading company-heading--hero"><h1>A closer look<br /><span>at wiring devices.</span></h1><p>Practical reading for product buyers. Understand the options, review the documentation and prepare a better sourcing brief.</p></div></div></header>
+    <BrandBanner title={<>A closer look<br /><span>at wiring devices.</span></>} label="BLOG & INSIGHTS" description="Practical reading for product buyers. Understand the options, review the documentation and prepare a better sourcing brief." image="assets/images/brand-home/generated/application-workplace-scene.webp" />
+    <BrandBreadcrumb current="Guides & insights" />
     <section className="company-section"><div className="company-wrap">
       <div className="reading-filters"><div role="group" aria-label="Article category">{postCategories.map(item => <button type="button" key={item} onClick={() => setCategory(item)} aria-pressed={category === item}>{item}</button>)}</div><p role="status">{filtered.length} {filtered.length === 1 ? 'article' : 'articles'}</p></div>
       {lead && <ReadingCard post={lead} lead />}

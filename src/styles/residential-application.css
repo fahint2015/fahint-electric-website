@@ -1,0 +1,64 @@
+.brand-site .residential-application { --motion-distance:32px; --motion-duration:700ms; }
+.brand-site .residential-intro { display:grid; grid-template-columns:1.35fr 1fr; align-items:center; gap:clamp(32px,5vw,96px); padding-block:32px 64px; }
+.brand-site .residential-scene img { display:block; width:100%; height:auto; object-fit:contain; }
+.brand-site .residential-scene figcaption { margin-top:8px; font-size:12px; color:var(--muted); }
+.brand-site .residential-intro-copy h2 { max-width:18ch; }
+.brand-site .residential-intro-copy .body-copy { max-width:34ch; margin-block:24px; }
+.brand-site .residential-offer { background:var(--navy); color:#fff; padding-block:64px; }
+.brand-site .residential-section-heading { margin-bottom:40px; }
+.brand-site .residential-capabilities { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:32px; }
+.brand-site .residential-capabilities > div + div { border-left:1px solid #ffffff30; padding-left:32px; }
+.brand-site .residential-capabilities a { position:relative; display:block; height:100%; padding:8px 24px 8px 0; }
+.brand-site .residential-capabilities a > svg:first-child { display:block; color:#b1e1eb; }
+.brand-site .residential-capabilities a > svg:last-child { position:absolute; right:0; top:14px; color:#b1e1eb; transition:transform 180ms; }
+.brand-site .residential-capabilities a:hover > svg:last-child { transform:translateX(4px); }
+.brand-site .residential-capabilities h3 { margin-top:24px; font-size:clamp(22px,1.4vw,28px); font-weight:600; line-height:1.25; }
+.brand-site .residential-capabilities p { max-width:25ch; margin-top:10px; color:#cbdce4; font-size:17px; line-height:1.6; }
+.brand-site .residential-capabilities a:focus-visible { outline-color:#fff; outline-offset:8px; }
+.brand-site .residential-features { padding-block:56px 42px; }
+.brand-site .residential-feature-heading { display:flex; align-items:center; justify-content:space-between; gap:24px; margin-bottom:28px; }
+.brand-site .residential-feature-heading h2 { max-width:none; font-size:clamp(28px,2.4vw,40px); line-height:1.2; }
+.brand-site .residential-guide { flex-shrink:0; min-height:44px; padding:10px 16px; border:1px solid var(--line); }
+.brand-site .residential-guide:hover { border-color:var(--blue); }
+.brand-site .residential-feature-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:clamp(24px,3vw,48px); padding-top:42px; border-top:1px solid var(--line); }
+.brand-site .residential-feature-grid article { display:grid; grid-template-columns:28px minmax(0,1fr); gap:8px 16px; align-content:start; }
+.brand-site .residential-feature-grid svg { grid-column:1; grid-row:1; align-self:center; width:28px; height:28px; color:var(--blue); }
+.brand-site .residential-feature-grid h3 { grid-column:2; margin:0; font-size:clamp(19px,1.35vw,23px); font-weight:600; line-height:1.3; }
+.brand-site .residential-feature-grid p { grid-column:2; max-width:34ch; margin:0; color:var(--muted); font-size:16px; line-height:1.65; }
+.brand-site .residential-application .concise-product-related { border-top:1px solid var(--line); padding-block:64px; }
+.brand-site .residential-application .concise-product-related h2 { margin-bottom:40px; text-align:center; color:var(--ink); }
+.brand-site .residential-contact { background:var(--blue); color:#fff; padding-block:64px; }
+.brand-site .residential-contact .wrap { display:flex; align-items:center; justify-content:space-between; gap:40px; }
+.brand-site .residential-contact h2 { font-size:clamp(28px,2.5vw,40px); }
+.brand-site .residential-contact p { margin-top:12px; color:#fff; }
+.brand-site .residential-contact a { flex-shrink:0; }
+@media (min-width:601px) and (max-width:1080px) {
+  .brand-site .residential-capabilities { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .brand-site .residential-capabilities > div:nth-child(odd) { border-left:0; padding-left:0; }
+}
+@media (max-width:760px) {
+  .brand-site .residential-intro { grid-template-columns:1fr; gap:24px; padding-block:16px 48px; }
+  .brand-site .residential-intro-copy h2 br { display:none; }
+  .brand-site .residential-intro-copy h2 { max-width:20ch; }
+  .brand-site .residential-offer { padding-block:48px; }
+  .brand-site .residential-section-heading { margin-bottom:28px; }
+  .brand-site .residential-features { padding-block:40px; }
+  .brand-site .residential-feature-heading { flex-direction:column; align-items:flex-start; gap:16px; margin-bottom:24px; }
+  .brand-site .residential-feature-grid { grid-template-columns:1fr; gap:0; padding-top:0; border-top:0; }
+  .brand-site .residential-feature-grid article { padding-block:20px; border-top:1px solid var(--line); }
+  .brand-site .residential-feature-grid article:last-child { padding-bottom:0; }
+  .brand-site .residential-contact .wrap { flex-direction:column; align-items:flex-start; gap:24px; }
+  .brand-site .residential-application .concise-product-related { padding-block:48px; }
+}
+@media (max-width:600px) {
+  .brand-site .residential-capabilities { grid-template-columns:1fr; gap:0; }
+  .brand-site .residential-capabilities > div + div { border-left:0; padding-left:0; border-top:1px solid #ffffff30; }
+  .brand-site .residential-capabilities a { display:grid; grid-template-columns:32px minmax(0,1fr) 18px; gap:8px 18px; padding:24px 0; }
+  .brand-site .residential-capabilities > div:first-child a { padding-top:0; }
+  .brand-site .residential-capabilities > div:last-child a { padding-bottom:0; }
+  .brand-site .residential-capabilities a > svg:first-child { grid-row:span 2; width:28px; }
+  .brand-site .residential-capabilities a > svg:last-child { position:static; grid-column:3; grid-row:1 / span 2; width:18px; align-self:center; }
+  .brand-site .residential-capabilities h3 { grid-column:2; margin:0; font-size:22px; }
+  .brand-site .residential-capabilities p { grid-column:2; margin:0; max-width:none; font-size:16px; }
+}
+@media (prefers-reduced-motion:reduce) { .brand-site .residential-capabilities a > svg:last-child { transition:none; } }

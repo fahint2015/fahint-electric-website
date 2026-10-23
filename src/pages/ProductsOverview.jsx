@@ -106,7 +106,7 @@ export default function ProductsOverview() {
               <div>
                 <h3>Model-specific certification</h3>
                 <p>Certification coverage varies by model. Review the applicable UL/cUL files and model addenda before specifying.</p>
-                <Link className="editorial-text-link" to="/about#certifications">View certification details <ArrowRight size={17} aria-hidden="true" /></Link>
+                <Link className="editorial-text-link" to="/resources#certifications">View certification details <ArrowRight size={17} aria-hidden="true" /></Link>
               </div>
             </li>
           </ul>

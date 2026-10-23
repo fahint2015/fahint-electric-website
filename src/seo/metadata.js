@@ -1,11 +1,31 @@
 // Shared by browser pages and build-time HTML heads. Do not import the full catalogue here.
 const organization = { '@type': 'Organization', name: 'FAHINT', legalName: 'Wenzhou Fahint Electric Co., Ltd.' };
-const homeImage = 'assets/images/hero/hero-interior.webp';
+const homeImage = 'assets/images/brand-home/generated/hero-family-belief-background.webp';
 export const staticMetadata = {
   '/': {
     title: 'Wiring Device Manufacturer | GFCI & USB Outlets | FAHINT',
     description: 'FAHINT manufactures GFCI outlets, USB wall outlets, switches and dimmers for North American markets, with OEM/ODM support for brands and distributors.',
-    image: homeImage, imageAlt: 'FAHINT wiring devices in an interior setting', organization: true,
+    image: homeImage, imageAlt: 'A family in a bright home — FAHINT brand concept', organization: true,
+  },
+  '/applications': {
+    title: 'Residential, Workplace & Hospitality Applications | FAHINT',
+    description: 'Explore FAHINT protection, charging and lighting controls for residential, workplace and hospitality spaces. Review the model for your application.',
+    image: 'assets/images/brand-home/generated/application-residential-scene.webp', imageAlt: 'Residential interior — FAHINT brand concept', label: 'Applications',
+  },
+  '/applications/residential': {
+    title: 'Residential Outlets, Charging & Lighting Controls | FAHINT',
+    description: 'Explore FAHINT GFCI outlets, USB charging, dimmers and smart controls for residential spaces. Compare models and plan your next home project.',
+    image: 'assets/images/brand-home/applications/residential-cutaway-v2.webp', imageAlt: 'Illustrated residential cutaway with kitchen, living room and bedroom', label: 'Residential applications',
+  },
+  '/applications/workplace': {
+    title: 'Workplace Outlets, USB Charging & Lighting Controls | FAHINT',
+    description: 'Explore FAHINT receptacles, USB-C charging, switches and dimmers for offices, meeting rooms and shared spaces. Compare models for your workplace project.',
+    image: 'assets/images/brand-home/applications/workplace-cutaway-v2.webp', imageAlt: 'Commercial office cutaway with open workstations, glass meeting room and reception', label: 'Workplace applications',
+  },
+  '/applications/hospitality': {
+    title: 'Hospitality Outlets, Charging & Room Controls | FAHINT',
+    description: 'Explore FAHINT USB outlets, GFCI protection, switches and dimmers for hotel guest rooms. Compare charging, lighting controls and coordinated finishes.',
+    image: 'assets/images/brand-home/applications/hospitality-cutaway-v3.webp', imageAlt: 'Hotel guest floor with a shared corridor and three separate rooms with ensuite bathrooms', label: 'Hospitality applications',
   },
   '/products': {
     title: 'FAHINT | Product Catalog',

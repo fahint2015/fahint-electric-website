@@ -79,7 +79,7 @@ describe('Header', () => {
     renderHeader();
 
     expect(screen.getByRole('link', { name: 'Skip to main content' }))
-      .toHaveAttribute('href', '#main-content');
+      .toHaveAttribute('href', '/#main-content');
   });
 
   it('uses a full-width sticky glass surface instead of a floating rounded card', () => {

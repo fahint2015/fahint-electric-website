@@ -5,7 +5,7 @@ import Blog from './Blog.jsx';
 import BlogPost from './BlogPost.jsx';
 import Resources from './Resources.jsx';
 import { BuyingGuide } from '../components/products/BuyingGuide.jsx';
-import { findPost } from '../data/posts.js';
+import { findPost, posts } from '../data/posts.js';
 import { findCatalogProduct } from '../data/catalogProducts.js';
 
 const slug = 'dimmer-buying-guide-led-0-10v';
@@ -74,7 +74,7 @@ describe('Researched dimmer buying guide', () => {
     render(wrap(<Blog />));
     expect(screen.getByRole('link', { name: 'Dimmer Buying Guide: LED Loads and 0–10V Compatibility' })).toHaveAttribute('href', path);
     expect(screen.getByRole('link', { name: 'USB Wall Outlet Buying Guide: Ports, PD and Power' })).toHaveAttribute('href', '/blog/usb-wall-outlet-buying-guide');
-    expect(screen.getByRole('status')).toHaveTextContent('11 articles');
+    expect(screen.getByRole('status')).toHaveTextContent(`${posts.length} articles`);
   });
 
   it('is linked from the dimmer family buying guide', () => {

@@ -1,3 +1,4 @@
+import BrandBanner from '../components/BrandBanner.jsx';
 import { useState } from 'react';
 import { Link, useParams, useSearchParams, Navigate } from 'react-router-dom';
 import { ArrowRight, Search } from 'lucide-react';
@@ -7,7 +8,6 @@ import { filterUsbProducts, usbFilters } from '../data/usbFilters.js';
 import { resolveUsbComparison } from '../data/usbComparison.js';
 import CatalogModelCard from '../components/products/CatalogModelCard.jsx';
 import UsbComparison from '../components/products/UsbComparison.jsx';
-import SafeImage from '../components/SafeImage.jsx';
 import { familyMetadata } from '../seo/metadata.js';
 import { usePageMetadata } from '../seo/usePageMetadata.js';
 import { BuyingGuide } from '../components/products/BuyingGuide.jsx';
@@ -44,45 +44,29 @@ function ModelCatalogue({ line }) {
     if (isUsb) updateUsbState({}, compared);
     else { setLocalQuery(''); setGroup(''); }
   };
-  const isCenteredPoster = ['receptacles', 'smart-switches'].includes(line.slug);
-  const isRightPoster = line.slug === 'lighting-switches';
   const poster = {
     'usb-outlets': 'assets/images/lines/usb-series-desktop-charging-v1.webp',
     dimmers: 'assets/images/lines/dimmer-series-living-room-v1.webp',
     receptacles: 'assets/images/lines/receptacle-series-desk-power-v1.webp',
     'smart-switches': 'assets/images/lines/smart-series-bedside-touch-v1.webp',
     'lighting-switches': 'assets/images/lines/lighting-series-stair-entry-v1.webp',
+    wallplates: 'assets/images/brand-home/generated/application-residential-scene.webp'
   }[line.slug];
+  const isWidePoster = isUsb || line.slug === 'dimmers';
 
   usePageMetadata(familyMetadata(line));
 
   return <div className="catalog-series">
-    <section className={`catalog-series__intro${poster ? ' catalog-series__intro--poster' : ''}${isCenteredPoster ? ' catalog-series__intro--centered' : ''}${isRightPoster ? ' catalog-series__intro--right' : ''}`} aria-labelledby="catalog-series-title">
-      {poster && <>
-        <SafeImage className="catalog-series__poster" src={poster}
-          alt="" width={1920} height={450} loading="eager" fetchpriority="high" />
-        <div className="catalog-series__poster-shade" aria-hidden="true" />
-      </>}
-      <div className="container">
-        <nav className="crumbs" aria-label="Breadcrumb">
-          <Link to="/">Home</Link><span aria-hidden="true">/</span><Link to="/products">Products</Link>
-          <span aria-hidden="true">/</span><span aria-current="page">{line.name}</span>
-        </nav>
-        <div className="catalog-section-heading">
-          <div><h1 id="catalog-series-title">{line.name}</h1></div>
-          {!isCenteredPoster && !isRightPoster && <p>{line.summary}</p>}
-        </div>
-        <div className="catalog-series__meta">
-          <span>{models.length} model configurations</span><span>Model-specific specifications</span><span>Original product references</span>
-        </div>
-      </div>
-    </section>
+    <BrandBanner title={line.name} label={false} image={poster} className="brand-banner--series"
+      {...(isWidePoster ? { width: 1920, height: 450, position: '72% center' } : {})} />
     <section className="catalog-series__models" aria-label={`${line.name} models`}>
       <div className="container">
+        <nav className="crumbs" aria-label="Breadcrumb"><Link to="/">Home</Link><span aria-hidden="true">/</span><Link to="/products">Products</Link><span aria-hidden="true">/</span><span aria-current="page">{line.name}</span></nav>
         {isUsb && <header className="catalog-section-heading">
           <div><h2>Compare USB wall outlets</h2><p>Choose USB-A, USB-A + USB-C or dual USB-C ports for your product range. Compare conventional 5V charging with 20W, 36W and 65W Power Delivery models, then check the separate AC receptacle rating and single-port output.</p></div>
           <Link className="textlink" to="/blog/usb-wall-outlet-buying-guide">Compare ports and charging power <ArrowRight size={16} aria-hidden="true" /></Link>
         </header>}
+        <div className="brand-catalog-layout">
         <div className={`catalog-filters${isUsb ? ' catalog-filters--usb' : ''}`}>
           <label className="catalog-filters__search"><span>Search models</span><div><Search size={18} aria-hidden="true" />
             <input type="search" value={query} onChange={(event) => isUsb ? updateUsbFilter('q', event.target.value) : setLocalQuery(event.target.value)} placeholder="Model number or feature" aria-describedby={aliasMatch ? 'catalog-alias-note' : undefined} />
@@ -100,6 +84,7 @@ function ModelCatalogue({ line }) {
             <Link className="textlink" to={`/products/${line.slug}${isUsb && params.size ? `?${params}` : ''}#buying-guide`}>Need help choosing?</Link></div>
           {aliasMatch && <p id="catalog-alias-note" className="catalog-filters__note" aria-live="polite">{aliasMatch.sourceModel} is listed in the current catalog as {aliasMatch.sku}.</p>}
         </div>
+        <div className="brand-catalog-results">
         {isUsb && <UsbComparison products={compared} onChange={updateComparison} />}
         {filtered.length ? <div className="catalog-model-grid">{filtered.map((product) => <CatalogModelCard key={product.slug} product={product}>
           {isUsb && <label className="usb-compare-choice">
@@ -109,6 +94,7 @@ function ModelCatalogue({ line }) {
           </label>}
         </CatalogModelCard>)}</div>
           : <div className="catalog-empty"><p role="status">No models match your selection.</p>{isUsb ? <p>Try another combination or clear the filters above.</p> : <button className="btn btn--outline" onClick={clear}>Clear filters</button>}</div>}
+        </div></div>
       </div>
     </section>
     <BuyingGuide line={line.slug} />

@@ -5,7 +5,7 @@ import Blog from './Blog.jsx';
 import BlogPost from './BlogPost.jsx';
 import Resources from './Resources.jsx';
 import { BuyingGuide } from '../components/products/BuyingGuide.jsx';
-import { findPost } from '../data/posts.js';
+import { findPost, posts } from '../data/posts.js';
 import { findCatalogProduct } from '../data/catalogProducts.js';
 
 const slug = 'usb-wall-outlet-buying-guide';
@@ -58,7 +58,7 @@ describe('Researched USB buying guide', () => {
   it('appears in the existing blog', () => {
     render(wrap(<Blog />));
     expect(screen.getByRole('link', { name: 'USB Wall Outlet Buying Guide: Ports, PD and Power' })).toHaveAttribute('href', path);
-    expect(screen.getByRole('status')).toHaveTextContent('11 articles');
+    expect(screen.getByRole('status')).toHaveTextContent(`${posts.length} articles`);
   });
 
   it('is linked from the USB family buying guide', () => {

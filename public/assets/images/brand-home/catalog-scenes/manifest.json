@@ -1,0 +1,133 @@
+{
+  "date": "2026-10-12",
+  "usage": "Generated application concepts for product-family cards. Not model identity, electrical installation instructions or real project photography. Original product gallery photos are unchanged.",
+  "style": "FAHINT navy, white, grey, pale oak, greenery, natural light. No logo or text.",
+  "files": [
+    {
+      "file": "gfci-application.webp",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 125868,
+      "sha256": "e4b3d4dfa0517a5884f408c69fdacb6102e6f33f65792ffa9ce407f1a0996516",
+      "sourceArchive": "output/imagegen/catalog-scenes-2026-10-12/gfci-application.png",
+      "originalSha256": "3f0814a972b19bf01eb5c1e2be6eddf1fafa28c994a02dd4851534c38ee21696"
+    },
+    {
+      "file": "gfci-application-768w.webp",
+      "width": 768,
+      "height": 512,
+      "bytes": 42380,
+      "sha256": "73af7a5adec2060f3527ebd20ce53384dec94eae8c9b1e981a5c76ce702659ae",
+      "sourceArchive": "output/imagegen/catalog-scenes-2026-10-12/gfci-application.png",
+      "originalSha256": "3f0814a972b19bf01eb5c1e2be6eddf1fafa28c994a02dd4851534c38ee21696"
+    },
+    {
+      "file": "usb-outlets-application.webp",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 173828,
+      "sha256": "6dc96f4ed420249e1ea30622407c9952f9e92420df1b2740f9373185dae3ca69",
+      "sourceArchive": "output/imagegen/catalog-scenes-2026-10-12/usb-outlets-application.png",
+      "originalSha256": "cd369dda44e114acaa731220005ed061801922041789e2fa97c5da8749ea8473"
+    },
+    {
+      "file": "usb-outlets-application-768w.webp",
+      "width": 768,
+      "height": 512,
+      "bytes": 55814,
+      "sha256": "bee4c9b4571230904446bdfb76406860b298403b07ed73b0daa6368ce8ed2757",
+      "sourceArchive": "output/imagegen/catalog-scenes-2026-10-12/usb-outlets-application.png",
+      "originalSha256": "cd369dda44e114acaa731220005ed061801922041789e2fa97c5da8749ea8473"
+    },
+    {
+      "file": "receptacles-application.webp",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 150240,
+      "sha256": "de4d9ab3939fafee0f64c52301f6e7be0162550da6c4276c15fca4699280303d",
+      "sourceArchive": "output/imagegen/catalog-scenes-2026-10-12/receptacles-application.png",
+      "originalSha256": "97192262820449393acc2a6d923bb0b1a554f5eb305c5e30487463a72650135c"
+    },
+    {
+      "file": "receptacles-application-768w.webp",
+      "width": 768,
+      "height": 512,
+      "bytes": 50440,
+      "sha256": "c825de97670eb345621caf26d30672815bae4f3c67f07e39b6523d5f6df3ae63",
+      "sourceArchive": "output/imagegen/catalog-scenes-2026-10-12/receptacles-application.png",
+      "originalSha256": "97192262820449393acc2a6d923bb0b1a554f5eb305c5e30487463a72650135c"
+    },
+    {
+      "file": "dimmers-application.webp",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 163436,
+      "sha256": "2f7b5200062c404a578555deee03e0dc862834c9967329d3a002000b25c5bb02",
+      "sourceArchive": "output/imagegen/catalog-scenes-2026-10-12/dimmers-application.png",
+      "originalSha256": "28fceb1d63b1f3062b02b7b79b2c44bc0735db20eab8b9e082504f1908260fd9"
+    },
+    {
+      "file": "dimmers-application-768w.webp",
+      "width": 768,
+      "height": 512,
+      "bytes": 47804,
+      "sha256": "7d77d9e0056dea79520e8e065ab8726035fc1c50c303302b83a2b8ee5b17ea86",
+      "sourceArchive": "output/imagegen/catalog-scenes-2026-10-12/dimmers-application.png",
+      "originalSha256": "28fceb1d63b1f3062b02b7b79b2c44bc0735db20eab8b9e082504f1908260fd9"
+    },
+    {
+      "file": "smart-switches-application.webp",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 189120,
+      "sha256": "ead3bce5dfb7ee6513b347944cc409aa42c0319d38c218b7774072a192d17f88",
+      "sourceArchive": "output/imagegen/catalog-scenes-2026-10-12/smart-switches-application.png",
+      "originalSha256": "84e07236491d2fdace67a0a9cdf91b70dfaf5aec3ca30a860a451931ab688522"
+    },
+    {
+      "file": "smart-switches-application-768w.webp",
+      "width": 768,
+      "height": 512,
+      "bytes": 50682,
+      "sha256": "0b6c1a31fdd5a756af10fe68445296eed4bd901e587e18d1ca097aca5c2902dd",
+      "sourceArchive": "output/imagegen/catalog-scenes-2026-10-12/smart-switches-application.png",
+      "originalSha256": "84e07236491d2fdace67a0a9cdf91b70dfaf5aec3ca30a860a451931ab688522"
+    },
+    {
+      "file": "lighting-switches-application.webp",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 165792,
+      "sha256": "f35e26c99b3f1ecfc605e9f3aa18333626901de42fa3bf767767d9f37c7ab16b",
+      "sourceArchive": "output/imagegen/catalog-scenes-2026-10-12/lighting-switches-application.png",
+      "originalSha256": "5a29df48e85342dda7b0054d943426d75e5149e27d23098e2e340bf51d5e359d"
+    },
+    {
+      "file": "lighting-switches-application-768w.webp",
+      "width": 768,
+      "height": 512,
+      "bytes": 52726,
+      "sha256": "ee364c1fc2e76ec21e7c9e7ddd2050c4383e906d1079f3f850d77d1dd9c3b32b",
+      "sourceArchive": "output/imagegen/catalog-scenes-2026-10-12/lighting-switches-application.png",
+      "originalSha256": "5a29df48e85342dda7b0054d943426d75e5149e27d23098e2e340bf51d5e359d"
+    },
+    {
+      "file": "wallplates-application.webp",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 94906,
+      "sha256": "7d51e5e77c4692bbd370c0f6f3de6382c94a4ef6d8b4b648631a46ffd88d4996",
+      "sourceArchive": "output/imagegen/catalog-scenes-2026-10-12/wallplates-application.png",
+      "originalSha256": "00b0b9a9268db39164270dd34f0e5a0c0ccdb0a1a42a81e240d3194842bafc65"
+    },
+    {
+      "file": "wallplates-application-768w.webp",
+      "width": 768,
+      "height": 512,
+      "bytes": 32460,
+      "sha256": "ddc607d7a5e620cc867a44398fadc70578ad1bdd0d84323ef204892d5ab1c413",
+      "sourceArchive": "output/imagegen/catalog-scenes-2026-10-12/wallplates-application.png",
+      "originalSha256": "00b0b9a9268db39164270dd34f0e5a0c0ccdb0a1a42a81e240d3194842bafc65"
+    }
+  ]
+}

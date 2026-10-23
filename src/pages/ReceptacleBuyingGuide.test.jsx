@@ -5,7 +5,7 @@ import Blog from './Blog.jsx';
 import BlogPost from './BlogPost.jsx';
 import Resources from './Resources.jsx';
 import { BuyingGuide, ModelBuyingChecklist } from '../components/products/BuyingGuide.jsx';
-import { findPost } from '../data/posts.js';
+import { findPost, posts } from '../data/posts.js';
 import { findCatalogProduct } from '../data/catalogProducts.js';
 import { findModelCertificate } from '../data/certificates.js';
 
@@ -90,7 +90,7 @@ describe('Researched standard receptacle buying guide', () => {
   it('is available from Blog and the related wallplate guide', () => {
     render(wrap(<Blog />));
     expect(screen.getByRole('link', { name: 'Standard receptacle buying guide: ratings, TR/WR and wiring' })).toHaveAttribute('href', path);
-    expect(screen.getByRole('status')).toHaveTextContent('11 articles');
+    expect(screen.getByRole('status')).toHaveTextContent(`${posts.length} articles`);
     expect(findPost('wallplate-buying-guide').body.flatMap(block => block.links || []).some(link => link.href === path)).toBe(true);
   });
 

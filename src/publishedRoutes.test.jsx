@@ -37,7 +37,7 @@ describe('published homepage and product overview', () => {
 
   it('serves the completed pages at the canonical entry routes', () => {
     const source = readFileSync('src/App.jsx', 'utf8');
-    expect(source).toContain('path="/" element={<HomeStudio />}');
+    expect(source).toContain('path="/" element={<HomeBrand />}');
     expect(source).toContain('path="/products" element={<ProductsStudio />}');
     expect(source).not.toContain('path="/" element={<Home />}');
   });

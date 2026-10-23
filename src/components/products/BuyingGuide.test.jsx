@@ -1,25 +1,32 @@
 import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { MemoryRouter, Route, Routes } from 'react-router-dom';
+import { MemoryRouter, Route, Routes, useParams } from 'react-router-dom';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import GfciSeries from '../../pages/GfciSeries.jsx';
 import LineDetail from '../../pages/LineDetail.jsx';
-import ProductDetail from '../../pages/ProductDetail.jsx';
+import {ModelBuyingChecklist} from './BuyingGuide.jsx';
+import {findProduct} from '../../data/products.js';
+import {findCatalogProduct} from '../../data/catalogProducts.js';
 import Capabilities from '../../pages/Capabilities.jsx';
 import { buyingGuides } from '../../data/buyingGuides.js';
+
+function ArchivedChecklistModel() {
+  const {line,sku} = useParams();
+  return <ModelBuyingChecklist product={(line==='gfci'?findProduct(sku):null)||findCatalogProduct(line,sku)} />;
+}
 
 function openPage(path) {
   return render(<MemoryRouter initialEntries={[path]} future={{ v7_startTransition: true, v7_relativeSplatPath: true }}><Routes>
     <Route path="/products/gfci" element={<GfciSeries />} />
     <Route path="/products/:line" element={<LineDetail />} />
-    <Route path="/products/:line/:sku" element={<ProductDetail />} />
+    <Route path="/products/:line/:sku" element={<ArchivedChecklistModel />} />
     <Route path="/capabilities" element={<Capabilities />} />
   </Routes></MemoryRouter>);
 }
 
 afterEach(() => vi.unstubAllEnvs());
 
-describe('Purchasing information', () => {
+describe('Series purchasing information and retained checklist component', () => {
   it.each([
     ['gfci', 'TR / WR'], ['usb-outlets', 'power sharing'], ['receptacles', 'voltage'],
     ['dimmers', 'load'], ['smart-switches', 'neutral'], ['lighting-switches', 'single-pole'], ['wallplates', 'opening'],

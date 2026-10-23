@@ -1,5 +1,6 @@
+import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { Download, ArrowUpRight } from 'lucide-react';
+import { ChevronDown, Download, ArrowUpRight } from 'lucide-react';
 import { findPost, posts } from '../data/posts.js';
 import { catalogueDocument } from '../data/documents.js';
 import { publicAsset } from '../utils/publicAsset.js';
@@ -9,24 +10,38 @@ import { usePageMetadata } from '../seo/usePageMetadata.js';
 import EditorialPhoto from '../components/company/EditorialPhoto.jsx';
 import { formatPostDate, ReadingCard } from '../components/company/ReadingShared.jsx';
 import NotFound from './NotFound.jsx';
+import Reveal from '../components/Reveal.jsx';
 
 function SourceLink({ source, children, ...props }) {
+  if (source.href.startsWith('/assets/')) return <a href={publicAsset(source.href)} target="_blank" rel="noreferrer" {...props}>{children || source.label}</a>;
   if (source.href.startsWith('/')) return <Link to={source.href} {...props}>{children || source.label}</Link>;
   return <a href={source.href} target="_blank" rel="noreferrer" {...props}>{children || source.label}</a>;
 }
 
 function ArticleContent({ post }) {
   usePageMetadata(articleMetadata(post));
+  const [outlineOpen, setOutlineOpen] = useState(false);
   const headings = post.body.map((block,index) => ({ ...block, id:'article-section-' + index })).filter(block => block.type === 'h2');
   const related = posts.filter(item => item.slug !== post.slug).sort((a,b) => Number(b.category === post.category) - Number(a.category === post.category)).slice(0,3);
   return <div className="company-page reading-page">
     <header className="reading-article-heading company-section--paper"><div className="company-wrap">
       <nav className="company-breadcrumb" aria-label="Breadcrumb"><Link to="/">Home</Link><span aria-hidden="true">/</span><Link to="/blog">Guides & insights</Link><span aria-hidden="true">/</span><span>{post.category}</span></nav>
-      <h1>{post.title}</h1><p>{post.excerpt}</p><div className="reading-meta"><span>{post.category}</span><time dateTime={post.updated || post.date}>Updated {formatPostDate(post.updated || post.date)}</time><span>{post.readMinutes} min read</span></div>
+      <Reveal as="h1">{post.title}</Reveal><Reveal as="p" delay={160}>{post.excerpt}</Reveal><div className="reading-meta"><span>{post.category}</span><time dateTime={post.updated || post.date}>Updated {formatPostDate(post.updated || post.date)}</time><span>{post.readMinutes} min read</span></div>
     </div></header>
     <div className="company-wrap reading-article-layout">
-      <aside className="reading-article-nav"><nav aria-label="In this article"><h2>In this article</h2><ol>{headings.map(heading => <li key={heading.id}><Link to={'#' + heading.id}>{heading.text}</Link></li>)}</ol></nav><div className="reading-document"><h3>Keep the details close.</h3><p>Compare the product with the original model documentation.</p><a className="company-text-link" href={publicAsset(catalogueDocument)} download>Download FAHINT catalog <Download size={16} aria-hidden="true" /></a><CompanyLink to="/about#certifications" secondary>Certificate library</CompanyLink></div></aside>
-      <article className="reading-article"><figure className="reading-article-image"><EditorialPhoto src={post.cover} alt={post.coverAlt} region={post.coverRegion} width={post.coverWidth} height={post.coverHeight} position={post.coverPosition} priority /><figcaption>{post.coverCaption}</figcaption></figure>
+      <aside className="reading-article-nav">
+        <h2 className="reading-article-nav-title">In this article</h2>
+        <button className="reading-outline-toggle" type="button" aria-expanded={outlineOpen} aria-controls="reading-outline" onClick={() => setOutlineOpen(value => !value)}>
+          In this article <ChevronDown size={20} aria-hidden="true" />
+        </button>
+        <div id="reading-outline" className={`reading-outline${outlineOpen ? ' is-open' : ''}`}>
+          <nav aria-label="In this article">
+            <ol>{headings.map(heading => <li key={heading.id}><Link to={'#' + heading.id}>{heading.text}</Link></li>)}</ol>
+          </nav>
+          <div className="reading-document"><h3>Keep the details close.</h3><p>Compare the product with the original model documentation.</p><a className="company-text-link" href={publicAsset(catalogueDocument)} download>Download FAHINT catalog <Download size={16} aria-hidden="true" /></a><CompanyLink to="/resources#certifications" secondary>Certificate library</CompanyLink></div>
+        </div>
+      </aside>
+      <article className="reading-article"><Reveal as="figure" className="reading-article-image"><EditorialPhoto src={post.cover} alt={post.coverAlt} region={post.coverRegion} width={post.coverWidth} height={post.coverHeight} position={post.coverPosition} fit={post.coverFit} priority /><figcaption>{post.coverCaption}</figcaption></Reveal>
         <p className="reading-safety-note">Buyer information, not installation instructions. Requirements depend on the adopted local code and exact product. Electrical work and site diagnosis should be performed by qualified professionals.</p>
         {post.body.map((block, index) => {
           if (block.type === 'h2') return <h2 id={'article-section-' + index} key={index}>{block.text}</h2>;

@@ -102,7 +102,7 @@ function RoomHero() {
           </div>
           <div role="group" aria-labelledby="studio-brand-path">
             <span id="studio-brand-path">For your brand</span>
-            <Link className="studio-hero__secondary" to="/#studio-oem">Build a range with us <ArrowRight size={18} aria-hidden="true" /></Link>
+            <Link className="studio-hero__secondary" to="#studio-oem">Build a range with us <ArrowRight size={18} aria-hidden="true" /></Link>
           </div>
         </div>
         <ul className="studio-hero__evidence" aria-label="Product and program support">
@@ -132,7 +132,7 @@ function BrandIntroduction() {
         <h2 id="studio-brand-title">Everyday power.<br /><span>Made by FAHINT.</span></h2>
         <div className="studio-company-summary">
           <h3>{company.name}</h3>
-          <p>FAHINT is a wiring device manufacturer in Wenzhou, China. We make GFCI outlets, USB wall outlets, receptacles, switches and dimmers for North American brands and distributors, with support for model selection and OEM / ODM projects.</p>
+          <p>Based in Wenzhou, China, we develop and manufacture wiring devices for the North American market, bringing product development, manufacturing and quality control together.</p>
         </div>
         <div className="studio-brand-details">
           <dl className="studio-brand-paths">
@@ -141,7 +141,7 @@ function BrandIntroduction() {
           </dl>
           <div className="studio-brand-actions">
             <StudioLink to="/about" light>Get to know FAHINT</StudioLink>
-            <Link className="studio-text-link" to="/#studio-oem">Explore OEM / ODM <ArrowUpRight size={18} aria-hidden="true" /></Link>
+            <Link className="studio-text-link" to="#studio-oem">Explore OEM / ODM <ArrowUpRight size={18} aria-hidden="true" /></Link>
           </div>
         </div>
       </Reveal>
@@ -154,7 +154,7 @@ function PrivateLabel() {
     <div className="studio-wrap">
       <Reveal as="header" className="studio-section-head studio-section-head--oem">
         <h2 id="studio-oem-title">Your product range.<br /><span>Our manufacturing.</span></h2>
-        <div><p>Build an OEM or private-label wiring-device range around your market. Choose the models, finishes, authorized artwork and packaging, then confirm product documents and samples before approving the order.</p></div>
+        <div><p>Choose the products, finishes and packaging for your market. We coordinate the details from your first brief to the approved order.</p></div>
       </Reveal>
       <div className="studio-program">
         <figure className="studio-program__image">
@@ -170,7 +170,7 @@ function PrivateLabel() {
             </li>)}
           </ol>
           <div className="studio-program-actions">
-            <StudioLink to="/#studio-inquiry" light>Discuss your OEM / ODM project</StudioLink>
+            <StudioLink to="#studio-inquiry" light>Discuss your OEM / ODM project</StudioLink>
             <Link className="studio-text-link" to="/capabilities#oem">Explore OEM / ODM capabilities <ArrowUpRight size={18} aria-hidden="true" /></Link>
           </div>
         </div>
@@ -195,7 +195,7 @@ function Manufacturing() {
         </div>
         <div className="studio-testing-support">
           <figure className="studio-testing-usb"><StudioImage {...companyPhotos.usbTesting} /><figcaption><h3>USB charging tests</h3><p>A dedicated bench for charging and electrical checks on USB outlet models.</p></figcaption></figure>
-          <div className="studio-testing-note"><h3>Model-specific checks</h3><p>Confirm the test requirements, electrical ratings and certification coverage for your selected device.</p><Link className="studio-text-link" to="/#studio-certificates">Review model certificates <ArrowUpRight size={17} aria-hidden="true" /></Link></div>
+          <div className="studio-testing-note"><h3>Model-specific checks</h3><p>Confirm the test requirements, electrical ratings and certification coverage for your selected device.</p><Link className="studio-text-link" to="#studio-certificates">Review model certificates <ArrowUpRight size={17} aria-hidden="true" /></Link></div>
         </div>
       </div>
     </section>;
@@ -208,12 +208,12 @@ export default function HomeStudio() {
     <div className="studio-product-transition">
       <StudioImage className="studio-product-transition__scene" src="assets/images/home-installations/home-interior-background-v1.webp" alt="" aria-hidden="true" width={1672} height={941} />
       <nav className="studio-chapter-nav" aria-label="Homepage sections">
-        <Link to="/#studio-collection">The collection</Link>
-        <Link to="/#studio-brand">About FAHINT</Link>
-        <Link to="/#studio-oem">OEM / ODM</Link>
-        <Link to="/#studio-making">Inside FAHINT</Link>
-        <Link to="/#studio-certificates">Certificates</Link>
-        <Link to="/#studio-inquiry">Let’s talk <ArrowUpRight size={17} aria-hidden="true" /></Link>
+        <Link to="#studio-collection">The collection</Link>
+        <Link to="#studio-brand">About FAHINT</Link>
+        <Link to="#studio-oem">OEM / ODM</Link>
+        <Link to="#studio-making">Inside FAHINT</Link>
+        <Link to="#studio-certificates">Certificates</Link>
+        <Link to="#studio-inquiry">Let’s talk <ArrowUpRight size={17} aria-hidden="true" /></Link>
       </nav>
       <StudioProductSelection />
     </div>

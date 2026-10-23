@@ -25,20 +25,41 @@ describe('Buyer reading pages', () => {
     expect(screen.getByRole('link', { name:'Download FAHINT catalog' })).toHaveAttribute('download');
     expect(document.title).toBe(`${posts.find(post => post.slug === 'gfci-vs-afci-whats-the-difference').title} | FAHINT`);
   });
+  it('lets keyboard users expand and collapse the mobile article outline', async () => {
+    const user = userEvent.setup();
+    renderBlog('/blog/outlet-planning-by-room');
+    const toggle = screen.getByText('In this article', { selector:'button' });
+    expect(toggle).toHaveAttribute('aria-expanded', 'false');
+    toggle.focus();
+    await user.keyboard('{Enter}');
+    expect(toggle).toHaveAttribute('aria-expanded', 'true');
+    const outline = document.getElementById(toggle.getAttribute('aria-controls'));
+    expect(outline.querySelector('a[href*="#article-section-"]')).not.toBeNull();
+    expect(outline.querySelector('a[download]')).not.toBeNull();
+    await user.keyboard(' ');
+    expect(toggle).toHaveAttribute('aria-expanded', 'false');
+  });
+  it('opens catalog PDFs directly while retaining client navigation for model pages', () => {
+    renderBlog('/blog/usb-c-wall-outlet-laptop-charging');
+    const documentLink = screen.getByRole('link', { name:'FAHINT USB catalog sheet, original page 11' });
+    expect(documentLink).toHaveAttribute('href', publicAsset('/assets/documents/catalog-sheets/pd-usb-outlets.pdf'));
+    expect(documentLink).toHaveAttribute('target', '_blank');
+    expect(screen.getByRole('link', { name:'View FTR15QC-DC65W' })).not.toHaveAttribute('target');
+  });
   it('shows a real not-found message for an unknown article', () => {
     renderBlog('/blog/not-a-real-article');
     expect(screen.getByRole('heading', { level:1, name:'This page isn’t here.' })).toBeInTheDocument();
     expect(screen.getByRole('link', { name:'Browse products' })).toHaveAttribute('href','/products');
   });
   it('removes unsourced universal specifications and retains original article URLs', () => {
-    expect(posts).toHaveLength(11);
+    expect(posts).toHaveLength(20);
     const content = posts.map(post => `${post.title} ${post.body.map(block=>block.text).join(' ')}`).join(' ');
     expect(content).not.toMatch(/every 15 minutes|400 cartons|98 percent|without Compliance Risk|seven-finish|Current production should be to UL 943 5th/i);
     expect(posts.find(post => post.slug === 'nec-406-8-weather-resistant-receptacles').title).not.toContain('406.8');
     for (const post of posts) expect(post.sources?.length).toBeGreaterThan(0);
   });
   it('gives every guide a distinct editorial cover with a source-aware description', () => {
-    expect(new Set(posts.map(post => JSON.stringify([post.cover, post.coverRegion])))).toHaveProperty('size', 11);
+    expect(new Set(posts.map(post => JSON.stringify([post.cover, post.coverRegion])))).toHaveProperty('size', posts.length);
     for (const post of posts) {
       expect(post.coverAlt).toBeTruthy();
       expect(post.coverCaption).toBeTruthy();
@@ -53,8 +74,8 @@ describe('Buyer reading pages', () => {
     expect(screen.getByText(post.coverCaption)).toBeInTheDocument();
   });
   it('visibly labels every reused application illustration, not only in alternative text', () => {
-    const illustrations = posts.filter(post => /application|product-gfci|product-usb|home-installations/.test(post.cover));
-    expect(illustrations).toHaveLength(6);
+    const illustrations = posts.filter(post => /application|product-gfci|product-usb|home-installations|smart-series/.test(post.cover));
+    expect(illustrations).toHaveLength(10);
     for (const post of illustrations) expect(post.coverCaption).toMatch(/illustrat/i);
   });
 });

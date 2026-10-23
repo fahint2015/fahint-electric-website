@@ -1,0 +1,316 @@
+{
+  "created": "2026-10-12",
+  "generation": "Approved local homepage assets; original PNG and generation records remain under output/imagegen.",
+  "conceptImages": "Scenes and FAHINT building are generated concepts, not actual buildings/project references.",
+  "certificationSources": {
+    "date": "2026-10-12",
+    "marks": [
+      {
+        "file": "ul-official-marks.png",
+        "dimensions": [
+          303,
+          160
+        ],
+        "bytes": 15989,
+        "sha256": "684beab92a8d937caa0d4c576805d1c120a8913ffce43feaaaf5614659d0e9a1",
+        "sourceURL": "https://code-authorities.ul.com/wp-content/uploads/sites/46/2021/01/UL_Marks_and_Labels.png",
+        "sourcePage": "https://code-authorities.ul.com/ulmarks/",
+        "delivery": "Original PNG unchanged; CSS clips the first (UL Listed) mark only.",
+        "scope": "GFCI family; links to model documentation for GF15 / E504391.",
+        "guidance": "https://www.ul.com/news/put-ul-mark-your-marketing"
+      },
+      {
+        "file": "cqc-quality-mark.png",
+        "dimensions": [
+          648,
+          504
+        ],
+        "bytes": 233703,
+        "sha256": "397ccd50d45ed9fba3ba210c3cc92a33888f458214f3684f989527ab491bf77a",
+        "source": "public/assets/documents/certificates/iso-9001.pdf",
+        "sourcePage": 1,
+        "sourceSHA256": "e666f56a686e213b68161ff64a26d6b91e6b5378308a4c66d43f6920080509c1",
+        "delivery": "PDFium crop of original issuer logo; no repainting, tracing or generated logo.",
+        "cropPDFUnits": [
+          324.3360107421875,
+          869.9526232910157,
+          324.3360107421875,
+          98.48520263671875
+        ],
+        "renderScale": 4,
+        "scope": "CQC issuer mark accompanies ISO 9001:2015 quality-management text; not a CQC product-safety claim.",
+        "certificate": "00125Q31531R1S/3302; stated validity March 13, 2025–April 11, 2028, subject to surveillance acceptance."
+      }
+    ],
+    "strengthFacts": [
+      {
+        "value": "2015",
+        "label": "Established",
+        "source": "public/assets/documents/fahint-product-catalog.pdf",
+        "page": 2
+      },
+      {
+        "value": "12",
+        "label": "Automated inspection lines",
+        "source": "public/assets/documents/fahint-product-catalog.pdf",
+        "page": 2,
+        "scope": "Automated inspection lines, not an inferred total production-line count."
+      },
+      {
+        "value": "100%",
+        "label": "GFCI functional testing",
+        "source": "../公司资料&产品/详情页/详情页_12.png",
+        "corroboration": "src/data/products.js, GF15/GF20 factory-inspection data; no first-pass-yield promise."
+      }
+    ],
+    "excluded": "The example building sheet names another brand. Its export-country number was not reused. Area, headcount and patent totals were not added."
+  },
+  "files": [
+    {
+      "file": "generated/hero-family-belief-background-1200.webp",
+      "source": "output/imagegen/home-brand-web-assets/hero-family-belief-background-1200.webp",
+      "sha256": "429fd7bcd759953d5331f655a08798aa0d3aed8fb23f771b6cad065dfe5ab732",
+      "bytes": 69568
+    },
+    {
+      "file": "generated/hero-family-belief-background-768.webp",
+      "source": "output/imagegen/home-brand-web-assets/hero-family-belief-background-768.webp",
+      "sha256": "92d0dc59215da9e7c78e561cd03123bdfd1ac9c851754ed2a68b2625232262b0",
+      "bytes": 37604
+    },
+    {
+      "file": "generated/hero-family-belief-background.webp",
+      "source": "output/imagegen/home-brand-web-assets/hero-family-belief-background.webp",
+      "sha256": "a9a92ebfafe44f69d84339ddbb37d8e0c60415e0e67476c41f1d9c74b3d21a06",
+      "bytes": 122814
+    },
+    {
+      "file": "generated/hero-hotel-purpose-background-1200.webp",
+      "source": "output/imagegen/home-brand-web-assets/hero-hotel-purpose-background-1200.webp",
+      "sha256": "240ea45025a5db95b2b2b116b4ba3c31681a1c10df18bebcc66376b944a6c55f",
+      "bytes": 43894
+    },
+    {
+      "file": "generated/hero-hotel-purpose-background-768.webp",
+      "source": "output/imagegen/home-brand-web-assets/hero-hotel-purpose-background-768.webp",
+      "sha256": "d707d7672405c8de66dd788ea8d852a9c25572744d8c6833fee2f974e59cb56e",
+      "bytes": 22264
+    },
+    {
+      "file": "generated/hero-hotel-purpose-background.webp",
+      "source": "output/imagegen/home-brand-web-assets/hero-hotel-purpose-background.webp",
+      "sha256": "887ca4e4e296592ce3543ec1c7e55903e90476ea653b7bb6fc03eda83c8c0a53",
+      "bytes": 81220
+    },
+    {
+      "file": "generated/hero-city-vision-background-1200.webp",
+      "source": "output/imagegen/home-brand-web-assets/hero-city-vision-background-1200.webp",
+      "sha256": "4b922cc9f696ec17e25c649d8213c25e1fcf951b0187a1fdddaefeb3a0c8824b",
+      "bytes": 131478
+    },
+    {
+      "file": "generated/hero-city-vision-background-768.webp",
+      "source": "output/imagegen/home-brand-web-assets/hero-city-vision-background-768.webp",
+      "sha256": "4c71f31c303300aa086ea50b8135b6ad3896f2e1796ad1c0685ed37676ede2b2",
+      "bytes": 62570
+    },
+    {
+      "file": "generated/hero-city-vision-background.webp",
+      "source": "output/imagegen/home-brand-web-assets/hero-city-vision-background.webp",
+      "sha256": "09da216efb7cc51d3b72ae93044a004afdb686f9a78532dac1022a144aa389dd",
+      "bytes": 253464
+    },
+    {
+      "file": "generated/application-residential-scene-1200.webp",
+      "source": "output/imagegen/home-brand-web-assets/application-residential-scene-1200.webp",
+      "sha256": "813520dee64056a236f54029b577ae12fed77d61b0c202c0804513dcd0de2bfa",
+      "bytes": 108518
+    },
+    {
+      "file": "generated/application-residential-scene-768.webp",
+      "source": "output/imagegen/home-brand-web-assets/application-residential-scene-768.webp",
+      "sha256": "166f4963ff3efe49cbd4330a4b7393c1a3d503f96f7d4f4b0c1dd5e4eb97ef15",
+      "bytes": 50374
+    },
+    {
+      "file": "generated/application-residential-scene.webp",
+      "source": "output/imagegen/home-brand-web-assets/application-residential-scene.webp",
+      "sha256": "e10844d0c01f8f95c52be14987e0b7aabd2c60f5cf97cb984d727ba9ed786746",
+      "bytes": 163986
+    },
+    {
+      "file": "generated/application-workplace-scene-1200.webp",
+      "source": "output/imagegen/home-brand-web-assets/application-workplace-scene-1200.webp",
+      "sha256": "f7eee0c177c19cb7306b6cd172e064b0d1d2b938f8cb2600b0c8eb91c652bf4b",
+      "bytes": 92008
+    },
+    {
+      "file": "generated/application-workplace-scene-768.webp",
+      "source": "output/imagegen/home-brand-web-assets/application-workplace-scene-768.webp",
+      "sha256": "c0c9f0c1944ce9431aee480400d4cf63893e407fa49c2e6934c72ad06997bbfa",
+      "bytes": 51458
+    },
+    {
+      "file": "generated/application-workplace-scene.webp",
+      "source": "output/imagegen/home-brand-web-assets/application-workplace-scene.webp",
+      "sha256": "cc264a93da895c33fce845187bf5b8e8c61e3742f0eb7adeb2098b1369036f33",
+      "bytes": 121780
+    },
+    {
+      "file": "generated/application-hospitality-scene-1200.webp",
+      "source": "output/imagegen/home-brand-web-assets/application-hospitality-scene-1200.webp",
+      "sha256": "148577b3ee960caf516bad00edf33a5720d90270331b8751fbfe520d560a8c35",
+      "bytes": 139706
+    },
+    {
+      "file": "generated/application-hospitality-scene-768.webp",
+      "source": "output/imagegen/home-brand-web-assets/application-hospitality-scene-768.webp",
+      "sha256": "da1c44938e3f2fefcf1bd1cc1ecfc4ec02fce2af72f798abac355e36ff053e0d",
+      "bytes": 68422
+    },
+    {
+      "file": "generated/application-hospitality-scene.webp",
+      "source": "output/imagegen/home-brand-web-assets/application-hospitality-scene.webp",
+      "sha256": "9c6b3e71729834fbbcf98f814a9938dc801e7afe5473185fe3d3b40392ab28f5",
+      "bytes": 206632
+    },
+    {
+      "file": "revised/hero-family-mobile-480.webp",
+      "source": "output/imagegen/home-brand-revision-v2/hero-family-mobile-480.webp",
+      "sha256": "077d7ec67ca75994093b48181b98e74150ae1ad1b92b6354f2c19a9cf11eb0e5",
+      "bytes": 55254
+    },
+    {
+      "file": "revised/hero-family-mobile-768.webp",
+      "source": "output/imagegen/home-brand-revision-v2/hero-family-mobile-768.webp",
+      "sha256": "24f2d1ca6c553182f6aae6e987ceed19f8f613ee8951b8b78a485666780ec357",
+      "bytes": 108558
+    },
+    {
+      "file": "revised/hero-family-mobile.webp",
+      "source": "output/imagegen/home-brand-revision-v2/hero-family-mobile.webp",
+      "sha256": "97df6646bd9599aab550c669789399ad02cd6276df30a1e448dfcd6f3cd84896",
+      "bytes": 156022
+    },
+    {
+      "file": "revised/hero-hotel-mobile-480.webp",
+      "source": "output/imagegen/home-brand-revision-v2/hero-hotel-mobile-480.webp",
+      "sha256": "a1d2c1d49e5a792ad716b576ccca37d2e3b41cdbb675b4917566c1a618a68f39",
+      "bytes": 56068
+    },
+    {
+      "file": "revised/hero-hotel-mobile-768.webp",
+      "source": "output/imagegen/home-brand-revision-v2/hero-hotel-mobile-768.webp",
+      "sha256": "86fe2aa05ee338f3d2e608d22f03ca440fbabc925f1feffbe1c40966d236ecc1",
+      "bytes": 136324
+    },
+    {
+      "file": "revised/hero-hotel-mobile.webp",
+      "source": "output/imagegen/home-brand-revision-v2/hero-hotel-mobile.webp",
+      "sha256": "3eef10d02569268fdc0619ed6046f5655f80218ab9878690794b849474588b0d",
+      "bytes": 233796
+    },
+    {
+      "file": "revised/hero-city-mobile-480.webp",
+      "source": "output/imagegen/home-brand-revision-v2/hero-city-mobile-480.webp",
+      "sha256": "a994837f6ff8c0e04dc2bd07684ca65a0d88e49d3f208edd6f1f4043671033b2",
+      "bytes": 73480
+    },
+    {
+      "file": "revised/hero-city-mobile-768.webp",
+      "source": "output/imagegen/home-brand-revision-v2/hero-city-mobile-768.webp",
+      "sha256": "736684e9fa2d6052b5bfbc0c19c69c7a2d2cced30269083b10c9d3d18aec7ef9",
+      "bytes": 171908
+    },
+    {
+      "file": "revised/hero-city-mobile.webp",
+      "source": "output/imagegen/home-brand-revision-v2/hero-city-mobile.webp",
+      "sha256": "24619cfd7b7846a23c690f5db80640293282693a66fca014ae647688deec2f62",
+      "bytes": 275400
+    },
+    {
+      "file": "revised/series-gfci-detail-1200.webp",
+      "source": "output/imagegen/home-brand-revision-v2/series-gfci-detail-1200.webp",
+      "sha256": "f00db5fbab0fa94eb2e63963b95db962cf5321ca9f014d30774810ad7f2a985c",
+      "bytes": 59158
+    },
+    {
+      "file": "revised/series-gfci-detail-768.webp",
+      "source": "output/imagegen/home-brand-revision-v2/series-gfci-detail-768.webp",
+      "sha256": "fb6e1fb3b2f51d09660fe38b4a60a8abea248f4fbed6c883eb54e677fd38db35",
+      "bytes": 27884
+    },
+    {
+      "file": "revised/series-gfci-detail.webp",
+      "source": "output/imagegen/home-brand-revision-v2/series-gfci-detail.webp",
+      "sha256": "3ede4ecefcc8035f5d24171fd5c7e38aceb22c8442ebca45e49b2952077b60a0",
+      "bytes": 85908
+    },
+    {
+      "file": "revised/series-usb-detail-1200.webp",
+      "source": "output/imagegen/home-brand-revision-v2/series-usb-detail-1200.webp",
+      "sha256": "653cb32f4be484714cab09330cbb7f4b9729499a651ca8d4933b8fdd01b0bd0a",
+      "bytes": 52476
+    },
+    {
+      "file": "revised/series-usb-detail-768.webp",
+      "source": "output/imagegen/home-brand-revision-v2/series-usb-detail-768.webp",
+      "sha256": "5c591dc4d6d0fa2a72b7610850afa4e2b4f8d054c2b2aefeb1d4d0c54775c318",
+      "bytes": 22638
+    },
+    {
+      "file": "revised/series-usb-detail.webp",
+      "source": "output/imagegen/home-brand-revision-v2/series-usb-detail.webp",
+      "sha256": "982881d8f5be66124f4368368b5df4c84c8db06700d589079f9741c0cd754ac1",
+      "bytes": 84018
+    },
+    {
+      "file": "revised/series-dimmer-detail-1200.webp",
+      "source": "output/imagegen/home-brand-revision-v2/series-dimmer-detail-1200.webp",
+      "sha256": "b0ef4d0d3fb8eee26615e8a3728f5d53ab934b8b6623d48cc79fc4332d1e9323",
+      "bytes": 60384
+    },
+    {
+      "file": "revised/series-dimmer-detail-768.webp",
+      "source": "output/imagegen/home-brand-revision-v2/series-dimmer-detail-768.webp",
+      "sha256": "fc07acca674e573534fcdb68c475b4abd9c97e033f5b734d0f41360b2004602d",
+      "bytes": 28020
+    },
+    {
+      "file": "revised/series-dimmer-detail.webp",
+      "source": "output/imagegen/home-brand-revision-v2/series-dimmer-detail.webp",
+      "sha256": "856f298c33b74a882ec192d67357026b5fbdc1b3f53ec9d5d46cd6dcb973203b",
+      "bytes": 86494
+    },
+    {
+      "file": "about/about-fahint-building-1200.webp",
+      "source": "output/imagegen/home-brand-about-v3/about-fahint-building-1200.webp",
+      "sha256": "ba8ae885bba130a6d6c1c60a36e1d246d78ae984415543f4a773f83f84936ee8",
+      "bytes": 150670
+    },
+    {
+      "file": "about/about-fahint-building-768.webp",
+      "source": "output/imagegen/home-brand-about-v3/about-fahint-building-768.webp",
+      "sha256": "ebf4a5750b3d2d02fa636dd4d269c9202e57f00eba1b2be969229cc6b01597aa",
+      "bytes": 71756
+    },
+    {
+      "file": "about/about-fahint-building.webp",
+      "source": "output/imagegen/home-brand-about-v3/about-fahint-building.webp",
+      "sha256": "020ae5264470fdd89b1d45b5909efb70ecb0c27c9db2c4689d7449498054f563",
+      "bytes": 222204
+    },
+    {
+      "file": "certification-marks/ul-official-marks.png",
+      "source": "output/design/home-brand-preview/assets/certification-marks/ul-official-marks.png",
+      "sha256": "684beab92a8d937caa0d4c576805d1c120a8913ffce43feaaaf5614659d0e9a1",
+      "bytes": 15989
+    },
+    {
+      "file": "certification-marks/cqc-quality-mark.png",
+      "source": "output/design/home-brand-preview/assets/certification-marks/cqc-quality-mark.png",
+      "sha256": "397ccd50d45ed9fba3ba210c3cc92a33888f458214f3684f989527ab491bf77a",
+      "bytes": 233703
+    }
+  ]
+}

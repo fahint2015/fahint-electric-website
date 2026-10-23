@@ -115,6 +115,6 @@ describe('ProductsOverview model directory', () => {
     expect(screen.getByRole('region', { name: 'Specified for real projects.' })).toBeInTheDocument();
     expect(screen.getByRole('region', { name: 'Verified manufacturing and compliance.' })).toBeInTheDocument();
     expect(screen.getByText(/Certification coverage varies by model/)).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: 'View certification details' })).toHaveAttribute('href', '/about#certifications');
+    expect(screen.getByRole('link', { name: 'View certification details' })).toHaveAttribute('href', '/resources#certifications');
   });
 });

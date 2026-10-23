@@ -10,6 +10,69 @@ const rows = (product) => new Map(product.specificationGroups.flatMap((group) =>
 const model = (family, sku) => findCatalogProduct(family, sku);
 
 describe('complete, model-specific catalogue', () => {
+  it('recovers USB functional paragraphs stored in legacy materials without inventing ports or power sharing', () => {
+    for (const sku of ['FTR15-3100', 'FTR15QC-DC20W']) {
+      const copy = model('usb-outlets', sku).functionalFeatures.join(' ');
+      expect(copy, sku).toMatch(/smart chip.*charging requirements/i);
+      expect(copy, sku).toMatch(/overheating/i);
+      expect(copy, sku).toMatch(/leaving.*outlets free/i);
+      expect(copy, sku).toMatch(/shutter.*contacts.*plug/i);
+      expect(copy, sku).toMatch(/standard wall box.*screwless wall plates/i);
+    }
+    expect(model('usb-outlets', 'FTR15-3100').functionalFeatures.join(' ')).not.toMatch(/USB[- ]?C\b|\bPD\b/i);
+    const pd = model('usb-outlets', 'FTR15QC-DC20W').functionalFeatures.join(' ');
+    expect(pd).toMatch(/single-port maximum.*sharing/i);
+    expect(pd).toMatch(/certification reference.*E498095.*certificate.*exact model.*not yet published/i);
+    expect(pd).not.toMatch(/legacy page|legacy file|source data/i);
+    expect(pd).not.toMatch(/combined total.*20W|each.*20W/i);
+  });
+
+  it('retains old receptacle connection and construction functions with model-specific wiring corrections', () => {
+    const standard = model('receptacles', 'D15').functionalFeatures.join(' ');
+    expect(standard).toMatch(/grounding screw/i);
+    expect(standard).toMatch(/phosphor bronze/i);
+    expect(standard).toMatch(/standard.*wall plates.*electrical boxes/i);
+    const quick = model('receptacles', 'D15Q').functionalFeatures.join(' ');
+    expect(quick).toMatch(/push-in.*#14 AWG/i);
+    expect(quick).not.toMatch(/copper.clad|back wire/i);
+  });
+
+  it('restores matte wallplate finish and customization features while retaining corrected material and size', () => {
+    const copy = model('wallplates', 'BS1801-M').functionalFeatures.join(' ');
+    expect(copy).toMatch(/laser.*engraving.*logo|laser.*engraved.*logo/i);
+    expect(copy).toMatch(/fingerprints.*scratches/i);
+    expect(copy).toMatch(/bulk pricing/i);
+    expect(copy).toMatch(/polycarbonate/i);
+    expect(copy).not.toMatch(/thermoset|80.*124|glossy/i);
+    expect(model('wallplates', 'BS1807').functionalFeatures.join(' ')).not.toMatch(/tool-free|decorator opening/i);
+  });
+
+  it('recovers the industrial GFCI feature topics without reintroducing residential wiring or material', () => {
+    for (const sku of ['GTN15', 'GTN20']) {
+      const copy = model('gfci', sku).functionalFeatures.join(' ');
+      expect(copy).toMatch(/mechanical.*trip.*powered off/i);
+      expect(copy).toMatch(/silver.*contacts.*temperature[- ]rise/i);
+      expect(copy).toMatch(/gasoline.*vibration/i);
+      expect(copy).toMatch(/nylon/i);
+      expect(copy).toMatch(/no feed-through/i);
+      expect(copy).not.toMatch(/thermoplastic cover|20A feed-through|can reset|outdoor use/i);
+    }
+  });
+
+  it('keeps documented legacy functions in the concise features without inferring connected capabilities', () => {
+    expect(model('lighting-switches', 'DS1502').functionalFeatures).toContain('Break-off tab for circuit splitting.');
+    expect(model('lighting-switches', 'DS1503').functionalFeatures.join(' ')).toContain('Three independent rocker switches');
+    expect(model('receptacles', 'DT15').functionalFeatures).toContain('Strip-gauge markings for conductor preparation.');
+    expect(model('wallplates', 'BS1801-M').functionalFeatures.join(' ')).toContain('easy-to-clean');
+    expect(model('wallplates', 'BS1807').functionalFeatures).toContain('Blank cover for unused junction boxes.');
+    expect(model('gfci', 'GTN15').functionalFeatures).toContain('Status indicator light reports power and protection status.');
+    expect(model('smart-switches', 'USW8833').functionalFeatures).toContain('Function: Curtain control');
+    const zigbee = catalogProducts.filter(p => /Zigbee/i.test(rows(p).get('Control mode') || ''));
+    expect(zigbee).toHaveLength(19);
+    for (const p of zigbee) expect(p.functionalFeatures).toContain('Zigbee control requires a compatible gateway.');
+    expect(model('smart-switches', 'UST8811').functionalFeatures.join(' ')).not.toMatch(/gateway|app|voice/i);
+    for (const p of catalogProducts.filter(p => rows(p).get('Charging protocols'))) expect(p.functionalFeatures).toContain(`Charging protocols: ${rows(p).get('Charging protocols')}`);
+  });
   it('covers each source model once without merging surface variants or product families', () => {
     const legacy = JSON.parse(readFileSync('src/data/catalog/legacy-products.json', 'utf8'));
     expect(legacy).toHaveLength(95);

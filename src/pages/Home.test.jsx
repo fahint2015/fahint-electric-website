@@ -392,7 +392,7 @@ describe('Home', () => {
     expect(screen.queryByRole('heading', { name: 'Build the Line Your Market Needs.' })).not.toBeInTheDocument();
     expect(screen.queryByRole('heading', { name: 'Latest From Fahint.' })).not.toBeInTheDocument();
     expect(screen.getByRole('link', { name: /Discover Fahint/i })).toHaveAttribute('href', '/about');
-    expect(screen.getByRole('link', { name: /View certification details/i })).toHaveAttribute('href', '/about#certifications');
+    expect(screen.getByRole('link', { name: /View certification details/i })).toHaveAttribute('href', '/resources#certifications');
   });
 
   it('keeps separate floating actions in a vertical mobile safe-area stack', () => {
@@ -539,7 +539,7 @@ describe('Home', () => {
     });
     expect(styles).toMatch(/\.editorial-home-front \.editorial-hero h1\s*\{[^}]*font-size:\s*var\(--home-display-size\)/);
     expect(styles).toMatch(/\.editorial-home-front \.homepage-restored-poster h2\s*\{[^}]*font-size:\s*var\(--home-poster-title-size\)/);
-    expect(styles).toContain("--font: 'Source Sans 3'");
+    expect(styles).toContain("--font: 'FAHINT Latin', 'Source Sans 3'");
     expect(styles).toMatch(/\.editorial-factory\.homepage-restored-poster\s*\{[^}]*min-height:\s*920px/);
   });
 

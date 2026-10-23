@@ -4,6 +4,7 @@ import { publicAsset } from '../../utils/publicAsset.js';
 import '../../styles/company-pages.css';
 import { staticMetadata } from '../../seo/metadata.js';
 import { usePageMetadata } from '../../seo/usePageMetadata.js';
+import Reveal from '../Reveal.jsx';
 
 export function usePageMeta(title, description) {
   const { pathname } = useLocation();
@@ -23,5 +24,5 @@ export function CompanyBreadcrumb({ current }) {
 }
 
 export function CompanyClosing({ title = 'Let’s make your next range.', text = 'Send the models, quantities and market requirements you have in mind. We will help define the next step.', to = '/contact', action = 'Talk to FAHINT' }) {
-  return <section className="company-closing"><div className="company-wrap company-heading"><div><h2>{title}</h2><p>{text}</p></div><CompanyLink to={to} light>{action}</CompanyLink></div></section>;
+  return <section className="company-closing"><Reveal className="company-wrap company-heading"><div><h2>{title}</h2><p>{text}</p></div><CompanyLink to={to} light>{action}</CompanyLink></Reveal></section>;
 }

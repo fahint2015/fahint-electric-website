@@ -47,6 +47,25 @@ describe('InquiryForm helpers', () => {
     expect(buildInquiryText(inquiry)).toBe(`To: louis@fahint.com\n\n${body}`);
   });
 
+  it('labels an application source in the inquiry text and mail draft', () => {
+    const source = '/applications/residential';
+    const body = new URLSearchParams(buildMailtoUrl({ ...validForm, source }).split('?')[1]).get('body');
+    expect(body).toContain(`Application page: ${source}`);
+    expect(body).not.toContain(`Product page: ${source}`);
+  });
+
+  it('keeps the visible application setting in a mocked inquiry-service payload', async () => {
+    const request = vi.fn().mockResolvedValue({ ok: true, json: async () => ({ ok: true }) });
+    render(<InquiryForm application={{ id: 'workplace', name: 'Workplace' }}
+      categoryOptions={productLines} endpoint="https://forms.example.com/inquiry" request={request} />);
+    expect(screen.getByRole('group', { name: 'Project setting' })).toHaveTextContent('Workplace');
+    fireEvent.change(screen.getByLabelText('Your name *'), { target: { value: validForm.name } });
+    fireEvent.change(screen.getByLabelText('Business email *'), { target: { value: validForm.email } });
+    fireEvent.change(screen.getByLabelText('Requirements *'), { target: { value: validForm.message } });
+    fireEvent.submit(screen.getByRole('button', { name: 'Send inquiry' }).closest('form'));
+    expect(JSON.parse(request.mock.calls[0][1].body)).toMatchObject({ source: '/applications/workplace' });
+  });
+
   it('returns the exact errors for trimmed required fields and an invalid email', () => {
     expect(
       validateInquiry({

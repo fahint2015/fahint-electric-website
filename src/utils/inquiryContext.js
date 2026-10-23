@@ -17,12 +17,13 @@ export function resolveInquiryContext(model, finishSlug = '') {
   };
 }
 
-export function inquiryContactHref(context, topic) {
+export function inquiryContactHref(context, topic, application) {
   const params = new URLSearchParams();
   if (['products', 'oem', 'technical'].includes(topic)) params.set('topic', topic);
   if (context) {
     params.set('model', context.model);
     if (context.finishSlug) params.set('finish', context.finishSlug);
   }
+  if (['residential', 'workplace', 'hospitality'].includes(application)) params.set('application', application);
   return `/contact${params.size ? `?${params}` : ''}`;
 }

@@ -4,8 +4,14 @@ import { dimmerBuyingGuide } from './dimmerBuyingGuide.js';
 import { wallplateBuyingGuide } from './wallplateBuyingGuide.js';
 import { lightSwitchBuyingGuide } from './lightSwitchBuyingGuide.js';
 import { receptacleBuyingGuide } from './receptacleBuyingGuide.js';
+import { roomOutletPlanningGuide } from './roomOutletPlanningGuide.js';
+import { smartSwitchBuyingGuide } from './smartSwitchBuyingGuide.js';
+import { productQuestionGuides } from './productQuestionGuides.js';
 
 export const posts = [
+  ...productQuestionGuides,
+  roomOutletPlanningGuide,
+  smartSwitchBuyingGuide,
   receptacleBuyingGuide,
   lightSwitchBuyingGuide,
   wallplateBuyingGuide,
@@ -34,7 +40,7 @@ export const posts = [
       },
       {
         "label": "FAHINT — Original certificate library",
-        "href": "/about#certifications"
+        "href": "/resources#certifications"
       }
     ],
     "body": [
@@ -101,7 +107,7 @@ export const posts = [
       },
       {
         "label": "FAHINT — Original certificate library",
-        "href": "/about#certifications"
+        "href": "/resources#certifications"
       }
     ],
     "body": [
@@ -159,7 +165,7 @@ export const posts = [
       },
       {
         "label": "FAHINT — Original certificate library",
-        "href": "/about#certifications"
+        "href": "/resources#certifications"
       }
     ],
     "body": [
@@ -229,7 +235,7 @@ export const posts = [
       },
       {
         "label": "FAHINT — Original certificate library",
-        "href": "/about#certifications"
+        "href": "/resources#certifications"
       }
     ],
     "body": [
@@ -291,7 +297,7 @@ export const posts = [
       },
       {
         "label": "FAHINT — Original certificate library",
-        "href": "/about#certifications"
+        "href": "/resources#certifications"
       },
       {
         "label": "FAHINT — GFCI outlet models and specifications",

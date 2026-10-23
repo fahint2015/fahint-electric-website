@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://fahint.com/</loc></url>
+  <url><loc>https://fahint.com/applications/</loc></url>
+  <url><loc>https://fahint.com/applications/residential/</loc></url>
+  <url><loc>https://fahint.com/applications/workplace/</loc></url>
+  <url><loc>https://fahint.com/applications/hospitality/</loc></url>
   <url><loc>https://fahint.com/products/</loc></url>
   <url><loc>https://fahint.com/products/gfci/</loc></url>
   <url><loc>https://fahint.com/products/usb-outlets/</loc></url>
@@ -181,4 +185,13 @@
   <url><loc>https://fahint.com/blog/wallplate-buying-guide/</loc></url>
   <url><loc>https://fahint.com/blog/light-switch-buying-guide/</loc></url>
   <url><loc>https://fahint.com/blog/standard-receptacle-buying-guide/</loc></url>
+  <url><loc>https://fahint.com/blog/outlet-planning-by-room/</loc></url>
+  <url><loc>https://fahint.com/blog/smart-switch-buying-guide-wifi-zigbee/</loc></url>
+  <url><loc>https://fahint.com/blog/what-is-blank-face-gfci/</loc></url>
+  <url><loc>https://fahint.com/blog/usb-c-wall-outlet-laptop-charging/</loc></url>
+  <url><loc>https://fahint.com/blog/back-wire-vs-push-in-outlets/</loc></url>
+  <url><loc>https://fahint.com/blog/led-lights-flicker-on-dimmer/</loc></url>
+  <url><loc>https://fahint.com/blog/combination-light-switch-double-triple-rocker/</loc></url>
+  <url><loc>https://fahint.com/blog/smart-switch-neutral-vs-no-neutral/</loc></url>
+  <url><loc>https://fahint.com/blog/screwless-vs-screw-fixed-wallplates/</loc></url>
 </urlset>

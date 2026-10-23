@@ -2,6 +2,7 @@ import { fireEvent, render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { readFileSync } from 'node:fs';
+import { useState } from 'react';
 import { findProduct, productFinishImage } from '../../data/products.js';
 import ProductGallery from './ProductGallery.jsx';
 
@@ -22,6 +23,7 @@ describe('ProductGallery', () => {
   });
 
   afterEach(() => {
+    vi.unstubAllGlobals();
     HTMLDialogElement.prototype.showModal = originalShowModal;
     HTMLDialogElement.prototype.close = originalClose;
   });
@@ -108,6 +110,52 @@ describe('ProductGallery', () => {
     await user.click(screen.getByRole('button', { name: 'View GF15 image 2' }));
 
     expect(onSelectImage).toHaveBeenCalledWith(product.assets.gallery[1]);
+  });
+
+  it('keeps arrows, keyboard, thumbnails and horizontal gestures in sync without opening zoom after a swipe', async () => {
+    const product = findProduct('GF15');
+    function Gallery() {
+      const [image, select] = useState(product.assets.hero);
+      return <ProductGallery product={product} selectedImage={image} selectedFinish={null} onSelectImage={select} />;
+    }
+    render(<Gallery />);
+    const user = userEvent.setup();
+    const main = screen.getByTestId('product-gallery-main');
+    const previous = screen.getByRole('button', { name: 'Previous GF15 image' });
+    const next = screen.getByRole('button', { name: 'Next GF15 image' });
+    expect(previous).toBeDisabled();
+    await user.click(next);
+    expect(screen.getByRole('button', { name: 'View GF15 image 2' })).toHaveAttribute('aria-pressed', 'true');
+    fireEvent.keyDown(main, { key: 'End' });
+    expect(next).toBeDisabled();
+    expect(screen.getByRole('button', { name: 'View GF15 image 5' })).toHaveAttribute('aria-pressed', 'true');
+    fireEvent.keyDown(main, { key: 'Home' });
+    function pointer(type, x, y) {
+      fireEvent(main, Object.assign(new Event(type, { bubbles: true }), { isPrimary: true, button: 0, pointerId: 1, clientX: x, clientY: y }));
+    }
+    pointer('pointerdown', 200, 100);
+    pointer('pointerup', 70, 110);
+    fireEvent.click(main, { detail: 1 });
+    expect(screen.getByRole('dialog', { hidden: true })).not.toHaveAttribute('open');
+    expect(screen.getByRole('button', { name: 'View GF15 image 2' })).toHaveAttribute('aria-pressed', 'true');
+    pointer('pointerdown', 100, 100);
+    pointer('pointerup', 120, 250);
+    expect(screen.getByRole('button', { name: 'View GF15 image 2' })).toHaveAttribute('aria-pressed', 'true');
+    await user.click(previous);
+    expect(previous).toBeDisabled();
+  });
+
+  it.each([false, true])('animates a loaded replacement image only when reduced motion is %s', async reducedMotion => {
+    vi.stubGlobal('matchMedia', () => ({ matches: reducedMotion }));
+    const product = findProduct('GF15');
+    const { rerender } = render(<ProductGallery product={product} selectedImage={product.assets.hero} selectedFinish={null} onSelectImage={vi.fn()} />);
+    const image = screen.getByRole('img', { name: 'GF15 selected product view' });
+    image.animate = vi.fn();
+    fireEvent.load(image);
+    expect(image.animate).not.toHaveBeenCalled();
+    rerender(<ProductGallery product={product} selectedImage={product.assets.gallery[1]} selectedFinish={null} onSelectImage={vi.fn()} />);
+    fireEvent.load(image);
+    expect(image.animate).toHaveBeenCalledTimes(reducedMotion ? 0 : 1);
   });
 
   it('uses one compact horizontally scrollable mobile strip for every product family', () => {
