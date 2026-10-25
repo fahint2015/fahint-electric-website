@@ -55,7 +55,7 @@ describe('published homepage and product overview', () => {
   it('makes the published homepage indexable with production metadata', () => {
     show(HomeStudio, '/');
     expect(document.querySelector('meta[name="robots"]')).toHaveAttribute('content', 'index, follow');
-    expect(document.title).toBe('Wiring Device Manufacturer | GFCI & USB Outlets | FAHINT');
+    expect(document.title).toBe('FAHINT | Safer Power. Better Living.');
     expect(document.querySelector('meta[name="description"]')?.content).toContain('North American');
     expect(screen.getByRole('link', { name: 'Explore FAHINT products' })).toHaveAttribute('href', '/products');
     const nav = screen.getByRole('navigation', { name: 'Homepage sections' });
