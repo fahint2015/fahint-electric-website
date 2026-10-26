@@ -61,7 +61,7 @@ describe('two-level product categories', () => {
     show(); fireEvent.click(screen.getByRole('button',{name:'Filter GFCI Outlets'}));
     expect(screen.getByRole('button',{name:'Filter GFCI Outlets'})).toHaveAttribute('aria-expanded','true');
     fireEvent.click(screen.getByRole('button',{name:'Industrial GFCI'}));
-    expect(screen.getByRole('link',{name:'View GTN15'})).toHaveAttribute('href','/products/gfci/gtn15');
+    expect(screen.getByRole('link',{name:'View GTN15'})).toHaveAttribute('href','/products/gfci/gtn15/');
     expect(screen.getByRole('link',{name:'View GTN20'})).toBeInTheDocument();
     expect(screen.queryByRole('link',{name:'View GF15'})).not.toBeInTheDocument();
     fireEvent.click(screen.getByRole('button',{name:'Filter Dimmers'}));
@@ -80,6 +80,6 @@ describe('two-level product categories', () => {
     expect(screen.getByRole('link',{name:'View FTR15C-3100'})).toBeInTheDocument();
     fireEvent.click(screen.getByRole('button',{name:'Reset filters'}));
     fireEvent.change(screen.getByRole('searchbox',{name:'Search model or feature'}),{target:{value:'R15-C'}});
-    expect(screen.getByRole('link',{name:'View C15'})).toHaveAttribute('href','/products/receptacles/r15-c');
+    expect(screen.getByRole('link',{name:'View C15'})).toHaveAttribute('href','/products/receptacles/r15-c/');
   });
 });

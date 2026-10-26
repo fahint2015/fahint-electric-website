@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { ArrowDown, ArrowRight, ArrowUpRight, Download, Plus } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link } from '../components/SiteLink.jsx';
 import { productLines } from '../data/lines.js';
 import { certificates } from '../data/certificates.js';
 import { company } from '../data/company.js';

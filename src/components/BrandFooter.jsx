@@ -1,18 +1,13 @@
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+import { Link } from './SiteLink.jsx';
 import { ArrowUp, Mail, Phone } from 'lucide-react';
 import { company } from '../data/company.js';
 import { productLines } from '../data/lines.js';
 import { publicAsset } from '../utils/publicAsset.js';
 import { normalizePathname } from '../utils/prerender.js';
 import Reveal from './Reveal.jsx';
+import { socialProfiles } from '../data/socialProfiles.js';
 
-const socialLinks = [
-  { name: 'TikTok', icon: 'tiktok', href: 'https://www.tiktok.com/@fahintelectric' },
-  { name: 'YouTube', icon: 'youtube', href: 'https://www.youtube.com/@fahintelectric' },
-  { name: 'LinkedIn', icon: 'linkedin', href: 'https://www.linkedin.com/company/fahint-electric' },
-  { name: 'Facebook', icon: 'facebook', href: 'https://www.facebook.com/share/19WjeF47d2/' },
-  { name: 'Instagram', icon: 'instagram', href: 'https://www.instagram.com/fahint2015?mdxt=Y2Z1d2h5amg3ZTg5' }
-];
 
 export default function BrandFooter() {
   const { pathname, search } = useLocation();
@@ -24,7 +19,7 @@ export default function BrandFooter() {
         <a href={`mailto:${company.email}`}><Mail size={20} aria-hidden="true" /><span>{company.email}</span></a>
       </div>
       <div className="footer-socials" role="group" aria-label="Follow FAHINT">
-        {socialLinks.map(({ name, icon, href }) => <a key={icon} href={href} target="_blank" rel="noopener noreferrer" aria-label={`FAHINT on ${name} (opens in a new tab)`} title={name}>
+        {socialProfiles.map(({ name, icon, href }) => <a key={icon} href={href} target="_blank" rel="noopener noreferrer" aria-label={`FAHINT on ${name} (opens in a new tab)`} title={name}>
           <img src={publicAsset(`assets/icons/social/${icon}.svg`)} alt="" width="22" height="22" loading="lazy" />
         </a>)}
       </div>

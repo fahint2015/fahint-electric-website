@@ -35,7 +35,7 @@ describe('Series purchasing information and retained checklist component', () =>
     const guide = screen.getByRole('region', { name: /Buying guide:/ });
     expect(guide.textContent.toLowerCase()).toContain(topic.toLowerCase());
     expect(within(guide).getAllByRole('button')).toHaveLength(line === 'gfci' ? 4 : 3);
-    expect(within(guide).getByRole('link', { name: /Discuss your selection/ })).toHaveAttribute('href', '/contact?topic=technical');
+    expect(within(guide).getByRole('link', { name: /Discuss your selection/ })).toHaveAttribute('href', '/contact/?topic=technical');
   });
 
   it('supports keyboard expansion of the buying questions', async () => {
@@ -87,7 +87,7 @@ describe('Series purchasing information and retained checklist component', () =>
     const checklist = screen.getByRole('region', { name: 'Before you order FTR15C-3100' });
     expect(checklist).toHaveTextContent(/April 26, 2022.*E498095-20180426/);
     expect(within(checklist).getByRole('link', { name: 'View original certificate PDF' })).toHaveAttribute('href', `${base}assets/documents/certificates/ul-usb.pdf`);
-    expect(within(checklist).getByRole('link', { name: 'Read the USB outlet buying guide' })).toHaveAttribute('href', '/blog/usb-wall-outlet-buying-guide');
+    expect(within(checklist).getByRole('link', { name: 'Read the USB outlet buying guide' })).toHaveAttribute('href', '/blog/usb-wall-outlet-buying-guide/');
   });
 
   it('explains missing exact-model documents without calling the product uncertified', () => {

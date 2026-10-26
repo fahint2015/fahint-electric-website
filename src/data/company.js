@@ -9,7 +9,13 @@ export const company = {
   whatsapp: '+8618857349189',
   website: 'fahint.com',
   location: 'Wenzhou, Zhejiang Province, China',
-  address: 'Wenzhou, Zhejiang Province, China — 25 minutes from Wenzhou International Airport',
+  address: 'No. 130 Xinguang Avenue, Xinguang Industrial Zone, Liushi Town, Yueqing, Wenzhou, Zhejiang, China',
+  postalAddress: {
+    streetAddress: 'No. 130 Xinguang Avenue, Xinguang Industrial Zone, Liushi Town',
+    addressLocality: 'Yueqing, Wenzhou',
+    addressRegion: 'Zhejiang',
+    addressCountry: 'CN'
+  },
   ulFile: 'E504391',
   hours: 'Mon – Sat, 08:30 – 18:00 (GMT+8)'
 };

@@ -20,9 +20,9 @@ describe('published page prerendering', () => {
       expect(html).toContain(`applications/${slug}-cutaway-${slug === 'hospitality' ? 'v3' : 'v2'}.webp`);
       expect(html).toContain(`id="${slug}-products"`);
       expect(html).toContain(`${name} application concept`);
-      for (const model of models) expect(html).toContain(`href="${base}products/${model}"`);
-      expect(html).toContain(`href="${base}contact?topic=technical&amp;application=${slug}"`);
-      expect(await renderPage('/applications', base)).toContain(`href="${base}applications/${slug}"`);
+      for (const model of models) expect(html).toContain(`href="${base}products/${model}/"`);
+      expect(html).toContain(`href="${base}contact/?topic=technical&amp;application=${slug}"`);
+      expect(await renderPage('/applications', base)).toContain(`href="${base}applications/${slug}/"`);
     }
   });
   it.each(['/', '/fahint-electric-website/'])('renders the complete residential application and real model links under %s', async base => {
@@ -32,9 +32,9 @@ describe('published page prerendering', () => {
     expect(html).not.toContain('Loading page…');
     for (const heading of ['What we offer.', 'Designed for home.', 'Recommended Products', 'Planning a residential project?']) expect(html).toContain(heading);
     expect(html).toContain(`${import.meta.env.BASE_URL}assets/images/brand-home/applications/residential-cutaway-v2.webp`);
-    for (const model of ['gfci/gt15', 'usb-outlets/ftr15c-3100', 'lighting-switches/ds15', 'dimmers/dm2010', 'smart-switches/usw8811', 'wallplates/bs1801']) expect(html).toContain(`href="${base}products/${model}"`);
-    expect(html).toContain(`href="${base}contact?topic=technical&amp;application=residential"`);
-    expect(html).toContain(`href="${base}blog/outlet-planning-by-room"`);
+    for (const model of ['gfci/gt15', 'usb-outlets/ftr15c-3100', 'lighting-switches/ds15', 'dimmers/dm2010', 'smart-switches/usw8811', 'wallplates/bs1801']) expect(html).toContain(`href="${base}products/${model}/"`);
+    expect(html).toContain(`href="${base}contact/?topic=technical&amp;application=residential"`);
+    expect(html).toContain(`href="${base}blog/outlet-planning-by-room/"`);
   });
   it.each(['/', '/fahint-electric-website/'])('renders catalogue corrections while keeping commercial URLs under %s', async base => {
     const commercial = await renderPage('/products/receptacles/rt15q-c', base);
@@ -54,13 +54,14 @@ describe('published page prerendering', () => {
     const html = await renderPage('/' + path, base);
     expect(html).toContain('FAHINT 125V receptacle comparison');
     expect(html).toContain('Receptacle quotation checklist');
+    expect(html).toContain(`href="${base}"`);
     expect(html).toContain('E498095-20211123');
-    expect(html).toContain('href="' + base + 'products/receptacles/r15q"');
-    expect(html).toContain('href="' + base + 'resources?family=receptacles"');
-    expect(html).toContain('href="' + base + 'contact?topic=technical"');
+    expect(html).toContain('href="' + base + 'products/receptacles/r15q/"');
+    expect(html).toContain('href="' + base + 'resources/?family=receptacles"');
+    expect(html).toContain('href="' + base + 'contact/?topic=technical"');
     expect(html).not.toContain('Loading page…');
     for (const entry of ['/products/receptacles', '/resources']) {
-      expect(await renderPage(entry, base)).toContain(`href="${base}${path}"`);
+      expect(await renderPage(entry, base)).toContain(`href="${base}${path}/"`);
     }
   });
 
@@ -87,11 +88,11 @@ describe('published page prerendering', () => {
     expect(html).toContain('15A, 125V AC');
     expect(html).toContain('Light switch quotation checklist');
     for (const model of ['ds15', 'ds15-3', 'ds1502', 'ds1503', 't15', 't15-3']) {
-      expect(html).toContain(`href="/fahint-electric-website/products/lighting-switches/${model}"`);
+      expect(html).toContain(`href="/fahint-electric-website/products/lighting-switches/${model}/"`);
     }
-    expect(html).toContain('href="/fahint-electric-website/resources?family=lighting-switches"');
-    expect(html).toContain('href="/fahint-electric-website/blog/dimmer-buying-guide-led-0-10v"');
-    expect(html).toContain('href="/fahint-electric-website/blog/wallplate-buying-guide"');
+    expect(html).toContain('href="/fahint-electric-website/resources/?family=lighting-switches"');
+    expect(html).toContain('href="/fahint-electric-website/blog/dimmer-buying-guide-led-0-10v/"');
+    expect(html).toContain('href="/fahint-electric-website/blog/wallplate-buying-guide/"');
     expect(html).not.toContain('Loading page…');
   });
 
@@ -103,10 +104,10 @@ describe('published page prerendering', () => {
     expect(html).toContain('80 × 124 mm');
     expect(html).toContain('Wallplate quotation checklist');
     for (const model of ['bs1801', 'bs1802', 'bs1804', 'bs1806', 'bs1807', 'bs18012', 'bs1803-g', 'bs1803-m']) {
-      expect(html).toContain(`href="/fahint-electric-website/products/wallplates/${model}"`);
+      expect(html).toContain(`href="/fahint-electric-website/products/wallplates/${model}/"`);
     }
-    expect(html).toContain('href="/fahint-electric-website/resources?family=wallplates"');
-    expect(html).toContain('href="/fahint-electric-website/blog/gfci-colour-finishes-specification"');
+    expect(html).toContain('href="/fahint-electric-website/resources/?family=wallplates"');
+    expect(html).toContain('href="/fahint-electric-website/blog/gfci-colour-finishes-specification/"');
     expect(html).not.toContain('Loading page…');
   });
 
@@ -116,9 +117,9 @@ describe('published page prerendering', () => {
     expect(html).toContain('<table>');
     expect(html).toContain('600VA');
     expect(html).toContain('Dimmer quotation checklist');
-    expect(html).toContain('href="/fahint-electric-website/products/dimmers/dm2010"');
-    expect(html).toContain('href="/fahint-electric-website/products/dimmers/dm2010s"');
-    expect(html).toContain('href="/fahint-electric-website/resources?family=dimmers"');
+    expect(html).toContain('href="/fahint-electric-website/products/dimmers/dm2010/"');
+    expect(html).toContain('href="/fahint-electric-website/products/dimmers/dm2010s/"');
+    expect(html).toContain('href="/fahint-electric-website/resources/?family=dimmers"');
     expect(html).not.toContain('Loading page…');
   });
 
@@ -127,8 +128,8 @@ describe('published page prerendering', () => {
     expect(html).toContain('FAHINT USB outlet shortlist');
     expect(html).toContain('<table>');
     expect(html).toContain('FTR15QC-DC65W');
-    expect(html).toContain('href="/fahint-electric-website/products/usb-outlets?ports=a-c"');
-    expect(html).toContain('href="/fahint-electric-website/products/usb-outlets/f4p"');
+    expect(html).toContain('href="/fahint-electric-website/products/usb-outlets/?ports=a-c"');
+    expect(html).toContain('href="/fahint-electric-website/products/usb-outlets/f4p/"');
     expect(html).toContain('USB outlet quotation checklist');
     expect(html).not.toContain('Loading page…');
   });
@@ -138,7 +139,7 @@ describe('published page prerendering', () => {
     expect(html).toContain('Safer Power.');
     expect(html).toContain('Better Living.');
     expect(html).toContain('Wenzhou Fahint Electric');
-    expect(html).toContain(`href="${base}products/usb-outlets"`);
+    expect(html).toContain(`href="${base}products/usb-outlets/"`);
     expect(html).not.toContain('Loading page…');
     expect(html).not.toContain('data-motion="ready"');
     expect(html).toContain('class="hero"');
@@ -168,9 +169,9 @@ describe('published page prerendering', () => {
 
   it('keeps the deployment subpath on navigation, model and inquiry links', async () => {
     const html = await renderPage('/products/gfci/gf15', '/fahint-electric-website/');
-    expect(html).toContain('href="/fahint-electric-website/products/gfci"');
-    expect(html).toContain('href="/fahint-electric-website/products/gfci/gf20"');
-    expect(html).toContain('href="/fahint-electric-website/contact?');
+    expect(html).toContain('href="/fahint-electric-website/products/gfci/"');
+    expect(html).toContain('href="/fahint-electric-website/products/gfci/gf20/"');
+    expect(html).toContain('href="/fahint-electric-website/contact/?');
     expect(html).not.toContain('href="/products');
   });
 

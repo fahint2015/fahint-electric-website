@@ -68,7 +68,7 @@ describe('GfciSeries', () => {
     ['GF15', 'GF20', 'GT15', 'GT20', 'GW15', 'GW20', 'GL20', 'GTN15', 'GTN20'].forEach((sku) => {
       expect(within(grid).getByRole('link', { name: new RegExp(`^${sku} `) })).toHaveAttribute(
         'href',
-        `/products/gfci/${sku.toLowerCase()}`
+        `/products/gfci/${sku.toLowerCase()}/`
       );
     });
     expect(within(grid).getAllByRole('link')).toHaveLength(9);
@@ -154,10 +154,10 @@ describe('GfciSeries', () => {
 
     expect(productLinks).toHaveLength(9);
     ['gtn15', 'gtn20'].forEach((sku) => {
-      expect(screen.getByRole('link', { name: new RegExp(`^${sku.toUpperCase()} `) })).toHaveAttribute('href', `/products/gfci/${sku}`);
+      expect(screen.getByRole('link', { name: new RegExp(`^${sku.toUpperCase()} `) })).toHaveAttribute('href', `/products/gfci/${sku}/`);
     });
     productLinks.forEach((link) => {
-      expect(link.getAttribute('href')).toMatch(/^\/products\/gfci\/[a-z0-9]+$/);
+      expect(link.getAttribute('href')).toMatch(/^\/products\/gfci\/[a-z0-9]+\/$/);
     });
   });
 

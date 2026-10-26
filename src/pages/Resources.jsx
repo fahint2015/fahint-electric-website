@@ -1,5 +1,6 @@
 import BrandBanner from '../components/BrandBanner.jsx';
-import { Link, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
+import { Link } from '../components/SiteLink.jsx';
 import { ArrowUpRight, BookOpen, Download } from 'lucide-react';
 import { certificates, findModelCertificate } from '../data/certificates.js';
 import { modelDocumentationNote } from '../data/buyingGuides.js';
@@ -28,6 +29,7 @@ function ResourceDocument({ document }) {
         <summary>Scope &amp; document date</summary>
         <p>{document.scope}</p>
         {document.report && <p>Report reference: {document.report}</p>}
+        {document.certificationNumber && <p>Certificate number: {document.certificationNumber} · {document.issuer}</p>}
         <p>Document issued: {document.issued}</p>
         {document.modelPages && <p>Model addenda: PDF pages {document.modelPages.join(', ')}</p>}
       </details>

@@ -1,0 +1,10 @@
+# Generated from src/server/security-headers.js. CSP remains report-only.
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  Referrer-Policy: strict-origin-when-cross-origin
+  Content-Security-Policy-Report-Only: default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://*.google-analytics.com https://*.googletagmanager.com; font-src 'self'; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://challenges.cloudflare.com https://cloudflareinsights.com; frame-src https://challenges.cloudflare.com; object-src 'none'; base-uri 'self'; form-action 'self' mailto:; frame-ancestors 'self'; report-uri /api/csp-report
+https://fahint.com/*
+  Strict-Transport-Security: max-age=86400
+https://www.fahint.com/*
+  Strict-Transport-Security: max-age=86400

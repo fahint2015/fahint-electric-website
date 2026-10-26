@@ -35,7 +35,7 @@ afterEach(() => vi.unstubAllEnvs());
 describe('Resources', () => {
   it('assigns product families without classifying ISO as a product listing', () => {
     expect(certificates.map(file => file.family)).toEqual(['gfci', 'receptacles', 'usb-outlets', 'wallplates', 'wallplates', 'lighting-switches', undefined]);
-    expect(documents.resourcesHref(findProduct('GF15'))).toBe('/resources?family=gfci&model=GF15');
+    expect(documents.resourcesHref(findProduct('GF15'))).toBe('/resources/?family=gfci&model=GF15');
   });
 
   it('offers the eight real PDFs with base-safe native open and download links', async () => {
@@ -85,7 +85,7 @@ describe('Resources', () => {
     expect(screen.getByText(/E501377-20181016/)).toBeVisible();
     expect(screen.getByText(/E501377-20230919/)).toBeVisible();
     expect(screen.getAllByRole('link', { name: /^Download .* PDF$/ })).toHaveLength(4);
-    expect(screen.getByRole('link', { name: 'Return to BS1805' })).toHaveAttribute('href', '/products/wallplates/bs1805');
+    expect(screen.getByRole('link', { name: 'Return to BS1805' })).toHaveAttribute('href', '/products/wallplates/bs1805/');
     expect(screen.getByText(/BS1805 is not named in the supplied wallplate addenda/)).toBeVisible();
   });
 
@@ -93,8 +93,8 @@ describe('Resources', () => {
     await show(`/resources?family=${family}`);
     expect(screen.getByText(/No separate certificate PDF is published here for this family/)).toBeVisible();
     expect(screen.getAllByRole('link', { name: /^Download .* PDF$/ })).toHaveLength(2);
-    expect(screen.getByRole('link', { name: 'Browse this product family' })).toHaveAttribute('href', `/products/${family}`);
-    expect(screen.getByRole('link', { name: 'Request model documents' })).toHaveAttribute('href', '/contact?topic=technical');
+    expect(screen.getByRole('link', { name: 'Browse this product family' })).toHaveAttribute('href', `/products/${family}/`);
+    expect(screen.getByRole('link', { name: 'Request model documents' })).toHaveAttribute('href', '/contact/?topic=technical');
   });
 
   it.each([
@@ -105,15 +105,15 @@ describe('Resources', () => {
   ])('keeps %s model context separate from certificate coverage', async (model, family, source) => {
     await show(`/resources?family=${family}&model=${model}`);
     expect(screen.getByLabelText('Product family')).toHaveValue(family);
-    expect(screen.getByRole('link', { name: `Return to ${model}` })).toHaveAttribute('href', source);
-    expect(screen.getByRole('link', { name: 'Request model documents' })).toHaveAttribute('href', `/contact?topic=technical&model=${model}`);
+    expect(screen.getByRole('link', { name: `Return to ${model}` })).toHaveAttribute('href', source + '/');
+    expect(screen.getByRole('link', { name: 'Request model documents' })).toHaveAttribute('href', `/contact/?topic=technical&model=${model}`);
     expect(screen.getByRole('complementary', { name: 'Source product' })).toHaveTextContent(/Confirm current coverage|under review/);
   });
 
   it.each(['family=invalid&model=unknown', 'family=receptacles&model=FLB20', 'family=usb-outlets&model=GF15'])('does not display untrusted, draft or mismatched model context: %s', async query => {
     await show(`/resources?${query}&source=https%3A%2F%2Fevil.example`);
     expect(screen.queryByRole('link', { name: /^Return to / })).not.toBeInTheDocument();
-    expect(screen.getByRole('link', { name: 'Request model documents' })).toHaveAttribute('href', '/contact?topic=technical');
+    expect(screen.getByRole('link', { name: 'Request model documents' })).toHaveAttribute('href', '/contact/?topic=technical');
     expect(within(document.querySelector('.resources-page')).queryByText(/unknown|FLB20|evil\.example/)).not.toBeInTheDocument();
   });
 
@@ -146,7 +146,7 @@ describe('Resources', () => {
     expect(source).toHaveTextContent(/No matching certificate PDF for FTR15QC-AC65W.*library/);
     expect(within(source).queryByRole('link', { name: 'View original certificate PDF' })).not.toBeInTheDocument();
     expect(screen.getByRole('link', { name: 'Download UL — USB Outlets PDF' })).toBeVisible();
-    expect(screen.getByRole('link', { name: 'Request model documents' })).toHaveAttribute('href', '/contact?topic=technical&model=FTR15QC-AC65W');
+    expect(screen.getByRole('link', { name: 'Request model documents' })).toHaveAttribute('href', '/contact/?topic=technical&model=FTR15QC-AC65W');
   });
 
   it('preserves the model when opening the existing technical inquiry form', async () => {
@@ -154,7 +154,7 @@ describe('Resources', () => {
     await show('/resources?family=usb-outlets&model=FTR15C-3100');
     await user.click(screen.getByRole('link', { name: 'Request model documents' }));
     expect(screen.getByRole('group', { name: 'Selected product' })).toHaveTextContent('FTR15C-3100');
-    expect(screen.getByTestId('route')).toHaveTextContent('/contact?topic=technical&model=FTR15C-3100');
+    expect(screen.getByTestId('route')).toHaveTextContent('/contact/?topic=technical&model=FTR15C-3100');
   });
 
   it('exposes document scope through a focusable native disclosure', async () => {
@@ -191,17 +191,17 @@ describe('Resource entry points', () => {
     expect(container.querySelector('.catalog-documentation__certificate')).not.toBeInTheDocument();
     expect(screen.getByText(/No matching certificate PDF for FTR15-5000/)).toBeVisible();
     expect(screen.getByText(/Supplier-published reference:/)).toHaveTextContent('E498095');
-    expect(screen.getByRole('link', { name: 'Request model-specific documents' })).toHaveAttribute('href', '/contact?model=FTR15-5000');
+    expect(screen.getByRole('link', { name: 'Request model-specific documents' })).toHaveAttribute('href', '/contact/?model=FTR15-5000');
   });
 
   it.each(['GF15', 'GL20'])('connects the GFCI documentation section for %s', model => {
     render(wrap(<ProductCertification product={findProduct(model)} />));
-    expect(screen.getByRole('link', { name: 'Browse product resources' })).toHaveAttribute('href', `/resources?family=gfci&model=${model}`);
+    expect(screen.getByRole('link', { name: 'Browse product resources' })).toHaveAttribute('href', `/resources/?family=gfci&model=${model}`);
   });
 
   it.each([['usb-outlets', 'ftr15c-3100', 'FTR15C-3100'], ['gfci', 'gtn15', 'GTN15']])('connects the catalog documentation section for %s/%s', (family, slug, model) => {
     render(wrap(<CatalogDocumentation product={findCatalogProduct(family, slug)} />));
-    expect(screen.getByRole('link', { name: 'Browse product resources' })).toHaveAttribute('href', `/resources?family=${family}&model=${model}`);
+    expect(screen.getByRole('link', { name: 'Browse product resources' })).toHaveAttribute('href', `/resources/?family=${family}&model=${model}`);
   });
 
   it('provides resources from desktop/mobile navigation, footer and the existing library', () => {
@@ -209,7 +209,7 @@ describe('Resource entry points', () => {
     expect(screen.getAllByRole('link', { name: 'Resources' })).toHaveLength(2);
     fireEvent.click(screen.getByRole('button', { name: 'Toggle menu' }));
     expect(screen.getAllByRole('link', { name: 'Resources' })).toHaveLength(3);
-    for (const link of screen.getAllByRole('link', { name: 'Resources' })) expect(link).toHaveAttribute('href', '/resources');
-    expect(screen.getByRole('link', { name: 'Browse all resources' })).toHaveAttribute('href', '/resources');
+    for (const link of screen.getAllByRole('link', { name: 'Resources' })) expect(link).toHaveAttribute('href', '/resources/');
+    expect(screen.getByRole('link', { name: 'Browse all resources' })).toHaveAttribute('href', '/resources/');
   });
 });

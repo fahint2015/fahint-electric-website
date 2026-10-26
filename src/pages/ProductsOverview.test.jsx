@@ -27,12 +27,12 @@ describe('ProductsOverview model directory', () => {
     expect(links).toHaveLength(productLines.length);
     productLines.forEach((line, i) => {
       expect(links[i]).toHaveAccessibleName(line.name);
-      expect(links[i]).toHaveAttribute('href', '/products#range-' + line.slug);
+      expect(links[i]).toHaveAttribute('href', '/products/#range-' + line.slug);
       expect(document.getElementById('range-' + line.slug)).toBeInTheDocument();
       const range = screen.getByRole('region', { name: line.name });
       const count = getCatalogProducts(line.slug).length + (line.slug === 'gfci' ? products.length : 0);
       expect(within(range).getByText(count + ' model configurations')).toBeInTheDocument();
-      expect(within(range).getByRole('link', { name: 'View all ' + line.name })).toHaveAttribute('href', '/products/' + line.slug);
+      expect(within(range).getByRole('link', { name: 'View all ' + line.name })).toHaveAttribute('href', '/products/' + line.slug + '/');
       expect(within(range).getAllByRole('article').length).toBe(Math.min(count, 3));
     });
   });
@@ -44,9 +44,9 @@ describe('ProductsOverview model directory', () => {
     }
     render(<MemoryRouter basename="/fahint-electric-website" initialEntries={['/fahint-electric-website/products']} future={{ v7_startTransition: true, v7_relativeSplatPath: true }}><ProductsOverview /><LocationProbe /></MemoryRouter>);
     const link = within(screen.getByRole('navigation', { name: 'Product ranges' })).getByRole('link', { name: 'Dimmers', exact: true });
-    expect(link).toHaveAttribute('href', '/fahint-electric-website/products#range-dimmers');
+    expect(link).toHaveAttribute('href', '/fahint-electric-website/products/#range-dimmers');
     fireEvent.click(link);
-    expect(screen.getByTestId('route')).toHaveTextContent('/products#range-dimmers');
+    expect(screen.getByTestId('route')).toHaveTextContent('/products/#range-dimmers');
   });
 
   it('uses exact source images, names, parameters and routes for every preview', () => {
@@ -61,7 +61,7 @@ describe('ProductsOverview model directory', () => {
       const p = records.find((item) => item.line === card.dataset.line && item.sku === card.dataset.sku);
       expect(p).toBeTruthy();
       expect(within(card).getByRole('heading', { name: p.name })).toBeInTheDocument();
-      expect(within(card).getByRole('link', { name: 'View ' + p.sku + ' details' })).toHaveAttribute('href', p.href);
+      expect(within(card).getByRole('link', { name: 'View ' + p.sku + ' details' })).toHaveAttribute('href', p.href + '/');
       expect(card.querySelector('img')).toHaveAttribute('src', expect.stringContaining(p.assets.card));
       expect(existsSync('public/' + p.assets.card)).toBe(true);
       expect(card.querySelector('img')).toHaveAttribute('width', '800');
@@ -79,14 +79,14 @@ describe('ProductsOverview model directory', () => {
     fireEvent.change(screen.getByRole('searchbox'), { target: { value: 'ftr20qc dc65w' } });
     expect(screen.getByRole('status')).toHaveTextContent('1 model found');
     expect(screen.getAllByRole('article')).toHaveLength(1);
-    expect(screen.getByRole('link', { name: 'View FTR20QC-DC65W details' })).toHaveAttribute('href', '/products/usb-outlets/ftr20qc-dc65w');
+    expect(screen.getByRole('link', { name: 'View FTR20QC-DC65W details' })).toHaveAttribute('href', '/products/usb-outlets/ftr20qc-dc65w/');
   });
 
   it('finds GFCI models using their existing detail routes', () => {
     renderOverview();
     fireEvent.change(screen.getByRole('searchbox'), { target: { value: ' gf15 ' } });
     expect(screen.getByRole('status')).toHaveTextContent('1 model found');
-    expect(screen.getByRole('link', { name: 'View GF15 details' })).toHaveAttribute('href', '/products/gfci/gf15');
+    expect(screen.getByRole('link', { name: 'View GF15 details' })).toHaveAttribute('href', '/products/gfci/gf15/');
   });
 
   it('shows an empty state and clears the search while restoring input focus', () => {
@@ -115,6 +115,6 @@ describe('ProductsOverview model directory', () => {
     expect(screen.getByRole('region', { name: 'Specified for real projects.' })).toBeInTheDocument();
     expect(screen.getByRole('region', { name: 'Verified manufacturing and compliance.' })).toBeInTheDocument();
     expect(screen.getByText(/Certification coverage varies by model/)).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: 'View certification details' })).toHaveAttribute('href', '/resources#certifications');
+    expect(screen.getByRole('link', { name: 'View certification details' })).toHaveAttribute('href', '/resources/#certifications');
   });
 });

@@ -1,6 +1,6 @@
 import { ArrowRight, FileCheck2, ShieldCheck } from 'lucide-react';
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from '../SiteLink.jsx';
 import { colors, isVerifiedListing, productFinishImage } from '../../data/products.js';
 import ProductGallery from './ProductGallery.jsx';
 import Reveal from '../Reveal.jsx';

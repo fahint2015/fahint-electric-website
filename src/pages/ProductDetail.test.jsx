@@ -23,7 +23,7 @@ describe('concise GFCI product pages', () => {
     for (const group of productSpecificationGroups(product)) for (const [label,value] of group.rows) {
       if (!['Factory inspection','Patent protection'].includes(label)) expect(table.textContent).toContain(value);
     }
-    expect(screen.getByRole('link',{name:'Request a quote'})).toHaveAttribute('href',`/contact?model=${sku}`);
+    expect(screen.getByRole('link',{name:'Request a quote'})).toHaveAttribute('href',`/contact/?model=${sku}`);
     expect(container.querySelector('form')).toBeNull();
     expect(container.querySelector('.product-manufacturing,.product-story,.product-certification,.product-inquiry')).toBeNull();
     const parameters=container.querySelector('#technical-details');
@@ -39,7 +39,7 @@ describe('concise GFCI product pages', () => {
     const user=userEvent.setup(); show('GF15');
     await user.click(screen.getByRole('button',{name:'Show GF15 in Black'}));
     expect(screen.getByRole('img',{name:'GF15 selected product view'})).toHaveAttribute('src',publicAsset('assets/images/products/gf15-black.webp'));
-    expect(screen.getByRole('link',{name:'Request a quote'})).toHaveAttribute('href','/contact?model=GF15&finish=black');
+    expect(screen.getByRole('link',{name:'Request a quote'})).toHaveAttribute('href','/contact/?model=GF15&finish=black');
     await user.click(screen.getByRole('tab',{name:'Download'}));
     expect(screen.getByRole('link',{name:'Request model-specific documents'}).getAttribute('href')).toContain('model=GF15&finish=black');
   });
@@ -64,7 +64,7 @@ describe('concise GFCI product pages', () => {
   });
   it('keeps current route and query when jumping to parameters',()=>{
     show('GF15','/products/gfci/gf15?source=sample');
-    expect(screen.getByRole('link',{name:'Technical Parameters'})).toHaveAttribute('href','/products/gfci/gf15?source=sample#technical-details');
+    expect(screen.getByRole('link',{name:'Technical Parameters'})).toHaveAttribute('href','/products/gfci/gf15/?source=sample#technical-details');
   });
   it('preserves browser metadata and image dimensions',()=>{
     const {container}=show('GT20');

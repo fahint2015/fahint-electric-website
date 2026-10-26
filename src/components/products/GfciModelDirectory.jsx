@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from '../SiteLink.jsx';
 import { Search } from 'lucide-react';
 import ProductCard from '../ProductCard.jsx';
 import { products } from '../../data/products.js';

@@ -47,7 +47,8 @@ describe('Page search information', () => {
     expect(product.sku).toBe('FTR15-3100');
     expect(product.brand.name).toBe('FAHINT');
     expect(product.image).toEqual([property('og:image')]);
-    expect(JSON.stringify(product)).not.toMatch(/"offers"|"aggregateRating"|"review"|certified|certification/i);
+    expect(JSON.stringify(product)).not.toMatch(/"offers"|"aggregateRating"|"review"/i);
+    expect(product.hasCertification['@id']).toContain('ul-usb');
     expect(property('og:image')).not.toContain('hero-interior');
   });
 
@@ -67,13 +68,14 @@ describe('Page search information', () => {
     expect(document.querySelector('script[type="application/ld+json"]')).toBeNull();
   });
 
-  it('publishes article metadata with its real cover and no invented author', () => {
+  it('publishes article metadata with its real cover and visible organizational author', () => {
     openPage('/blog/how-to-source-ul-listed-gfci-from-china');
     const article = graph().find(item => item['@type'] === 'Article');
     expect(article.headline).toBeTruthy();
     expect(article.dateModified).toBeTruthy();
     expect(article.publisher.name).toBe('FAHINT');
-    expect(article.author).toBeUndefined();
+    expect(article.author).toMatchObject({ '@type': 'Organization', name: 'FAHINT' });
+    expect(document.querySelector('a[rel="author"]')).toHaveTextContent('FAHINT');
     expect(property('og:type')).toBe('article');
   });
 

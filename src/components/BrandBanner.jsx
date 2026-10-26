@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link } from './SiteLink.jsx';
 import { publicAsset } from '../utils/publicAsset.js';
 import Reveal from './Reveal.jsx';
 

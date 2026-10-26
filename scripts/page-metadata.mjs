@@ -1,12 +1,12 @@
 import { posts } from '../src/data/posts.js';
 import { products } from '../src/data/products.js';
-import { catalogProducts } from '../src/data/catalogProducts.js';
+import { catalogProducts, getCatalogProducts } from '../src/data/catalogProducts.js';
 import { findLine, productLines } from '../src/data/lines.js';
 import { articleMetadata, familyMetadata, headEntries, productMetadata, renderHeadEntries, staticMetadata } from '../src/seo/metadata.js';
 
 export const routeMetadata = new Map([
   ...Object.entries(staticMetadata),
-  ...productLines.map(line => [`/products/${line.slug}`, familyMetadata(line)]),
+  ...productLines.map(line => [`/products/${line.slug}`, familyMetadata(line, [...(line.slug === 'gfci' ? products : []), ...getCatalogProducts(line.slug)])]),
   ...[...products, ...catalogProducts.filter(product => !product.draft)].map(product => {
     const meta = productMetadata(product, findLine(product.line || 'gfci'));
     return [meta.path, meta];

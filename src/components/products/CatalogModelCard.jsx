@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link } from '../SiteLink.jsx';
 import { ArrowRight } from 'lucide-react';
 import { productHref } from '../../data/catalogProducts.js';
 import SafeImage from '../SafeImage.jsx';

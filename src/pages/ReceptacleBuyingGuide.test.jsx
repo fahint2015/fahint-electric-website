@@ -10,7 +10,7 @@ import { findCatalogProduct } from '../data/catalogProducts.js';
 import { findModelCertificate } from '../data/certificates.js';
 
 const slug = 'standard-receptacle-buying-guide';
-const path = '/blog/' + slug;
+const path = '/blog/' + slug + '/';
 const wrap = children => <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>{children}</MemoryRouter>;
 
 describe('Researched standard receptacle buying guide', () => {
@@ -25,13 +25,13 @@ describe('Researched standard receptacle buying guide', () => {
     expect(within(table).getAllByRole('columnheader')).toHaveLength(4);
     expect(screen.getByRole('region', { name: 'FAHINT 125V receptacle comparison' })).toHaveAttribute('tabindex', '0');
     expect(within(screen.getByRole('list', { name: 'Receptacle quotation checklist' })).getAllByRole('listitem')).toHaveLength(7);
-    expect(screen.getByRole('link', { name: 'Review receptacle product documents' })).toHaveAttribute('href', '/resources?family=receptacles');
-    expect(screen.getByRole('link', { name: 'Read the wallplate buying guide' })).toHaveAttribute('href', '/blog/wallplate-buying-guide');
-    expect(screen.getByRole('link', { name: 'Ask a product question' })).toHaveAttribute('href', '/contact?topic=technical');
+    expect(screen.getByRole('link', { name: 'Review receptacle product documents' })).toHaveAttribute('href', '/resources/?family=receptacles');
+    expect(screen.getByRole('link', { name: 'Read the wallplate buying guide' })).toHaveAttribute('href', '/blog/wallplate-buying-guide/');
+    expect(screen.getByRole('link', { name: 'Ask a product question' })).toHaveAttribute('href', '/contact/?topic=technical');
     expect(document.title).toBe(post.title + ' | FAHINT');
     expect(document.querySelector('meta[name="description"]')).toHaveAttribute('content', post.excerpt);
     const graph = JSON.parse(document.querySelector('script[type="application/ld+json"]').textContent)['@graph'];
-    expect(graph.find(item => item['@type'] === 'Article')).toMatchObject({ headline: post.title, datePublished: '2026-10-07', dateModified: '2026-10-07' });
+    expect(graph.find(item => item['@type'] === 'Article')).toMatchObject({ headline: post.title, datePublished: '2026-10-07', dateModified: '2026-10-25' });
     for (const link of within(screen.getByRole('navigation', { name: 'In this article' })).getAllByRole('link')) {
       expect(document.getElementById(new URL(link.getAttribute('href'), 'https://example.com').hash.slice(1))).toHaveTextContent(link.textContent);
     }
@@ -91,7 +91,7 @@ describe('Researched standard receptacle buying guide', () => {
     render(wrap(<Blog />));
     expect(screen.getByRole('link', { name: 'Standard receptacle buying guide: ratings, TR/WR and wiring' })).toHaveAttribute('href', path);
     expect(screen.getByRole('status')).toHaveTextContent(`${posts.length} articles`);
-    expect(findPost('wallplate-buying-guide').body.flatMap(block => block.links || []).some(link => link.href === path)).toBe(true);
+    expect(findPost('wallplate-buying-guide').body.flatMap(block => block.links || []).some(link => link.href === path.slice(0, -1))).toBe(true);
   });
 
   it('connects both the family guide and model procurement checklist to the full guide', () => {

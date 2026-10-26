@@ -1,5 +1,5 @@
 import { ArrowRight, FileCheck2, Factory } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link } from '../components/SiteLink.jsx';
 import SafeImage from '../components/SafeImage.jsx';
 import ProductRangeDirectory from '../components/products/ProductRangeDirectory.jsx';
 import EditorialPhoto from '../components/company/EditorialPhoto.jsx';

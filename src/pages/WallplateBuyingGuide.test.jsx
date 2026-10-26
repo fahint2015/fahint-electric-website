@@ -9,7 +9,7 @@ import { findPost, posts } from '../data/posts.js';
 import { findCatalogProduct } from '../data/catalogProducts.js';
 
 const slug = 'wallplate-buying-guide';
-const path = '/blog/' + slug;
+const path = '/blog/' + slug + '/';
 const wrap = children => <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>{children}</MemoryRouter>;
 
 describe('Researched wallplate buying guide', () => {
@@ -25,10 +25,10 @@ describe('Researched wallplate buying guide', () => {
     expect(within(table).getAllByRole('rowheader')).toHaveLength(8);
     expect(screen.getByRole('region', { name: 'FAHINT wallplate configuration comparison' })).toHaveAttribute('tabindex', '0');
     expect(within(screen.getByRole('list', { name: 'Wallplate quotation checklist' })).getAllByRole('listitem')).toHaveLength(7);
-    expect(screen.getByRole('link', { name: 'Browse all FAHINT wallplate configurations' })).toHaveAttribute('href', '/products/wallplates');
-    expect(screen.getByRole('link', { name: 'Review wallplate product documents' })).toHaveAttribute('href', '/resources?family=wallplates');
-    expect(screen.getByRole('link', { name: 'Prepare a device and wallplate finish specification' })).toHaveAttribute('href', '/blog/gfci-colour-finishes-specification');
-    expect(screen.getByRole('link', { name: 'Ask a product question' })).toHaveAttribute('href', '/contact?topic=technical');
+    expect(screen.getByRole('link', { name: 'Browse all FAHINT wallplate configurations' })).toHaveAttribute('href', '/products/wallplates/');
+    expect(screen.getByRole('link', { name: 'Review wallplate product documents' })).toHaveAttribute('href', '/resources/?family=wallplates');
+    expect(screen.getByRole('link', { name: 'Prepare a device and wallplate finish specification' })).toHaveAttribute('href', '/blog/gfci-colour-finishes-specification/');
+    expect(screen.getByRole('link', { name: 'Ask a product question' })).toHaveAttribute('href', '/contact/?topic=technical');
     expect(document.title).toBe(post.title + ' | FAHINT');
     expect(document.querySelector('meta[name="description"]')).toHaveAttribute('content', post.excerpt);
     const graph = JSON.parse(document.querySelector('script[type="application/ld+json"]').textContent)['@graph'];
@@ -96,8 +96,8 @@ describe('Researched wallplate buying guide', () => {
   it('is linked from Resources without replacing the other guides or downloads', () => {
     render(wrap(<Resources />));
     expect(screen.getByRole('link', { name: 'Read the wallplate buying guide' })).toHaveAttribute('href', path);
-    expect(screen.getByRole('link', { name: 'Read the USB outlet buying guide' })).toHaveAttribute('href', '/blog/usb-wall-outlet-buying-guide');
-    expect(screen.getByRole('link', { name: 'Read the dimmer buying guide' })).toHaveAttribute('href', '/blog/dimmer-buying-guide-led-0-10v');
+    expect(screen.getByRole('link', { name: 'Read the USB outlet buying guide' })).toHaveAttribute('href', '/blog/usb-wall-outlet-buying-guide/');
+    expect(screen.getByRole('link', { name: 'Read the dimmer buying guide' })).toHaveAttribute('href', '/blog/dimmer-buying-guide-led-0-10v/');
     expect(screen.getAllByRole('link', { name: /^Download .* PDF$/ })).toHaveLength(8);
   });
 });

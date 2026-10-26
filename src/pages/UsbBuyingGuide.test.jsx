@@ -9,7 +9,7 @@ import { findPost, posts } from '../data/posts.js';
 import { findCatalogProduct } from '../data/catalogProducts.js';
 
 const slug = 'usb-wall-outlet-buying-guide';
-const path = '/blog/' + slug;
+const path = '/blog/' + slug + '/';
 const wrap = children => <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>{children}</MemoryRouter>;
 
 describe('Researched USB buying guide', () => {
@@ -26,10 +26,10 @@ describe('Researched USB buying guide', () => {
     expect(screen.getByText(/Do not add the two port ratings together/)).toBeVisible();
     expect(screen.getByText(/four-port USB charger without AC receptacle openings/)).toBeVisible();
     expect(screen.getByRole('list', { name: 'USB outlet quotation checklist' })).toBeVisible();
-    expect(screen.getByRole('link', { name: 'Browse USB outlet models' })).toHaveAttribute('href', '/products/usb-outlets');
-    expect(screen.getByRole('link', { name: 'Compare A + C configurations' })).toHaveAttribute('href', '/products/usb-outlets?ports=a-c');
-    expect(screen.getByRole('link', { name: 'View 65W PD models' })).toHaveAttribute('href', '/products/usb-outlets?charging=pd-65w');
-    expect(screen.getByRole('link', { name: 'Review USB product documents' })).toHaveAttribute('href', '/resources?family=usb-outlets');
+    expect(screen.getByRole('link', { name: 'Browse USB outlet models' })).toHaveAttribute('href', '/products/usb-outlets/');
+    expect(screen.getByRole('link', { name: 'Compare A + C configurations' })).toHaveAttribute('href', '/products/usb-outlets/?ports=a-c');
+    expect(screen.getByRole('link', { name: 'View 65W PD models' })).toHaveAttribute('href', '/products/usb-outlets/?charging=pd-65w');
+    expect(screen.getByRole('link', { name: 'Review USB product documents' })).toHaveAttribute('href', '/resources/?family=usb-outlets');
     expect(screen.getByRole('link', { name: /USB-IF/ })).toHaveAttribute('href', expect.stringContaining('usb.org'));
     expect(document.title).toBe(findPost(slug).title + ' | FAHINT');
   });

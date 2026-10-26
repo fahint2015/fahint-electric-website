@@ -1,6 +1,6 @@
 import BrandBanner from '../components/BrandBanner.jsx';
 import Reveal from '../components/Reveal.jsx';
-import { Link } from 'react-router-dom';
+import { Link } from '../components/SiteLink.jsx';
 import { ArrowUpRight } from 'lucide-react';
 import { CompanyBreadcrumb, CompanyImage, CompanyLink, usePageMeta } from '../components/company/CompanyShared.jsx';
 import { capabilitiesPhotos } from '../data/capabilitiesPhotos.js';

@@ -16,8 +16,8 @@ describe('new homepage preview', () => {
   it('has a fresh brand statement and separate brand and private-label entry points', async () => {
     const { container } = await renderNext();
     expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('Considered design. Everyday power.');
-    expect(screen.getByRole('link', { name: 'Explore FAHINT products' })).toHaveAttribute('href', '/products');
-    expect(screen.getByRole('link', { name: 'Create your own range' })).toHaveAttribute('href', '/home-next#private-label');
+    expect(screen.getByRole('link', { name: 'Explore FAHINT products' })).toHaveAttribute('href', '/products/');
+    expect(screen.getByRole('link', { name: 'Create your own range' })).toHaveAttribute('href', '/home-next/#private-label');
     expect(container.querySelector('#homepage')).toBeNull();
     expect(readFileSync('src/pages/HomeNext.jsx', 'utf8')).not.toMatch(/EditorialHomepageFront|HomeFaqInquiry|HomeCertifications/);
   });
@@ -33,7 +33,7 @@ describe('new homepage preview', () => {
       expect(tab).toHaveAttribute('aria-selected', 'true');
       const panel = screen.getByRole('tabpanel');
       expect(panel).toHaveAttribute('aria-labelledby', tab.id);
-      expect(within(panel).getByRole('link', { name: `Explore ${line.name}` })).toHaveAttribute('href', `/products/${line.slug}`);
+      expect(within(panel).getByRole('link', { name: `Explore ${line.name}` })).toHaveAttribute('href', `/products/${line.slug}/`);
       expect(within(panel).getByRole('img')).toHaveAttribute('src', expect.stringContaining('/assets/'));
     }
   });

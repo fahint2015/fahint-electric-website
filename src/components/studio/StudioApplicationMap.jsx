@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from '../SiteLink.jsx';
 import { ArrowUpRight } from 'lucide-react';
 import { StudioImage } from './StudioShared.jsx';
 import Reveal from '../Reveal.jsx';

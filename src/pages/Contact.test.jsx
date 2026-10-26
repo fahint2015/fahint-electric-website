@@ -1,4 +1,4 @@
-import { render, screen, within } from '@testing-library/react';
+import { render, screen, within, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Link, MemoryRouter, Route, Routes } from 'react-router-dom';
 import { describe, expect, it } from 'vitest';
@@ -31,7 +31,7 @@ describe('Contact product categories', () => {
     expect(screen.getByRole('heading', { level: 1, name: 'Let’s talk about your next project.' })).toBeInTheDocument();
     expect(screen.getByRole('link', { name: 'OEM / ODM inquiry' })).toHaveAttribute('aria-current', 'page');
     expect(screen.getByLabelText('Product category')).toHaveValue('GFCI Outlets');
-    expect(screen.getByRole('link', { name: 'Technical question' })).toHaveAttribute('href', '/contact?topic=technical&model=GF15');
+    expect(screen.getByRole('link', { name: 'Technical question' })).toHaveAttribute('href', '/contact/?topic=technical&model=GF15');
   });
   it('falls back to product inquiry for an unsupported topic', () => {
     renderContact('/contact?topic=invalid');
@@ -78,6 +78,7 @@ describe('Contact product categories', () => {
     const user = userEvent.setup();
     renderContact('/contact?model=GF15');
 
+    await waitFor(() => expect(document.getElementById('inquiry')).toHaveFocus());
     await user.type(screen.getByLabelText('Company'), 'Northstar');
     await user.click(screen.getByRole('link', { name: 'Select USB Outlets' }));
 

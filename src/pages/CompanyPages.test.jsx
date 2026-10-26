@@ -26,7 +26,7 @@ describe('Manufacturing and company information', () => {
     expect(screen.getByRole('heading', { name: 'GFCI functional testing' })).toBeVisible();
     expect(screen.getByRole('heading', { name: 'Laboratory verification' })).toBeVisible();
     expect(document.getElementById('oem')).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: 'Discuss your OEM / ODM project' })).toHaveAttribute('href', '/contact?topic=oem');
+    expect(screen.getByRole('link', { name: 'Discuss your OEM / ODM project' })).toHaveAttribute('href', '/contact/?topic=oem');
     const styles = readFileSync('src/styles/capabilities.css', 'utf8');
     expect(styles.match(/\.capabilities-page\.company-page h2\s*\{/g)).toHaveLength(2);
   });
@@ -40,25 +40,25 @@ describe('Manufacturing and company information', () => {
     expect(screen.getByRole('article', { name: 'Laboratory verification' })).toHaveTextContent('instruments');
     expect(screen.getByRole('article', { name: 'Laboratory verification' })).not.toHaveTextContent('temperature and humidity');
     expect(screen.getByText(/AI-refined from FAHINT factory photographs/)).toBeVisible();
-    expect(screen.getByRole('link', { name: 'See our testing stations' })).toHaveAttribute('href', '/capabilities#production');
+    expect(screen.getByRole('link', { name: 'See our testing stations' })).toHaveAttribute('href', '/capabilities/#production');
   });
   it('keeps chapter navigation on the manufacturing route and joins documentation with the project inquiry', () => {
     renderPage(Capabilities);
     const nav = screen.getByRole('navigation', { name: 'Manufacturing sections' });
     for (const [name, anchor] of [['Inside production', 'production'], ['OEM / ODM', 'oem'], ['Working with us', 'process']]) {
-      expect(within(nav).getByRole('link', { name })).toHaveAttribute('href', `/capabilities#${anchor}`);
+      expect(within(nav).getByRole('link', { name })).toHaveAttribute('href', `/capabilities/#${anchor}`);
       expect(document.getElementById(anchor)).toBeInTheDocument();
     }
     const nextStep = screen.getByRole('region', { name: 'Bring us your product brief.' });
-    expect(within(nextStep).getByRole('link', { name: 'Start a project' })).toHaveAttribute('href', '/contact?topic=oem');
-    expect(within(nextStep).getByRole('link', { name: 'Review certificates' })).toHaveAttribute('href', '/resources#certifications');
+    expect(within(nextStep).getByRole('link', { name: 'Start a project' })).toHaveAttribute('href', '/contact/?topic=oem');
+    expect(within(nextStep).getByRole('link', { name: 'Review certificates' })).toHaveAttribute('href', '/resources/#certifications');
     expect(nextStep).toHaveTextContent('A company certificate does not certify every product in the range.');
   });
   it('provides a sequenced cooperation process and model-scoped documentation', () => {
     renderPage(Capabilities);
     const process = screen.getByRole('list', { name: 'From brief to production' });
     expect(within(process).getAllByRole('listitem')).toHaveLength(4);
-    expect(screen.getByRole('link', { name: /Review certificates/ })).toHaveAttribute('href', '/resources#certifications');
+    expect(screen.getByRole('link', { name: /Review certificates/ })).toHaveAttribute('href', '/resources/#certifications');
     expect(document.body).not.toHaveTextContent(/400 cartons|within 6 hours|98%|3-day shipment|10-day delivery|exceeds the UL/i);
   });
   it('distinguishes the FAHINT brand from private-label manufacturing', () => {
@@ -72,8 +72,8 @@ describe('Manufacturing and company information', () => {
     renderPage(About);
     expect(document.getElementById('certifications')).not.toBeInTheDocument();
     expect(screen.queryByRole('link', { name: /^Open .* PDF$/ })).not.toBeInTheDocument();
-    expect(screen.getByRole('link', { name: 'Explore our standards' })).toHaveAttribute('href', '/resources#certifications');
-    expect(screen.getByRole('link', { name: /ISO 9001:2015/ })).toHaveAttribute('href', '/resources#quality-management');
+    expect(screen.getByRole('link', { name: 'Explore our standards' })).toHaveAttribute('href', '/resources/#certifications');
+    expect(screen.getByRole('link', { name: /ISO 9001:2015/ })).toHaveAttribute('href', '/resources/#quality-management');
   });
   it('explains the company background, actual manufacturing stages and export relationships', () => {
     renderPage(About);

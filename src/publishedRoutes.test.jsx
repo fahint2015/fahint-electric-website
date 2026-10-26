@@ -57,7 +57,7 @@ describe('published homepage and product overview', () => {
     expect(document.querySelector('meta[name="robots"]')).toHaveAttribute('content', 'index, follow');
     expect(document.title).toBe('FAHINT | Safer Power. Better Living.');
     expect(document.querySelector('meta[name="description"]')?.content).toContain('North American');
-    expect(screen.getByRole('link', { name: 'Explore FAHINT products' })).toHaveAttribute('href', '/products');
+    expect(screen.getByRole('link', { name: 'Explore FAHINT products' })).toHaveAttribute('href', '/products/');
     const nav = screen.getByRole('navigation', { name: 'Homepage sections' });
     for (const link of within(nav).getAllByRole('link')) {
       expect(link.getAttribute('href')).toMatch(/^\/#studio-/);
@@ -74,8 +74,8 @@ describe('published homepage and product overview', () => {
   it.each(['/', '/about', '/products', '/products/usb-outlets'])('keeps navigation on published routes from %s', path => {
     show(Header, path);
     expect(screen.getByRole('link', { name: 'Home' })).toHaveAttribute('href', '/');
-    expect(screen.getByRole('link', { name: /^Products/ })).toHaveAttribute('href', '/products');
-    expect(screen.getByRole('link', { name: 'Send Inquiry' })).toHaveAttribute('href', path === '/' ? '/#studio-inquiry' : '/contact');
+    expect(screen.getByRole('link', { name: /^Products/ })).toHaveAttribute('href', '/products/');
+    expect(screen.getByRole('link', { name: 'Send Inquiry' })).toHaveAttribute('href', path === '/' ? '/#studio-inquiry' : '/contact/');
   });
 
   it('has current sharing copy without the former five-range claim', () => {

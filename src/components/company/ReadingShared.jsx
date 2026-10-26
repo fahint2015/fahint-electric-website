@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link } from '../SiteLink.jsx';
 import { ArrowUpRight } from 'lucide-react';
 import EditorialPhoto from './EditorialPhoto.jsx';
 import Reveal from '../Reveal.jsx';

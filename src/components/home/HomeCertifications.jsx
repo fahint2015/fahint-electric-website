@@ -1,5 +1,5 @@
 import { ArrowRight } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link } from '../SiteLink.jsx';
 import CertCarousel from '../CertCarousel.jsx';
 
 export default function HomeCertifications() {

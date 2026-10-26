@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from '../SiteLink.jsx';
 import { ArrowRight, Columns3, X } from 'lucide-react';
 import { productHref } from '../../data/catalogProducts.js';
 import { usbComparisonRows } from '../../data/usbComparison.js';

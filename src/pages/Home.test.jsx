@@ -60,10 +60,10 @@ describe('Home', () => {
     const { container } = renderHome();
     expect(screen.getByRole('heading', { name: 'Featured product ranges.' })).toBeInTheDocument();
     container.querySelectorAll('.editorial-product-panel').forEach((card) => {
-      const line = productLines.find((item) => `/products/${item.slug}` === card.getAttribute('href'));
+      const line = productLines.find((item) => `/products/${item.slug}/` === card.getAttribute('href'));
       expect(card.querySelector('h3').textContent).toBe(line.name);
     });
-    expect(screen.getByRole('link', { name: 'Browse all 7 product ranges' })).toHaveAttribute('href', '/products');
+    expect(screen.getByRole('link', { name: 'Browse all 7 product ranges' })).toHaveAttribute('href', '/products/');
   });
   it('does not add the full model catalogue to the homepage initial bundle', () => {
     const source = readFileSync('src/components/home/HomeFaqInquiry.jsx', 'utf8');
@@ -122,8 +122,8 @@ describe('Home', () => {
     expect(screen.getByText('FAHINT · Wiring-device manufacturer')).toBeInTheDocument();
     const hero = screen.getByRole('heading', { name: 'Wiring devices for your market.' }).closest('section');
     expect(hero).toBeInTheDocument();
-    expect(within(hero).getByRole('link', { name: /Explore FAHINT products/i })).toHaveAttribute('href', '/products');
-    expect(within(hero).getByRole('link', { name: /Discuss OEM\/ODM/i })).toHaveAttribute('href', '/contact');
+    expect(within(hero).getByRole('link', { name: /Explore FAHINT products/i })).toHaveAttribute('href', '/products/');
+    expect(within(hero).getByRole('link', { name: /Discuss OEM\/ODM/i })).toHaveAttribute('href', '/contact/');
     expect(hero).toHaveTextContent('Choose FAHINT products or work with our manufacturing team on OEM/ODM orders.');
     expect(hero).toHaveTextContent('North American wiring devices for distributors, contractors and private-label brands.');
     expect(screen.getByText('Selected listed models')).toBeInTheDocument();
@@ -174,7 +174,7 @@ describe('Home', () => {
       ['Wallplates', '/products/wallplates']
     ].forEach(([name, href]) => {
       const heading = screen.getByRole('heading', { name });
-      expect(heading.closest('a')).toHaveAttribute('href', href);
+      expect(heading.closest('a')).toHaveAttribute('href', href + '/');
     });
   });
 
@@ -299,7 +299,7 @@ describe('Home', () => {
     ]);
     expect(within(overview).getByAltText('Fahint coordinated wiring-device product family'))
       .toHaveAttribute('src', 'assets/images/editorial-home/brand-system-family-final-optimized.webp');
-    expect(within(overview).getByRole('link', { name: /Discover Fahint/i })).toHaveAttribute('href', '/about');
+    expect(within(overview).getByRole('link', { name: /Discover Fahint/i })).toHaveAttribute('href', '/about/');
     expect(within(overview).getByRole('link', { name: /Download product catalog/i })).toHaveAttribute('download');
   });
 
@@ -333,7 +333,7 @@ describe('Home', () => {
       ['Bathrooms & Renovation', '/products/receptacles']
     ].forEach(([name, href]) => {
       const heading = screen.getByRole('heading', { name });
-      expect(heading.closest('a')).toHaveAttribute('href', href);
+      expect(heading.closest('a')).toHaveAttribute('href', href + '/');
     });
   });
 
@@ -383,7 +383,7 @@ describe('Home', () => {
     ['Safety & compliance', 'Charging performance', 'Control intelligence', 'Coordinated form & finish'].forEach((text) => {
       expect(within(engineering).getByText(text)).toBeVisible();
     });
-    expect(within(engineering).getByRole('link', { name: /Explore engineering capability/ })).toHaveAttribute('href', '/capabilities');
+    expect(within(engineering).getByRole('link', { name: /Explore engineering capability/ })).toHaveAttribute('href', '/capabilities/');
     const oem = screen.getByRole('heading', { name: 'From specification to production.' }).closest('section');
     expect(oem).toHaveClass('editorial-oem');
     expect(within(oem).getByAltText('Fahint automated manufacturing equipment')).toHaveAttribute('src', 'assets/images/editorial-home/about-fahint-optimized.webp');
@@ -391,8 +391,8 @@ describe('Home', () => {
     expect(screen.getByRole('heading', { name: 'Customize your product range.' }).closest('section').querySelector('.homepage-oem-program__process')).toBeNull();
     expect(screen.queryByRole('heading', { name: 'Build the Line Your Market Needs.' })).not.toBeInTheDocument();
     expect(screen.queryByRole('heading', { name: 'Latest From Fahint.' })).not.toBeInTheDocument();
-    expect(screen.getByRole('link', { name: /Discover Fahint/i })).toHaveAttribute('href', '/about');
-    expect(screen.getByRole('link', { name: /View certification details/i })).toHaveAttribute('href', '/resources#certifications');
+    expect(screen.getByRole('link', { name: /Discover Fahint/i })).toHaveAttribute('href', '/about/');
+    expect(screen.getByRole('link', { name: /View certification details/i })).toHaveAttribute('href', '/resources/#certifications');
   });
 
   it('keeps separate floating actions in a vertical mobile safe-area stack', () => {
@@ -456,7 +456,7 @@ describe('Home', () => {
     expect(footer).not.toBeNull();
     expect(footer).not.toContainElement(image);
     const cta = within(section).getByRole('link', { name: /Request a quote/i });
-    expect(cta).toHaveAttribute('href', '/contact');
+    expect(cta).toHaveAttribute('href', '/contact/');
     expect(footer).toContainElement(cta);
     expect(image.closest('figure')).not.toContainElement(cta);
     expect(within(footer).getByRole('heading', { name: 'Your packaging. Your presentation.' })).toBeVisible();

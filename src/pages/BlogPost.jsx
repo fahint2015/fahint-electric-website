@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import { Link } from '../components/SiteLink.jsx';
 import { ChevronDown, Download, ArrowUpRight } from 'lucide-react';
 import { findPost, posts } from '../data/posts.js';
 import { catalogueDocument } from '../data/documents.js';
@@ -19,14 +20,15 @@ function SourceLink({ source, children, ...props }) {
 }
 
 function ArticleContent({ post }) {
-  usePageMetadata(articleMetadata(post));
+  const metadata = articleMetadata(post);
+  usePageMetadata(metadata);
   const [outlineOpen, setOutlineOpen] = useState(false);
   const headings = post.body.map((block,index) => ({ ...block, id:'article-section-' + index })).filter(block => block.type === 'h2');
   const related = posts.filter(item => item.slug !== post.slug).sort((a,b) => Number(b.category === post.category) - Number(a.category === post.category)).slice(0,3);
   return <div className="company-page reading-page">
     <header className="reading-article-heading company-section--paper"><div className="company-wrap">
       <nav className="company-breadcrumb" aria-label="Breadcrumb"><Link to="/">Home</Link><span aria-hidden="true">/</span><Link to="/blog">Guides & insights</Link><span aria-hidden="true">/</span><span>{post.category}</span></nav>
-      <Reveal as="h1">{post.title}</Reveal><Reveal as="p" delay={160}>{post.excerpt}</Reveal><div className="reading-meta"><span>{post.category}</span><time dateTime={post.updated || post.date}>Updated {formatPostDate(post.updated || post.date)}</time><span>{post.readMinutes} min read</span></div>
+      <Reveal as="h1">{post.title}</Reveal><Reveal as="p" delay={160}>{post.excerpt}</Reveal><div className="reading-meta"><span>{post.category}</span><span>By <Link to="/about" rel="author">FAHINT</Link></span><time dateTime={metadata.entity.dateModified}>Updated {formatPostDate(metadata.entity.dateModified)}</time><span>{post.readMinutes} min read</span></div>
     </div></header>
     <div className="company-wrap reading-article-layout">
       <aside className="reading-article-nav">

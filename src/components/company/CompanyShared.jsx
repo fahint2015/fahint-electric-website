@@ -1,4 +1,5 @@
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+import { Link } from '../SiteLink.jsx';
 import { ArrowUpRight } from 'lucide-react';
 import { publicAsset } from '../../utils/publicAsset.js';
 import '../../styles/company-pages.css';

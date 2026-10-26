@@ -13,7 +13,7 @@ import './styles/site-system.css';
 const root = document.getElementById('root');
 initializeAnalytics();
 const app = <BrowserRouter
-  basename={import.meta.env.BASE_URL.replace(/\/$/, '')}
+  basename={import.meta.env.BASE_URL}
   future={{ v7_startTransition: true, v7_relativeSplatPath: true }}
 ><App /></BrowserRouter>;
 

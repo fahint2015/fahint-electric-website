@@ -1,5 +1,5 @@
 import { useMemo, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from '../components/SiteLink.jsx';
 import { ArrowDown, ArrowRight, ArrowUpRight, ChevronDown, Download, Search, X } from 'lucide-react';
 import { studioRanges, searchStudioModels } from '../data/studioCatalog.js';
 import { categoryImages, productCategories, productCategory } from '../data/productCategories.js';

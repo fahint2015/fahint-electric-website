@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link } from '../SiteLink.jsx';
 import { ArrowUpRight } from 'lucide-react';
 import { productLines } from '../../data/lines.js';
 import { StudioImage } from './StudioShared.jsx';

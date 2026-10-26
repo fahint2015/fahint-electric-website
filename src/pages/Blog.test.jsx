@@ -49,7 +49,7 @@ describe('Buyer reading pages', () => {
   it('shows a real not-found message for an unknown article', () => {
     renderBlog('/blog/not-a-real-article');
     expect(screen.getByRole('heading', { level:1, name:'This page isn’t here.' })).toBeInTheDocument();
-    expect(screen.getByRole('link', { name:'Browse products' })).toHaveAttribute('href','/products');
+    expect(screen.getByRole('link', { name:'Browse products' })).toHaveAttribute('href','/products/');
   });
   it('removes unsourced universal specifications and retains original article URLs', () => {
     expect(posts).toHaveLength(20);

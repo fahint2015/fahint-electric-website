@@ -118,7 +118,7 @@ describe('GitHub Pages deployment', () => {
     const rendered = [];
     await preparePages({ distDir, expectedBase: '/catalog/', renderPage: async (path, base) => {
       rendered.push([path, base]);
-      return `<main id="main-content"><h1>${path}</h1><a href="${base}products">Products</a></main>`;
+      return `<main id="main-content"><h1>${path}</h1><a href="${base}products/">Products</a></main>`;
     } });
     expect(rendered.map(([path]) => path).sort()).toEqual(['/', ...PUBLIC_ROUTES.map(route => `/${route}`), '/404'].sort());
     expect(rendered.every(([, base]) => base === '/catalog/')).toBe(true);

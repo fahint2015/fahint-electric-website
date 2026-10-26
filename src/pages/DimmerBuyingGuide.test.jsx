@@ -9,7 +9,7 @@ import { findPost, posts } from '../data/posts.js';
 import { findCatalogProduct } from '../data/catalogProducts.js';
 
 const slug = 'dimmer-buying-guide-led-0-10v';
-const path = '/blog/' + slug;
+const path = '/blog/' + slug + '/';
 const wrap = children => <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>{children}</MemoryRouter>;
 
 describe('Researched dimmer buying guide', () => {
@@ -24,13 +24,13 @@ describe('Researched dimmer buying guide', () => {
     expect(within(table).getAllByRole('rowheader')).toHaveLength(2);
     expect(screen.getByRole('region', { name: 'FAHINT dimmer model comparison' })).toHaveAttribute('tabindex', '0');
     for (const model of ['DM2010', 'DM2010S']) {
-      expect(within(table).getByRole('link', { name: model })).toHaveAttribute('href', '/products/dimmers/' + model.toLowerCase());
+      expect(within(table).getByRole('link', { name: model })).toHaveAttribute('href', '/products/dimmers/' + model.toLowerCase() + '/');
     }
     const checklist = screen.getByRole('list', { name: 'Dimmer quotation checklist' });
     expect(within(checklist).getAllByRole('listitem')).toHaveLength(7);
-    expect(screen.getByRole('link', { name: 'Browse FAHINT dimmer models' })).toHaveAttribute('href', '/products/dimmers');
-    expect(screen.getByRole('link', { name: 'Review dimmer product documents' })).toHaveAttribute('href', '/resources?family=dimmers');
-    expect(screen.getByRole('link', { name: 'Ask a product question' })).toHaveAttribute('href', '/contact?topic=technical');
+    expect(screen.getByRole('link', { name: 'Browse FAHINT dimmer models' })).toHaveAttribute('href', '/products/dimmers/');
+    expect(screen.getByRole('link', { name: 'Review dimmer product documents' })).toHaveAttribute('href', '/resources/?family=dimmers');
+    expect(screen.getByRole('link', { name: 'Ask a product question' })).toHaveAttribute('href', '/contact/?topic=technical');
     expect(document.title).toBe(findPost(slug).title + ' | FAHINT');
   });
 
@@ -73,7 +73,7 @@ describe('Researched dimmer buying guide', () => {
   it('appears in Blog alongside the existing USB guide', () => {
     render(wrap(<Blog />));
     expect(screen.getByRole('link', { name: 'Dimmer Buying Guide: LED Loads and 0–10V Compatibility' })).toHaveAttribute('href', path);
-    expect(screen.getByRole('link', { name: 'USB Wall Outlet Buying Guide: Ports, PD and Power' })).toHaveAttribute('href', '/blog/usb-wall-outlet-buying-guide');
+    expect(screen.getByRole('link', { name: 'USB Wall Outlet Buying Guide: Ports, PD and Power' })).toHaveAttribute('href', '/blog/usb-wall-outlet-buying-guide/');
     expect(screen.getByRole('status')).toHaveTextContent(`${posts.length} articles`);
   });
 
@@ -85,7 +85,7 @@ describe('Researched dimmer buying guide', () => {
   it('is linked from Resources without removing the USB guide or document downloads', () => {
     render(wrap(<Resources />));
     expect(screen.getByRole('link', { name: 'Read the dimmer buying guide' })).toHaveAttribute('href', path);
-    expect(screen.getByRole('link', { name: 'Read the USB outlet buying guide' })).toHaveAttribute('href', '/blog/usb-wall-outlet-buying-guide');
+    expect(screen.getByRole('link', { name: 'Read the USB outlet buying guide' })).toHaveAttribute('href', '/blog/usb-wall-outlet-buying-guide/');
     expect(screen.getAllByRole('link', { name: /^Download .* PDF$/ })).toHaveLength(8);
   });
 });

@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from '../SiteLink.jsx';
 import { ArrowRight, Download, Search, X } from 'lucide-react';
 import SafeImage from '../SafeImage.jsx';
 import { productLines } from '../../data/lines.js';

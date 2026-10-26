@@ -17,7 +17,7 @@ export function renderPage(path, base = import.meta.env.BASE_URL) {
       stream.abort();
     };
     const stream = renderToPipeableStream(
-      <StaticRouter basename={basename} location={`${basename}${path}`} future={{ v7_relativeSplatPath: true }}><App /></StaticRouter>,
+      <StaticRouter basename={base} location={`${basename}${path}`} future={{ v7_relativeSplatPath: true }}><App /></StaticRouter>,
       {
         // Wait for lazy routes: never publish a Suspense loading placeholder.
         onAllReady() { if (!failed) stream.pipe(output); },

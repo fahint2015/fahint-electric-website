@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link } from '../SiteLink.jsx';
 import { ArrowRight, Check } from 'lucide-react';
 
 export default function HomepageCta() {

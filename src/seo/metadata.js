@@ -1,7 +1,10 @@
 // Shared by browser pages and build-time HTML heads. Do not import the full catalogue here.
+import { findModelCertificate } from '../data/certificates.js';
+import { conciseSpecificationRows } from '../utils/productSpecifications.js';
+import { organizationEntity, organizationUpdated, certificateId, supportingEntities } from './entities.js';
 const organization = { '@type': 'Organization', name: 'FAHINT', legalName: 'Wenzhou Fahint Electric Co., Ltd.' };
 const homeImage = 'assets/images/brand-home/generated/hero-family-belief-background.webp';
-export const staticMetadata = {
+export const staticMetadata = Object.fromEntries(Object.entries({
   '/': {
     title: 'FAHINT | Safer Power. Better Living.',
     description: 'FAHINT manufactures GFCI outlets, USB wall outlets, switches and dimmers for North American markets, with OEM/ODM support for brands and distributors.',
@@ -43,11 +46,13 @@ export const staticMetadata = {
     image: 'assets/images/company/factory/electronics-workshop-v2.webp', imageAlt: 'FAHINT electronics workshop', label: 'About FAHINT', organization: true,
   },
   '/contact': {
+    updated: '2026-10-26', // Owner-confirmed full street address added to the page.
     title: 'Contact FAHINT | Product & OEM Inquiries',
     description: 'Send FAHINT your models, quantities, market and packaging needs. Contact our Wenzhou team about product quotations, OEM/ODM projects or technical documents.',
     image: 'assets/images/company/fahint-showroom-front-v1.webp', imageAlt: 'FAHINT showroom and product display', label: 'Contact',
   },
   '/resources': {
+    updated: '2026-10-25', // Original ISO number and model-specific certification graph.
     title: 'Product Catalog & Certificate Downloads | FAHINT',
     description: 'Download the FAHINT product catalog and original product-family certificates. Find model references and request installation or technical documents for your device.',
     image: 'assets/images/company/factory/showroom-samples-v1.webp', imageAlt: 'FAHINT wiring-device samples', label: 'Resources',
@@ -57,13 +62,13 @@ export const staticMetadata = {
     description: 'Read FAHINT buyer guides on GFCI selection, sourcing, finishes and product documentation. Compare options using practical questions and original references.',
     image: 'assets/images/company/factory/showroom-samples-v1.webp', imageAlt: 'Wiring-device samples in the FAHINT showroom', label: 'Guides & insights',
   },
-};
+}).map(([path, meta]) => [path, { ...meta, structuredDataUpdated: organizationUpdated }]));
 
 export const notFoundMetadata = {
   title: 'Page not found | FAHINT', description: 'The requested FAHINT page could not be found. Browse products or contact the team.', noindex: true,
 };
 
-export function familyMetadata(line) {
+export function familyMetadata(line, models = []) {
   const titles = {
     gfci: 'GFCI Outlet Manufacturer | 15A & 20A Models | FAHINT',
     'usb-outlets': 'USB-C Wall Outlets | USB-A & Power Delivery | FAHINT',
@@ -79,18 +84,25 @@ export function familyMetadata(line) {
   };
   return {
     path: `/products/${line.slug}`, title: titles[line.slug] || `${line.name} · Models & Specifications | FAHINT`, description: descriptions[line.slug] || line.summary,
+    updated: '2026-10-26', // Existing buying-guide introductions revised for all seven families.
+    structuredDataUpdated: organizationUpdated,
     image: line.cover, imageAlt: `${line.name} from FAHINT`,
     breadcrumbs: [['Home', '/'], ['Products', '/products'], [line.name, `/products/${line.slug}`]],
+    models: models.filter(model => !model.draft).map(model => ({ name: model.sku, path: `/products/${line.slug}/${model.slug || model.sku.toLowerCase()}` })),
   };
 }
 
 export function productMetadata(product, line) {
   const path = `/products/${line.slug}/${product.slug || product.sku.toLowerCase()}`;
   return {
+    updated: '2026-10-25', // Real model specifications and exact certification links added to JSON-LD.
+    structuredDataUpdated: organizationUpdated,
     path, title: `${product.sku} ${product.name} | FAHINT`, description: product.summary,
     image: product.assets.hero, imageAlt: `FAHINT ${product.sku} ${product.name}`,
     breadcrumbs: [['Home', '/'], ['Products', '/products'], [line.name, `/products/${line.slug}`], [product.sku, path]],
-    entity: { '@type': 'Product', name: `${product.sku} ${product.name}`, sku: product.sku, description: product.summary,
+    certificate: findModelCertificate(product),
+    entity: { '@type': 'Product', name: `${product.sku} ${product.name}`, sku: product.sku, mpn: product.sku, description: product.summary,
+      additionalProperty: conciseSpecificationRows(product).map(([name, value]) => ({ '@type': 'PropertyValue', name, value })),
       category: line.name, brand: { '@type': 'Brand', name: 'FAHINT' }, manufacturer: organization },
   };
 }
@@ -98,10 +110,11 @@ export function productMetadata(product, line) {
 export function articleMetadata(post) {
   const path = `/blog/${post.slug}`;
   return {
+    structuredDataUpdated: organizationUpdated,
     path, title: `${post.title} | FAHINT`, description: post.excerpt, image: post.cover, imageAlt: post.coverAlt, type: 'article',
     breadcrumbs: [['Home', '/'], ['Guides & insights', '/blog'], [post.title, path]],
     entity: { '@type': 'Article', headline: post.title, description: post.excerpt, datePublished: post.date,
-      dateModified: post.updated || post.date, publisher: organization, inLanguage: 'en' },
+      dateModified: [post.updated || post.date, '2026-10-25'].sort().at(-1), publisher: organization, author: organization, inLanguage: 'en' },
   };
 }
 
@@ -115,6 +128,10 @@ export function validateSiteUrl(value = '') {
 }
 
 export const serializeSchema = value => JSON.stringify(value).replace(/</g, '\\u003c').replace(/>/g, '\\u003e').replace(/&/g, '\\u0026');
+
+// Dates describe recorded content/structured-data changes, never build or checkout time.
+// Article attribution and its visible FAHINT byline were added on 2026-10-25.
+export const pageModifiedDate = meta => [meta.updated, meta.structuredDataUpdated, meta.entity?.dateModified].filter(Boolean).sort().at(-1);
 
 export function headEntries(meta, { path = '/', siteUrl = '', publicUrl = '' } = {}) {
   const configured = validateSiteUrl(siteUrl);
@@ -139,8 +156,28 @@ export function headEntries(meta, { path = '/', siteUrl = '', publicUrl = '' } =
 
   const graph = [];
   if (!meta.noindex) {
-    if (meta.organization) graph.push({ ...organization, ...(base ? { url: base, logo: new URL('assets/images/brand/fahint-logo-navy.png', base).href } : {}) });
-    if (meta.entity) graph.push({ ...meta.entity, ...(image ? { image: [image] } : {}), ...(pageUrl ? { url: pageUrl } : {}) });
+    const org = base ? organizationEntity(base) : organization;
+    const orgRef = base ? { '@type': 'Organization', '@id': org['@id'], name: org.name } : organization;
+    if (base || meta.organization) graph.push(org);
+    if (base) {
+      graph.push(...supportingEntities(meta, base));
+      graph.push({ '@type': 'WebSite', '@id': `${base}#website`, name: 'FAHINT', url: base, publisher: orgRef });
+      graph.push({ '@type': 'WebPage', '@id': `${pageUrl}#webpage`, name: meta.title, url: pageUrl, isPartOf: { '@id': `${base}#website` },
+        ...(meta.label === 'Resources' ? { hasPart: supportingEntities(meta, base).map(c => ({ '@id': c['@id'] })) } : {}),
+        ...(meta.models?.length ? { mainEntity: { '@id': `${pageUrl}#models` } } : {}),
+        ...(pageModifiedDate(meta) ? { dateModified: pageModifiedDate(meta) } : {}) });
+      if (meta.models?.length) graph.push({ '@type': 'ItemList', '@id': `${pageUrl}#models`, numberOfItems: meta.models.length,
+        itemListElement: meta.models.map((model, index) => ({ '@type': 'ListItem', position: index + 1, name: model.name, url: new URL(`${model.path.replace(/^\/+|\/+$/g, '')}/`, base).href })) });
+    }
+    if (meta.entity) {
+      const entity = { ...meta.entity, ...(image ? { image: [image] } : {}), ...(pageUrl ? { url: pageUrl } : {}) };
+      if (entity['@type'] === 'Product') {
+        entity.manufacturer = orgRef;
+        if (base && meta.certificate) entity.hasCertification = { '@id': certificateId(meta.certificate, base) };
+      }
+      if (entity['@type'] === 'Article') { entity.publisher = orgRef; entity.author = { ...orgRef, ...(base ? { url: new URL('about/', base).href } : {}) }; }
+      graph.push(entity);
+    }
     const crumbs = meta.breadcrumbs || (meta.label ? [['Home', '/'], [meta.label, `/${route}`]] : []);
     if (base && crumbs.length) graph.push({ '@type': 'BreadcrumbList', itemListElement: crumbs.map(([name, href], index) => ({
       '@type': 'ListItem', position: index + 1, name, item: new URL(href.replace(/^\/+|\/+$/g, '') + (href === '/' ? '' : '/'), base).href,

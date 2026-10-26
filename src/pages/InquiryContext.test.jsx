@@ -60,10 +60,10 @@ describe('inquiry product continuity', () => {
   ])('carries the %s application into the technical inquiry and keeps it on topic changes', async (slug, name) => {
     const user = userEvent.setup();
     renderJourney(`/applications/${slug}`);
-    expect(screen.getByRole('link', { name: 'Contact us' })).toHaveAttribute('href', `/contact?topic=technical&application=${slug}`);
+    expect(screen.getByRole('link', { name: 'Contact us' })).toHaveAttribute('href', `/contact/?topic=technical&application=${slug}`);
     await user.click(screen.getByRole('link', { name: 'Contact us' }));
     expect(screen.getByRole('group', { name: 'Project setting' })).toHaveTextContent(name);
-    expect(screen.getByRole('link', { name: 'Product inquiry' })).toHaveAttribute('href', `/contact?topic=products&application=${slug}`);
+    expect(screen.getByRole('link', { name: 'Product inquiry' })).toHaveAttribute('href', `/contact/?topic=products&application=${slug}`);
     await user.click(screen.getByRole('link', { name: 'Product inquiry' }));
     expect(screen.getByRole('group', { name: 'Project setting' })).toHaveTextContent(name);
   });
@@ -85,12 +85,12 @@ describe('inquiry product continuity', () => {
   ])('carries an explicit %s finish through the gallery, anchors, Contact and topics', async (line, slug, sku, category) => {
     const user = userEvent.setup();
     renderJourney(`/products/${line}/${slug}`);
-    expect(screen.getByRole('link', {name:'Request a quote'})).toHaveAttribute('href', `/contact?model=${sku}`);
+    expect(screen.getByRole('link', {name:'Request a quote'})).toHaveAttribute('href', `/contact/?model=${sku}`);
     await user.click(screen.getByRole('button', { name: `Show ${sku} in Black` }));
     await user.click(screen.getByRole('tab', {name:'Download'}));
-    expect(screen.getByRole('link', {name:'Request model-specific documents'})).toHaveAttribute('href', `/contact?topic=technical&model=${sku}&finish=black`);
+    expect(screen.getByRole('link', {name:'Request model-specific documents'})).toHaveAttribute('href', `/contact/?topic=technical&model=${sku}&finish=black`);
     await user.click(screen.getByRole('button', { name: `View ${sku} image 2` }));
-    expect(screen.getByRole('link', {name:'Request a quote'})).toHaveAttribute('href', `/contact?model=${sku}&finish=black`);
+    expect(screen.getByRole('link', {name:'Request a quote'})).toHaveAttribute('href', `/contact/?model=${sku}&finish=black`);
     expect(screen.getByRole('button', { name: `Show ${sku} in Black` })).toHaveAttribute('aria-pressed', 'true');
     await user.click(screen.getByRole('link', {name:'Request a quote'}));
     expect(summary()).toHaveTextContent(`${sku} · Finish: Black`);
@@ -100,7 +100,7 @@ describe('inquiry product continuity', () => {
     await user.click(screen.getByRole('link', { name: 'Technical question' }));
     expect(summary()).toHaveTextContent(`${sku} · Finish: Black`);
     expect(screen.getByLabelText('Company')).toHaveValue('Northstar');
-    expect(screen.getByRole('link', { name: 'OEM / ODM inquiry' })).toHaveAttribute('href', `/contact?topic=oem&model=${sku}&finish=black`);
+    expect(screen.getByRole('link', { name: 'OEM / ODM inquiry' })).toHaveAttribute('href', `/contact/?topic=oem&model=${sku}&finish=black`);
   });
 
   it.each(['clear', 'category'])('removes stale product context on %s without deleting the draft or selected category', async action => {
@@ -119,7 +119,7 @@ describe('inquiry product continuity', () => {
     expect(screen.getByLabelText('Your name *')).toHaveValue('Avery');
     expect(screen.getByLabelText('Business email *')).toHaveValue('buyer@example.com');
     expect(screen.getByLabelText('Requirements *')).toHaveValue('Please quote 500 pieces.');
-    expect(screen.getByRole('link', { name: 'Product inquiry' })).toHaveAttribute('href', '/contact?topic=products');
+    expect(screen.getByRole('link', { name: 'Product inquiry' })).toHaveAttribute('href', '/contact/?topic=products');
   });
 
   it('resets the finish when the Contact model changes within a category', async () => {
@@ -143,21 +143,21 @@ describe('inquiry product continuity', () => {
     renderJourney('/products/gfci/gf15');
     await user.click(screen.getByRole('button', { name: 'Show GF15 in Black' }));
     await user.click(screen.getByRole('link', { name: 'GF20 20A Self-Test GFCI Receptacle' }));
-    expect(screen.getByRole('link', {name:'Request a quote'})).toHaveAttribute('href','/contact?model=GF20');
+    expect(screen.getByRole('link', {name:'Request a quote'})).toHaveAttribute('href','/contact/?model=GF20');
     await user.click(screen.getByRole('link', { name: 'GF15 15A Self-Test GFCI Receptacle' }));
-    expect(screen.getByRole('link', {name:'Request a quote'})).toHaveAttribute('href','/contact?model=GF15');
+    expect(screen.getByRole('link', {name:'Request a quote'})).toHaveAttribute('href','/contact/?model=GF15');
   });
 
   it.each(['unknown', 'FLB20'])('does not expose unvalidated model %s', model => {
     renderJourney(`/contact?model=${model}&finish=black`);
     expect(screen.queryByRole('group', { name: 'Selected product' })).not.toBeInTheDocument();
-    expect(screen.getByRole('link', { name: 'Technical question' })).toHaveAttribute('href', '/contact?topic=technical');
+    expect(screen.getByRole('link', { name: 'Technical question' })).toHaveAttribute('href', '/contact/?topic=technical');
   });
 
   it('ignores invalid finishes and untrusted source URLs', () => {
     renderJourney('/contact?model=GF15&finish=gold&source=https://untrusted.example');
     expect(summary()).toHaveTextContent('GF15 · Finish: Not specified');
-    expect(screen.getByRole('link', { name: 'Technical question' })).toHaveAttribute('href', '/contact?topic=technical&model=GF15');
+    expect(screen.getByRole('link', { name: 'Technical question' })).toHaveAttribute('href', '/contact/?topic=technical&model=GF15');
   });
 
   it.each([
@@ -169,6 +169,6 @@ describe('inquiry product continuity', () => {
     renderJourney(path);
     await user.click(screen.getByRole('button', { name: `Show ${model} in Black` }));
     await user.click(screen.getByRole('tab', {name:'Download'}));
-    expect(screen.getByRole('link', { name: label })).toHaveAttribute('href', `/contact?topic=technical&model=${model}&finish=black`);
+    expect(screen.getByRole('link', { name: label })).toHaveAttribute('href', `/contact/?topic=technical&model=${model}&finish=black`);
   });
 });

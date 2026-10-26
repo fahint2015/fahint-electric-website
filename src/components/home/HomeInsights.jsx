@@ -1,5 +1,5 @@
 import { ArrowRight, Clock } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link } from '../SiteLink.jsx';
 import { posts } from '../../data/posts.js';
 import Reveal from '../Reveal.jsx';
 

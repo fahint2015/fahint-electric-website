@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link } from '../SiteLink.jsx';
 import { ArrowUpRight, Download, Mail, MapPin, MessageCircle, Phone } from 'lucide-react';
 import CertCarousel from '../CertCarousel.jsx';
 import Faq from '../Faq.jsx';

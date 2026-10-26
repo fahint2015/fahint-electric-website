@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link } from '../components/SiteLink.jsx';
 import { ArrowRight } from 'lucide-react';
 import BrandBanner from '../components/BrandBanner.jsx';
 import Reveal from '../components/Reveal.jsx';

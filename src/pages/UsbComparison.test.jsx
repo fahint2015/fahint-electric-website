@@ -86,8 +86,8 @@ describe('USB comparison flow', () => {
     const table = within(dialog).getByRole('table', { name: 'USB model specifications' });
     expect(within(table).getByRole('columnheader', { name: /FTR15-3100/ })).toHaveAttribute('scope', 'col');
     expect(within(table).getByRole('rowheader', { name: /USB ports/ })).toHaveAttribute('scope', 'row');
-    expect(within(dialog).getByRole('link', { name: 'View FTR15-3100 details' })).toHaveAttribute('href', '/products/usb-outlets/ftr15-3100');
-    expect(within(dialog).getByRole('link', { name: 'Request quote for FTR20QC-DC65W' })).toHaveAttribute('href', '/contact?topic=products&model=FTR20QC-DC65W');
+    expect(within(dialog).getByRole('link', { name: 'View FTR15-3100 details' })).toHaveAttribute('href', '/products/usb-outlets/ftr15-3100/');
+    expect(within(dialog).getByRole('link', { name: 'Request quote for FTR20QC-DC65W' })).toHaveAttribute('href', '/contact/?topic=products&model=FTR20QC-DC65W');
     const inquiryLink = within(dialog).getByRole('link', { name: 'Add selected to inquiry' });
     const inquiryParams = new URL(inquiryLink.href).searchParams;
     expect(inquiryParams.get('topic')).toBe('products');

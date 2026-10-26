@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
-import { Link, NavLink, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+import { Link, NavLink } from './SiteLink.jsx';
 import { Menu, X, ArrowRight, ChevronDown } from 'lucide-react';
 import { company } from '../data/company.js';
 import { productLines } from '../data/lines.js';

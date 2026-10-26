@@ -5,6 +5,7 @@ import { findLine } from '../data/lines.js';
 import { familyMetadata } from '../seo/metadata.js';
 import { usePageMetadata } from '../seo/usePageMetadata.js';
 import { BuyingGuide } from '../components/products/BuyingGuide.jsx';
+import { getCatalogProducts } from '../data/catalogProducts.js';
 
 
 const verifiedListings = products.filter(isVerifiedListing);
@@ -26,7 +27,7 @@ const ENGINEERING_PROOF = [
 ];
 
 export default function GfciSeries() {
-  usePageMetadata(familyMetadata(findLine('gfci')));
+  usePageMetadata(familyMetadata(findLine('gfci'), [...products, ...getCatalogProducts('gfci')]));
   return (
     <div className="gfci-series">
       <section className="gfci-series__hero gfci-series-hero"><BrandBanner title="GFCI Outlets" label={false} image="assets/images/lines/gfci-series-kitchen-wide-v1.webp" width={2172} height={724} position="72% center" className="brand-banner--series" /></section>

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { ArrowRight, ExternalLink, FileCheck2 } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link } from '../SiteLink.jsx';
 import { isVerifiedListing } from '../../data/products.js';
 import { companyPhotos } from '../../data/companyProfile.js';
 import { resourcesHref } from '../../data/documents.js';
@@ -9,87 +9,8 @@ import { modelDocumentationNote } from '../../data/buyingGuides.js';
 import { publicAsset } from '../../utils/publicAsset.js';
 import SafeImage from '../SafeImage.jsx';
 
-export function productSpecificationRows(product) {
-  const verified = isVerifiedListing(product);
-  const configuration = product.nema === 'Blank face' ? product.nema : `NEMA ${product.nema}`;
-  const faceDimensions = [product.dimensions?.face, product.dimensions?.width].filter(Boolean).join(' × ');
-  const certification = verified
-    ? `UL/cUL listed · file ${product.listing.file}`
-    : 'Documentation review required';
-
-  if (Array.isArray(product.technicalSpecifications) && product.technicalSpecifications.length > 0) {
-    return [
-      ['Item code', product.sku],
-      ['Rating', product.rating],
-      ['Certification', certification],
-      ...product.technicalSpecifications,
-      ['Face dimensions', faceDimensions],
-      ['Body depth', product.dimensions?.depth]
-    ].filter(([, value]) => value);
-  }
-
-  return [
-    ['Item code', product.sku],
-    ['Rating', product.rating],
-    ['NEMA configuration', configuration],
-    ['Variant', product.feature],
-    ['Application grade', product.grade],
-    ['Standard', verified ? 'UL 943' : null],
-    ['Certification', certification],
-    ['Face dimensions', faceDimensions],
-    ['Body depth', product.dimensions?.depth]
-  ].filter(([, value]) => value);
-}
-
-const SPECIFICATION_GROUPS = [
-  {
-    title: 'Electrical performance',
-    labels: ['Amperage', 'Rated voltage', 'Working voltage', 'Trip level', 'Operating temperature']
-  },
-  {
-    title: 'Installation & configuration',
-    labels: ['NEMA configuration', 'Wiring method', 'Wire gauge', 'Pole & wire', 'Grounding', 'Face dimensions', 'Body depth']
-  },
-  {
-    title: 'Compliance & application',
-    labels: ['Item code', 'Certification', 'Standard', 'Application grade', 'Tamper-resistant', 'Weather-resistant', 'Usage']
-  }
-];
-
-function selectRows(rows, labels) {
-  const rowMap = new Map(rows);
-  return labels.map((label) => [label, rowMap.get(label)]).filter(([, value]) => value);
-}
-
-export function productSpecificationGroups(product) {
-  if (Array.isArray(product.specificationGroups)) return product.specificationGroups;
-  const rows = productSpecificationRows(product);
-
-  if (!Array.isArray(product.technicalSpecifications) || product.technicalSpecifications.length === 0) {
-    return [{ title: 'Product information', rows }];
-  }
-
-  return [
-    ...SPECIFICATION_GROUPS.map((group) => ({
-      title: group.title,
-      rows: selectRows(rows, group.labels)
-    })),
-    { title: 'Materials & construction', rows: product.construction?.materials || [] },
-    { title: 'Quality & durability', rows: product.construction?.performance || [] }
-  ].filter((group) => group.rows.length > 0);
-}
-
-export function productSpecificationSummaryRows(product) {
-  if (Array.isArray(product.specificationSummary)) return product.specificationSummary;
-  const rows = new Map(productSpecificationRows(product));
-  return [
-    ['Rating', product.rating],
-    ['Configuration', rows.get('NEMA configuration')],
-    ['Trip level', rows.get('Trip level')],
-    ['Wiring', rows.get('Wiring method')],
-    ['Certification', rows.get('Certification')]
-  ].filter(([, value]) => value);
-}
+import { productSpecificationRows, productSpecificationGroups, productSpecificationSummaryRows } from '../../utils/productSpecifications.js';
+export { productSpecificationRows, productSpecificationGroups, productSpecificationSummaryRows } from '../../utils/productSpecifications.js';
 
 function SpecificationGroup({ group, index, isOpen, onToggle }) {
   if (!Array.isArray(group.rows) || group.rows.length === 0) return null;

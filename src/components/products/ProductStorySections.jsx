@@ -1,5 +1,5 @@
 import { ArrowRight } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link } from '../SiteLink.jsx';
 import { colors, productFinishImage } from '../../data/products.js';
 import SafeImage from '../SafeImage.jsx';
 

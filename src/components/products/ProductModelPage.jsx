@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+import { Link } from '../SiteLink.jsx';
 import { findLine } from '../../data/lines.js';
 import { productMetadata } from '../../seo/metadata.js';
 import { usePageMetadata } from '../../seo/usePageMetadata.js';

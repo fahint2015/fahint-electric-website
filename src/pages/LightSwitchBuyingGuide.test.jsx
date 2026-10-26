@@ -9,7 +9,7 @@ import { findPost, posts } from '../data/posts.js';
 import { findCatalogProduct } from '../data/catalogProducts.js';
 
 const slug = 'light-switch-buying-guide';
-const path = '/blog/' + slug;
+const path = '/blog/' + slug + '/';
 const wrap = children => <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>{children}</MemoryRouter>;
 
 describe('Researched light switch buying guide', () => {
@@ -25,17 +25,17 @@ describe('Researched light switch buying guide', () => {
     expect(within(table).getAllByRole('rowheader')).toHaveLength(6);
     expect(screen.getByRole('region', { name: 'FAHINT lighting switch model comparison' })).toHaveAttribute('tabindex', '0');
     expect(within(screen.getByRole('list', { name: 'Light switch quotation checklist' })).getAllByRole('listitem')).toHaveLength(7);
-    expect(screen.getByRole('link', { name: 'Browse FAHINT lighting switches' })).toHaveAttribute('href', '/products/lighting-switches');
-    expect(screen.getByRole('link', { name: 'Review lighting switch product documents' })).toHaveAttribute('href', '/resources?family=lighting-switches');
-    expect(screen.getByRole('link', { name: 'Read the dimmer buying guide' })).toHaveAttribute('href', '/blog/dimmer-buying-guide-led-0-10v');
-    expect(screen.getByRole('link', { name: 'Read the wallplate buying guide' })).toHaveAttribute('href', '/blog/wallplate-buying-guide');
-    expect(screen.getByRole('link', { name: 'Ask a product question' })).toHaveAttribute('href', '/contact?topic=technical');
+    expect(screen.getByRole('link', { name: 'Browse FAHINT lighting switches' })).toHaveAttribute('href', '/products/lighting-switches/');
+    expect(screen.getByRole('link', { name: 'Review lighting switch product documents' })).toHaveAttribute('href', '/resources/?family=lighting-switches');
+    expect(screen.getByRole('link', { name: 'Read the dimmer buying guide' })).toHaveAttribute('href', '/blog/dimmer-buying-guide-led-0-10v/');
+    expect(screen.getByRole('link', { name: 'Read the wallplate buying guide' })).toHaveAttribute('href', '/blog/wallplate-buying-guide/');
+    expect(screen.getByRole('link', { name: 'Ask a product question' })).toHaveAttribute('href', '/contact/?topic=technical');
     expect(screen.getByText(post.coverCaption)).toBeVisible();
     expect(document.title).toBe(post.title + ' | FAHINT');
     expect(document.querySelector('meta[name="description"]')).toHaveAttribute('content', post.excerpt);
     const graph = JSON.parse(document.querySelector('script[type="application/ld+json"]').textContent)['@graph'];
     expect(graph.find(item => item['@type'] === 'Article')).toMatchObject({
-      headline: post.title, description: post.excerpt, datePublished: '2026-10-06', dateModified: '2026-10-06',
+      headline: post.title, description: post.excerpt, datePublished: '2026-10-06', dateModified: '2026-10-25',
     });
     for (const link of within(screen.getByRole('navigation', { name: 'In this article' })).getAllByRole('link')) {
       const id = new URL(link.getAttribute('href'), 'https://example.com').hash.slice(1);

@@ -1,6 +1,6 @@
 import { useId } from 'react';
 import { ArrowRight } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link } from '../SiteLink.jsx';
 
 // Schematic coordinates, not measurements. R15/R15Q/R20 source photographs
 // show different rear terminals and front slots, but publish no dimensions.

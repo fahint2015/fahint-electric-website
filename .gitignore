@@ -17,6 +17,7 @@ output/
 .impeccable/
 .superpowers/
 .worktrees/
+.wrangler/
 
 # Local helper scripts and editor files
 _tools/

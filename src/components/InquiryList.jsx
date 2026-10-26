@@ -1,5 +1,5 @@
 import { useId } from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from './SiteLink.jsx';
 import { X } from 'lucide-react';
 import { getCatalogProducts } from '../data/catalogProducts.js';
 import { validInquiryQuantity } from '../utils/inquiryList.js';

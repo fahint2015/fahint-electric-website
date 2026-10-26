@@ -36,6 +36,6 @@ describe('RecommendedProducts', () => {
   it('hides paging controls when all recommendations fit', () => {
     render(<MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}><RecommendedProducts products={products.slice(0, 1)} /></MemoryRouter>);
     expect(screen.queryByRole('button', { name: 'Next recommended products' })).not.toBeInTheDocument();
-    expect(screen.getByRole('link', { name: /^GF15 / })).toHaveAttribute('href', '/products/gfci/gf15');
+    expect(screen.getByRole('link', { name: /^GF15 / })).toHaveAttribute('href', '/products/gfci/gf15/');
   });
 });

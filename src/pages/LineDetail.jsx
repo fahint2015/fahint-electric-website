@@ -1,6 +1,7 @@
 import BrandBanner from '../components/BrandBanner.jsx';
 import { useState } from 'react';
-import { Link, useParams, useSearchParams, Navigate } from 'react-router-dom';
+import { useParams, useSearchParams, Navigate } from 'react-router-dom';
+import { Link } from '../components/SiteLink.jsx';
 import { ArrowRight, Search } from 'lucide-react';
 import { findLine, productLines } from '../data/lines.js';
 import { filterCatalogProducts, findCatalogAliasMatch, getCatalogProducts } from '../data/catalogProducts.js';
@@ -54,7 +55,7 @@ function ModelCatalogue({ line }) {
   }[line.slug];
   const isWidePoster = isUsb || line.slug === 'dimmers';
 
-  usePageMetadata(familyMetadata(line));
+  usePageMetadata(familyMetadata(line, getCatalogProducts(line.slug)));
 
   return <div className="catalog-series">
     <BrandBanner title={line.name} label={false} image={poster} className="brand-banner--series"

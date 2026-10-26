@@ -42,7 +42,7 @@ describe('published brand homepage', () => {
       expect(button).toHaveFocus();
       expect(button).toHaveAttribute('aria-expanded', 'true');
       const link = within(section).getByRole('link');
-      expect(link).toHaveAttribute('href', destinations[index]);
+      expect(link).toHaveAttribute('href', destinations[index] + '/');
       await user.tab();
       expect(link).toHaveFocus();
       await user.tab({ shift: true });
@@ -87,15 +87,15 @@ describe('published brand homepage', () => {
   });
   it('connects all selected product and document destinations and supports keyboard application tabs', () => {
     const {container}=show();
-    expect(screen.getAllByRole('link',{name:'Explore GFCI'})[0]).toHaveAttribute('href','/products/gfci');
-    expect(screen.getByRole('link',{name:/UL Listed/})).toHaveAttribute('href','/resources?family=gfci&model=GF15');
+    expect(screen.getAllByRole('link',{name:'Explore GFCI'})[0]).toHaveAttribute('href','/products/gfci/');
+    expect(screen.getByRole('link',{name:/UL Listed/})).toHaveAttribute('href','/resources/?family=gfci&model=GF15');
     const tabs=screen.getByRole('tablist',{name:'Application environments'});
     fireEvent.keyDown(within(tabs).getByRole('tab',{name:'Residential'}),{key:'End'});
     expect(within(tabs).getByRole('tab',{name:'Hospitality'})).toHaveAttribute('aria-selected','true');
     expect(screen.getByRole('tabpanel')).toHaveTextContent('Thoughtful details. A warmer welcome.');
-    expect(within(screen.getByRole('tabpanel')).getByRole('link', {name:'Explore hospitality'})).toHaveAttribute('href','/applications/hospitality');
+    expect(within(screen.getByRole('tabpanel')).getByRole('link', {name:'Explore hospitality'})).toHaveAttribute('href','/applications/hospitality/');
     fireEvent.keyDown(within(tabs).getByRole('tab',{name:'Hospitality'}),{key:'ArrowLeft'});
-    expect(within(screen.getByRole('tabpanel')).getByRole('link', {name:'Explore workplace'})).toHaveAttribute('href','/applications/workplace');
+    expect(within(screen.getByRole('tabpanel')).getByRole('link', {name:'Explore workplace'})).toHaveAttribute('href','/applications/workplace/');
     expect(container.querySelector('img[src*="about-fahint-factory-v3"]')).toHaveAttribute('alt',expect.stringContaining('concept'));
     expect(container.querySelector('img[src*="/output/"]')).toBeNull();
   });

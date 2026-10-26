@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from '../components/SiteLink.jsx';
 import { ArrowDown, ArrowRight } from 'lucide-react';
 import { publicAsset } from '../utils/publicAsset.js';
 import { staticMetadata } from '../seo/metadata.js';

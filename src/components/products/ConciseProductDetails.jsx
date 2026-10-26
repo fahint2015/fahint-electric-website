@@ -1,26 +1,15 @@
 import { useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from '../SiteLink.jsx';
 import { ArrowRight, Download } from 'lucide-react';
-import { productSpecificationGroups } from './ProductTechnicalSections.jsx';
+import { conciseSpecificationRows } from '../../utils/productSpecifications.js';
 import { findModelCertificate } from '../../data/certificates.js';
 import { resourcesHref, catalogueDocument } from '../../data/documents.js';
 import { publicAsset } from '../../utils/publicAsset.js';
-import { colors } from '../../data/products.js';
 import { modelDocumentationNote } from '../../data/buyingGuides.js';
 import { modelGuideLink } from '../../data/modelGuideLinks.js';
 import Reveal from '../Reveal.jsx';
 
-// All rows come from the normalized model data; the presentation adds no ratings.
-export function conciseSpecificationRows(product) {
-  const rows = productSpecificationGroups(product).flatMap(group => group.rows);
-  const seen = new Set(['model', 'item code', 'factory inspection', 'patent protection']);
-  const finishes = product.finishes || colors.filter(finish => product.assets.finishes?.[finish.slug]);
-  return [['Model', product.sku], ...(finishes.length ? [['Available finishes', finishes.map(f => f.name).join(' / ')]] : []),
-    ...rows.filter(([label, value]) => {
-      if (!value || seen.has(label.toLowerCase())) return false;
-      seen.add(label.toLowerCase()); return true;
-    })];
-}
+export { conciseSpecificationRows } from '../../utils/productSpecifications.js';
 
 export default function ConciseProductDetails({ product, contactHref }) {
   const [tab, setTab] = useState('features');

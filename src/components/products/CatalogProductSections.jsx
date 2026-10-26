@@ -1,5 +1,5 @@
 import { ArrowRight, ExternalLink, FileCheck2 } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link } from '../SiteLink.jsx';
 import SafeImage from '../SafeImage.jsx';
 import { publicAsset } from '../../utils/publicAsset.js';
 import { resourcesHref } from '../../data/documents.js';

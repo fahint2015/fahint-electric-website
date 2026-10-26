@@ -1,5 +1,5 @@
 import { ArrowRight, Check, Download, FileCheck2, FlaskConical, Layers3, Package, Palette, PenTool } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link } from '../SiteLink.jsx';
 import { stats as companyStats } from '../../data/company.js';
 import Reveal from '../Reveal.jsx';
 import HomeCertifications from './HomeCertifications.jsx';

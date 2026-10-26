@@ -12,9 +12,9 @@ describe('brand navigation', () => {
     show();
     const applicationTrigger = screen.getByRole('button', { name: 'Toggle applications' });
     fireEvent.click(applicationTrigger);
-    expect(screen.getByRole('link', { name: 'Residential', exact: true })).toHaveAttribute('href', '/applications/residential');
-    expect(screen.getByRole('link', { name: 'Workplace', exact: true })).toHaveAttribute('href', '/applications/workplace');
-    expect(screen.getByRole('link', { name: 'Hospitality', exact: true })).toHaveAttribute('href', '/applications/hospitality');
+    expect(screen.getByRole('link', { name: 'Residential', exact: true })).toHaveAttribute('href', '/applications/residential/');
+    expect(screen.getByRole('link', { name: 'Workplace', exact: true })).toHaveAttribute('href', '/applications/workplace/');
+    expect(screen.getByRole('link', { name: 'Hospitality', exact: true })).toHaveAttribute('href', '/applications/hospitality/');
     fireEvent.click(screen.getByRole('button', { name: 'Toggle product series' }));
     expect(applicationTrigger).toHaveAttribute('aria-expanded', 'false');
     fireEvent.click(applicationTrigger);
@@ -48,19 +48,19 @@ describe('brand navigation', () => {
   });
   it.each(['/home-studio/','/home-previous/'])('keeps the preserved homepage links local under %s', path => {
     render(<MemoryRouter initialEntries={[path+'?review=1']} future={{v7_startTransition:true,v7_relativeSplatPath:true}}><LegacyHeader /></MemoryRouter>);
-    const canonical=path.slice(0,-1);
+    const canonical=path;
     expect(screen.getByRole('link',{name:'Home',exact:true})).toHaveAttribute('href',canonical);
     expect(screen.getByRole('link',{name:'Send Inquiry'})).toHaveAttribute('href',canonical+'#studio-inquiry');
     expect(screen.getByRole('link',{name:'Skip to main content'})).toHaveAttribute('href',canonical+'?review=1#main-content');
   });
   it('keeps skip and back-to-top links on the current model/filter URL', () => {
     render(<MemoryRouter initialEntries={['/products/usb-outlets?ports=c&compare=FTR15C-3100']} future={{v7_startTransition:true,v7_relativeSplatPath:true}}><BrandHeader /><BrandFooter /></MemoryRouter>);
-    for (const name of ['Skip to content','Back to top']) expect(screen.getByRole('link',{name})).toHaveAttribute('href','/products/usb-outlets?ports=c&compare=FTR15C-3100#main-content');
+    for (const name of ['Skip to content','Back to top']) expect(screen.getByRole('link',{name})).toHaveAttribute('href','/products/usb-outlets/?ports=c&compare=FTR15C-3100#main-content');
   });
   it('links all five main groups to actual routes including Blog', () => {
     show(); const nav=screen.getByRole('navigation',{name:'Main navigation'});
     for(const [name,path] of [['Products','/products'],['Applications','/applications'],['Resources','/resources'],['Blog','/blog'],['About FAHINT','/about']]) {
-      expect(within(nav).getByRole('link',{name,exact:true})).toHaveAttribute('href',path);
+      expect(within(nav).getByRole('link',{name,exact:true})).toHaveAttribute('href',path + '/');
     }
   });
   it('opens all seven product families and closes Escape to its trigger', () => {

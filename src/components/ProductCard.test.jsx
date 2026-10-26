@@ -23,7 +23,7 @@ describe('ProductCard', () => {
     const link = screen.getByRole('link', {
       name: 'GF15 15A Self-Test GFCI Receptacle'
     });
-    expect(link).toHaveAttribute('href', '/products/gfci/gf15');
+    expect(link).toHaveAttribute('href', '/products/gfci/gf15/');
     expect(link).toHaveClass('pcard');
     expect(container.querySelectorAll('a')).toHaveLength(1);
     expect(link.querySelectorAll('button, input, select, textarea')).toHaveLength(0);

@@ -43,12 +43,12 @@ describe('studio homepage and catalog', () => {
   it('directs preview navigation to the published pages', () => {
     show(Header, '/products-studio');
     expect(screen.getByRole('link', { name: 'Home' })).toHaveAttribute('href', '/');
-    expect(screen.getByRole('link', { name: /^Products/ })).toHaveAttribute('href', '/products');
+    expect(screen.getByRole('link', { name: /^Products/ })).toHaveAttribute('href', '/products/');
   });
 
   it('connects the studio homepage header inquiry button to its own form', () => {
     show(Header);
-    expect(screen.getByRole('link', { name: 'Send Inquiry' })).toHaveAttribute('href', '/home-studio#studio-inquiry');
+    expect(screen.getByRole('link', { name: 'Send Inquiry' })).toHaveAttribute('href', '/home-studio/#studio-inquiry');
   });
 
   it('introduces the brand and gives six homepage categories a direct entrance', () => {
@@ -57,9 +57,9 @@ describe('studio homepage and catalog', () => {
     const list = screen.getByRole('list', { name: 'Product categories' });
     for (const [slug] of installedCategories) {
       const line = productLines.find(line => line.slug === slug);
-      expect(within(list).getByRole('link', { name: `Explore ${line.name}` })).toHaveAttribute('href', `/products/${slug}`);
+      expect(within(list).getByRole('link', { name: `Explore ${line.name}` })).toHaveAttribute('href', `/products/${slug}/`);
     }
-    expect(screen.getByRole('link', { name: 'Explore FAHINT products' })).toHaveAttribute('href', '/products');
+    expect(screen.getByRole('link', { name: 'Explore FAHINT products' })).toHaveAttribute('href', '/products/');
   });
 
   it('switches between the three real application scenes without a floating product card', () => {
@@ -140,7 +140,7 @@ describe('studio homepage and catalog', () => {
     expect(nav.nextElementSibling).toHaveClass('studio-collection');
     expect(collection.nextElementSibling).toHaveClass('studio-application-map');
     expect(within(nav).getAllByRole('link').map(link => link.getAttribute('href'))).toEqual([
-      '/home-studio#studio-collection', '/home-studio#studio-brand', '/home-studio#studio-oem', '/home-studio#studio-making', '/home-studio#studio-certificates', '/home-studio#studio-inquiry'
+      '/home-studio/#studio-collection', '/home-studio/#studio-brand', '/home-studio/#studio-oem', '/home-studio/#studio-making', '/home-studio/#studio-certificates', '/home-studio/#studio-inquiry'
     ]);
     expect(within(collection).queryByRole('tablist')).not.toBeInTheDocument();
     expect(within(collection).getAllByRole('listitem')).toHaveLength(6);
@@ -254,7 +254,7 @@ describe('studio homepage and catalog', () => {
       expect(image).toHaveAttribute('width', '1536');
       expect(image).toHaveAttribute('height', '1024');
       expect(image).toHaveAttribute('loading', 'lazy');
-      expect(within(card).getByRole('link', { name: `Explore ${line.name}` })).toHaveAttribute('href', `/products/${slug}`);
+      expect(within(card).getByRole('link', { name: `Explore ${line.name}` })).toHaveAttribute('href', `/products/${slug}/`);
     });
     expect(within(list).queryByText('Wallplates')).not.toBeInTheDocument();
     expect(productLines.find(line => line.slug === 'wallplates')).toBeDefined();
@@ -347,8 +347,8 @@ describe('studio homepage and catalog', () => {
     const hero = screen.getByRole('region', { name: 'Wiring devices. Built for your market.' });
     const projects = within(hero).getByRole('group', { name: 'For your projects' });
     const brands = within(hero).getByRole('group', { name: 'For your brand' });
-    expect(within(projects).getByRole('link', { name: 'Explore FAHINT products' })).toHaveAttribute('href', '/products');
-    expect(within(brands).getByRole('link', { name: 'Build a range with us' })).toHaveAttribute('href', '/home-studio#studio-oem');
+    expect(within(projects).getByRole('link', { name: 'Explore FAHINT products' })).toHaveAttribute('href', '/products/');
+    expect(within(brands).getByRole('link', { name: 'Build a range with us' })).toHaveAttribute('href', '/home-studio/#studio-oem');
     expect(within(hero).getByText(/North American wiring devices/)).toBeInTheDocument();
     expect(within(hero).getByText(`${productLines.length} product families`)).toBeInTheDocument();
     expect(within(hero).getByText('Model-specific documentation')).toBeInTheDocument();
@@ -474,7 +474,7 @@ describe('studio homepage and catalog', () => {
       expect(button).toHaveAttribute('aria-expanded', 'false');
       await user.click(button);
       expect(button).toHaveAttribute('aria-expanded', 'true');
-      expect(within(section).getByRole('link', { name: `View ${name}` })).toHaveAttribute('href', href);
+      expect(within(section).getByRole('link', { name: `View ${name}` })).toHaveAttribute('href', href + '/');
       const model = studioRanges.flatMap(range => range.models).find(product => product.href === href);
       const card = within(section).getByRole('article');
       expect(within(card).getByRole('heading', { level: 3 })).toHaveTextContent(model.name);
@@ -625,10 +625,10 @@ describe('studio homepage and catalog', () => {
   it('connects the brand introduction to company details and the existing OEM chapter', () => {
     show(HomeStudio);
     const section = screen.getByRole('region', { name: 'Everyday power. Made by FAHINT.' });
-    expect(within(section).getByRole('link', { name: 'Get to know FAHINT' })).toHaveAttribute('href', '/about');
-    expect(within(section).getByRole('link', { name: 'Explore OEM / ODM' })).toHaveAttribute('href', '/home-studio#studio-oem');
+    expect(within(section).getByRole('link', { name: 'Get to know FAHINT' })).toHaveAttribute('href', '/about/');
+    expect(within(section).getByRole('link', { name: 'Explore OEM / ODM' })).toHaveAttribute('href', '/home-studio/#studio-oem');
     const nav = screen.getByRole('navigation', { name: 'Homepage sections' });
-    expect(within(nav).getByRole('link', { name: 'About FAHINT' })).toHaveAttribute('href', '/home-studio#studio-brand');
+    expect(within(nav).getByRole('link', { name: 'About FAHINT' })).toHaveAttribute('href', '/home-studio/#studio-brand');
     expect(within(nav).queryByRole('link', { name: 'Finishes' })).not.toBeInTheDocument();
   });
 
@@ -748,8 +748,8 @@ describe('studio homepage and catalog', () => {
     expect(within(process).getByText(/authorized artwork/)).toBeVisible();
     expect(within(process).getByText(/quantities and lead times/i)).toBeVisible();
     expect(within(section).getAllByRole('link', { name: 'Discuss your OEM / ODM project' })).toHaveLength(1);
-    expect(within(section).getByRole('link', { name: 'Discuss your OEM / ODM project' })).toHaveAttribute('href', '/home-studio#studio-inquiry');
-    expect(within(section).getByRole('link', { name: 'Explore OEM / ODM capabilities' })).toHaveAttribute('href', '/capabilities#oem');
+    expect(within(section).getByRole('link', { name: 'Discuss your OEM / ODM project' })).toHaveAttribute('href', '/home-studio/#studio-inquiry');
+    expect(within(section).getByRole('link', { name: 'Explore OEM / ODM capabilities' })).toHaveAttribute('href', '/capabilities/#oem');
     expect(within(section).queryByText('Have a product range in mind?')).not.toBeInTheDocument();
     expect(within(section).queryByText('Model selection & product brief')).not.toBeInTheDocument();
     expect(screen.queryByText(/1,000,000|20,000\+|12 hours|15 Days|UC60-GAN/)).not.toBeInTheDocument();
@@ -777,7 +777,7 @@ describe('studio homepage and catalog', () => {
     for (const title of ['GFCI functional testing', 'USB charging tests', 'Model-specific checks']) {
       expect(within(section).getByRole('heading', { name: title })).toBeVisible();
     }
-    expect(within(section).getByRole('link', { name: 'Review model certificates' })).toHaveAttribute('href', '/home-studio#studio-certificates');
+    expect(within(section).getByRole('link', { name: 'Review model certificates' })).toHaveAttribute('href', '/home-studio/#studio-certificates');
   });
 
   it('uses the supplied catalog poster as a full-width hero with overlaid copy', () => {
@@ -813,7 +813,7 @@ describe('studio homepage and catalog', () => {
       expect(within(item).queryByText(`${count} models`)).not.toBeInTheDocument();
       expect(within(item).getAllByRole('img')).toHaveLength(1);
       expect(within(item).getByRole('img')).toHaveAttribute('src', expect.stringContaining(`/catalog-products/${line.slug}-product.webp`));
-      expect(within(item).getByRole('link', { name: `Explore ${line.name}` })).toHaveAttribute('href', `/products/${line.slug}`);
+      expect(within(item).getByRole('link', { name: `Explore ${line.name}` })).toHaveAttribute('href', `/products/${line.slug}/`);
     }
   });
 
@@ -828,7 +828,7 @@ describe('studio homepage and catalog', () => {
     const search = screen.getByRole('searchbox', { name: 'Search model or feature' });
     fireEvent.change(search, { target: { value: 'FTR15C-3100' } });
     expect(screen.getByRole('status')).toHaveTextContent('1 model');
-    expect(screen.getByRole('link', { name: 'View FTR15C-3100' })).toHaveAttribute('href', '/products/usb-outlets/ftr15c-3100');
+    expect(screen.getByRole('link', { name: 'View FTR15C-3100' })).toHaveAttribute('href', '/products/usb-outlets/ftr15c-3100/');
     fireEvent.change(search, { target: { value: 'nothing-matches-here' } });
     expect(screen.getByRole('heading', { name: 'No matching products' })).toBeInTheDocument();
     fireEvent.click(screen.getByRole('button', { name: 'Reset filters' }));
@@ -853,7 +853,7 @@ describe('studio homepage and catalog', () => {
     fireEvent.change(search, { target: { value: 'R15-C' } });
     expect(screen.getByRole('status')).toHaveTextContent('1 model');
     expect(screen.getByText('R15-C is listed in the current catalog as C15.')).toBeVisible();
-    expect(screen.getByRole('link', { name: 'View C15' })).toHaveAttribute('href', '/products/receptacles/r15-c');
+    expect(screen.getByRole('link', { name: 'View C15' })).toHaveAttribute('href', '/products/receptacles/r15-c/');
     fireEvent.click(screen.getByRole('button', { name: 'Filter USB Outlets' }));
     expect(screen.getByRole('heading', { name: 'No matching products' })).toBeVisible();
     expect(screen.queryByText(/is listed in the current catalog as/)).not.toBeInTheDocument();

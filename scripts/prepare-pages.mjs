@@ -5,6 +5,9 @@ import { posts } from '../src/data/posts.js';
 import { products } from '../src/data/products.js';
 import { catalogProducts, productHref } from '../src/data/catalogProducts.js';
 import { pageHtml, routeMetadata } from './page-metadata.mjs';
+import { renderSitemap } from './sitemap.mjs';
+import { renderSecurityHeaders } from '../src/server/security-headers.js';
+import { publicReferenceFiles } from './public-reference-files.mjs';
 import { escapeHtml, notFoundMetadata, validateSiteUrl } from '../src/seo/metadata.js';
 
 const STATIC_ROUTES = [
@@ -138,6 +141,7 @@ export async function preparePages({
   }
 
   const metadataOptions = { siteUrl: canonicalBase, publicUrl: actualPublicUrl };
+  const sitemap = renderSitemap(routeMetadata, canonicalBase || 'https://fahint.com/');
   // Prepare all heads before writing: a missing route or malformed template must fail the build.
   const preparedRoutes = ['', ...PUBLIC_ROUTES].map(route => {
     const path = `/${route}`;
@@ -168,6 +172,12 @@ export async function preparePages({
     await writeFile(join(routeDir, 'index.html'), html);
   }));
   await writeFile(join(outputDir, '.nojekyll'), '');
+  await writeFile(join(outputDir, 'sitemap.xml'), sitemap);
+  await writeFile(join(outputDir, '_headers'), renderSecurityHeaders());
+  await mkdir(join(outputDir, 'ai'), {recursive: true});
+  for (const [file, content] of Object.entries(publicReferenceFiles(canonicalBase || 'https://fahint.com/'))) {
+    await writeFile(join(outputDir, file), content);
+  }
 
   const cnamePath = join(outputDir, 'CNAME');
   if (validatedDomain) {

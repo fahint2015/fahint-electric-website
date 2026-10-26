@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+import { Link } from './SiteLink.jsx';
 import { Mail, Phone, MapPin } from 'lucide-react';
 import { company } from '../data/company.js';
 import { productLines } from '../data/lines.js';

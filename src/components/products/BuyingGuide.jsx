@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link } from '../SiteLink.jsx';
 import { ArrowUpRight } from 'lucide-react';
 import Faq from '../Faq.jsx';
 import { buyingGuides, modelDocumentationNote } from '../../data/buyingGuides.js';

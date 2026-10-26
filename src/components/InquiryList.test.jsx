@@ -60,7 +60,7 @@ describe('USB inquiry list form', () => {
     expect(screen.queryByLabelText('Estimated quantity')).not.toBeInTheDocument();
     expect(screen.getByLabelText('Quantity for FTR15-3100')).toHaveValue('1200');
     expect(screen.getByLabelText('Finish for FTR20QC-DC65W')).toHaveValue('');
-    expect(screen.getByRole('link', { name: 'FTR15-3100' })).toHaveAttribute('href', '/products/usb-outlets/ftr15-3100');
+    expect(screen.getByRole('link', { name: 'FTR15-3100' })).toHaveAttribute('href', '/products/usb-outlets/ftr15-3100/');
     await user.selectOptions(screen.getByLabelText('Finish for FTR15-3100'), 'grey');
     expect(change.mock.calls.at(-1)[0][0]).toMatchObject({ model: 'FTR15-3100', finishSlug: 'grey', quantity: '1200' });
   });

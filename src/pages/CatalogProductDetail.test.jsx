@@ -20,7 +20,7 @@ describe('concise catalog product pages',()=>{
     expect(screen.getByRole('img',{name:`${product.sku} selected product view`})).toHaveAttribute('src',publicAsset(product.assets.hero));
     const table=screen.getByRole('table',{name:`${product.sku} technical parameters`});
     for(const group of product.specificationGroups) for(const [,value] of group.rows) expect(table.textContent).toContain(value);
-    expect(screen.getByRole('link',{name:'Request a quote'})).toHaveAttribute('href',`/contact?model=${encodeURIComponent(product.sku)}`);
+    expect(screen.getByRole('link',{name:'Request a quote'})).toHaveAttribute('href',`/contact/?model=${encodeURIComponent(product.sku)}`);
     expect(container.querySelector('form')).toBeNull();
     if(product.reviewNotice) expect(screen.getByRole('note')).toHaveTextContent(product.reviewNotice);
     expect(screen.getByRole('tabpanel',{name:'Features'}).querySelectorAll('li').length).toBeGreaterThan(0);
@@ -31,7 +31,7 @@ describe('concise catalog product pages',()=>{
     for(const finish of product.finishes){
       await user.click(screen.getByRole('button',{name:`Show ${sku} in ${finish.name}`}));
       expect(image).toHaveAttribute('src',publicAsset(product.assets.finishes[finish.slug]));
-      expect(screen.getByRole('link',{name:'Request a quote'})).toHaveAttribute('href',`/contact?model=${encodeURIComponent(sku)}&finish=${finish.slug}`);
+      expect(screen.getByRole('link',{name:'Request a quote'})).toHaveAttribute('href',`/contact/?model=${encodeURIComponent(sku)}&finish=${finish.slug}`);
     }
   });
   it('keeps industrial limitations and withholds conflicting drawings in Download',async()=>{

@@ -1,7 +1,8 @@
 import { useEffect } from 'react';
 import BrandBanner from '../components/BrandBanner.jsx';
 import Reveal from '../components/Reveal.jsx';
-import { Link, useLocation, useSearchParams } from 'react-router-dom';
+import { useLocation, useSearchParams } from 'react-router-dom';
+import { Link } from '../components/SiteLink.jsx';
 import { Mail, Phone, MapPin, Clock, MessageCircle } from 'lucide-react';
 import { company, faqs } from '../data/company.js';
 import InquiryForm from '../components/InquiryForm.jsx';
@@ -60,7 +61,7 @@ export default function Contact() {
           <li><Mail size={20} aria-hidden="true" /><div><span>Email</span><a href={`mailto:${company.email}`}>{company.email}</a></div></li>
           <li><MessageCircle size={20} aria-hidden="true" /><div><span>WhatsApp</span><a href={`https://wa.me/${company.whatsapp.replace(/[^0-9]/g, '')}`} target="_blank" rel="noreferrer">Message our team</a></div></li>
           <li><Phone size={20} aria-hidden="true" /><div><span>Phone</span><a href={`tel:${company.phone.replace(/\s/g, '')}`}>{company.phone}</a></div></li>
-          <li><MapPin size={20} aria-hidden="true" /><div><span>Based in</span><strong>{company.location}</strong></div></li>
+          <li><MapPin size={20} aria-hidden="true" /><div><span>Address</span><strong>{company.address}</strong></div></li>
           <li><Clock size={20} aria-hidden="true" /><div><span>Business hours</span><strong>{company.hours}</strong></div></li>
         </ul>
         <div className="company-contact-help"><h3>Looking for a document?</h3><p>Original product-family certificates are available before you write.</p><CompanyLink to="/resources#certifications" secondary light>View certificate library</CompanyLink></div>

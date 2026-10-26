@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from '../components/SiteLink.jsx';
 import { ArrowRight, ArrowUpRight, Check } from 'lucide-react';
 import { company } from '../data/company.js';
 import { companyPhotos } from '../data/companyProfile.js';

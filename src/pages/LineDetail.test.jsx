@@ -28,7 +28,7 @@ describe('model catalogue', () => {
     await user.type(search, 'RT15Q-C');
     expect(search).toHaveValue('RT15Q-C');
     expect(screen.getByText('RT15Q-C is listed in the current catalog as CT15Q.')).toBeVisible();
-    expect(screen.getByRole('link', { name: 'View CT15Q details' })).toHaveAttribute('href', '/products/receptacles/rt15q-c');
+    expect(screen.getByRole('link', { name: 'View CT15Q details' })).toHaveAttribute('href', '/products/receptacles/rt15q-c/');
     expect(screen.getByText('1 of 30 models')).toBeVisible();
     await user.selectOptions(screen.getByRole('combobox', { name: 'Configuration' }), 'Duplex Receptacle');
     expect(screen.getByRole('status')).toHaveTextContent('No models match');
@@ -56,7 +56,7 @@ describe('model catalogue', () => {
     await user.selectOptions(screen.getByRole('combobox', { name: 'Receptacle rating' }), '20a');
     await user.selectOptions(screen.getByRole('combobox', { name: 'Charging output' }), 'pd-65w');
     expect(screen.getByText('1 of 37 models')).toBeVisible();
-    expect(screen.getByRole('link', { name: 'View FTR20QC-DC65W details' })).toHaveAttribute('href', '/products/usb-outlets/ftr20qc-dc65w');
+    expect(screen.getByRole('link', { name: 'View FTR20QC-DC65W details' })).toHaveAttribute('href', '/products/usb-outlets/ftr20qc-dc65w/');
     expect(screen.getByTestId('listing-location')).toHaveTextContent('ports=dual-c&rating=20a&charging=pd-65w');
     const search = screen.getByRole('searchbox', { name: 'Search models' });
     await user.type(search, 'FTR15');
@@ -138,9 +138,9 @@ describe('model catalogue', () => {
   it('links USB models to their own detail pages instead of the series landing page', () => {
     renderSeries();
     expect(screen.getByRole('link', { name: /View FTR15-3100 details/i }))
-      .toHaveAttribute('href', '/products/usb-outlets/ftr15-3100');
+      .toHaveAttribute('href', '/products/usb-outlets/ftr15-3100/');
     expect(screen.getByRole('link', { name: /View FTR20QC-DC65W details/i }))
-      .toHaveAttribute('href', '/products/usb-outlets/ftr20qc-dc65w');
+      .toHaveAttribute('href', '/products/usb-outlets/ftr20qc-dc65w/');
     expect(screen.queryByText(/Full specifications and datasheets for any model below are available on request/i))
       .not.toBeInTheDocument();
   });
