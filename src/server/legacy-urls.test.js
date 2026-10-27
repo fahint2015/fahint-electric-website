@@ -1,5 +1,5 @@
 // @vitest-environment node
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import { describe, expect, it, vi } from 'vitest';
 import { onRequest } from '../../functions/_middleware.js';
 import { legacyRedirects } from './legacy-urls.js';
@@ -39,8 +39,60 @@ describe('production legacy URL cleanup', () => {
     }
   });
 
+  it('recovers archived category and inquiry-list entrances, including HEAD and encoded queries', () => {
+    const recovered = [
+      ['list_17/', '/products/usb-outlets/f4p/'],
+      ['pro2/', '/products/gfci/'],
+      ['list_50/', '/products/wallplates/bs1802/'],
+      ['list_16/', '/products/usb-outlets/'],
+      ['pro7/', '/products/wallplates/'],
+      ['list_29/', '/products/smart-switches/'],
+      ['pro6/', '/products/smart-switches/'],
+      ['list_47/', '/products/smart-switches/'],
+      ['list_39/', '/products/smart-switches/'],
+      ['list_14/', '/products/usb-outlets/'],
+      ['list_35/', '/products/smart-switches/'],
+      ['list_21/', '/products/receptacles/'],
+      ['list_25/', '/products/dimmers/'],
+      ['about_57/', '/contact/'],
+    ];
+    for (const [key, target] of recovered) {
+      for (const query of [key, `${encodeURIComponent(key)}=`]) {
+        for (const method of ['GET', 'HEAD']) {
+          const { response, next } = invoke(`/?${query}&utm_source=legacy`, method);
+          expect(response.status, `${method} ${query}`).toBe(301);
+          expect(response.headers.get('Location')).toBe(`https://fahint.com${target}`);
+          expect(next).not.toHaveBeenCalled();
+        }
+      }
+    }
+  });
+
+  it('ships exact static migrations to real pages without overriding Functions or present-day routes', () => {
+    const rules = (existsSync('public/_redirects') ? readFileSync('public/_redirects', 'utf8') : '')
+      .split(/\r?\n/).map(line => line.trim()).filter(line => line && !line.startsWith('#'))
+      .map(line => line.split(/\s+/));
+    expect(rules).toHaveLength(58);
+    const sources = new Set(rules.map(([source]) => source));
+    const destinations = new Set(PUBLIC_ROUTES.map(path => `/${path}/`));
+    const functionRoutes = JSON.parse(readFileSync('public/_routes.json', 'utf8')).include;
+    expect(sources.size).toBe(rules.length);
+    for (const [source, target, status] of rules) {
+      expect(source).toMatch(/^\/[a-z0-9-]+\/?$/);
+      expect(destinations.has(target), target).toBe(true);
+      expect(status).toBe('301');
+      expect(sources.has(target), target).toBe(false);
+      expect(functionRoutes.some(pattern => pattern.endsWith('*') ? source.startsWith(pattern.slice(0, -1)) : source === pattern)).toBe(false);
+      expect(sources.has(source.endsWith('/') ? source.slice(0, -1) : `${source}/`)).toBe(true);
+    }
+    const redirects = new Map(rules.map(([source, target]) => [source, target]));
+    expect(redirects.get('/ds15-3-ul-listed-15a-decorator-rocker-lighting-switch-product/')).toBe('/products/lighting-switches/ds15-3/');
+    expect(redirects.get('/pricelist-for-15-amp-duplex-receptacle-cw20-standard-size-us-duplex-outlet-receptacle-20amp-125v-trweather-resistant-fahint-product/')).toBe('/products/receptacles/rw20-c/');
+    for (const path of ['/gfci-outlet-with-usb/', '/usb-night-light-outlet/', '/chrome-light-switch/', '/contact/', '/products/']) expect(redirects.has(path), path).toBe(false);
+  });
+
   it('permanently removes obsolete CMS endpoints and queries without an equivalent page', async () => {
-    for (const path of ['/static/index.php?12345.html', '/yineng/index.php/12345', '/api.php/content/addcart/id/', '/core/code.php', '/?list_2/195.html', '/?pro1/242.html', '/?list_20%2F254.html=', '/?p=/Do/area&lg=cn']) {
+    for (const path of ['/static/index.php?12345.html', '/yineng/index.php/12345', '/api.php/content/addcart/id/', '/core/code.php', '/?list_2/195.html', '/?pro1/242.html', '/?list_20%2F254.html=', '/?list_32/', '/?list_30/', '/?list_24/', '/?p=/Do/area&lg=cn']) {
       for (const method of ['GET', 'HEAD']) {
         const { response, next } = invoke(path, method);
         expect(response.status, path).toBe(410);

@@ -102,6 +102,22 @@ export const legacyRedirects = new Map(Object.entries({
   "list_41/": "/products/smart-switches/",
   "list_49/": "/products/wallplates/",
   "pro4/": "/products/receptacles/",
+  // Recovered from the local 2026-08-23 archive during the 2026-10-27 GSC audit.
+  "list_17/": "/products/usb-outlets/f4p/",
+  "pro2/": "/products/gfci/",
+  "list_50/": "/products/wallplates/bs1802/",
+  "list_16/": "/products/usb-outlets/",
+  "pro7/": "/products/wallplates/",
+  "list_29/": "/products/smart-switches/",
+  "pro6/": "/products/smart-switches/",
+  "list_47/": "/products/smart-switches/",
+  "list_39/": "/products/smart-switches/",
+  "list_14/": "/products/usb-outlets/",
+  "list_35/": "/products/smart-switches/",
+  "list_21/": "/products/receptacles/",
+  "list_25/": "/products/dimmers/",
+  // "My List" was the old enquiry basket, not an About page.
+  "about_57/": "/contact/",
 }));
 
 const gonePage = '<!doctype html><html lang="en"><meta charset="utf-8"><meta name="robots" content="noindex"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Page removed | FAHINT</title><main><h1>This page has been removed.</h1><p>Find current products in the <a href="/products/">FAHINT product catalogue</a>.</p></main></html>';
