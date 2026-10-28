@@ -4,7 +4,7 @@ export const smartSwitchBuyingGuide = {
   title: 'Smart Switch Buying Guide: Wi-Fi, Zigbee and Wiring',
   excerpt: 'Compare FAHINT touch, Wi-Fi and Zigbee switches by wiring version, control function, supply rating and format. Prepare a model-specific sample and order brief.',
   date: '2026-10-18',
-  updated: '2026-10-18',
+  updated: '2026-10-28',
   readMinutes: 5,
   category: 'Buying Guide',
   cover: 'assets/images/lines/smart-series-bedside-touch-v1.webp',
@@ -84,7 +84,8 @@ export const smartSwitchBuyingGuide = {
     },
     {
       type: 'p',
-      text: 'Keep the number of controlled outputs separate from the physical box and panel dimensions. Approve the finish and markings on the assembled sample, and record which mounting parts and accessories belong in the pack. Ask for the model-specific documents needed for the destination market before approving the order.'
+      text: 'USW8841-Z is a four-gang Zigbee touch switch in the US format. Here, four-gang describes the controlled outputs, not wall-box size. Confirm dimensions, finish, markings and accessories for the ordered model.',
+      links: [{ label: 'USW8841-Z · four-gang Zigbee wall switch', href: '/products/smart-switches/usw8841-z' }]
     },
     { type: 'h2', text: 'Test the control in the intended connected system' },
     {

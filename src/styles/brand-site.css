@@ -51,14 +51,14 @@
 .brand-site .brand-chapter-nav { display:flex; gap:48px; border-bottom:1px solid var(--line); padding-block:10px 20px; }
 .brand-site .brand-chapter-nav a { display:flex; min-height:44px; align-items:center; font-size:20px; font-weight:600; }
 .brand-site .brand-chapter-nav a:hover { color:var(--blue); }
-.brand-site .brand-application { display:grid; grid-template-columns:1.15fr 1fr; gap:clamp(40px,6vw,112px); align-items:center; }
-.brand-site .brand-application.is-reversed { grid-template-columns:1fr 1.15fr; }
+.brand-site .brand-application { display:grid; grid-template-columns:minmax(0,1.2fr) minmax(0,1fr); gap:clamp(32px,4.5vw,80px); align-items:center; padding-block:clamp(36px,4.4vw,80px); }
+.brand-site .brand-application.is-reversed { grid-template-columns:minmax(0,1fr) minmax(0,1.2fr); }
 .brand-site .brand-application.is-reversed figure { order:2; }
-.brand-site .brand-application figure img { width:100%; aspect-ratio:1.45; object-fit:cover; }
+.brand-site .brand-application figure img { width:100%; aspect-ratio:8/5; object-fit:cover; }
 .brand-site .brand-application figcaption { font-size:13px; color:var(--muted); margin-top:12px; }
-.brand-site .brand-application-copy { padding-block:24px; }
-.brand-site .brand-application-copy h2 { font-size:clamp(36px,3vw,64px); line-height:1.12; }
-.brand-site .brand-application .body-copy { margin-block:24px 32px; max-width:33ch; font-size:clamp(18px,1.15vw,22px); }
+.brand-site .brand-application-copy { width:100%; max-width:520px; min-width:0; justify-self:center; padding-block:8px; }
+.brand-site .brand-application-copy h2 { font-size:clamp(32px,3vw,52px); line-height:1.12; letter-spacing:-.025em; }
+.brand-site .brand-application .body-copy { margin-block:18px 28px; max-width:44ch; font-size:clamp(17px,1.05vw,20px); line-height:1.6; text-wrap:pretty; }
 .brand-site .brand-application-copy .button-link { min-height:52px; padding-inline:26px; }
 .brand-site .brand-application-links { display:grid; margin-bottom:22px; border-top:1px solid var(--line); }
 .brand-site .brand-application-links a { display:flex; justify-content:space-between; align-items:center; min-height:50px; border-bottom:1px solid var(--line); font-weight:600; }
@@ -274,11 +274,6 @@
 .brand-site .reading-filters button { border-radius:0; background:none; border-bottom:1px solid var(--line); padding-inline:10px; }
 .brand-site .reading-filters button[aria-pressed='true'] { background:none; color:var(--blue); border-bottom:2px solid var(--blue); }
 .brand-site .reading-card { box-shadow:none; background:#fff; }
-.brand-site .reading-article-heading { background:#fff; border-bottom:1px solid var(--line); padding-block:30px 50px; }
-.brand-site .reading-article-heading h1 { max-width:28ch; font-size:clamp(32px,3vw,54px); }
-.brand-site .reading-article h2 { font-size:30px; }
-.brand-site .reading-article-nav h2 { font-size:20px; }
-.brand-site .reading-article { max-width:920px; }
 .brand-site .company-contact-heading { padding-top:24px; }
 .brand-site .company-contact-main { background:#fff; }
 .brand-site .company-contact-details { background:var(--paper); color:var(--ink); padding:40px; border-radius:0; }
@@ -334,8 +329,10 @@
   .brand-site .brand-banner-shade { background:#071b307d; }
   .brand-site .brand-chapter-nav { gap:24px; flex-wrap:wrap; }
   .brand-site .brand-chapter-nav a { font-size:17px; }
-  .brand-site .brand-application, .brand-site .brand-application.is-reversed { grid-template-columns:1fr; gap:28px; }
+  .brand-site .brand-application, .brand-site .brand-application.is-reversed { grid-template-columns:1fr; gap:20px; }
   .brand-site .brand-application.is-reversed figure { order:0; }
+  .brand-site .brand-application-copy { max-width:none; padding-block:0; }
+  .brand-site .brand-application .body-copy { margin-block:16px 24px; }
   .brand-site .brand-catalog-layout, .brand-site .studio-catalog-layout { grid-template-columns:1fr; gap:30px; }
   .brand-site .brand-catalog-layout .catalog-filters { display:grid; grid-template-columns:1fr 1fr; gap:18px; padding:20px; border:1px solid var(--line); }
   .brand-site .catalog-filters__search, .brand-site .catalog-filters__note, .brand-site .catalog-filters__summary { grid-column:1/-1; }

@@ -55,9 +55,6 @@
   line-height: 1.16;
   letter-spacing: -.025em;
 }
-.company-page .reading-article h2 { font-size: 30px; }
-.company-page .reading-article-nav h2 { font-size: 20px; }
-.company-page .reading-sources h2 { font-size: 25px; }
 .company-page .company-panorama { max-width: none; }
 .company-columns--photographic > div { padding-top: 0; border-top: 0; }
 .company-columns--photographic .editorial-photo { border-radius: var(--site-radius); margin-bottom: 24px; }

@@ -4,7 +4,7 @@ export const wallplateBuyingGuide = {
   title: 'Wallplate Buying Guide: Openings, Sizes and Finishes',
   excerpt: 'Compare wallplate openings, gang counts, exterior sizes and finishes. Use FAHINT model examples and a practical checklist to prepare a quotation request.',
   date: '2026-10-06',
-  updated: '2026-10-07',
+  updated: '2026-10-28',
   readMinutes: 6,
   category: 'Buying Guide',
   cover: 'assets/images/editorial-home/category-wallplates-scene.webp',
@@ -105,7 +105,8 @@ export const wallplateBuyingGuide = {
     { type: 'h2', text: 'Specify the fixing style and pack contents' },
     {
       type: 'p',
-      text: 'Decide whether the finished face should show fixing screws. For a screwless model, ask which mounting components it needs and which are supplied. The appearance of the face does not tell you what belongs in the pack.'
+      text: 'Decide whether the finished face should show fixing screws. BS18032-G is a two-gang screwless decorator wall plate. Check its dimensions and supplied mounting components separately from a one-gang plate or a screw-fixed design.',
+      links: [{ label: 'BS18032-G · 2-gang screwless wall plate', href: '/products/wallplates/bs18032-g' }]
     },
     {
       type: 'p',

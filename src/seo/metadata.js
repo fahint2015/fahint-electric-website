@@ -1,6 +1,7 @@
 // Shared by browser pages and build-time HTML heads. Do not import the full catalogue here.
 import { findModelCertificate } from '../data/certificates.js';
 import { conciseSpecificationRows } from '../utils/productSpecifications.js';
+import { modelGuideLink } from '../data/modelGuideLinks.js';
 import { organizationEntity, organizationUpdated, certificateId, supportingEntities } from './entities.js';
 const organization = { '@type': 'Organization', name: 'FAHINT', legalName: 'Wenzhou Fahint Electric Co., Ltd.' };
 const homeImage = 'assets/images/brand-home/generated/hero-family-belief-background.webp';
@@ -11,6 +12,7 @@ export const staticMetadata = Object.fromEntries(Object.entries({
     image: homeImage, imageAlt: 'A family in a bright home — FAHINT brand concept', organization: true,
   },
   '/applications': {
+    updated: '2026-10-28', // Residential, workplace and hospitality selection guidance revised.
     title: 'Residential, Workplace & Hospitality Applications | FAHINT',
     description: 'Explore FAHINT protection, charging and lighting controls for residential, workplace and hospitality spaces. Review the model for your application.',
     image: 'assets/images/brand-home/generated/application-residential-scene.webp', imageAlt: 'Residential interior — FAHINT brand concept', label: 'Applications',
@@ -36,6 +38,7 @@ export const staticMetadata = Object.fromEntries(Object.entries({
     image: 'assets/images/editorial-home/brand-system-family-final-optimized.webp', imageAlt: 'FAHINT wiring-device collection', label: 'Products',
   },
   '/capabilities': {
+    updated: '2026-10-28', // Private-label selection copy and product-family links revised.
     title: 'OEM Wiring Devices & Private-Label Manufacturing | FAHINT',
     description: 'Source OEM wiring devices from FAHINT. Review model selection, private-label packaging, samples and manufacturing support for your distribution range.',
     image: 'assets/images/company/capabilities/workshop-editorial-v1.webp', imageAlt: 'FAHINT electronics workshop — AI-refined from a factory photograph', label: 'Manufacturing & OEM / ODM',
@@ -58,6 +61,7 @@ export const staticMetadata = Object.fromEntries(Object.entries({
     image: 'assets/images/company/factory/showroom-samples-v1.webp', imageAlt: 'FAHINT wiring-device samples', label: 'Resources',
   },
   '/blog': {
+    updated: '2026-10-28', // Revised guide dates are shown in the article listing.
     title: 'Wiring Device Guides | FAHINT',
     description: 'Read FAHINT buyer guides on GFCI selection, sourcing, finishes and product documentation. Compare options using practical questions and original references.',
     image: 'assets/images/company/factory/showroom-samples-v1.webp', imageAlt: 'Wiring-device samples in the FAHINT showroom', label: 'Guides & insights',
@@ -72,19 +76,24 @@ export function familyMetadata(line, models = []) {
   const titles = {
     gfci: 'GFCI Outlet Manufacturer | 15A & 20A Models | FAHINT',
     'usb-outlets': 'USB-C Wall Outlets | USB-A & Power Delivery | FAHINT',
+    receptacles: 'Duplex & Decorator Receptacles | FAHINT',
+    dimmers: 'LED & 0–10V Dimmer Switches | FAHINT',
+    'smart-switches': 'Wi-Fi & Zigbee Smart Wall Switches | FAHINT',
+    'lighting-switches': 'Single-Pole, 3-Way & Combination Switches | FAHINT',
+    wallplates: 'Screwless & Decorator Wall Plates | FAHINT',
   };
   const descriptions = {
     gfci: 'Compare FAHINT 15A and 20A self-test GFCI outlets, including TR and WR models. Review model documents and prepare your bulk or OEM inquiry.',
     'usb-outlets': 'Compare USB-A and USB-C wall outlets, from conventional 5V to 20W, 36W and 65W Power Delivery. Check model outputs, AC ratings and OEM options.',
-    receptacles: 'Compare FAHINT duplex and decorator receptacles by voltage, current, TR/WR features and wiring method. Review the exact model before ordering.',
-    dimmers: 'Compare FAHINT digital slide and 0-10V dimmers. Check load-specific ratings, control type, wiring requirements and product documentation.',
-    'smart-switches': 'Compare Wi-Fi, Zigbee and touch-only switches by wiring, control function and US/EU format. Review the exact FAHINT model and required accessories.',
-    'lighting-switches': 'Compare FAHINT paddle, toggle and combination switches. Check single-pole or 3-way operation, electrical ratings and model-specific approvals.',
-    wallplates: 'Compare FAHINT standard and screwless wallplates by opening, gang count and finish. Review dimensions and the matching device before ordering.',
+    receptacles: 'Compare 15A and 20A duplex and decorator receptacles, including commercial and tamper-resistant models. Review wiring, ratings and model documents.',
+    dimmers: 'Compare the DM2010 LED slide dimmer and DM2010S 120/277V 0–10V dimmer switch. Check lamp or driver compatibility and load-specific ratings.',
+    'smart-switches': 'Compare Wi-Fi touch switches and Zigbee wall switches by control function, wiring and US/EU format. Check the exact model and gateway requirements.',
+    'lighting-switches': 'Compare single-pole and 3-way paddle switches, toggle switches, and double- or triple-rocker combination models. Review ratings and wiring.',
+    wallplates: 'Compare screwless decorator wall plates, glossy and matte finishes, and 1- to 4-gang options. Find duplex, toggle and blank plates with model dimensions.',
   };
   return {
     path: `/products/${line.slug}`, title: titles[line.slug] || `${line.name} · Models & Specifications | FAHINT`, description: descriptions[line.slug] || line.summary,
-    updated: '2026-10-26', // Existing buying-guide introductions revised for all seven families.
+    updated: '2026-10-28', // Concise selection copy revised for all seven families; five titles made specific.
     structuredDataUpdated: organizationUpdated,
     image: line.cover, imageAlt: `${line.name} from FAHINT`,
     breadcrumbs: [['Home', '/'], ['Products', '/products'], [line.name, `/products/${line.slug}`]],
@@ -95,7 +104,8 @@ export function familyMetadata(line, models = []) {
 export function productMetadata(product, line) {
   const path = `/products/${line.slug}/${product.slug || product.sku.toLowerCase()}`;
   return {
-    updated: '2026-10-25', // Real model specifications and exact certification links added to JSON-LD.
+    // Record only actual model-copy, document or guide-link changes, never a build timestamp.
+    updated: [product.updated || '2026-10-25', modelGuideLink(product.sku, line.slug)?.updated].filter(Boolean).sort().at(-1),
     structuredDataUpdated: organizationUpdated,
     path, title: `${product.sku} ${product.name} | FAHINT`, description: product.summary,
     image: product.assets.hero, imageAlt: `FAHINT ${product.sku} ${product.name}`,

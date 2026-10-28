@@ -10,6 +10,18 @@ const rows = (product) => new Map(product.specificationGroups.flatMap((group) =>
 const model = (family, sku) => findCatalogProduct(family, sku);
 
 describe('complete, model-specific catalogue', () => {
+  it('offers the matching single-page extract for every documented PD model and both dimmers', () => {
+    for (const product of getCatalogProducts('usb-outlets')) {
+      const sheet = product.sources.find(source => source.href.endsWith('/pd-usb-outlets.pdf'));
+      expect(Boolean(sheet), product.sku).toBe(product.group.startsWith('PD '));
+      if (sheet) expect(sheet.kind).toBe('catalogue');
+    }
+    for (const sku of ['DM2010', 'DM2010S']) {
+      expect(model('dimmers', sku).sources.some(source => source.href.endsWith('/dm2010-dm2010s.pdf')), sku).toBe(true);
+    }
+    expect(model('receptacles', 'R15').sources.some(source => source.href.includes('/catalog-sheets/'))).toBe(false);
+  });
+
   it('recovers USB functional paragraphs stored in legacy materials without inventing ports or power sharing', () => {
     for (const sku of ['FTR15-3100', 'FTR15QC-DC20W']) {
       const copy = model('usb-outlets', sku).functionalFeatures.join(' ');

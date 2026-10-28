@@ -22,7 +22,7 @@ export const posts = [
     "title": "GFCI vs AFCI: Two Different Kinds of Protection",
     "excerpt": "GFCI and AFCI protect against different hazards. Learn what each does and which details to check before ordering a FAHINT GFCI.",
     "date": "2026-08-12",
-    "updated": "2026-08-31",
+    "updated": "2026-10-28",
     "readMinutes": 3,
     "category": "Technical Guide",
     "cover": "assets/images/editorial-home/product-gfci-optimized.webp",
@@ -84,7 +84,11 @@ export const posts = [
       },
       {
         "type": "p",
-        "text": "FAHINT’s GFCI range includes different ratings and configurations. Read the model page and its original listing documents before ordering. Confirm indicator behavior, test instructions and available finishes for that model; these details can differ across the range."
+        "text": "Compare GF15 and GF20 for standard-face 15A and 20A GFCI outlets. Read the exact model’s specifications and listing documents, then confirm indicator behavior, test instructions and finishes. GFCI identification does not establish AFCI protection.",
+        "links": [
+          { "label": "GF15 · 15A self-test GFCI outlet", "href": "/products/gfci/gf15" },
+          { "label": "GF20 · 20A self-test GFCI outlet", "href": "/products/gfci/gf20" }
+        ]
       }
     ]
   },
@@ -93,7 +97,7 @@ export const posts = [
     "title": "Weather-Resistant Receptacles: The Device and the Cover",
     "excerpt": "A WR marking does not make an outlet waterproof. Check the receptacle, enclosure and cover against the location and locally adopted code.",
     "date": "2026-08-08",
-    "updated": "2026-08-31",
+    "updated": "2026-10-28",
     "readMinutes": 3,
     "category": "Compliance",
     "cover": "assets/images/products/gw15-application-scene-v1.jpg",
@@ -142,7 +146,11 @@ export const posts = [
       },
       {
         "type": "p",
-        "text": "Use the full model number, not just “outdoor outlet,” and request its instructions and certification coverage. Have a qualified installer select the box, cover and installation method for the site."
+        "text": "Use the full model number, not just “outdoor outlet,” and request its instructions and certification coverage. Have a qualified installer select the box, cover and installation method for the site.",
+        "links": [
+          { "label": "GW15 · 15A weather-resistant GFCI", "href": "/products/gfci/gw15" },
+          { "label": "GW20 · 20A weather-resistant GFCI", "href": "/products/gfci/gw20" }
+        ]
       }
     ]
   },
@@ -151,7 +159,7 @@ export const posts = [
     "title": "A GFCI Keeps Tripping: What to Record Before Asking for Help",
     "excerpt": "Note the model, indicator and conditions when a GFCI trips repeatedly or will not reset. Know what to send for support and when to call an electrician.",
     "date": "2026-08-04",
-    "updated": "2026-08-31",
+    "updated": "2026-10-28",
     "readMinutes": 3,
     "category": "Troubleshooting",
     "cover": "assets/images/products/gf15-feature-application-v3.jpg",
@@ -212,7 +220,11 @@ export const posts = [
       },
       {
         "type": "p",
-        "text": "Send the full model number and order reference, safely obtained photos, the observed indicator and a description of the conditions. FAHINT can help find the relevant product documents. A qualified electrical professional still needs to diagnose the installation."
+        "text": "Send the full model number and order reference, safely obtained photos, the observed indicator and a description of the conditions. FAHINT can help find the relevant product documents. A qualified electrical professional still needs to diagnose the installation.",
+        "links": [
+          { "label": "Find your GFCI model", "href": "/products/gfci" },
+          { "label": "Request GFCI technical documents", "href": "/contact?topic=technical&family=gfci" }
+        ]
       }
     ]
   },
@@ -221,7 +233,7 @@ export const posts = [
     "title": "Tamper-Resistant Receptacles: A Buyer’s Specification Checklist",
     "excerpt": "Specify tamper resistance alongside the electrical rating, GFCI protection and weather resistance. Check the local requirements before ordering.",
     "date": "2026-07-29",
-    "updated": "2026-08-31",
+    "updated": "2026-10-28",
     "readMinutes": 3,
     "category": "Compliance",
     "cover": "assets/images/products/gt15-application-scene-v1.jpg",
@@ -270,7 +282,11 @@ export const posts = [
       },
       {
         "type": "p",
-        "text": "Compare the full model number, device markings and documents with the purchase order. A description covering an entire product family may not describe every variant’s construction."
+        "text": "Compare the full model number, device markings and documents with the purchase order. GT20 combines tamper resistance with GFCI protection; RT20 is a tamper-resistant duplex receptacle without an integral GFCI function.",
+        "links": [
+          { "label": "GT20 · 20A tamper-resistant GFCI outlet", "href": "/products/gfci/gt20" },
+          { "label": "RT20 · tamper-resistant duplex receptacle", "href": "/products/receptacles/rt20" }
+        ]
       },
       {
         "type": "p",
@@ -418,7 +434,7 @@ export const posts = [
     "title": "Coordinating Device Finishes Across a Project",
     "excerpt": "Check device and wallplate finishes together under project lighting, then keep the approved model and sample details with the order.",
     "date": "2026-07-15",
-    "updated": "2026-08-31",
+    "updated": "2026-10-28",
     "readMinutes": 3,
     "category": "Specification",
     "cover": "assets/images/company/exhibition-source.webp",
@@ -461,7 +477,11 @@ export const posts = [
       },
       {
         "type": "p",
-        "text": "Place the device and plate together under the lighting planned for the project. Screen images can help you narrow the choice, but they cannot guarantee a physical color match. Use actual samples to approve a finish that matters to the specification."
+        "text": "Place the device and plate together under the lighting planned for the project. Screen images can help you narrow the choice, but they cannot guarantee a physical color match. Use actual samples to approve a finish that matters to the specification.",
+        "links": [
+          { "label": "BS1803-G · glossy screwless wall plate", "href": "/products/wallplates/bs1803-g" },
+          { "label": "BS1803-M · matte screwless wall plate", "href": "/products/wallplates/bs1803-m" }
+        ]
       },
       {
         "type": "h2",

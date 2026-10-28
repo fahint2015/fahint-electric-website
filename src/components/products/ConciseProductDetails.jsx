@@ -15,7 +15,7 @@ export default function ConciseProductDetails({ product, contactHref }) {
   const [tab, setTab] = useState('features');
   const tabRefs = useRef({});
   const certificate = findModelCertificate(product);
-  const guide = modelGuideLink(product.sku);
+  const guide = modelGuideLink(product.sku, product.line || 'gfci');
   const features = (product.functionalFeatures || product.features || []).filter(feature => !/certified under.*report reference/i.test(feature));
   const documents = [
     ...(certificate ? [{ label: 'Model certificate', href: certificate.document }] : []),

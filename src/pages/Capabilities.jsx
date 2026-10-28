@@ -74,7 +74,7 @@ export default function Capabilities() {
         <div>
           <div className="cap-intro">
             <h2 id="oem-title">OEM wiring devices.<br />Built around your range.</h2>
-            <p>Start with FAHINT product platforms for your brand or distribution range. Discuss the models, finishes, markings and packaging your market needs. Availability and customization are confirmed per model.</p>
+            <p>Plan private-label electrical outlets, switches and wallplates for your market. Compare our <Link to="/products/gfci">GFCI outlets</Link> and <Link to="/products/usb-outlets">USB charging outlets</Link>, then confirm finishes, authorized markings and packaging for each model.</p>
           </div>
           <div className="cap-oem__options">
             {oemOptions.map(([title, description]) => <div key={title}><h3>{title}</h3><p>{description}</p></div>)}

@@ -47,6 +47,19 @@ describe('GEO facts and canonical navigation', () => {
     expect(graph(productMetadata(usb,findLine('usb-outlets'))).find(n=>n['@type']==='Product').hasCertification).toBeUndefined();
     expect(JSON.stringify(p)).not.toMatch(/"offers"|"aggregateRating"|"review"|"gtin"/);
   });
+  it('changes model dates only when copy, documents or a visible guide link actually change', () => {
+    for (const [family, sku, expected] of [
+      ['receptacles', 'R15', '2026-10-26'],
+      ['receptacles', 'R15Q', '2026-10-26'],
+      ['dimmers', 'DM2010', '2026-10-26'],
+      ['receptacles', 'R20', '2026-10-28'],
+      ['dimmers', 'DM2010S', '2026-10-28'],
+      ['usb-outlets', 'FTR15QC-DC65W', '2026-10-28'],
+    ]) {
+      const product = getCatalogProducts(family).find(p => p.sku === sku);
+      expect(graph(productMetadata(product, findLine(family))).find(n => n['@type'] === 'WebPage').dateModified, sku).toBe(expected);
+    }
+  });
   it('lists only published category models with canonical URLs', () => {
     const models=getCatalogProducts('usb-outlets');
     const list=graph(familyMetadata(findLine('usb-outlets'),models)).find(n=>n['@type']==='ItemList');

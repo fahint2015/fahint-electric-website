@@ -7,9 +7,9 @@ import { usePageMetadata } from '../seo/usePageMetadata.js';
 import Reveal from '../components/Reveal.jsx';
 
 const scenes = [
-  { id:'residential', name:'Residential', description:'Power, charging and lighting for kitchens, bedrooms and living spaces.', image:'application-residential-scene', link:'/applications/residential', action:'Explore residential' },
-  { id:'workplace', name:'Workplace', description:'Outlets and lighting controls for desks, meeting rooms and shared spaces.', image:'application-workplace-scene', link:'/applications/workplace', action:'Explore workplace' },
-  { id:'hospitality', name:'Hospitality', description:'Convenient charging and coordinated controls for guest rooms and common areas.', image:'application-hospitality-scene', link:'/applications/hospitality', action:'Explore hospitality' }
+  { id:'residential', name:'Residential', description:'GFCI protection, USB charging and lighting controls for kitchens, bedrooms and living spaces. Compare ratings and finishes for your project.', image:'application-residential-scene', link:'/applications/residential', action:'Explore residential' },
+  { id:'workplace', name:'Workplace', description:'Outlets, USB charging and lighting controls for desks and meeting rooms. Match charging ports and power output to your equipment.', image:'application-workplace-scene', link:'/applications/workplace', action:'Explore workplace' },
+  { id:'hospitality', name:'Hospitality', description:'Bedside USB charging, lighting controls and matching wallplates for guest rooms. Coordinate finishes and quantities across your room types.', image:'application-hospitality-scene', link:'/applications/hospitality', action:'Explore hospitality' }
 ];
 export default function Applications() {
   usePageMetadata(staticMetadata['/applications']);

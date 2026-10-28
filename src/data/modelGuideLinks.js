@@ -1,4 +1,6 @@
-// Link a guide only where its question and named models match the product page.
+import { buyingGuides } from './buyingGuides.js';
+
+// Prefer a question naming the model; otherwise offer its family's selection guide.
 const guides = [
   { title: 'What is a blank-face GFCI?', slug: 'what-is-blank-face-gfci', models: ['GL20'] },
   { title: 'Can a USB-C wall outlet charge a laptop?', slug: 'usb-c-wall-outlet-laptop-charging', models: ['FTR15QC-DC65W'] },
@@ -11,6 +13,8 @@ const guides = [
 
 const byModel = new Map(guides.flatMap(({ title, slug, models }) => models.map(model => [model, { title, href: `/blog/${slug}` }])));
 
-export function modelGuideLink(sku) {
-  return byModel.get(sku) || null;
+export function modelGuideLink(sku, line) {
+  if (byModel.has(sku)) return byModel.get(sku);
+  const resource = buyingGuides[line]?.resource;
+  return resource ? { title: resource.label.replace(/^Read the /, ''), href: resource.to, updated: '2026-10-28' } : null;
 }

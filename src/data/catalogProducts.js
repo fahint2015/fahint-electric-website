@@ -8,8 +8,8 @@ import { findModelCertificate } from './certificates.js';
 export { catalogueDocument };
 // Unmodified extracts from the supplied catalog, not manuals or certificates.
 const catalogSheets = {
-  'FTR15QC-DC20W': { label: 'PD USB outlets · catalog sheet (PDF)', href: 'assets/documents/catalog-sheets/pd-usb-outlets.pdf', kind: 'catalogue' },
-  DM2010: { label: 'DM2010 / DM2010S · catalog sheet (PDF)', href: 'assets/documents/catalog-sheets/dm2010-dm2010s.pdf', kind: 'catalogue' }
+  11: { label: 'PD USB outlets · catalog sheet (PDF)', href: 'assets/documents/catalog-sheets/pd-usb-outlets.pdf', kind: 'catalogue' },
+  13: { label: 'DM2010 / DM2010S · catalog sheet (PDF)', href: 'assets/documents/catalog-sheets/dm2010-dm2010s.pdf', kind: 'catalogue' }
 };
 const clean = (value) => String(value ?? '').replace(/\s+/g, ' ').trim();
 export const modelKey = (value) => clean(value).toLowerCase().replace(/[^a-z0-9]/g, '');
@@ -302,6 +302,7 @@ function describeLegacy(record, rows) {
     name = rawModel === 'F4P' ? '4-Port USB-A Wall Charger' : `${amp} ${portType} Outlet · ${pd ? `PD ${pd}W` : group.replace(' USB', '')}`;
     summary = rawModel === 'F4P'
       ? 'Four USB-A charging ports in a decorator-format wall device, with a published combined output of 4.2A at 5V DC.'
+      : pd ? `${rating}. ${portType} wall outlet with USB-C Power Delivery up to ${pd}W on one port. Confirm power sharing when both ports are used.`
       : `${rating}. ${portType} charging with ${output}. ${values.get('Tamper-resistant') === 'Yes' ? 'Tamper-resistant receptacle' : 'Receptacle'} with ${clean(values.get('Wiring method')).toLowerCase()}.`;
     facts = [[rawModel === 'F4P' ? 'Input' : 'Receptacle', rating], ['Charging', output], ['Interfaces', portType], ['Variant', values.get('Tamper-resistant') === 'Yes' ? 'Tamper-resistant' : 'USB charger']];
   } else if (record.family === 'wallplates') {
@@ -317,7 +318,8 @@ function describeLegacy(record, rows) {
     const names = { DS15: 'Single-Pole Paddle Switch', 'DS15.3': '3-Way Paddle Switch', DS1502: 'Double Paddle Combination Switch', DS1503: 'Triple Paddle Combination Switch', T15: 'Single-Pole Toggle Switch', 'T15.3': '3-Way Toggle Switch' };
     group = rawModel.startsWith('T') ? 'Toggle switches' : 'Paddle switches';
     name = `${amp} ${names[rawModel]}`;
-    summary = `${rating}. ${circuit} control with ${values.get('Wiring method').toLowerCase()}. ${values.get('Published certification')} is the certification identified on the original model page.`;
+    const switchType = { DS1502: 'Double-rocker combination light switch', DS1503: 'Triple-rocker combination light switch' }[rawModel] || names[rawModel];
+    summary = `${switchType} rated ${rating}. ${circuit} control with ${values.get('Wiring method').toLowerCase()}.`;
     facts = [['Rating', rating], ['Circuit', circuit], ['Wiring', values.get('Wiring method')], ['Published certification', values.get('Published certification')]];
   } else if (record.family === 'gfci') {
     group = rawModel.startsWith('GTN') ? 'Industrial GFCI' : 'Archived model reference';
@@ -335,7 +337,9 @@ function describeLegacy(record, rows) {
     if (commercialModels[rawModel]) group = 'Commercial Duplex Receptacles';
     if (['CR15', 'CR20', 'CD20'].includes(rawModel)) group = 'Industrial Grade Duplex Receptacles';
     name = descriptions[rawModel] || `${amp} ${variant === 'Standard' ? '' : `${variant} `}${group.replace(/Receptacles$/, 'Receptacle')}`;
-    summary = `${sku}: ${group.toLowerCase()}. ${rows.filter(([label]) => /^(device rating|receptacle rating|rated voltage|amperage|wiring method)$/i.test(label)).map(([, value]) => value).join(' · ')}.`;
+    const protection = [values.get('Tamper-resistant') === 'Yes' && 'Tamper-resistant', values.get('Weather-resistant') === 'Yes' && 'weather-resistant'].filter(Boolean).join(' and ');
+    summary = `${protection ? `${protection} ` : ''}${group.replace(/Receptacles$/, 'Receptacle').toLowerCase()} rated ${rating}. ${values.get('Wiring method')}.`;
+    summary = `${sku}: ${summary[0].toUpperCase()}${summary.slice(1)}`;
     facts = [['Rating', rating], ['Configuration', values.get('NEMA') || values.get('Pole & wire')], ['Variant', variant], ['Application', values.get('Application grade')]];
   }
   return { sku, slug: modelSlug(sourceSku), group, name: clean(name), summary, keyFacts: facts.filter(([, value]) => value) };
@@ -517,7 +521,9 @@ function legacyProduct(record) {
   const functionalFeatures = restoredFunctionalFeatures(record, { values, description, materialRows, warrantyValue, modelReference, file, draft });
   return {
     ...description, line: record.family, sourceModel: record.model, sourceUrl: record.sourceUrl,
-    sources: [catalogSheets[description.sku], ...[...new Set(referencePages)].map((page) => ({ label: `Product catalogue · page ${page}`, href: `${catalogueDocument}#page=${page}`, kind: 'catalogue' }))].filter(Boolean),
+    // These records changed in this copy/document pass; unchanged models retain their dates.
+    ...((!record.title && ['receptacles', 'lighting-switches'].includes(record.family)) || pdWattage || record.model === 'DM2010S' ? { updated: '2026-10-28' } : {}),
+    sources: [...new Set(referencePages)].flatMap((page) => [catalogSheets[page], { label: `Product catalogue · page ${page}`, href: `${catalogueDocument}#page=${page}`, kind: 'catalogue' }]).filter(Boolean),
     ...familyStories[record.family],
     specificationGroups: makeGroups([['Model', description.sku], ...rows], materialRows, record.family),
     specificationSummary: description.keyFacts,

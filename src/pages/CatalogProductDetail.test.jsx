@@ -54,6 +54,8 @@ describe('concise catalog product pages',()=>{
   });
   it.each([
     ['usb-outlets','FTR15QC-DC20W','PD USB outlets · catalog sheet (PDF)','pd-usb-outlets.pdf'],
+    ['usb-outlets','FTR15QC-DC65W','PD USB outlets · catalog sheet (PDF)','pd-usb-outlets.pdf'],
+    ['dimmers','DM2010S','DM2010 / DM2010S · catalog sheet (PDF)','dm2010-dm2010s.pdf'],
     ['dimmers','DM2010','DM2010 / DM2010S · catalog sheet (PDF)','dm2010-dm2010s.pdf']
   ])('offers the original catalog sheet for %s/%s without treating it as certification',async(line,sku,label,file)=>{
     const user=userEvent.setup();show(findCatalogProduct(line,sku));

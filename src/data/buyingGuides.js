@@ -3,7 +3,7 @@ import { findModelCertificate } from './certificates.js';
 // Purchasing guidance based on the published model data, not installation instructions.
 export const buyingGuides = {
   gfci: {
-    intro: 'FAHINT GFCI outlets include 15A and 20A models with standard, tamper-resistant and TR/WR configurations, plus blank-face and industrial options. Shortlist the exact model by its rating and intended application, then check the matching certification document. Include the finish, wallplate and quantities when requesting a quotation.',
+    intro: 'Compare 15A and 20A self-test GFCI outlets, including tamper-resistant, weather-resistant and blank-face models. Check the exact rating and certification coverage, then specify finishes, wallplates and quantities for your bulk or OEM order.',
     questions: [
       { q: 'How do I compare standard, TR / WR and blank-face models?', a: 'GF15/GF20 are the standard-face models; GT15/GT20 add tamper resistance; GW15/GW20 combine tamper and weather resistance. GL20 is a blank-face device, not a plug-in receptacle. Filter the model directory by rating and variant, then review the model specifications and have a qualified professional confirm suitability for the project.' },
       { q: 'Does the same certificate cover every GFCI model?', a: 'No. The August 16, 2022 E504391-20210212 addendum names GF15, GF20, GT15, GT20, GW15 and GW20, plus GTN15 and GTN20 as tamper-resistant models with no feed-through. GL20 documentation remains under review. Confirm current listing status and coverage for the ordered configuration.' },
@@ -14,7 +14,7 @@ export const buyingGuides = {
     modelCheck: 'Confirm the face rating, TR / WR or blank-face configuration, and required model documents.',
   },
   'usb-outlets': {
-    intro: 'Choose FAHINT USB outlets by port arrangement, charging profile and AC receptacle rating. Conventional 5V models and 20W, 36W or 65W Power Delivery models serve different charging needs. For a hotel, home or workplace range, check single-port output and shared power against the intended devices and cables.',
+    intro: 'FAHINT manufactures USB-A, USB-A + USB-C and dual USB-C wall outlets. Compare conventional 5V charging with 20W, 36W and 65W USB-C Power Delivery. Check single-port output, shared power and the AC receptacle rating before ordering.',
     questions: [
       { q: 'Should I choose a USB-A, USB-C or Power Delivery outlet?', a: 'Use the port arrangement and published profiles to narrow the range. FTR15C-3100 combines USB-A and USB-C with 3.1A at 5V shared output; it is non-PD. FTR15QC-DC20W, DC36W and DC65W offer dual USB-C Power Delivery with different single-port limits. A USB-C connector alone does not establish a particular PD output.' },
       { q: 'How should I compare total output and power sharing?', a: 'Check combined USB output, single-port limits and the behaviour with multiple ports in use. Do not add individual maximum ratings together. Charging output depends on the connected device, cable and negotiated profile; confirm simultaneous-port power sharing for the selected model.' },
@@ -24,7 +24,7 @@ export const buyingGuides = {
     modelCheck: 'Confirm port mix, charging profiles, simultaneous-port power sharing and input rating; where applicable, confirm the AC receptacle rating.',
   },
   receptacles: {
-    intro: 'Compare FAHINT duplex and decorator receptacles by current, voltage, plug configuration and wiring method. The range includes 15A and 20A options, with separate TR, WR, commercial and industrial configurations. Specify the exact model before choosing a matching wallplate, finish and packaging for your distribution or project order.',
+    intro: 'Compare duplex and decorator receptacles, including 15A and 20A commercial models and tamper-resistant options. Match voltage, plug configuration and wiring to the project, then select the wallplate and finish. Industrial models have separate ratings and specifications.',
     questions: [
       { q: 'Which voltage and current should I specify?', a: 'Use the exact current, voltage and plug configuration required by the project. The catalogue lists the standard and commercial range at 125V, and industrial CR15/CR20/CD20 at 125V/250V. That voltage label does not establish plug compatibility; confirm the exact ordered configuration.' },
       { q: 'How do face style and TR / WR affect the shortlist?', a: 'Compare duplex or decorator openings, tamper-resistant and weather-resistant features, and the stated wiring method for each model. A similar-looking face does not make two configurations interchangeable. Confirm location and installation requirements with a qualified professional.' },
@@ -34,7 +34,7 @@ export const buyingGuides = {
     modelCheck: 'Confirm voltage, current, NEMA configuration, TR / WR features and wiring method for the exact model.',
   },
   dimmers: {
-    intro: 'FAHINT offers the DM2010 digital slide dimmer and DM2010S 0–10V dimmer for different lighting-control requirements. Select the control method and check the rating for the intended lamp or driver load. Provide the lighting model and total connected load so compatibility can be reviewed before an order.',
+    intro: 'Compare the DM2010 LED slide dimmer with the DM2010S 120/277V 0–10V dimmer switch. They use different control methods and load ratings. Confirm the lamp or driver model, circuit configuration and total load before ordering.',
     questions: [
       { q: 'Which load information should I provide?', a: 'Share the lamp or driver manufacturer, model, load type and total connected load. Compare the dimmer rating for that load type; LED and incandescent ratings must not be treated as the same limit. Have compatibility and installation requirements checked for the complete lighting system.' },
       { q: 'Are DM2010 and DM2010S interchangeable?', a: 'They represent different control choices: DM2010 is the digital slide dimmer and DM2010S is the 0-10V model. Review the model-specific control method, wiring and lighting-system requirements before selecting either one.' },
@@ -44,7 +44,7 @@ export const buyingGuides = {
     modelCheck: 'Provide lamp or driver model, load type and total load; confirm compatibility with the selected control method.',
   },
   'smart-switches': {
-    intro: 'FAHINT smart controls include US and EU formats with Wi-Fi, Zigbee or touch-only operation. Start with the required switching, dimming, curtain, fan or heater function, then check the exact model’s wiring requirements. Confirm the app, gateway and accessories for the intended connected system before approving a sample.',
+    intro: 'Compare Wi-Fi touch switches, Zigbee wall switches and touch-only controls in US and EU formats. Match the control function and neutral-wire requirements to the project. Confirm the app, gateway and accessories for the selected connected model.',
     questions: [
       { q: 'Does this model require a neutral conductor?', a: 'Check the exact model: neutral-required, single-live and dual-wiring versions are separate catalogue configurations. Provide the wiring requirements from your project team. Do not assume one diagram or wiring arrangement applies to the whole smart-switch range.' },
       { q: 'What should I confirm about Wi-Fi, Zigbee or touch-only operation?', a: 'Specify the required protocol and function, then confirm the app, gateway and accessories for the chosen model. Touch-only controls should not be assumed to provide network features. Switching, dimming, curtain, fan and heater controls serve different loads.' },
@@ -54,7 +54,7 @@ export const buyingGuides = {
     modelCheck: 'Confirm neutral requirements, protocol, control function, US/EU format and any gateway or accessory requirements.',
   },
   'lighting-switches': {
-    intro: 'Choose FAHINT lighting switches by switching function, electrical rating and face style. Single-pole, 3-way and combination models serve different circuit requirements, with model-specific 125V or 120/277V ratings. Specify the full model number, matching plate opening and finish, and review the relevant approval documents before ordering.',
+    intro: 'Choose single-pole or 3-way paddle and toggle switches, or double- and triple-rocker combination light switches. Check each model’s 125V or 120/277V rating, wiring and approval documents. Match the wallplate opening to the device.',
     questions: [
       { q: 'Do I need single-pole, 3-way or combination controls?', a: 'Specify the required switching function first. The range includes single-pole and 3-way models plus double- and triple-rocker combination controls. Multiple rockers in one device do not necessarily mean a multi-gang wallplate.' },
       { q: 'What electrical and approval details should I check?', a: 'Compare the current and voltage stated for the model, including the separate 125V and 120/277V configurations. Published UL or ETL identification varies by model. Do not substitute a certificate from another switch or product family.' },
@@ -64,7 +64,7 @@ export const buyingGuides = {
     modelCheck: 'Confirm single-pole, 3-way or combination operation, voltage and current, and the matching plate opening.',
   },
   wallplates: {
-    intro: 'FAHINT wallplates include standard and screwless designs, with 1- to 4-gang options and glossy or matte finishes. Match the opening to the intended device, then check dimensions, fixing style and surface appearance. Confirm whether the plate is supplied with the device or ordered separately when preparing quantities.',
+    intro: 'Compare screwless decorator wall plates and screw-fixed designs in glossy or matte finishes, with 1- to 4-gang options. Duplex, toggle and blank plates serve different openings. Check dimensions, fixing style and pack contents for the selected model.',
     questions: [
       { q: 'Which opening and gang count should I choose?', a: 'Match the plate to the device opening: decorator, duplex, toggle or blank. Then confirm gang count and dimensions. The number of buttons or rockers on a device is not a substitute for checking the wallplate configuration.' },
       { q: 'What changes between standard and screwless plates?', a: 'Check the fixing style and the components shown for the selected model. Confirm the plate and device fit together using the model dimensions and a sample. Do not assume every plate is included with every device order.' },
