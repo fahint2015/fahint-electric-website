@@ -447,3 +447,6 @@
 /* The hero frame has a fixed height, so width must not be derived from aspect-ratio. */
 .reading-article-hero { width:100%; overflow:hidden; }
 .reading-article-hero .editorial-photo { width:100%; }
+
+/* Anchor jumps must clear the sticky site header. */
+.company-page.reading-post :is(h1,h2,h3) { scroll-margin-top:108px; }
