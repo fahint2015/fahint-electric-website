@@ -2,10 +2,10 @@
 export const wallplateBuyingGuide = {
   slug: 'wallplate-buying-guide',
   title: 'Wallplate Buying Guide: Openings, Sizes and Finishes',
-  excerpt: 'Compare wallplate openings, gang counts, exterior sizes and finishes. Use FAHINT model examples and a practical checklist to prepare a quotation request.',
+  excerpt: "Match wallplate openings and gang counts, then compare actual dimensions, fixing styles and finishes across eight FAHINT configurations.",
   date: '2026-10-06',
-  updated: '2026-10-28',
-  readMinutes: 6,
+  updated: "2026-10-29",
+  readMinutes: 3,
   category: 'Buying Guide',
   cover: 'assets/images/editorial-home/category-wallplates-scene.webp',
   coverAlt: 'Single- and multi-gang wallplates arranged on a dark display surface in an illustrated scene.',
@@ -41,126 +41,221 @@ export const wallplateBuyingGuide = {
   ],
   body: [
     {
-      type: 'p',
-      text: 'Choose the wallplate with the device it will surround. Start with the opening and gang count, then check the exterior dimensions, fixing style and finish. A request for a white, one-gang plate leaves several of those decisions unanswered.'
+      "type": "p",
+      "text": "Select the opening that fits the device, count the mounting positions, then choose the outer size and finish. Put the wallplate model beside its switch or outlet on the order list."
     },
     {
-      type: 'p',
-      text: 'For a mixed product order, put the wallplate model beside each switch or receptacle model in your purchasing list. That gives both sides a specific pairing to review before samples and packaging are approved.'
-    },
-    { type: 'h2', text: 'Match the device opening' },
-    {
-      type: 'p',
-      text: 'Decorator, duplex and toggle describe different device openings. A decorator plate has a rectangular opening; a traditional duplex plate has two shaped receptacle openings; a toggle plate has a smaller opening for the switch lever. A blank plate has no device opening. FAHINT examples are BS1801, BS1804, BS1806 and BS1807 respectively.'
+      "type": "h2",
+      "text": "Match the opening and gang count"
     },
     {
-      type: 'p',
-      text: 'Use those names to narrow the range, then compare the intended device with the plate drawing. Include the device model in your inquiry even if the opening looks familiar. A front photograph cannot establish the mounting fit or clearance behind the plate.',
-      links: [{ label: 'Read the standard receptacle buying guide', href: '/blog/standard-receptacle-buying-guide' }]
-    },
-    { type: 'h2', text: 'Count the device mounting positions' },
-    {
-      type: 'p',
-      text: 'Gang count refers to device mounting positions side by side. Two buttons on one switch do not necessarily require a two-gang plate. Count the device positions in the planned arrangement and check the opening required at each position.'
+      "type": "p",
+      "text": "Our one-gang examples are BS1801 for a rectangular decorator opening, BS1804 for a traditional duplex receptacle, BS1806 for a toggle and BS1807 for a blank cover."
     },
     {
-      type: 'p',
-      text: 'The FAHINT range includes one- through four-gang decorator configurations. BS18012 is a two-gang screw-fixed example; the BS1803 screwless series also has separate multi-gang models. If a project combines different opening types, send the arrangement for review. The published decorator options do not establish availability of every mixed-opening plate.',
-      links: [{ label: 'Browse all FAHINT wallplate configurations', href: '/products/wallplates' }]
-    },
-    { type: 'h2', text: 'Check the exterior size separately' },
-    {
-      type: 'p',
-      text: 'Exterior width and height measure the plate’s outer edges. The device opening is a separate measurement. A larger outer frame may provide more wall coverage, but it does not resolve an opening or mounting mismatch.'
-    },
-    {
-      type: 'p',
-      text: 'Leviton separates size from style in its wallplate selector. That is a useful way to organize a purchasing brief: record the opening first, then the outside dimensions. Use FAHINT’s own drawings for a FAHINT order; size labels from another brand are not a dimension specification.',
-      source: 0
-    },
-    {
-      type: 'p',
-      text: 'BS1801 is the standard 70 × 115 mm plate; BS1802 is the medium 80 × 124 mm plate. Both supplied product-library drawings show 6.5 mm thickness. They are separate models, not two sizes of BS1802. BS1803-G is a separate screwless configuration at 75 × 120 mm. All sizes here are exterior width × height.'
-    },
-    { type: 'h2', text: 'Compare eight FAHINT configurations' },
-    {
-      type: 'p',
-      text: 'These rows summarize selected published configurations. The dimensions are exterior width × height, not opening dimensions. Open the model links for drawings and the rest of the specification. This table is a shortlist, not a cross-brand compatibility list.'
-    },
-    {
-      type: 'table',
-      caption: 'FAHINT wallplate configuration comparison',
-      columns: ['Model', 'Opening / gangs', 'Finish / fixing', 'Exterior W × H (mm)'],
-      rows: [
-        [{ label: 'BS1801', href: '/products/wallplates/bs1801' }, 'Decorator / 1', 'Glossy / Screw-fixed', '70 × 115 mm'],
-        [{ label: 'BS1802', href: '/products/wallplates/bs1802' }, 'Mid-Size Decorator / 1', 'Glossy / Screw-fixed', '80 × 124 mm'],
-        [{ label: 'BS1804', href: '/products/wallplates/bs1804' }, 'Duplex / 1', 'Glossy / Screw-fixed', '70 × 115 mm'],
-        [{ label: 'BS1806', href: '/products/wallplates/bs1806' }, 'Toggle / 1', 'Glossy / Screw-fixed', '70 × 115 mm'],
-        [{ label: 'BS1807', href: '/products/wallplates/bs1807' }, 'Blank / 1', 'Glossy / Screw-fixed', '70 × 115 mm'],
-        [{ label: 'BS18012', href: '/products/wallplates/bs18012' }, 'Decorator / 2', 'Glossy / Screw-fixed', '116 × 115 mm'],
-        [{ label: 'BS1803-G', href: '/products/wallplates/bs1803-g' }, 'Decorator / 1', 'Glossy / Screwless', '75 × 120 mm'],
-        [{ label: 'BS1803-M', href: '/products/wallplates/bs1803-m' }, 'Decorator / 1', 'Matte / Screwless', '75 × 120 mm']
-      ]
-    },
-    { type: 'h2', text: 'Specify the fixing style and pack contents' },
-    {
-      type: 'p',
-      text: 'Decide whether the finished face should show fixing screws. BS18032-G is a two-gang screwless decorator wall plate. Check its dimensions and supplied mounting components separately from a one-gang plate or a screw-fixed design.',
-      links: [{ label: 'BS18032-G · 2-gang screwless wall plate', href: '/products/wallplates/bs18032-g' }]
-    },
-    {
-      type: 'p',
-      text: 'Legrand’s radiant screwless plate, for example, uses subplate screws and has a stated device-series fit. This illustrates why the mounting parts and approved pairing need checking even when the face has no visible screws. It does not establish the construction or compatibility of a FAHINT plate.',
-      source: 1
-    },
-    {
-      type: 'p',
-      text: 'For your FAHINT quotation, request confirmation of the faceplate, any required backplate and fixing hardware. State whether plates are ordered separately or packed with devices. Agree on the pack contents before comparing unit prices.'
-    },
-    { type: 'h2', text: 'Approve the finish and the complete pairing' },
-    {
-      type: 'p',
-      text: 'Glossy and matte describe the surface appearance. Compare the plate and device samples together under the intended lighting, including the visible edge profile. Keep the approved samples or their agreed references with the order. A shared color name or a screen image is not enough to approve a match.',
-      links: [{ label: 'Prepare a device and wallplate finish specification', href: '/blog/gfci-colour-finishes-specification' }]
-    },
-    {
-      type: 'p',
-      text: 'Use the full website model and write the finish separately. Some screw-fixed matte entries, such as BS1801-M, use a website suffix to distinguish them from a glossy entry with the same original base model. BS1803-G and BS1803-M have distinct G and M source designations. Keep those suffixes when requesting the screwless models.'
-    },
-    {
-      type: 'p',
-      text: 'FAHINT’s wallplate material reference identifies polycarbonate (PC) for these plates. Glossy and matte are surface finishes, not two different materials. BS1801 is shown in both finishes; BS1802 is shown in glossy. Specify the material, size and finish as separate fields, and include any additional performance requirement before approving the sample.'
-    },
-    {
-      type: 'p',
-      text: 'The library contains two supplied wallplate reports. E501377-20181016, issued August 16, 2022, names base models BS1801, BS1802, BS1803 and BS1804. E501377-20230919, issued September 25, 2023, names BS1806, BS1807, BS18012, BS18013, BS18014, BS18032, BS18033 and BS18034.'
-    },
-    {
-      type: 'p',
-      text: 'Match the base model to the relevant addendum, then confirm the finish designation, current listing status and coverage of the ordered configuration. Website finish suffixes are not proof of an exact certificate designation. Models outside those lists need their corresponding documentation.',
-      links: [{ label: 'Review wallplate product documents', href: '/resources?family=wallplates' }]
-    },
-    { type: 'h2', text: 'Prepare a wallplate quotation request' },
-    {
-      type: 'p',
-      text: 'Send one line per model and finish, with quantities split accordingly. Include the following details so the quotation can address the intended pairing and pack:'
-    },
-    {
-      type: 'list',
-      label: 'Wallplate quotation checklist',
-      items: [
-        'Wallplate model, opening type and gang count, plus the matching device model and drawing.',
-        'Exterior size limits and any fit constraints identified by the project team.',
-        'Screw-fixed or screwless style, with the required backplate and fixing hardware confirmed.',
-        'Color, glossy or matte finish, and the sample reference for the plate and device together.',
-        'Quantity by configuration, destination market and requested delivery date.',
-        'Separate or device-matched packs, labeling and any authorized brand artwork.',
-        'Material, thickness, required model documents and the sample checks to agree before ordering.'
+      "type": "p",
+      "text": "Compare the intended device with the plate drawing and assembled sample. A familiar opening shape still needs the correct mounting fit.",
+      "links": [
+        {
+          "label": "Read the standard receptacle buying guide",
+          "href": "/blog/standard-receptacle-buying-guide"
+        }
       ]
     },
     {
-      type: 'p',
-      text: 'Start a model-specific inquiry from the wallplate’s product page. If the pairing needs review, use “Ask a product question” below and include the device details. Sample arrangements, customization, minimum quantities and lead times are confirmed in the quotation.'
+      "type": "p",
+      "text": "Gang count describes device mounting positions side by side. A combination switch with two rockers can occupy a single position."
+    },
+    {
+      "type": "p",
+      "text": "FAHINT has one- through four-gang decorator configurations. BS18012 is a two-gang screw-fixed model. For mixed opening types, send the proposed arrangement for review.",
+      "links": [
+        {
+          "label": "Browse all FAHINT wallplate configurations",
+          "href": "/products/wallplates"
+        }
+      ]
+    },
+    {
+      "type": "h2",
+      "text": "Compare exterior sizes"
+    },
+    {
+      "type": "p",
+      "text": "Exterior width and height measure the outer edges of the plate. Larger outside dimensions provide more wall coverage while the device opening remains a separate measurement."
+    },
+    {
+      "type": "p",
+      "text": "Use the millimeter dimensions on the FAHINT drawing when comparing sizes. Other brands’ size labels may refer to different dimensions.",
+      "source": 0
+    },
+    {
+      "type": "p",
+      "text": "BS1801 measures 70 × 115 mm and BS1802 measures 80 × 124 mm. Both supplied drawings specify 6.5 mm thickness. BS1803-G is a separate screwless model at 75 × 120 mm."
+    },
+    {
+      "type": "table",
+      "caption": "FAHINT wallplate configuration comparison",
+      "columns": [
+        "Model",
+        "Opening / gangs",
+        "Finish / fixing",
+        "Exterior W × H (mm)"
+      ],
+      "rows": [
+        [
+          {
+            "label": "BS1801",
+            "href": "/products/wallplates/bs1801"
+          },
+          "Decorator / 1",
+          "Glossy / Screw-fixed",
+          "70 × 115 mm"
+        ],
+        [
+          {
+            "label": "BS1802",
+            "href": "/products/wallplates/bs1802"
+          },
+          "Mid-Size Decorator / 1",
+          "Glossy / Screw-fixed",
+          "80 × 124 mm"
+        ],
+        [
+          {
+            "label": "BS1804",
+            "href": "/products/wallplates/bs1804"
+          },
+          "Duplex / 1",
+          "Glossy / Screw-fixed",
+          "70 × 115 mm"
+        ],
+        [
+          {
+            "label": "BS1806",
+            "href": "/products/wallplates/bs1806"
+          },
+          "Toggle / 1",
+          "Glossy / Screw-fixed",
+          "70 × 115 mm"
+        ],
+        [
+          {
+            "label": "BS1807",
+            "href": "/products/wallplates/bs1807"
+          },
+          "Blank / 1",
+          "Glossy / Screw-fixed",
+          "70 × 115 mm"
+        ],
+        [
+          {
+            "label": "BS18012",
+            "href": "/products/wallplates/bs18012"
+          },
+          "Decorator / 2",
+          "Glossy / Screw-fixed",
+          "116 × 115 mm"
+        ],
+        [
+          {
+            "label": "BS1803-G",
+            "href": "/products/wallplates/bs1803-g"
+          },
+          "Decorator / 1",
+          "Glossy / Screwless",
+          "75 × 120 mm"
+        ],
+        [
+          {
+            "label": "BS1803-M",
+            "href": "/products/wallplates/bs1803-m"
+          },
+          "Decorator / 1",
+          "Matte / Screwless",
+          "75 × 120 mm"
+        ]
+      ]
+    },
+    {
+      "type": "h2",
+      "text": "Include the mounting components"
+    },
+    {
+      "type": "p",
+      "text": "BS18032-G is a two-gang screwless decorator plate. Specify the complete mounting assembly and check its dimensions for the two-device arrangement.",
+      "links": [
+        {
+          "label": "BS18032-G · 2-gang screwless wall plate",
+          "href": "/products/wallplates/bs18032-g"
+        }
+      ]
+    },
+    {
+      "type": "p",
+      "text": "A concealed fixing can still require mounting hardware. Legrand’s radiant plate, for example, uses subplate screws and a specified device pairing; its parts do not establish compatibility with FAHINT plates.",
+      "source": 1
+    },
+    {
+      "type": "p",
+      "text": "For the selected FAHINT model, state the faceplate, required backplate and fixing hardware in the quotation. Also specify separate packs or plates packed with their matching devices."
+    },
+    {
+      "type": "h2",
+      "text": "Approve the material and finish"
+    },
+    {
+      "type": "p",
+      "text": "Compare the assembled plate and device under the project lighting, including their sheen and visible edges. Keep the approved pairing for repeat orders.",
+      "links": [
+        {
+          "label": "Prepare a device and wallplate finish specification",
+          "href": "/blog/gfci-colour-finishes-specification"
+        }
+      ]
+    },
+    {
+      "type": "p",
+      "text": "Specify polycarbonate (PC) as the material and glossy or matte as the finish. BS1801 is shown in both finishes; BS1802 is shown in glossy."
+    },
+    {
+      "type": "p",
+      "text": "BS1801-M distinguishes a matte website entry using the BS1801 base model. BS1803-G and BS1803-M use distinct G and M source designations. Retain the complete designation and write the finish on the order."
+    },
+    {
+      "type": "p",
+      "text": "Report E501377-20181016, issued August 16, 2022, names BS1801, BS1802, BS1803 and BS1804. Report E501377-20230919, issued September 25, 2023, names BS1806, BS1807, BS18012, BS18013, BS18014, BS18032, BS18033 and BS18034."
+    },
+    {
+      "type": "p",
+      "text": "Match the base model and finish to the relevant record, and confirm current listing status for the ordered configuration. Models outside these lists need their corresponding documents.",
+      "links": [
+        {
+          "label": "Review wallplate product documents",
+          "href": "/resources?family=wallplates"
+        }
+      ]
+    },
+    {
+      "type": "h2",
+      "text": "Prepare the quotation"
+    },
+    {
+      "type": "list",
+      "label": "Wallplate quotation checklist",
+      "items": [
+        "Plate model, opening and gang count, with the matching device.",
+        "Exterior dimensions and any fit constraints.",
+        "Fixing style, backplate and hardware.",
+        "Color, sheen and approved sample pairing.",
+        "Quantity, destination and delivery date.",
+        "Pack format, labels and authorized artwork.",
+        "Material, thickness and required model documents."
+      ]
+    },
+    {
+      "type": "p",
+      "text": "Split quantities by model and finish. Send any unresolved mounting or device-pairing question with the inquiry."
     }
   ]
 };

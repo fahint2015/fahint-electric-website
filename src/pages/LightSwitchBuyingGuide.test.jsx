@@ -35,7 +35,7 @@ describe('Researched light switch buying guide', () => {
     expect(document.querySelector('meta[name="description"]')).toHaveAttribute('content', post.excerpt);
     const graph = JSON.parse(document.querySelector('script[type="application/ld+json"]').textContent)['@graph'];
     expect(graph.find(item => item['@type'] === 'Article')).toMatchObject({
-      headline: post.title, description: post.excerpt, datePublished: '2026-10-06', dateModified: '2026-10-25',
+      headline: post.title, description: post.excerpt, datePublished: '2026-10-06', dateModified: post.updated,
     });
     for (const link of within(screen.getByRole('navigation', { name: 'In this article' })).getAllByRole('link')) {
       const id = new URL(link.getAttribute('href'), 'https://example.com').hash.slice(1);

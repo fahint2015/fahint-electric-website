@@ -2,10 +2,10 @@
 export const receptacleBuyingGuide = {
   slug: 'standard-receptacle-buying-guide',
   title: 'Standard receptacle buying guide: ratings, TR/WR and wiring',
-  excerpt: 'Compare FAHINT standard receptacle ratings, TR/WR features and terminal types. Check model documents and prepare a quotation with the right wallplate and finish.',
+  excerpt: "Choose FAHINT receptacles by rating, NEMA configuration, TR/WR features and terminal type. Compare model options and the scope of supplied certificates.",
   date: '2026-10-07',
-  updated: '2026-10-07',
-  readMinutes: 7,
+  updated: "2026-10-29",
+  readMinutes: 4,
   category: 'Buying Guide',
   cover: 'assets/images/lines/receptacle-series-desk-power-v1.webp',
   coverAlt: 'A white duplex receptacle beside a desk lamp on a blue wall in an illustrated room.',
@@ -45,134 +45,262 @@ export const receptacleBuyingGuide = {
   ],
   body: [
     {
-      type: 'p',
-      text: 'R15 and R15Q share a front-face image in the FAHINT catalog, but their terminals differ. R15 is listed for side/back wiring; R15Q for side/push-in quick wiring. A purchasing list based on the photograph would miss that difference.'
+      "type": "p",
+      "text": "Choose a receptacle by its electrical rating, plug configuration and required protection features. Then select the terminal type and matching wallplate. Our model designations keep those choices separate."
     },
     {
-      type: 'p',
-      text: 'Keep the complete model number on each order line. Use the guide below to compare the electrical configuration, protection features and terminals, then specify the finish and matching plate. The examples come from our published model records and product catalog.'
-    },
-    { type: 'h2', text: 'Start with the rating and NEMA configuration' },
-    {
-      type: 'p',
-      text: 'A NEMA designation identifies a particular plug and receptacle configuration. Leviton organizes its receptacles by these configurations as well as by current and voltage. Put all three fields in the purchasing brief; a matching color or similar face is not enough to identify a replacement.',
-      source: 1
+      "type": "h2",
+      "text": "Start with the rating and plug configuration"
     },
     {
-      type: 'p',
-      text: 'For example, FAHINT D15 is listed as 15A, 125V AC, NEMA 5-15R. D20 is 20A, 125V AC, NEMA 5-20R. The project electrician should confirm the required configuration against the circuit, equipment and adopted local code. A 20A face is not an automatic upgrade for any existing outlet.'
+      "type": "p",
+      "text": "A NEMA designation identifies the plug and receptacle configuration. Record it alongside current and voltage in the purchasing brief.",
+      "source": 1
     },
     {
-      type: 'p',
-      text: 'The industrial range is listed separately on catalog PDF page 17: CR15 is 15A, 125V/250V; CR20 and CD20 are 20A, 125V/250V. All three use side/back wiring. These published ratings do not establish interchangeable plug configurations. Match the ordered device to its face photograph and approved specification; these models are not part of the 125V comparison below.',
-      links: [
-        { label: 'Review CR15 references', href: '/products/receptacles/cr15' },
-        { label: 'Review CR20 references', href: '/products/receptacles/cr20' },
-        { label: 'Review CD20 specifications', href: '/products/receptacles/cd20' }
-      ]
-    },
-    { type: 'h2', text: 'Keep TR, WR and GFCI requirements separate' },
-    {
-      type: 'p',
-      text: 'TR means tamper-resistant. The device uses internal shutters to restrict access to its contacts by foreign objects. This is a physical feature of the receptacle; it does not describe its current rating. Leviton explains the shutter function in its tamper-resistant reference.',
-      source: 3
+      "type": "p",
+      "text": "D15 is listed as 15A, 125V AC, NEMA 5-15R; D20 is 20A, 125V AC, NEMA 5-20R. The project electrician must match the selection to the circuit and equipment. A higher face rating alone is not an upgrade for an existing installation."
     },
     {
-      type: 'p',
-      text: 'WR means weather-resistant. For an outdoor or damp location, check the cover and enclosure as well as the receptacle. Legrand treats outdoor location and electrical protection as separate selection questions. Have the installer confirm the required assembly, including protection while a plug is connected where applicable.',
-      source: 0
-    },
-    {
-      type: 'p',
-      text: 'TR and WR features do not provide GFCI protection. The standard receptacles in this guide have no built-in GFCI function. Where the project requires ground-fault protection, ask the electrician to confirm how it will be provided. FAHINT GFCI models have their own selection and documentation pages.',
-      links: [
-        { label: 'Compare FAHINT GFCI models', href: '/products/gfci' },
-        { label: 'Read about weather-resistant devices and covers', href: '/blog/nec-406-8-weather-resistant-receptacles' }
-      ]
-    },
-    { type: 'h2', text: 'Compare these FAHINT 125V models' },
-    {
-      type: 'p',
-      text: 'The table shows ten examples, not the entire range. D/DT/DW models have decorator faces; R/RT/RW models have traditional duplex faces. DT and RT add TR; DW and RW have both TR and WR. The commercial range uses C, CT and CW designations. Ratings and terminal types follow catalog PDF pages 15–17.',
-      links: [{ label: 'Browse all standard receptacle models', href: '/products/receptacles' }]
-    },
-    {
-      type: 'table',
-      caption: 'FAHINT 125V receptacle comparison',
-      columns: ['Model', 'Face / protection features', 'Published rating', 'Terminals'],
-      rows: [
-        [{ label: 'D15', href: '/products/receptacles/d15' }, 'Decorator / non-TR, non-WR', '15A, 125V AC', 'Side / back wire'],
-        [{ label: 'D15Q', href: '/products/receptacles/d15q' }, 'Decorator / non-TR, non-WR', '15A, 125V AC', 'Side / push-in quick wire'],
-        [{ label: 'D20', href: '/products/receptacles/d20' }, 'Decorator / non-TR, non-WR', '20A, 125V AC', 'Side / back wire'],
-        [{ label: 'DT15', href: '/products/receptacles/dt15' }, 'Decorator / TR', '15A, 125V AC', 'Side / back wire'],
-        [{ label: 'DW20', href: '/products/receptacles/dw20' }, 'Decorator / TR + WR', '20A, 125V AC', 'Side / back wire'],
-        [{ label: 'R15', href: '/products/receptacles/r15' }, 'Duplex / non-TR, non-WR', '15A, 125V AC', 'Side / back wire'],
-        [{ label: 'R15Q', href: '/products/receptacles/r15q' }, 'Duplex / non-TR, non-WR', '15A, 125V AC', 'Side / push-in quick wire'],
-        [{ label: 'RT20', href: '/products/receptacles/rt20' }, 'Duplex / TR', '20A, 125V AC', 'Side / back wire'],
-        [{ label: 'RW20', href: '/products/receptacles/rw20' }, 'Duplex / TR + WR', '20A, 125V AC', 'Side / back wire'],
-        [{ label: 'CT15', href: '/products/receptacles/rt15-c' }, 'Commercial duplex / TR', '15A, 125V AC', 'Side / back wire']
-      ]
-    },
-    { type: 'h2', text: 'Check the terminal type before comparing prices' },
-    {
-      type: 'p',
-      text: 'Back-wire and push-in quick-wire are different terminal descriptions. In Leviton\'s explanation, a back-wire connection uses a screw-operated clamp, while side wiring uses the side terminal screw. That reference explains the terms; use FAHINT\'s approved instructions to establish the connection details for a FAHINT device.',
-      source: 2
-    },
-    {
-      type: 'p',
-      text: 'The Q versions are listed for side/push-in quick wiring. Their non-Q counterparts list side/back wiring. Catalog PDF page 18 marks the 15A push-in terminal “#14 AWG Only”; that limit is not a side/back-terminal specification. Confirm conductor material, solid or stranded suitability, strip length and terminal torque in the approved instructions for the chosen connection.'
-    },
-    {
-      type: 'p',
-      text: 'Leviton’s 5325 specification lists conductor requirements for its side terminals and Quickwire terminals separately. Use that distinction when requesting FAHINT documents: ask which conductor requirements apply to each terminal, rather than one wire-size range for the whole device. The Leviton limits are not installation specifications for FAHINT.',
-      source: 6
-    },
-    { type: 'h2', text: 'Approve the receptacle and wallplate together' },
-    {
-      type: 'p',
-      text: 'Both traditional and decorator styles can have two receptacle positions. The plate opening differs: a traditional duplex plate has two shaped openings, while a decorator plate has one rectangular opening. Match the device and plate drawings, then check the assembled sample.'
-    },
-    {
-      type: 'p',
-      text: 'Specify color and surface finish separately, and compare the plate with the device under the intended lighting. Keep the approved pairing with the order record. State whether plates should be packed with the devices or supplied separately; a photograph with a plate does not define the pack contents.',
-      links: [{ label: 'Read the wallplate buying guide', href: '/blog/wallplate-buying-guide' }]
-    },
-    { type: 'h2', text: 'Match the document to the complete model number' },
-    {
-      type: 'p',
-      text: 'The supplied December 13, 2021 report E498095-20211123 names 18 receptacle models in its addendum: D15, D15Q, D20, DT15, DT15Q, DT20, DW15, DW15Q, DW20, R15, R15Q, R20, RT15, RT15Q, RT20, RW15, RW15Q and RW20. The US and Canadian model lists are on PDF pages 2 and 4.'
-    },
-    {
-      type: 'p',
-      text: 'The commercial C/CT/CW range, CR15, CR20 and CD20 are not named in that addendum. Request their matching records; a shared E498095 file number does not establish exact-model coverage. A missing PDF in this library does not mean that a model is uncertified. Confirm current listing status and the ordered configuration with the issuing body and our team.'
-    },
-    {
-      type: 'p',
-      text: 'Use the catalog names for commercial orders: C15/C15Q/C20 are standard, CT15/CT15Q/CT20 add TR, and CW15/CW15Q/CW20 add TR and WR. Keep the Q suffix when requesting push-in terminals. Updating a website model name does not extend the scope of an existing certificate.'
-    },
-    {
-      type: 'p',
-      text: 'Open the full certificate from Resources, then follow the selected model page for its available drawings. R15, R15Q and R20 now include the shared receptacle range drawing: 33.2 mm width, 106 mm overall height and 23.8 mm depth. It is a dimensional reference, not proof of TR/WR features or a substitute for the exact model\'s approved installation drawing.',
-      links: [{ label: 'Review receptacle product documents', href: '/resources?family=receptacles' }]
-    },
-    { type: 'h2', text: 'What to send with a quotation request' },
-    {
-      type: 'list',
-      label: 'Receptacle quotation checklist',
-      items: [
-        'Complete catalog model designation, including any Q suffix, with quantity on each order line.',
-        'Required current, voltage and NEMA configuration from the project specification.',
-        'TR and WR requirements, intended location, and the project\'s separate GFCI protection requirement.',
-        'Terminal type and conductor requirements supplied by the installation team.',
-        'Device finish, matching wallplate model and approved sample references.',
-        'Destination market, requested timing, pack contents and authorized branding artwork.',
-        'Current model documents, approved drawings and any designation or rating questions to resolve before sample approval.'
+      "type": "p",
+      "text": "The industrial catalog range lists CR15 at 15A, 125V/250V, and CR20 and CD20 at 20A, 125V/250V. All three use side/back wiring. Review their exact plug configurations separately from the 125V models below.",
+      "links": [
+        {
+          "label": "Review CR15 references",
+          "href": "/products/receptacles/cr15"
+        },
+        {
+          "label": "Review CR20 references",
+          "href": "/products/receptacles/cr20"
+        },
+        {
+          "label": "Review CD20 specifications",
+          "href": "/products/receptacles/cd20"
+        }
       ]
     },
     {
-      type: 'p',
-      text: 'Start an inquiry from a model page to carry its model number into the form. For an unresolved selection, use the product-question link below and include the specification details in your message. Sample arrangements, minimum quantities and lead times are confirmed in the quotation.'
+      "type": "h2",
+      "text": "Compare the required features"
+    },
+    {
+      "type": "p",
+      "text": "TR means tamper-resistant: internal shutters restrict access to the contacts by foreign objects.",
+      "source": 3
+    },
+    {
+      "type": "p",
+      "text": "WR means weather-resistant. The cover and enclosure must also suit the location, including protection while a plug remains inserted where required.",
+      "source": 0
+    },
+    {
+      "type": "p",
+      "text": "TR and WR do not provide GFCI protection. The standard receptacles here have no integral GFCI function; the project team must specify how any required ground-fault protection will be provided.",
+      "links": [
+        {
+          "label": "Compare FAHINT GFCI models",
+          "href": "/products/gfci"
+        },
+        {
+          "label": "Read about weather-resistant devices and covers",
+          "href": "/blog/nec-406-8-weather-resistant-receptacles"
+        }
+      ]
+    },
+    {
+      "type": "p",
+      "text": "D/DT/DW models have decorator faces; R/RT/RW have traditional duplex faces. DT and RT add TR; DW and RW combine TR with WR. The table shows selected catalog models.",
+      "links": [
+        {
+          "label": "Browse all standard receptacle models",
+          "href": "/products/receptacles"
+        }
+      ]
+    },
+    {
+      "type": "table",
+      "caption": "FAHINT 125V receptacle comparison",
+      "columns": [
+        "Model",
+        "Face / protection features",
+        "Published rating",
+        "Terminals"
+      ],
+      "rows": [
+        [
+          {
+            "label": "D15",
+            "href": "/products/receptacles/d15"
+          },
+          "Decorator / non-TR, non-WR",
+          "15A, 125V AC",
+          "Side / back wire"
+        ],
+        [
+          {
+            "label": "D15Q",
+            "href": "/products/receptacles/d15q"
+          },
+          "Decorator / non-TR, non-WR",
+          "15A, 125V AC",
+          "Side / push-in quick wire"
+        ],
+        [
+          {
+            "label": "D20",
+            "href": "/products/receptacles/d20"
+          },
+          "Decorator / non-TR, non-WR",
+          "20A, 125V AC",
+          "Side / back wire"
+        ],
+        [
+          {
+            "label": "DT15",
+            "href": "/products/receptacles/dt15"
+          },
+          "Decorator / TR",
+          "15A, 125V AC",
+          "Side / back wire"
+        ],
+        [
+          {
+            "label": "DW20",
+            "href": "/products/receptacles/dw20"
+          },
+          "Decorator / TR + WR",
+          "20A, 125V AC",
+          "Side / back wire"
+        ],
+        [
+          {
+            "label": "R15",
+            "href": "/products/receptacles/r15"
+          },
+          "Duplex / non-TR, non-WR",
+          "15A, 125V AC",
+          "Side / back wire"
+        ],
+        [
+          {
+            "label": "R15Q",
+            "href": "/products/receptacles/r15q"
+          },
+          "Duplex / non-TR, non-WR",
+          "15A, 125V AC",
+          "Side / push-in quick wire"
+        ],
+        [
+          {
+            "label": "RT20",
+            "href": "/products/receptacles/rt20"
+          },
+          "Duplex / TR",
+          "20A, 125V AC",
+          "Side / back wire"
+        ],
+        [
+          {
+            "label": "RW20",
+            "href": "/products/receptacles/rw20"
+          },
+          "Duplex / TR + WR",
+          "20A, 125V AC",
+          "Side / back wire"
+        ],
+        [
+          {
+            "label": "CT15",
+            "href": "/products/receptacles/rt15-c"
+          },
+          "Commercial duplex / TR",
+          "15A, 125V AC",
+          "Side / back wire"
+        ]
+      ]
+    },
+    {
+      "type": "h2",
+      "text": "Read the terminal specification"
+    },
+    {
+      "type": "p",
+      "text": "In Leviton’s explanation, screw-clamp back wiring uses a screw-operated clamp; side wiring uses a side screw terminal. These terms describe connection methods, with permitted conductors set by each model’s instructions.",
+      "source": 2
+    },
+    {
+      "type": "p",
+      "text": "For R15 and R15Q, the Q identifies side/push-in quick wiring; R15 uses side/back wiring. Catalog page 18 marks the 15A push-in terminal “#14 AWG Only”. Check conductor material, solid or stranded suitability, strip length and torque for the selected terminal."
+    },
+    {
+      "type": "p",
+      "text": "Leviton’s 5325 lists its side terminals and Quickwire terminals separately. Its values are not installation specifications for FAHINT; request the limits for the exact FAHINT terminal.",
+      "source": 6
+    },
+    {
+      "type": "h2",
+      "text": "Pair the device and wallplate"
+    },
+    {
+      "type": "p",
+      "text": "A traditional duplex plate has two shaped openings; a decorator plate has one rectangular opening. Check the device and plate together, including the outer dimensions and mounting fit."
+    },
+    {
+      "type": "p",
+      "text": "Compare color and sheen under the project lighting. Record the plate model and whether it is packed with the receptacle or supplied separately.",
+      "links": [
+        {
+          "label": "Read the wallplate buying guide",
+          "href": "/blog/wallplate-buying-guide"
+        }
+      ]
+    },
+    {
+      "type": "h2",
+      "text": "Check the certificate’s model list"
+    },
+    {
+      "type": "p",
+      "text": "The supplied December 13, 2021 report E498095-20211123 names 18 receptacle models: D15, D15Q, D20, DT15, DT15Q, DT20, DW15, DW15Q, DW20, R15, R15Q, R20, RT15, RT15Q, RT20, RW15, RW15Q and RW20. Its US and Canadian lists are on PDF pages 2 and 4."
+    },
+    {
+      "type": "p",
+      "text": "C/CT/CW models, CR15, CR20 and CD20 are outside that addendum. Request their corresponding records and confirm current listing status. A missing PDF in this library does not mean a model is uncertified."
+    },
+    {
+      "type": "p",
+      "text": "Use C15/C15Q/C20 for the commercial standard range, CT15/CT15Q/CT20 for TR, and CW15/CW15Q/CW20 for TR/WR. Keep the complete designation, including Q where applicable, when matching the order to its documents."
+    },
+    {
+      "type": "p",
+      "text": "R15, R15Q and R20 link to a shared receptacle range drawing showing 33.2 mm width, 106 mm overall height and 23.8 mm depth. Use it as a dimensional reference; the exact model’s approved drawing remains necessary for fit and feature confirmation.",
+      "links": [
+        {
+          "label": "Review receptacle product documents",
+          "href": "/resources?family=receptacles"
+        }
+      ]
+    },
+    {
+      "type": "h2",
+      "text": "Send one line per configuration"
+    },
+    {
+      "type": "list",
+      "label": "Receptacle quotation checklist",
+      "items": [
+        "Full model designation, quantity and any Q suffix.",
+        "Current, voltage and NEMA configuration.",
+        "TR, WR and the separate GFCI protection requirement.",
+        "Terminal type and conductor requirements from the project team.",
+        "Finish, wallplate model and approved sample reference.",
+        "Destination, delivery date, pack contents and authorized artwork.",
+        "Current model documents and approved drawings."
+      ]
+    },
+    {
+      "type": "p",
+      "text": "A model-page inquiry carries its model number into the form. Include any unresolved rating or document question so it can be addressed with the quotation."
     }
   ]
 };

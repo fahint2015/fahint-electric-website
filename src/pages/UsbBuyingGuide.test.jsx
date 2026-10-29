@@ -23,8 +23,8 @@ describe('Researched USB buying guide', () => {
     expect(within(table).getAllByRole('columnheader')).toHaveLength(4);
     expect(within(table).getAllByRole('rowheader')).toHaveLength(7);
     expect(screen.getByRole('region', { name: 'FAHINT USB outlet shortlist' })).toHaveAttribute('tabindex', '0');
-    expect(screen.getByText(/Do not add the two port ratings together/)).toBeVisible();
-    expect(screen.getByText(/four-port USB charger without AC receptacle openings/)).toBeVisible();
+    expect(screen.getByText(/combined limit prevents both ports supplying their individual maximums together/)).toBeVisible();
+    expect(screen.getByText(/USB-only charger with four USB-A ports.*no AC receptacle openings/)).toBeVisible();
     expect(screen.getByRole('list', { name: 'USB outlet quotation checklist' })).toBeVisible();
     expect(screen.getByRole('link', { name: 'Browse USB outlet models' })).toHaveAttribute('href', '/products/usb-outlets/');
     expect(screen.getByRole('link', { name: 'Compare A + C configurations' })).toHaveAttribute('href', '/products/usb-outlets/?ports=a-c');

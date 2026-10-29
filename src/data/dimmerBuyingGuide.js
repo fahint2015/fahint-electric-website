@@ -2,10 +2,10 @@
 export const dimmerBuyingGuide = {
   "slug": "dimmer-buying-guide-led-0-10v",
   "title": "Dimmer Buying Guide: LED Loads and 0–10V Compatibility",
-  "excerpt": "Compare FAHINT DM2010 and DM2010S dimmers, including LED load limits, 0–10V control and the lamp or driver details needed for a quotation.",
+  "excerpt": "Compare DM2010 and the 0–10V DM2010S by supply, load type and driver requirements. Review the limits and sample checks for the intended lighting.",
   "date": "2026-10-04",
-  "updated": "2026-10-07",
-  "readMinutes": 6,
+  "updated": "2026-10-29",
+  "readMinutes": 3,
   "category": "Buying Guide",
   "cover": "assets/images/home-installations/dm2010-living-installed-v1.webp",
   "coverAlt": "A white slide dimmer beside a living-room doorway in an illustrated interior.",
@@ -50,55 +50,11 @@ export const dimmerBuyingGuide = {
   "body": [
     {
       "type": "p",
-      "text": "Ask for the lamp or driver data sheet before choosing a dimmer. The control needs to match its dimming requirements as well as the circuit’s supply voltage and load. The face style and maximum wattage alone are not enough to approve a pairing."
-    },
-    {
-      "type": "p",
-      "text": "For a distributor range, private-label order or project, keep the lighting details with the dimmer specification. Agree on sample checks for the intended circuit before approving the model."
+      "text": "Use the lamp or driver specification to choose the dimmer. DM2010 is listed for dimmable LED/CFL and incandescent loads. DM2010S provides a 0–10V DC control signal for a compatible driver."
     },
     {
       "type": "h2",
-      "text": "Check the lamp or driver first"
-    },
-    {
-      "type": "p",
-      "text": "You need the manufacturer, full model number and data sheet for the lamp or fixture. If it has a separate driver, include that model too. Record how many lamps or drivers will connect to each dimmer; the project’s total order quantity cannot answer that question."
-    },
-    {
-      "type": "p",
-      "text": "Look for a dimmable marking and the manufacturer’s control requirements. Leviton’s buying guide treats the lamp and dimmer as a pair. A lamp marked dimmable still needs a suitable control.",
-      "source": 0
-    },
-    {
-      "type": "p",
-      "text": "The control method matters here. Phase control and 0–10V are different: a driver designed for one cannot be assumed to accept the other. Leviton’s 0–10V guidance calls for a driver or ballast specified for that signal.",
-      "source": 1
-    },
-    {
-      "type": "p",
-      "text": "FAHINT DM2010S has a 0–10V DC analog control output and requires a compatible driver. DM2010 is described as a digital slide dimmer, but its model references do not specify a forward-phase or reverse-phase type. If the light source requires a particular phase-control method, ask for that detail before selecting DM2010. The word “digital” does not answer it."
-    },
-    {
-      "type": "h2",
-      "text": "DM2010 or DM2010S: compare the ratings"
-    },
-    {
-      "type": "p",
-      "text": "For a wattage calculation, use the lamp’s actual input power. The “equivalent wattage” on its packaging compares brightness with an incandescent lamp; it is not the electrical load. Legrand’s dimming guide explains this distinction.",
-      "source": 3
-    },
-    {
-      "type": "p",
-      "text": "DM2010 has a published range of 5–200W for LED/CFL and 20–600W for incandescent lamps. The 600W incandescent limit is not an LED rating. Keep the load type beside the wattage on the quotation and sample approval."
-    },
-    {
-      "type": "p",
-      "text": "The lamp model and its electrical behavior also affect minimum and maximum loading, as Lutron explains in Application Note 487. Staying within a wattage limit is only one check. The approved number of lamps cannot be calculated from wattage alone.",
-      "source": 2
-    },
-    {
-      "type": "p",
-      "text": "These are FAHINT’s published model ratings. Open each model for its full specifications and original drawings. The industry references linked in this guide explain selection principles; they do not verify FAHINT compatibility, certification or test results."
+      "text": "Compare DM2010 and DM2010S"
     },
     {
       "type": "table",
@@ -132,43 +88,65 @@ export const dimmerBuyingGuide = {
     },
     {
       "type": "p",
-      "text": "DM2010S is specified in VA, not as a 600W LED dimmer. Check its current limit at the selected supply voltage as well as the load rating. The model references do not publish the control-circuit current capacity or maximum driver count. Request those figures before specifying several drivers on one control."
+      "text": "DM2010 has separate load ranges: 5–200W for LED/CFL and 20–600W for incandescent lamps. The 600W incandescent limit is not an LED rating."
     },
     {
       "type": "p",
-      "text": "Eaton’s DF10P data sheet separates the switched lamp load from the 0–10V control-circuit current. They answer different questions: how much lighting load the switch can handle, and how much demand the connected drivers place on its control circuit. Request both limits for DM2010S; Eaton’s values apply to Eaton’s model, not to FAHINT.",
+      "text": "DM2010S is specified in VA, not as a 600W LED dimmer. It also has different current limits at 120V and 277V. Keep the full model designation, including S, on the inquiry."
+    },
+    {
+      "type": "h2",
+      "text": "Read the lamp and driver requirements"
+    },
+    {
+      "type": "p",
+      "text": "Record the lamp or fixture manufacturer, model and dimmable designation. Include a separate driver model where fitted. Leviton’s buying guide treats the lamp and dimmer as a pairing.",
+      "source": 0
+    },
+    {
+      "type": "p",
+      "text": "A 0–10V driver needs a control designed for that signal. Match the specified control method before comparing wattage.",
+      "source": 1
+    },
+    {
+      "type": "p",
+      "text": "DM2010’s model references do not specify a forward-phase or reverse-phase type. If the light source requires one of those methods, obtain that detail before selecting the dimmer."
+    },
+    {
+      "type": "p",
+      "text": "Calculate the load from actual input watts. “Equivalent wattage” describes brightness relative to incandescent lighting, so it is unsuitable for that calculation.",
+      "source": 3
+    },
+    {
+      "type": "p",
+      "text": "Lamp behavior affects loading as well as total watts. Record the quantity per dimmer and use the exact model’s limits when approving a lamp combination.",
+      "source": 2
+    },
+    {
+      "type": "h2",
+      "text": "Check driver count and the installation arrangement"
+    },
+    {
+      "type": "p",
+      "text": "DM2010S references do not publish the control-circuit current capacity or maximum driver count. Request both for a multi-driver installation."
+    },
+    {
+      "type": "p",
+      "text": "Eaton’s DF10P sheet separates the switched lighting load from the 0–10V control-circuit current. These describe different limits. Use the same distinction when requesting DM2010S data; the Eaton values apply to its own model.",
       "source": 6
     },
     {
       "type": "p",
-      "text": "DM2010 and DM2010S are not interchangeable. Include the full model number, with the S suffix where applicable, on your inquiry and sample approval.",
-      "links": [
-        {
-          "label": "Browse FAHINT dimmer models",
-          "href": "/products/dimmers"
-        }
-      ]
-    },
-    {
-      "type": "h2",
-      "text": "Check the circuit and fit"
+      "text": "Both FAHINT models list single-pole / 3-way configurations. Have the electrician confirm the control locations, permitted companion arrangement, conductors and wall-box fit from the approved instructions."
     },
     {
       "type": "p",
-      "text": "Both models list single-pole / 3-way configurations. Specify how many locations need to control the lights and check the arrangement against the approved instructions. Do not assume the 3-way label allows two dimmers on one circuit or any combination of controls."
-    },
-    {
-      "type": "p",
-      "text": "Have a qualified professional review the supply voltage, conductor requirements and wall-box space. If several devices will sit side by side, ask whether the arrangement requires a lower load limit, known as derating. Use the exact model’s drawing for dimensions and wallplate fit; a similar device is not a reliable guide to neutral requirements or installation clearances."
-    },
-    {
-      "type": "p",
-      "text": "Lutron’s DVCLN-153P instructions organize multi-gang limits by load type and gang count. Those are not ratings for DM2010 or DM2010S. For a FAHINT order, send the planned device arrangement and lamp load together, then request the applicable load limit before approval. Do not apply another manufacturer’s derating table.",
+      "text": "Lutron’s DVCLN-153P instructions vary limits by load type and gang count. They are not ratings for DM2010 or DM2010S. For a FAHINT installation, request the applicable limit for the planned side-by-side device arrangement.",
       "source": 7
     },
     {
       "type": "p",
-      "text": "Agree on the finish, wallplate and pack contents, then request the instructions and certification documents for that configuration and destination market. A certification marking or file number does not show that a particular lamp has passed compatibility testing.",
+      "text": "Include the matching wallplate, finish and pack contents. Check the ordered model’s certification documents separately from lamp compatibility.",
       "links": [
         {
           "label": "Review dimmer product documents",
@@ -178,45 +156,47 @@ export const dimmerBuyingGuide = {
     },
     {
       "type": "h2",
-      "text": "What to check with a sample"
+      "text": "Agree on the sample checks"
     },
     {
       "type": "p",
-      "text": "Use the intended lamp or driver and the planned quantity per dimmer for the sample review. Agree how startup, brightness changes, visible flicker and audible noise will be assessed. Include the lowest usable light level and switching from the proposed control locations. Record the exact combination and the acceptance criteria before approving the order."
+      "text": "Use the intended lamp or driver and planned quantity. Assess startup, brightness changes, flicker, audible noise and switching from the required locations. Include the lowest usable light level for the room."
     },
     {
       "type": "p",
-      "text": "Legrand notes that dimming range varies with the light source. A maximum load rating therefore cannot tell you how the combination behaves at low brightness. Ask for that behavior to be demonstrated: the FAHINT references do not establish a minimum dimming percentage or a universal flicker-free result.",
+      "text": "Dimming range depends on the light source. Ask for stable operation at the required low level; the FAHINT references do not establish a universal minimum dimming percentage.",
       "source": 3
     },
     {
       "type": "p",
-      "text": "These are checks to agree for your sample, not a report of tests already completed by FAHINT. Electrical setup and site diagnosis require qualified professionals and the device’s approved installation instructions."
+      "text": "These are proposed sample checks, not a report of tests already completed by FAHINT. Record the accepted combination and have electrical setup performed by qualified personnel."
     },
     {
       "type": "h2",
-      "text": "Send the lighting details with your inquiry"
-    },
-    {
-      "type": "p",
-      "text": "A model number and order quantity are only part of a dimmer inquiry. Send the lighting requirements too, especially any compatibility questions that still need an answer:"
+      "text": "Send the lighting specification"
     },
     {
       "type": "list",
       "label": "Dimmer quotation checklist",
       "items": [
-        "Full dimmer model numbers and quantities, with DM2010 and DM2010S listed separately.",
-        "Destination market, supply voltage and frequency, and the required control method.",
-        "Lamp or fixture manufacturer, full model number and data sheets, plus the driver model if separate.",
-        "Load type, actual input rating and the number of lamps or drivers per dimmer.",
-        "Control locations and any installation or multi-gang constraints identified by your qualified professional.",
-        "Finish, wallplate style, pack contents, packaging and authorized brand markings.",
-        "Sample checks, acceptance criteria, required model documents and requested delivery date."
+        "Full dimmer model and quantity.",
+        "Destination, supply voltage, frequency and control method.",
+        "Lamp, fixture and driver models with data sheets.",
+        "Load type, actual input power and quantity per dimmer.",
+        "Control locations and multi-gang or mounting constraints.",
+        "Finish, wallplate, pack contents and authorized artwork.",
+        "Sample criteria, required documents and delivery date."
       ]
     },
     {
       "type": "p",
-      "text": "Add a model to your inquiry list from its product page. If a specification is still unclear, use “Ask a product question” below. We confirm samples, minimum order quantities, customization and lead times in the quotation; the approved sample and agreed model documents remain the basis for the order."
+      "text": "Send unresolved compatibility questions with the inquiry so they can be addressed before sample approval.",
+      "links": [
+        {
+          "label": "Browse FAHINT dimmer models",
+          "href": "/products/dimmers"
+        }
+      ]
     }
   ]
 };

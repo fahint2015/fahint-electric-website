@@ -31,7 +31,7 @@ describe('Researched standard receptacle buying guide', () => {
     expect(document.title).toBe(post.title + ' | FAHINT');
     expect(document.querySelector('meta[name="description"]')).toHaveAttribute('content', post.excerpt);
     const graph = JSON.parse(document.querySelector('script[type="application/ld+json"]').textContent)['@graph'];
-    expect(graph.find(item => item['@type'] === 'Article')).toMatchObject({ headline: post.title, datePublished: '2026-10-07', dateModified: '2026-10-25' });
+    expect(graph.find(item => item['@type'] === 'Article')).toMatchObject({ headline: post.title, datePublished: '2026-10-07', dateModified: post.updated });
     for (const link of within(screen.getByRole('navigation', { name: 'In this article' })).getAllByRole('link')) {
       expect(document.getElementById(new URL(link.getAttribute('href'), 'https://example.com').hash.slice(1))).toHaveTextContent(link.textContent);
     }

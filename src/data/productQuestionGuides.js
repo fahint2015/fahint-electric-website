@@ -3,9 +3,10 @@ export const productQuestionGuides = [
   {
     slug: 'what-is-blank-face-gfci',
     title: 'What is a blank-face GFCI?',
-    excerpt: 'A blank-face GFCI has test and reset buttons but no plug sockets. See how it differs from a receptacle and what to check when specifying GL20.',
+    excerpt: "A blank-face GFCI provides protection with TEST and RESET controls but no plug sockets. Compare this format with a receptacle and review FAHINT GL20.",
     date: '2026-10-22',
-    readMinutes: 3,
+    updated: "2026-10-29",
+    readMinutes: 2,
     category: 'Technical Guide',
     cover: 'assets/images/products/gl20-feature-application-v1.jpg',
     coverAlt: 'Blank-face GFCI with test and reset buttons on a wall beside an equipment enclosure.',
@@ -17,35 +18,95 @@ export const productQuestionGuides = [
       { label: 'FAHINT original certification documents', href: '/resources#certifications' }
     ],
     body: [
-      { type: 'p', text: 'A blank-face GFCI provides ground-fault protection without a place to insert a plug. Its front has TEST and RESET buttons. You may also see it called a faceless or dead-front GFCI. The protected equipment is connected elsewhere in the circuit, as specified in the device instructions.', source: 0 },
-      { type: 'p', text: 'That explains the unusual appearance of FAHINT GL20. It belongs in a specification that calls for a separate protective device. If the drawing calls for a plug-in outlet at that location, a blank-face model will leave that requirement unmet.' },
-      { type: 'h2', text: 'Why separate protection from the plug-in point?' },
-      { type: 'p', text: 'A project may need the protection and its test/reset controls in one place, with the equipment or outlet it protects elsewhere. Leviton describes downstream protection as a use for this device format. “Downstream” means electrically connected through the protective device; it does not mean every outlet farther along the wall.', source: 0 },
-      { type: 'p', text: 'For a buyer, the useful document is a marked-up device schedule from the project electrician. It should identify which load the GFCI protects and where someone will reach the controls. A room name alone, such as “utility room,” leaves both questions open. Have the project team approve the arrangement and access before placing the order.' },
-      { type: 'h2', text: 'A blank face, a blank wallplate and a receptacle are different items' },
-      { type: 'table', caption: 'Three items that can appear on a wiring-device schedule', columns: ['Item', 'What is on the front', 'What to specify'], rows: [
-        ['Blank-face GFCI', 'TEST / RESET controls, no plug sockets', 'The protective device and intended load'],
-        ['GFCI receptacle', 'Plug sockets and TEST / RESET controls', 'The receptacle rating and required protection features'],
-        ['Blank wallplate', 'A plain cover', 'The plate dimensions and mounting arrangement; it provides no GFCI function']
-      ] },
-      { type: 'p', text: 'Keep those descriptions separate in a bill of materials. “Blank GFCI plate” is ambiguous: the supplier could read it as a cover, an accessory or a complete device. Use the model number and state whether the wallplate is included in the required pack.' },
-      { type: 'h2', text: 'What the GL20 record tells you' },
-      { type: 'p', text: 'GL20 is listed in FAHINT’s product record as a 20A, 125V blank-face self-test GFCI with side and back wiring. The record identifies indoor use and does not list weather resistance. Its current rating and appearance do not establish suitability for every appliance or outdoor application.', source: 1 },
-      { type: 'p', text: 'GL20’s exact-model certification documentation remains under review in our library. Request that record for your project; a certificate covering a different GFCI model is not evidence that GL20 is included. The model page also needs to be read alongside the approved installation instructions, particularly when the drawing calls for a specific load arrangement.' },
-      { type: 'h2', text: 'What to put on the order line' },
-      { type: 'p', text: 'Start with “GL20, 20A, 125V, blank-face GFCI,” then add the finish, wallplate configuration and quantity. Attach the project’s intended load and installation location for review. If a sample is required, ask for the same full model and pack configuration that will be supplied in production.' },
-      { type: 'p', text: 'For a specification that needs plug sockets at the device, compare the receptacle models in the same family. The broader sourcing guide explains how to review their individual ratings and documentation.', links: [
-        { label: 'View GL20', href: '/products/gfci/gl20' },
-        { label: 'GFCI sourcing guide', href: '/blog/how-to-source-ul-listed-gfci-from-china' }
-      ] }
+      {
+        "type": "p",
+        "text": "A blank-face GFCI has TEST and RESET buttons without plug sockets. It provides ground-fault protection for a connected load. You may also see this format called faceless or dead-front.",
+        "source": 0
+      },
+      {
+        "type": "p",
+        "text": "Our GL20 is a 20A, 125V self-test model with side/back wiring for indoor use. Choose this format when the project needs a separate protective device and accessible test/reset controls.",
+        "source": 1
+      },
+      {
+        "type": "h2",
+        "text": "Blank-face device, receptacle or cover?"
+      },
+      {
+        "type": "table",
+        "caption": "Three items that can appear on a wiring-device schedule",
+        "columns": [
+          "Item",
+          "What is on the front",
+          "What to specify"
+        ],
+        "rows": [
+          [
+            "Blank-face GFCI",
+            "TEST / RESET controls, no plug sockets",
+            "The protective device and intended load"
+          ],
+          [
+            "GFCI receptacle",
+            "Plug sockets and TEST / RESET controls",
+            "The receptacle rating and required protection features"
+          ],
+          [
+            "Blank wallplate",
+            "A plain cover",
+            "The plate dimensions and mounting arrangement; it provides no GFCI function"
+          ]
+        ]
+      },
+      {
+        "type": "p",
+        "text": "Write the device name and model on the bill of materials. “Blank GFCI plate” can be read as either a protective device or a plain cover. If a plug-in outlet is needed at that position, specify a GFCI receptacle."
+      },
+      {
+        "type": "h2",
+        "text": "Specify the GL20 and its protected load"
+      },
+      {
+        "type": "p",
+        "text": "The project drawing should identify the protected load and the position of the TEST/RESET controls. Downstream protection follows the electrical connections through the GFCI; proximity along a wall does not establish protection.",
+        "source": 0
+      },
+      {
+        "type": "p",
+        "text": "For GL20, include the intended equipment and location in the review. Its indoor rating has no weather-resistant designation. The installer needs the exact model instructions to approve the load arrangement and access to the controls."
+      },
+      {
+        "type": "p",
+        "text": "A useful order line starts with “GL20, 20A, 125V, blank-face self-test GFCI”, followed by finish, quantity and the required wallplate or pack. Match the sample to that configuration."
+      },
+      {
+        "type": "p",
+        "text": "GL20 certification documentation remains under review in our library. Request its exact-model record before approval; the supplied certificate covering other GFCI models does not establish GL20 coverage.",
+        "source": 2
+      },
+      {
+        "type": "p",
+        "text": "Compare the receptacle models if you need plug sockets at the device. The sourcing guide explains the model and document checks for a larger GFCI order.",
+        "links": [
+          {
+            "label": "View GL20",
+            "href": "/products/gfci/gl20"
+          },
+          {
+            "label": "GFCI sourcing guide",
+            "href": "/blog/how-to-source-ul-listed-gfci-from-china"
+          }
+        ]
+      }
     ]
   },
   {
     slug: 'usb-c-wall-outlet-laptop-charging',
     title: 'Can a USB-C wall outlet charge a laptop?',
-    excerpt: 'Check the laptop’s power requirement, the outlet’s USB-C profiles and the cable. A 65W marking alone does not tell you what happens with two devices connected.',
+    excerpt: "Match the laptop’s USB-C charging profile and cable to the outlet. Review FTR15QC-DC65W and the power-sharing question when a second device connects.",
     date: '2026-10-22',
-    readMinutes: 4,
+    updated: "2026-10-29",
+    readMinutes: 2,
     category: 'Buying Guide',
     cover: 'assets/images/home-installations/ftr15qc-dc65w-desk-installed-v1.webp',
     coverAlt: 'A dual USB-C wall outlet charging a phone on a desk in an illustrated interior.',
@@ -59,66 +120,144 @@ export const productQuestionGuides = [
       { label: 'FAHINT USB catalog sheet, original page 11', href: '/assets/documents/catalog-sheets/pd-usb-outlets.pdf' }
     ],
     body: [
-      { type: 'p', text: 'Yes, a USB-C wall outlet can charge a laptop when the laptop accepts USB-C charging and the outlet and cable meet its requirements. Some manufacturers, including Legrand, offer wall outlets for this use. That is a useful starting point, but it is not a compatibility result for a different outlet or computer.', source: 0 },
-      { type: 'p', text: 'For an office desk, write down the laptop model before choosing the outlet. “USB-C laptop” is too broad to be a purchasing specification. The same question comes up in guest rooms, where the property may want a convenient charging point without promising that it replaces every guest’s power adapter.' },
-      { type: 'h2', text: 'Start with the laptop’s recommended charging power' },
-      { type: 'p', text: 'Check the computer manufacturer’s charging guidance and the rating of the recommended adapter. Apple, for example, specifies USB Power Delivery for USB-C charging and recommends a source that meets at least the minimum wattage for the Mac model. Its recommendations differ by computer.', source: 1 },
-      { type: 'p', text: 'A connected computer can show a charging symbol and still charge more slowly than expected. Apple documents a slow-charger warning when the available power is too low for the model. Use the actual laptop and its intended workload when assessing a sample, rather than recording only whether the battery icon changes.', source: 2 },
-      { type: 'h2', text: 'Read the voltage and current profiles behind “65W”' },
-      { type: 'p', text: 'The published FTR15QC-DC65W record lists the following USB-C output profiles. The largest is 20V at 3.25A, which gives 65W. These are available output profiles, not a statement that every connected device draws 65W.', source: 3 },
-      { type: 'table', caption: 'FTR15QC-DC65W published USB-C profiles', columns: ['Voltage', 'Current', 'Calculated power'], rows: [
-        ['5V', '3A', '15W'], ['9V', '3A', '27W'], ['12V', '3A', '36W'], ['15V', '3A', '45W'], ['20V', '3.25A', '65W']
-      ] },
-      { type: 'p', text: 'Compare that list with the computer’s accepted charging input and use a cable rated for the required power. The outlet’s 15A, 125V receptacle rating is a separate AC specification. It does not describe the power available from its USB ports.' },
-      { type: 'h2', text: 'What changes when someone plugs in a phone?' },
-      { type: 'p', text: 'FTR15QC-DC65W has two USB-C ports. Its listed figures are single-port maximums; they do not establish a combined 130W output. The current catalog does not give a complete simultaneous-use power allocation table. Ask for that table before approving laptop-and-phone charging as a project requirement.' },
-      { type: 'p', text: 'Make the sample check match the desk. First record the laptop charging on its own. Then connect the phone to the second port and record the laptop’s reported charging status and any interruption. Keep the cable model, computer model and battery state with the result so the supplier can reproduce the conditions. This is a proposed acceptance check, not a test result for the FAHINT model.' },
-      { type: 'h2', text: 'Specify a useful charging point without overpromising' },
-      { type: 'p', text: 'For a managed office, you can name the exact computers the outlet must support. For a hotel, decide whether the brief is phone charging, occasional laptop charging or a verified replacement for a particular adapter. Those are different acceptance requirements, even if the front of the outlet looks the same.' },
-      { type: 'p', text: 'A useful inquiry would be: “Please review FTR15QC-DC65W for this laptop model and cable. We need the available power with the laptop alone and with a phone on the second port.” Attach the laptop’s charging specification. This gives us something concrete to check before the sample order.', links: [
-        { label: 'View FTR15QC-DC65W', href: '/products/usb-outlets/ftr15qc-dc65w' },
-        { label: 'Compare USB outlet configurations', href: '/blog/usb-wall-outlet-buying-guide' }
-      ] }
+      {
+        "type": "p",
+        "text": "Yes, if the laptop accepts USB-C charging and the outlet and cable supply a compatible power profile. Start with the laptop model and its recommended charger. These determine which outlet to shortlist.",
+        "source": 0
+      },
+      {
+        "type": "h2",
+        "text": "Match the laptop to a charging profile"
+      },
+      {
+        "type": "p",
+        "text": "Apple recommends a USB Power Delivery source and cable that meet at least the minimum wattage for the Mac model. Other laptops have their own requirements, so use the computer manufacturer’s specification.",
+        "source": 1
+      },
+      {
+        "type": "p",
+        "text": "FTR15QC-DC65W offers the profiles below. Its highest published single-port output is 20V at 3.25A, or 65W. Compare the voltage and current with the laptop’s accepted input.",
+        "source": 3
+      },
+      {
+        "type": "table",
+        "caption": "FTR15QC-DC65W published USB-C profiles",
+        "columns": [
+          "Voltage",
+          "Current",
+          "Calculated power"
+        ],
+        "rows": [
+          [
+            "5V",
+            "3A",
+            "15W"
+          ],
+          [
+            "9V",
+            "3A",
+            "27W"
+          ],
+          [
+            "12V",
+            "3A",
+            "36W"
+          ],
+          [
+            "15V",
+            "3A",
+            "45W"
+          ],
+          [
+            "20V",
+            "3.25A",
+            "65W"
+          ]
+        ]
+      },
+      {
+        "type": "p",
+        "text": "Use a cable rated for the required power. The outlet’s 15A, 125V rating describes its AC receptacle; USB charging power is specified separately."
+      },
+      {
+        "type": "h2",
+        "text": "Allow for the second device"
+      },
+      {
+        "type": "p",
+        "text": "FTR15QC-DC65W has two USB-C ports. The catalog gives single-port maximums but no complete simultaneous-port allocation table. For a laptop and phone used together, request the combined-use figures before approving the outlet."
+      },
+      {
+        "type": "p",
+        "text": "A charging icon is only part of the check. Apple notes that insufficient available power can produce a slow-charger warning. Assess the laptop under its intended workload, then repeat with the second port occupied.",
+        "source": 2
+      },
+      {
+        "type": "p",
+        "text": "Keep the laptop, cable, phone and battery state with the sample results so the same setup can be checked again."
+      },
+      {
+        "type": "p",
+        "text": "For an office, name the computers the outlet must support. For a guest room, state whether the aim is phone charging or laptop charging too. That distinction belongs in the product brief."
+      },
+      {
+        "type": "p",
+        "text": "For example: “FTR15QC-DC65W for [laptop model] with [cable]. Please confirm available power with the laptop alone and with a phone on the second port.” Attach the laptop charging specification.",
+        "links": [
+          {
+            "label": "View FTR15QC-DC65W",
+            "href": "/products/usb-outlets/ftr15qc-dc65w"
+          },
+          {
+            "label": "Compare USB outlet configurations",
+            "href": "/blog/usb-wall-outlet-buying-guide"
+          }
+        ]
+      }
     ]
   },
   {
     slug: 'back-wire-vs-push-in-outlets',
-    title: 'Back wire vs push-in outlets: what changes?',
-    excerpt: 'A hole in the back of a receptacle does not identify its terminal mechanism. Compare screw-clamp back wiring, push-in wiring and FAHINT R15 / R15Q.',
+    title: 'Back wire vs push-in outlets: R15 or R15Q?',
+    excerpt: 'R15 uses side/back wiring; R15Q uses side/push-in quick wiring. Compare these 15A duplex outlets and the published #14 AWG push-in limit.',
     date: '2026-10-22',
-    readMinutes: 3,
+    updated: '2026-10-29',
+    readMinutes: 2,
     category: 'Technical Guide',
-    cover: 'assets/images/editorial-home/product-receptacle-optimized.webp',
-    coverAlt: 'A receptacle between lighting controls in a dark wallplate, shown in an interior illustration.',
-    coverCaption: 'Illustrated receptacle setting. A front view does not identify the terminals behind the device.',
-    coverSource: 'Existing FAHINT illustration: editorial-home/product-receptacle-optimized.webp',
+    cover: 'assets/images/catalog/models/f7545e332ba20ec4.webp',
+    coverAlt: 'White standard duplex receptacle with two plug sockets, mounting strap and visible side screws.',
+    coverCaption: 'R15 / R15Q standard duplex design. The model designation identifies the wiring version.',
+    coverSource: 'Existing FAHINT standard duplex product image: catalog/models/f7545e332ba20ec4.webp',
+    coverWidth: 800,
+    coverHeight: 800,
+    coverFit: 'contain',
     sources: [
+      { label: 'FAHINT catalog: R15 and R15Q, page 15', href: '/assets/documents/fahint-product-catalog.pdf#page=15' },
+      { label: 'FAHINT catalog: terminal illustrations, page 18', href: '/assets/documents/fahint-product-catalog.pdf#page=18' },
       { label: 'Leviton: back wiring vs side wiring', href: 'https://leviton.com/support/literature/blogs/back-wiring-vs-side-wiring' },
-      { label: 'Leviton: Quickwire terminology', href: 'https://leviton.com/support/resources/product-support/dimmers-and-switches/articles/4402132021915-Video-How-to-Wire-a-Device-Using-the-Quickwire-Method' },
-      { label: 'FAHINT receptacle catalog, pages 15 to 18', href: '/assets/documents/fahint-product-catalog.pdf#page=15' },
-      { label: 'FAHINT R15Q terminal specification', href: '/products/receptacles/r15q' }
+      { label: 'Leviton: Quickwire terminology', href: 'https://leviton.com/support/resources/product-support/dimmers-and-switches/switches/video-how-to-wire-a-device-using-the-quickwire-method' },
+      { label: 'FAHINT D15Q: decorator face and push-in specification', href: '/products/receptacles/d15q' }
     ],
     body: [
-      { type: 'p', text: 'Back wire and push-in can describe different terminal mechanisms, even though both accept a conductor from the rear of the device. With a screw-clamp back-wire terminal, tightening the screw secures the conductor under a clamp. A push-in terminal holds the conductor through its internal spring mechanism. Check the exact terminal description instead of treating the rear hole as the specification.', source: 0 },
-      { type: 'p', text: 'This distinction matters when ordering R15 and R15Q. FAHINT’s source library uses the same front-face presentation for the two models, but the catalog lists different wiring versions. A purchasing comparison based on that photograph would miss the difference.' },
-      { type: 'h2', text: 'Three terms you will see in a catalog' },
-      { type: 'table', caption: 'Wiring terminology for receptacle selection', columns: ['Term', 'What it describes', 'What the name leaves open'], rows: [
-        ['Screw-clamp back wire', 'A rear-entry conductor secured by a screw-operated clamp', 'Permitted conductor sizes and types, strip length and torque'],
-        ['Push-in / quick wire', 'A push-in conductor connection retained by the terminal mechanism', 'The exact conductor limits for that push-in terminal'],
-        ['Side wire', 'A conductor connection at a side screw terminal', 'The approved conductor and tightening requirements']
+      { type: 'p', text: 'FAHINT R15 and R15Q are both 15A, 125V standard duplex receptacles. The difference is at the terminals: R15 offers side/back wiring; R15Q offers side/push-in quick wiring.', source: 0 },
+      { type: 'h2', text: 'The difference in our catalog' },
+      { type: 'table', caption: 'R15 and R15Q: published wiring options', columns: ['Model', 'Rating', 'Wiring options'], rows: [
+        [{ label: 'R15', href: '/products/receptacles/r15' }, '15A, 125V', 'Side wire / back wire'],
+        [{ label: 'R15Q', href: '/products/receptacles/r15q' }, '15A, 125V', 'Side wire / push-in quick wire']
       ] },
-      { type: 'p', text: 'Leviton uses Quickwire for its push-in method and also refers to it as backstab. That brand terminology helps explain why a request for “back wiring” can be misunderstood. For a FAHINT order, use the catalog wording and full model number.', source: 1 },
-      { type: 'h2', text: 'R15 and R15Q share a rating, not a terminal specification' },
-      { type: 'p', text: 'Both R15 and R15Q are listed as 15A, 125V standard duplex receptacles. R15 has side/back wiring. R15Q has side/push-in quick wiring. The Q therefore identifies a purchasing difference that should stay on the order line, sample label and packing specification.', source: 2 },
-      { type: 'p', text: 'The published push-in limit for the 15A version is #14 AWG only. It is a limit for that terminal, not a general rule for every side or back terminal in the series. Do not use it to approve a different conductor material or a stranded conductor; those details need the exact model instructions.', source: 3 },
-      { type: 'p', text: 'D15Q is a decorator-format example with the same published #14 AWG push-in limit. Its face requires a different wallplate opening from the duplex R15Q. Keep the front configuration and terminal configuration as two separate fields in a comparison.' },
-      { type: 'h2', text: 'Ask for a rear view with the sample' },
-      { type: 'p', text: 'If two quotations use similar front images, ask each supplier to identify the rear and side terminals on the quoted sample. Include the model marking in the photograph. This is useful evidence for purchasing; it does not replace the installer’s review of the approved instructions.' },
-      { type: 'p', text: 'Your technical team can then check the required conductor size and type against that version. Record any mismatch before approval. Do not resolve it by dropping the model suffix or accepting a claim that all 15A receptacles use the same terminals.' },
-      { type: 'h2', text: 'Keep the wiring version visible in the specification' },
-      { type: 'p', text: 'A clear line would read “R15Q, 15A 125V, duplex, side/push-in quick wire,” followed by finish and quantity. If the project calls for back-wire clamps, review R15 instead and confirm its instructions. The broader guide covers the other decisions, including tamper resistance and matching wallplates.', links: [
-        { label: 'Compare R15', href: '/products/receptacles/r15' },
-        { label: 'Compare R15Q', href: '/products/receptacles/r15q' },
+      { type: 'p', text: 'The Q identifies the push-in version of this pair. Keep that suffix on the quotation and sample label so the wiring version stays clear through ordering.' },
+      { type: 'p', text: 'Our catalog marks the 15A push-in terminal “#14 AWG only.” That limit applies to the push-in connection. A purchase specification calling for a #12 AWG push-in connection does not match it.', source: 1, links: [
+        { label: 'See the terminal illustrations · catalog page 18', href: '/assets/documents/fahint-product-catalog.pdf#page=18' }
+      ] },
+      { type: 'h2', text: 'What the terminal names mean' },
+      { type: 'p', text: 'With screw-clamp back wiring, a screw operates a clamp that holds the conductor. Side wiring uses the screw terminal on the side of the device. Leviton illustrates both methods in its wiring guide.', source: 2 },
+      { type: 'p', text: 'Push-in wiring accepts the conductor directly into the rear terminal. Leviton calls its version Quickwire and also uses the term “backstab.” These overlapping names are why “back wire” on its own can be ambiguous in a quotation.', source: 3 },
+      { type: 'p', text: 'For the selected FAHINT model, the approved instructions specify conductor material, solid or stranded suitability, strip length and torque. The #14 AWG push-in marking does not specify the conductor range for the separate side/back terminals.' },
+      { type: 'h2', text: 'A purchase description you can use' },
+      { type: 'p', text: 'For R15Q, write “R15Q, 15A 125V, standard duplex, side/push-in quick wire,” followed by the chosen finish and quantity. If the project calls for side/back wiring, compare R15 using the first row above.' },
+      { type: 'p', text: 'When checking a sample, look at its model marking and rear terminals together. R15 and R15Q share a front presentation in our catalog, so a front photo alone cannot confirm the wiring version.' },
+      { type: 'p', text: 'For a rectangular decorator face, D15Q offers side/push-in quick wiring with the same published #14 AWG limit for its 15A push-in terminal. It needs a different wallplate opening from this duplex pair.', source: 4, links: [
+        { label: 'View D15Q · decorator format', href: '/products/receptacles/d15q' },
         { label: 'Standard receptacle buying guide', href: '/blog/standard-receptacle-buying-guide' }
       ] }
     ]
@@ -126,9 +265,10 @@ export const productQuestionGuides = [
   {
     slug: 'led-lights-flicker-on-dimmer',
     title: 'Why do LED lights flicker on a dimmer?',
-    excerpt: 'Flicker at low brightness can point to a lamp and dimmer mismatch. Record when it happens, check the load specification and evaluate the exact combination.',
+    excerpt: "Identify when LED flicker occurs, compare DM2010 with the 0-10V DM2010S, and record the lamp, load and symptoms for a useful technical review.",
     date: '2026-10-22',
-    readMinutes: 3,
+    updated: "2026-10-29",
+    readMinutes: 2,
     category: 'Troubleshooting',
     cover: 'assets/images/editorial-home/category-switches-scene.webp',
     coverAlt: 'White paddle and slide dimmer on a dark wall beside a softly lit room.',
@@ -140,37 +280,87 @@ export const productQuestionGuides = [
       { label: 'FAHINT DM2010 load specifications', href: '/products/dimmers/dm2010' }
     ],
     body: [
-      { type: 'p', text: 'LED lights that flicker on a dimmer may be non-dimmable, incompatible with the control, or operating below their stable dimming range. Those are possible causes, not a diagnosis of the installation. Lutron’s support guidance distinguishes low-level flicker and dropout from other behavior and starts by checking the lamp.', source: 0 },
-      { type: 'p', text: 'The first useful detail is when it happens. “It flickers” gives a supplier very little to work with. “These four lamps flicker near the bottom of the slider, but stay steady at full brightness” gives the review a place to start. There is no need to open the wall box to make that observation.' },
-      { type: 'h2', text: 'Does the lamp or driver support this dimming method?' },
-      { type: 'p', text: 'Find the lamp or fixture model in its paperwork and check for a dimmable designation. Then look for the control method the manufacturer specifies. A 0-10V driver needs a compatible control signal; a conventional line-voltage dimmer is a different choice. “LED compatible” on a dimmer does not establish compatibility with every LED product.' },
-      { type: 'p', text: 'FAHINT DM2010 is listed for dimmable LED/CFL loads at 120V AC, 60Hz. DM2010S is the separate 0-10V model, with a 120/277V supply specification. Their similar paddle-and-slider appearance is not a reason to substitute one for the other.', source: 1 },
-      { type: 'h2', text: 'Low-end flicker needs a closer look at the usable range' },
-      { type: 'p', text: 'An LED may stop behaving steadily before the slider reaches its lowest position. Lutron explains that a low-end adjustment can help on its supported dimmers by keeping the output within the lamp’s usable range. That adjustment and its procedure are model-specific. Do not apply a Maestro button sequence to a FAHINT dimmer.', source: 0 },
-      { type: 'p', text: 'During sample approval, define the lowest brightness the room actually needs. Ask the supplier and lighting team to demonstrate stable operation at that level with the proposed lamps. If the combination cannot reach it, review the lamp/control pairing before ordering the full quantity. A catalog wattage range does not provide that demonstration.' },
-      { type: 'h2', text: 'Check the LED rating, even when the watts look low' },
-      { type: 'p', text: 'DM2010’s published LED/CFL range is 5 to 200W. Its incandescent range is 20 to 600W. The 600W figure should not be used as the LED limit.', source: 2 },
-      { type: 'p', text: 'For example, four 10W dimmable LED lamps add up to 40W. That is within the stated LED wattage range, but the arithmetic alone cannot establish how that lamp model will dim. The installation also needs the applicable instructions, including any limits for the actual mounting arrangement. The catalog sheet does not provide a multi-gang derating schedule.' },
-      { type: 'h2', text: 'Send a short, reproducible description' },
-      { type: 'list', label: 'Information for a dimming performance review', items: [
-        'Dimmer model and the lamp or driver manufacturer and model.',
-        'Lamp quantity, wattage per lamp and the specified dimming method.',
-        'Whether the symptom occurs at startup, at low brightness or throughout the range.',
-        'Whether every lamp behaves the same way, and whether anything was recently changed.'
-      ] },
-      { type: 'p', text: 'A short video can help show the sequence, but describe what you see in person as well. Have a qualified electrician assess wiring faults or abnormal operation. If there is heat damage, a burning smell or arcing, stop using the affected control and arrange inspection rather than continuing a dimming trial.' },
-      { type: 'p', text: 'For a new project, keep the approved lamp model with the dimmer sample record. If the lamp changes later, repeat the compatibility review; the earlier sample result belongs to the combination that was actually evaluated.', links: [
-        { label: 'View DM2010', href: '/products/dimmers/dm2010' },
-        { label: 'Compare LED and 0-10V dimmers', href: '/blog/dimmer-buying-guide-led-0-10v' }
-      ] }
+      {
+        "type": "p",
+        "text": "LED flicker on a dimmer can come from a lamp that is not dimmable, an incompatible control, or a light level below the lamp’s stable range. Note when it happens: at startup, near minimum brightness, or throughout the range.",
+        "source": 0
+      },
+      {
+        "type": "p",
+        "text": "“Four lamps flicker near the bottom of the slider and stay steady at full brightness” gives a useful starting point. Record what you can observe without opening the wall box."
+      },
+      {
+        "type": "h2",
+        "text": "Compare the lamp and dimmer specifications"
+      },
+      {
+        "type": "p",
+        "text": "Check the lamp or driver’s full model number, dimmable marking and required control method. A 0-10V driver needs a compatible 0-10V control."
+      },
+      {
+        "type": "p",
+        "text": "In our range, DM2010 is listed for dimmable LED/CFL loads at 120V AC, 60Hz. DM2010S is the separate 0-10V model, with a 120/277V supply specification. Keep the S suffix when comparing them.",
+        "source": 1
+      },
+      {
+        "type": "p",
+        "text": "DM2010’s published LED/CFL range is 5 to 200W; its incandescent range is 20 to 600W. Use the LED range for LED lamps. Four 10W lamps total 40W, but that calculation still needs a compatibility check with the actual lamp model.",
+        "source": 2
+      },
+      {
+        "type": "h2",
+        "text": "When flicker appears only at low brightness"
+      },
+      {
+        "type": "p",
+        "text": "Lutron explains that some LEDs reach their lowest stable light level before the dimmer reaches its minimum setting. Supported dimmers may offer a low-end adjustment. The setting and procedure belong to the exact control; Maestro instructions should not be applied to DM2010.",
+        "source": 0
+      },
+      {
+        "type": "p",
+        "text": "During sample review, agree on the lowest light level the room needs and demonstrate it with the planned lamp quantity. For several devices mounted together, request the applicable load limits. The current FAHINT catalog sheet has no multi-gang derating schedule."
+      },
+      {
+        "type": "h2",
+        "text": "Send the details that help identify the problem"
+      },
+      {
+        "type": "list",
+        "label": "Information for a dimming performance review",
+        "items": [
+          "Dimmer model and the lamp or driver manufacturer and model.",
+          "Lamp quantity, wattage per lamp and the specified dimming method.",
+          "Whether the symptom occurs at startup, at low brightness or throughout the range.",
+          "Whether every lamp behaves the same way, and whether anything was recently changed."
+        ]
+      },
+      {
+        "type": "p",
+        "text": "Describe what you see in person as well as sending a short video. Stop using a control with heat damage, a burning smell or arcing and arrange qualified inspection. Electrical faults and wiring checks need an electrician."
+      },
+      {
+        "type": "p",
+        "text": "For a new installation, keep the accepted lamp and dimmer models together in the sample record. Recheck compatibility if the lamp or driver changes.",
+        "links": [
+          {
+            "label": "View DM2010",
+            "href": "/products/dimmers/dm2010"
+          },
+          {
+            "label": "Compare LED and 0-10V dimmers",
+            "href": "/blog/dimmer-buying-guide-led-0-10v"
+          }
+        ]
+      }
     ]
   },
   {
     slug: 'combination-light-switch-double-triple-rocker',
     title: 'Two or three switches in one box: choosing a combination switch',
-    excerpt: 'A double or triple rocker can control separate loads from one device position. Rocker count, wallplate gangs and 3-way operation describe different things.',
+    excerpt: "Compare FAHINT DS1502, DS1503 and DS15.3. Separate rocker count, control locations and wallplate gangs when ordering a combination light switch.",
     date: '2026-10-22',
-    readMinutes: 3,
+    updated: "2026-10-29",
+    readMinutes: 2,
     category: 'Buying Guide',
     cover: 'assets/images/catalog/models/9c21053579be1cac.webp',
     coverAlt: 'FAHINT DS1502 double paddle combination switch with two separate rockers.',
@@ -186,36 +376,107 @@ export const productQuestionGuides = [
       { label: 'FAHINT DS1503 specifications', href: '/products/lighting-switches/ds1503' }
     ],
     body: [
-      { type: 'p', text: 'A combination light switch puts separate controls into one device position. A double rocker can give two loads their own on/off control; a triple rocker can give three. This can be useful when a room needs several lighting groups but the design calls for a single device position on the wall.' },
-      { type: 'p', text: 'The names can be confusing on an order. “Three switches” may mean three separate devices, three rockers in one device or a 3-way control requirement. ENERLITES, for example, lists dual single-pole, dual 3-way and triple-rocker configurations separately. FAHINT buyers need the same distinction in their specification.', source: 0 },
-      { type: 'h2', text: 'Count the loads and the control locations separately' },
-      { type: 'p', text: 'Suppose a room has one ceiling-light group and one wall-light group, both controlled at the entrance. The purchasing brief needs two separate on/off controls at that location. If the ceiling lights must also be controlled from another doorway, that adds a different requirement. The installer needs to specify the appropriate multi-location arrangement.' },
-      { type: 'p', text: 'A 3-way switch is used in a suitable circuit to control a load from two locations. Three rockers on the front do not create that function. DS1503 has three single-pole rockers, while DS15.3 is FAHINT’s 3-way paddle-switch model.', source: 1 },
-      { type: 'table', caption: 'FAHINT switch functions that should not be confused', columns: ['Model', 'Controls on the device', 'Published function'], rows: [
-        [{ label: 'DS1502', href: '/products/lighting-switches/ds1502' }, 'Two rockers', 'Two single-pole controls'],
-        [{ label: 'DS1503', href: '/products/lighting-switches/ds1503' }, 'Three rockers', 'Three single-pole controls'],
-        [{ label: 'DS15.3', href: '/products/lighting-switches/ds15-3' }, 'One paddle', '3-way switching']
-      ] },
-      { type: 'h2', text: 'Several rockers still fit one device opening' },
-      { type: 'p', text: 'DS1502 and DS1503 are single-gang combination devices. Do not order a two-gang wallplate for DS1502 merely because it has two buttons. The gang count describes the physical device arrangement; the rocker count describes the controls within that device.' },
-      { type: 'p', text: 'Review the complete switch and wallplate sample. The plate opening must suit the device face, and the installer must confirm the box, conductors and mounting space. A compact front does not establish that an existing box has room for the proposed installation.' },
-      { type: 'h2', text: 'Check the load type behind each rocker' },
-      { type: 'p', text: 'Both DS1502 and DS1503 carry a published device rating of 15A, 120/277V AC. Treat that as the starting specification, then ask for the permitted load types and the limits that apply to the complete device. Do not multiply the 15A figure by the number of rockers to advertise a combined capacity.', source: 2 },
-      { type: 'p', text: 'If one control is intended for a fan, heater or another non-lighting load, name that equipment in the request. The equipment rating and the switch’s applicable load approval need to be reviewed together. These rocker switches provide on/off operation; they do not add dimming or fan-speed control.' },
-      { type: 'h2', text: 'Make the control schedule readable' },
-      { type: 'p', text: 'Label the intended function of each rocker in the sample brief, such as ceiling lights and wall lights. Have the project team confirm the wiring arrangement using the exact instructions. For a repeated room design, keep the same control order on the approved sample and the room schedule.' },
-      { type: 'p', text: 'When asking for DS1502 or DS1503, include the load schedule and matching plate, not just the phrase “double switch” or “triple switch.” For a single paddle or toggle, the lighting-switch guide compares the other FAHINT options.', links: [
-        { label: 'Lighting switch buying guide', href: '/blog/light-switch-buying-guide' },
-        { label: 'View combination switch models', href: '/products/lighting-switches' }
-      ] }
+      {
+        "type": "p",
+        "text": "DS1502 puts two single-pole rockers in one device position; DS1503 puts three there. They provide separate on/off controls for separate loads, such as ceiling lights and wall lights at a room entrance."
+      },
+      {
+        "type": "h2",
+        "text": "Two loads or two control locations?"
+      },
+      {
+        "type": "p",
+        "text": "Count loads and control locations separately. A 3-way circuit lets the same load be controlled from two locations. For that function, review DS15.3. DS1503’s three rockers each provide single-pole control.",
+        "source": 1
+      },
+      {
+        "type": "table",
+        "caption": "FAHINT switch functions that should not be confused",
+        "columns": [
+          "Model",
+          "Controls on the device",
+          "Published function"
+        ],
+        "rows": [
+          [
+            {
+              "label": "DS1502",
+              "href": "/products/lighting-switches/ds1502"
+            },
+            "Two rockers",
+            "Two single-pole controls"
+          ],
+          [
+            {
+              "label": "DS1503",
+              "href": "/products/lighting-switches/ds1503"
+            },
+            "Three rockers",
+            "Three single-pole controls"
+          ],
+          [
+            {
+              "label": "DS15.3",
+              "href": "/products/lighting-switches/ds15-3"
+            },
+            "One paddle",
+            "3-way switching"
+          ]
+        ]
+      },
+      {
+        "type": "p",
+        "text": "Combination configurations vary across manufacturers. ENERLITES, for example, lists dual single-pole and dual 3-way versions separately. Use the stated function as well as the rocker count when comparing products.",
+        "source": 0
+      },
+      {
+        "type": "h2",
+        "text": "The device still occupies one gang"
+      },
+      {
+        "type": "p",
+        "text": "DS1502 and DS1503 are single-gang devices. Choose the wallplate by the device opening and mounting position, rather than ordering a two- or three-gang plate from the number of rockers."
+      },
+      {
+        "type": "p",
+        "text": "Review the switch and plate as an assembled sample. The installer also needs to check wall-box space and the conductors for the planned loads."
+      },
+      {
+        "type": "h2",
+        "text": "State the load behind each rocker"
+      },
+      {
+        "type": "p",
+        "text": "Both combination models have a published device rating of 15A, 120/277V AC. The rocker count does not multiply that rating. Obtain the applicable per-circuit and combined-load limits for the selected model.",
+        "source": 2
+      },
+      {
+        "type": "p",
+        "text": "If a rocker will operate a fan, heater or other equipment, name its model and load in the request. These are on/off controls; dimming and fan-speed control require their own suitable devices."
+      },
+      {
+        "type": "p",
+        "text": "For a DS1502 inquiry, a simple control schedule might read “upper rocker: ceiling lights; lower rocker: wall lights,” followed by the equipment details, finish, plate and quantity. Keep the same arrangement in the approved sample and room schedule.",
+        "links": [
+          {
+            "label": "Lighting switch buying guide",
+            "href": "/blog/light-switch-buying-guide"
+          },
+          {
+            "label": "View combination switch models",
+            "href": "/products/lighting-switches"
+          }
+        ]
+      }
     ]
   },
   {
     slug: 'smart-switch-neutral-vs-no-neutral',
     title: 'Smart switches with or without neutral: which version fits?',
-    excerpt: 'Neutral requirements belong to the exact switch model. Compare FAHINT USW8811 and USW8811-S, then check the load, accessories and actual wall-box conditions.',
+    excerpt: "USW8811 requires neutral and live; USW8811-S uses single-live wiring. Compare their supply ratings and the accessory and load details to confirm.",
     date: '2026-10-22',
-    readMinutes: 3,
+    updated: "2026-10-29",
+    readMinutes: 2,
     category: 'Buying Guide',
     cover: 'assets/images/catalog/smart-switches/17f21f2fe226b9cf-white-v1.webp',
     coverAlt: 'Black FAHINT US-format glass touch switch shown at a slight angle on a white background.',
@@ -232,34 +493,99 @@ export const productQuestionGuides = [
       { label: 'FAHINT USW8811-S specifications', href: '/products/smart-switches/usw8811-s' }
     ],
     body: [
-      { type: 'p', text: 'Choose the wiring version after a qualified electrician confirms the conditions in the switch box. A smart switch marked “neutral required” needs that connection. A no-neutral or single-live version is a different product configuration with its own load and installation requirements. The choice cannot be made from the glass panel or Wi-Fi logo.' },
-      { type: 'p', text: 'Manufacturer instructions are specific about this. ELEGRP’s guidance for SPN10 and SPN30 says those models need a neutral. Leviton documents both neutral-required and no-neutral families, with different accessory requirements. A statement about one smart switch should not be treated as a rule for the whole category.', source: 0 },
-      { type: 'h2', text: 'What changes between USW8811 and USW8811-S?' },
-      { type: 'p', text: 'Both FAHINT models are US-format, one-gang Wi-Fi touch switches. Their published wiring and supply specifications differ. The suffix needs to stay visible from the quotation through to the sample and final order.', source: 2 },
-      { type: 'table', caption: 'Two similar-looking FAHINT Wi-Fi switches', columns: ['Model', 'Wiring version', 'Published supply'], rows: [
-        [{ label: 'USW8811', href: '/products/smart-switches/usw8811' }, 'Neutral + live (N + L)', '90 to 250V AC, 50/60Hz'],
-        [{ label: 'USW8811-S', href: '/products/smart-switches/usw8811-s' }, 'Single live wire', '110 to 240V AC, 50/60Hz']
-      ] },
-      { type: 'p', text: 'The single-live designation describes the wiring version. It does not mean that the device is battery powered or that it can be installed anywhere without checking the existing circuit. Have the installer review the model diagram and available conductors. Do not identify a neutral from color alone or substitute a grounding conductor for it.' },
-      { type: 'h2', text: 'No-neutral does not settle the accessory question' },
-      { type: 'p', text: 'Some no-neutral products need additional equipment. Leviton’s DN family, for example, requires its specified Wi-Fi bridge and an earth-ground connection. That is an example of a particular system, not a requirement or a compatibility claim for FAHINT.', source: 1 },
-      { type: 'p', text: 'For the FAHINT version being quoted, ask whether a bypass accessory is needed, which loads are permitted and whether a minimum load applies. The catalog alone does not resolve those details for every lamp. Include any required accessory in the price comparison and sample pack so it cannot be missed later.' },
-      { type: 'h2', text: 'Check the lamp separately from the switch’s headline wattage' },
-      { type: 'p', text: 'The catalog gives a 1200W-per-gang load figure for these models but does not identify every permitted lamp or motor type behind that figure. It should not become a blanket “1200W LED” claim. Send the lamp or driver model, quantity and wattage for review before accepting a load match.', source: 3 },
-      { type: 'p', text: 'The required action matters too. If the room needs dimming, choose and evaluate a dimming model. A one-gang touch switch does not become a dimmer because its panel resembles another product in the range.' },
-      { type: 'h2', text: 'Use a sample to settle the remaining questions' },
-      { type: 'p', text: 'Ask the project electrician to install the approved sample with the intended lamp under the supplied instructions. Then review ordinary use: local on/off control, the required app functions and what happens when power or connectivity returns. Record the exact app, accessories and hardware version with the result.' },
-      { type: 'p', text: 'For a renovation with several rooms, note the confirmed wiring conditions room by room. Avoid ordering a single version for the whole property until the survey supports that choice. The wider smart-switch guide covers Wi-Fi, Zigbee and touch-only options once the wiring requirement is established.', links: [
-        { label: 'Wi-Fi, Zigbee and touch-control guide', href: '/blog/smart-switch-buying-guide-wifi-zigbee' }
-      ] }
+      {
+        "type": "p",
+        "text": "USW8811 requires neutral and live conductors. USW8811-S is the single-live version. Both are US-format, one-gang Wi-Fi touch switches, so the full model designation matters when ordering.",
+        "source": 2
+      },
+      {
+        "type": "h2",
+        "text": "Compare the wiring and supply ratings"
+      },
+      {
+        "type": "table",
+        "caption": "Two similar-looking FAHINT Wi-Fi switches",
+        "columns": [
+          "Model",
+          "Wiring version",
+          "Published supply"
+        ],
+        "rows": [
+          [
+            {
+              "label": "USW8811",
+              "href": "/products/smart-switches/usw8811"
+            },
+            "Neutral + live (N + L)",
+            "90 to 250V AC, 50/60Hz"
+          ],
+          [
+            {
+              "label": "USW8811-S",
+              "href": "/products/smart-switches/usw8811-s"
+            },
+            "Single live wire",
+            "110 to 240V AC, 50/60Hz"
+          ]
+        ]
+      },
+      {
+        "type": "p",
+        "text": "An electrician must identify the available conductors and check the model diagram. Neutral availability cannot be established by wire color alone, and a grounding conductor must never substitute for a neutral."
+      },
+      {
+        "type": "p",
+        "text": "Keep the confirmed wiring version against each room in a renovation schedule. Rooms in the same property may need different selections."
+      },
+      {
+        "type": "h2",
+        "text": "Check the accessories and intended load"
+      },
+      {
+        "type": "p",
+        "text": "For the FAHINT model being quoted, establish whether a bypass accessory or minimum load applies. Include any required accessory in the quotation and sample pack."
+      },
+      {
+        "type": "p",
+        "text": "No-neutral systems can have additional requirements. Leviton’s DN family, for example, uses its specified Wi-Fi bridge and an earth-ground connection. Those requirements describe Leviton’s system, not FAHINT’s.",
+        "source": 1
+      },
+      {
+        "type": "p",
+        "text": "Our catalog lists 1200W per gang for these switches without identifying every permitted lamp or motor type. It does not establish a 1200W LED rating. Send the lamp or driver model, quantity and wattage for load review.",
+        "source": 3
+      },
+      {
+        "type": "p",
+        "text": "For brightness control, select a dimming model. The switches compared here provide switching."
+      },
+      {
+        "type": "h2",
+        "text": "Evaluate the version you will order"
+      },
+      {
+        "type": "p",
+        "text": "Have the sample installed by the project electrician with the intended lamp and supplied instructions. Review local operation, the required app functions, and behavior after power or connectivity returns. Record the app, accessories and hardware version."
+      },
+      {
+        "type": "p",
+        "text": "Keep that combination with the sample approval. The broader smart-switch guide compares Wi-Fi, Zigbee and touch-only options once the wiring requirement is settled.",
+        "links": [
+          {
+            "label": "Wi-Fi, Zigbee and touch-control guide",
+            "href": "/blog/smart-switch-buying-guide-wifi-zigbee"
+          }
+        ]
+      }
     ]
   },
   {
     slug: 'screwless-vs-screw-fixed-wallplates',
     title: 'Screwless vs screw-fixed wallplates: what to check',
-    excerpt: 'The visible screws are only part of the choice. Compare the complete mounting assembly, opening, outside dimensions and finish before approving a wallplate.',
+    excerpt: "Compare fixing styles and actual plate sizes. See why changing from BS1802 to BS1803 can expose a paint border, and what the mounting kit should include.",
     date: '2026-10-22',
-    readMinutes: 3,
+    updated: "2026-10-29",
+    readMinutes: 2,
     category: 'Specification',
     cover: 'assets/images/catalog/models/302d8689a5dde176.webp',
     coverAlt: 'White FAHINT BS1803-G decorator wallplate with a screwless front and rectangular device opening.',
@@ -276,29 +602,105 @@ export const productQuestionGuides = [
       { label: 'FAHINT wallplate catalog, pages 27 to 28', href: '/assets/documents/fahint-product-catalog.pdf#page=27' }
     ],
     body: [
-      { type: 'p', text: 'A screw-fixed wallplate leaves the fixing screws visible on the front. A screwless design hides them behind the face. Many screwless plates use a separate mounting piece and a cover that clips into place; ENERLITES describes its decorator product as a two-piece kit.', source: 0 },
-      { type: 'p', text: 'For a room sample, the visual choice is easy to compare. For an order, there is more to record: the complete assembly, the device opening and the outside dimensions. A front cover on its own is not the same purchase as a complete mounting kit.' },
-      { type: 'h2', text: 'Approve the plate with the device it will surround' },
-      { type: 'p', text: 'Start with the opening. A decorator plate has a rectangular opening; a traditional duplex receptacle or toggle needs the corresponding pattern. Choosing a screwless finish does not change which opening the device requires.' },
-      { type: 'p', text: 'Ask for a sample with the proposed switch or outlet. Look at the device height within the opening and the gap around its edge. Have the installer confirm that the mounting parts fit as intended. Do not assume that covers and mounting pieces from different manufacturers are interchangeable simply because both products say “screwless.”' },
-      { type: 'h2', text: 'Outside size can change when the fixing style changes' },
-      { type: 'table', caption: 'FAHINT one-gang decorator plate examples', columns: ['Model', 'Fixing style', 'Outside width × height'], rows: [
-        [{ label: 'BS1801', href: '/products/wallplates/bs1801' }, 'Screw fixed, standard size', '70 × 115 mm'],
-        [{ label: 'BS1802', href: '/products/wallplates/bs1802' }, 'Screw fixed, medium size', '80 × 124 mm'],
-        [{ label: 'BS1803-G', href: '/products/wallplates/bs1803-g' }, 'Screwless, glossy', '75 × 120 mm'],
-        [{ label: 'BS1803-M', href: '/products/wallplates/bs1803-m' }, 'Screwless, matte', '75 × 120 mm']
-      ] },
-      { type: 'p', text: 'These are exterior dimensions from the model records. BS1802 is a larger one-gang plate, not a two-gang plate. BS1803-G is a separate screwless model, not another name for the standard BS1801.', source: 4 },
-      { type: 'p', text: 'That difference matters on a decorated wall. In the size table, the 75 × 120 mm screwless plate is smaller than the 80 × 124 mm medium plate. If the old finish stops at the edge of the larger plate, changing to the smaller one can expose the border. Measure the actual area that needs covering before choosing the replacement; a plate should not be used to conceal an installation defect.' },
-      { type: 'h2', text: 'Look at the edge as well as the front' },
-      { type: 'p', text: 'Compare the assembled sample from the side under the room’s lighting. Check how far it stands from the wall, whether the cover sits evenly and how its sheen compares with the device. The word “white” does not record those details.' },
-      { type: 'p', text: 'For the BS1803 range, retain G for the glossy version and M for the matte version in the order designation. Keep an approved physical sample with the device and plate together. A separate photo of each part is less useful when the question is whether they look right as a pair.' },
-      { type: 'h2', text: 'Include the mounting parts and spare covers in the brief' },
-      { type: 'p', text: 'Confirm which mounting components and fixings come in the quoted pack, then ask how the cover is removed for service under the manufacturer’s instructions. If a property needs spare covers, specify the exact model and finish and verify whether the supplier sells that component separately.' },
-      { type: 'p', text: 'A short order description can capture the decision: “BS1803-M, one-gang decorator opening, matte white, complete mounting assembly.” Add the quantity after the sample pairing is approved. For other opening patterns and gang counts, use the full wallplate guide.', links: [
-        { label: 'Wallplate opening and size guide', href: '/blog/wallplate-buying-guide' },
-        { label: 'View wallplate models', href: '/products/wallplates' }
-      ] }
+      {
+        "type": "p",
+        "text": "Screw-fixed wallplates show the fixing screws on the front. Screwless plates conceal them behind the face. Many use a separate mounting piece and clip-on cover, such as the two-piece ENERLITES decorator kit.",
+        "source": 0
+      },
+      {
+        "type": "h2",
+        "text": "Check how much wall the replacement will cover"
+      },
+      {
+        "type": "table",
+        "caption": "FAHINT one-gang decorator plate examples",
+        "columns": [
+          "Model",
+          "Fixing style",
+          "Outside width × height"
+        ],
+        "rows": [
+          [
+            {
+              "label": "BS1801",
+              "href": "/products/wallplates/bs1801"
+            },
+            "Screw fixed, standard size",
+            "70 × 115 mm"
+          ],
+          [
+            {
+              "label": "BS1802",
+              "href": "/products/wallplates/bs1802"
+            },
+            "Screw fixed, medium size",
+            "80 × 124 mm"
+          ],
+          [
+            {
+              "label": "BS1803-G",
+              "href": "/products/wallplates/bs1803-g"
+            },
+            "Screwless, glossy",
+            "75 × 120 mm"
+          ],
+          [
+            {
+              "label": "BS1803-M",
+              "href": "/products/wallplates/bs1803-m"
+            },
+            "Screwless, matte",
+            "75 × 120 mm"
+          ]
+        ]
+      },
+      {
+        "type": "p",
+        "text": "These are exterior dimensions. Replacing an 80 × 124 mm BS1802 with a 75 × 120 mm BS1803 reduces coverage by 5 mm in width and 4 mm in height. That can expose the border of the old paint or wallpaper.",
+        "source": 4
+      },
+      {
+        "type": "p",
+        "text": "Measure the area that needs covering and check the condition of the wall. A larger plate is not a repair for an installation defect. BS1802 remains a one-gang plate despite its larger outer size."
+      },
+      {
+        "type": "h2",
+        "text": "Compare the complete plate and device"
+      },
+      {
+        "type": "p",
+        "text": "The opening must match the device: rectangular for a decorator face, shaped duplex openings for a traditional receptacle, or a toggle opening for a toggle switch."
+      },
+      {
+        "type": "p",
+        "text": "Review an assembled sample from the front and side. Check the gap around the device, how evenly the cover sits, and its sheen under the room lighting. Covers and mounting pieces from different brands may not fit together."
+      },
+      {
+        "type": "p",
+        "text": "BS1803-G is glossy and BS1803-M is matte. Keep the suffix and approved device/plate pairing in the order record."
+      },
+      {
+        "type": "h2",
+        "text": "Include the mounting kit in the price"
+      },
+      {
+        "type": "p",
+        "text": "State the faceplate, mounting piece and fixing hardware required in the pack. For spare covers, specify the exact model and finish and confirm whether that part is sold separately. Use the manufacturer’s removal instructions for service."
+      },
+      {
+        "type": "p",
+        "text": "An order description could read “BS1803-M, one-gang decorator opening, matte white, complete mounting assembly,” followed by quantity. The wallplate guide covers other opening patterns and gang counts.",
+        "links": [
+          {
+            "label": "Wallplate opening and size guide",
+            "href": "/blog/wallplate-buying-guide"
+          },
+          {
+            "label": "View wallplate models",
+            "href": "/products/wallplates"
+          }
+        ]
+      }
     ]
   }
 ];
