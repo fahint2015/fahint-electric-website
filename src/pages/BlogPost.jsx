@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Link } from '../components/SiteLink.jsx';
 import { ChevronDown, Download, ArrowUpRight } from 'lucide-react';
@@ -24,15 +24,29 @@ function ArticleContent({ post }) {
   usePageMetadata(metadata);
   const [outlineOpen, setOutlineOpen] = useState(false);
   const headings = post.body.map((block,index) => ({ ...block, id:'article-section-' + index })).filter(block => block.type === 'h2');
+  const [activeSection, setActiveSection] = useState(headings[0]?.id ?? '');
+  useEffect(() => {
+    const targets = headings.map(heading => document.getElementById(heading.id)).filter(Boolean);
+    if (!targets.length || typeof IntersectionObserver !== 'function') return undefined;
+    const observer = new IntersectionObserver(entries => {
+      const visible = entries
+        .filter(entry => entry.isIntersecting)
+        .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+      if (visible[0]) setActiveSection(visible[0].target.id);
+    }, { rootMargin: '-88px 0px -62% 0px', threshold: 0 });
+    targets.forEach(target => observer.observe(target));
+    return () => observer.disconnect();
+  }, [post.slug]);
   const related = posts.filter(item => item.slug !== post.slug).sort((a,b) => Number(b.category === post.category) - Number(a.category === post.category)).slice(0,3);
   return <div className="company-page reading-page reading-post">
     <header className="reading-article-heading"><div className="company-wrap">
       <nav className="company-breadcrumb" aria-label="Breadcrumb"><Link to="/">Home</Link><span aria-hidden="true">/</span><Link to="/blog">Guides & insights</Link><span aria-hidden="true">/</span><span>{post.category}</span></nav>
-      <div className="reading-article-intro">
-        <div className="reading-article-title"><Reveal as="h1">{post.title}</Reveal><Reveal as="p" delay={160}>{post.excerpt}</Reveal><div className="reading-meta"><span>{post.category}</span><span>By <Link to="/about" rel="author">FAHINT</Link></span><time dateTime={metadata.entity.dateModified}>Updated {formatPostDate(metadata.entity.dateModified)}</time><span>{post.readMinutes} min read</span></div></div>
-        <Reveal as="figure" className="reading-article-image"><EditorialPhoto src={post.cover} alt={post.coverAlt} region={post.coverRegion} width={post.coverWidth} height={post.coverHeight} position={post.coverPosition} fit={post.coverFit} ratio={1.5} priority /><figcaption>{post.coverCaption}</figcaption></Reveal>
-      </div>
+      <div className="reading-article-title"><Reveal as="h1">{post.title}</Reveal><Reveal as="p" delay={160}>{post.excerpt}</Reveal><div className="reading-meta"><span>{post.category}</span><span>By <Link to="/about" rel="author">FAHINT</Link></span><time dateTime={metadata.entity.dateModified}>Updated {formatPostDate(metadata.entity.dateModified)}</time><span>{post.readMinutes} min read</span></div></div>
     </div></header>
+    <Reveal as="figure" className="reading-article-hero">
+      <EditorialPhoto src={post.cover} alt={post.coverAlt} region={post.coverRegion} width={post.coverWidth} height={post.coverHeight} position={post.coverPosition} fit={post.coverFit} ratio={3} priority />
+      <div className="company-wrap"><figcaption>{post.coverCaption}</figcaption></div>
+    </Reveal>
     <div className="company-wrap reading-article-layout">
       <aside className="reading-article-nav">
         <h2 className="reading-article-nav-title">In this article</h2>
@@ -41,7 +55,7 @@ function ArticleContent({ post }) {
         </button>
         <div id="reading-outline" className={`reading-outline${outlineOpen ? ' is-open' : ''}`}>
           <nav aria-label="In this article">
-            <ol>{headings.map(heading => <li key={heading.id}><Link to={'#' + heading.id}>{heading.text}</Link></li>)}</ol>
+            <ol>{headings.map(heading => <li key={heading.id}><Link to={'#' + heading.id} className={activeSection === heading.id ? 'is-active' : undefined} aria-current={activeSection === heading.id ? 'true' : undefined}>{heading.text}</Link></li>)}</ol>
           </nav>
           <div className="reading-document"><h3>Keep the details close.</h3><p>Compare the product with the original model documentation.</p><a className="company-text-link" href={publicAsset(catalogueDocument)} download>Download FAHINT catalog <Download size={16} aria-hidden="true" /></a><CompanyLink to="/resources#certifications" secondary>Certificate library</CompanyLink></div>
         </div>
