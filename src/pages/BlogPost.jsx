@@ -50,6 +50,7 @@ function ArticleContent({ post }) {
         <p className="reading-safety-note">Buyer information, not installation instructions. Requirements depend on the adopted local code and exact product. Electrical work and site diagnosis should be performed by qualified professionals.</p>
         {post.body.map((block, index) => {
           if (block.type === 'h2') return <h2 id={'article-section-' + index} key={index}>{block.text}</h2>;
+          if (block.type === 'h3') return <h3 key={index}>{block.text}</h3>;
           if (block.type === 'list') return <ul className="reading-checklist" aria-label={block.label} key={index}>{block.items.map(item => <li key={item}>{item}</li>)}</ul>;
           if (block.type === 'table') return <div className="reading-table-scroll" role="region" aria-label={block.caption} tabIndex={0} key={index}>
             <table><caption>{block.caption}<span aria-hidden="true">Scroll sideways on smaller screens.</span></caption>

@@ -7,8 +7,10 @@ import { receptacleBuyingGuide } from './receptacleBuyingGuide.js';
 import { roomOutletPlanningGuide } from './roomOutletPlanningGuide.js';
 import { smartSwitchBuyingGuide } from './smartSwitchBuyingGuide.js';
 import { productQuestionGuides } from './productQuestionGuides.js';
+import { gfciOutletGuide } from './gfciOutletGuide.js';
 
 export const posts = [
+  gfciOutletGuide,
   ...productQuestionGuides,
   roomOutletPlanningGuide,
   smartSwitchBuyingGuide,
