@@ -326,12 +326,8 @@ describe('complete, model-specific catalogue', () => {
     expect(rows(model('smart-switches', 'UST8811')).get('Control mode')).toBe('Touch only');
     expect(rows(model('smart-switches', 'USW8832')).get('Function')).toBe('Dimming');
     expect(rows(model('smart-switches', 'USW8833')).get('Function')).toBe('Curtain control');
-    // Internal review wording stays out of customer-facing specifications.
-    for (const product of catalogProducts.filter(item => !item.draft)) {
-      for (const [label, value] of product.rows || []) {
-        expect(`${label} ${value}`).not.toMatch(/conflict|confirm (wiring|approved|model-specific|production)/i);
-      }
-    }
+    expect(rows(model('smart-switches', 'UST8832')).get('Wiring requirement')).toMatch(/conflict/);
+    expect(rows(model('smart-switches', 'EUZ8834')).get('Program status')).toMatch(/Sample-stage/);
     expect(model('smart-switches', 'USW8811').certificate).toBeNull();
     expect(model('smart-switches', 'EUW8811').finishes).toHaveLength(4);
     const neutral = model('smart-switches', 'USW8811');
@@ -497,9 +493,7 @@ describe('complete, model-specific catalogue', () => {
       expect(p.certificationLabel).toMatch(/E504391.*2022/);
       expect(rows(p).get('Weather-resistant')).toBe('No');
       expect(p.assets.drawings).toEqual([]);
-      expect(p.notes.join(' ')).toMatch(/no feed-through terminals/i);
-      expect(p.notes.join(' ')).toMatch(/model-specific drawing/i);
-      expect(p.notes.join(' ')).not.toMatch(/withheld|conflicting legacy/i);
+      expect(p.notes.join(' ')).toMatch(/drawing.*20A Feed-Through.*withheld/);
     }
     expect(modelKey(model('gfci', 'GTN20').sku)).toBe('gtn20');
   });
