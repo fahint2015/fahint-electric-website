@@ -103,12 +103,12 @@ const customizationOptions = [
   [FlaskConical, 'Samples & testing', 'Review appearance, fit, function and packaging before production handoff.']
 ];
 
-const factoryArea = companyStats.find((item) => item.label === 'Factory area (sq ft)');
+const factoryArea = companyStats.find((item) => item.label === 'Factory area (m²)');
 
 const proof = [
   ['UL / cUL', 'Selected listed models'],
   ['100%', 'GFCI functional testing'],
-  [factoryArea?.value || '70,000', factoryArea?.label || 'Factory area (sq ft)'],
+  [factoryArea?.value || '3,600', factoryArea?.label || 'Factory area (m²)'],
   ['OEM / ODM', 'Flexible program support']
 ];
 

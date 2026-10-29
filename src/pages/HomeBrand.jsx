@@ -97,7 +97,7 @@ export function WhyFahint({ showEyebrow = true }) {
       <Reveal className="section-heading"><div>{showEyebrow && <p className="eyebrow">WHY FAHINT</p>}<h2 id="why-fahint-title">Why choose FAHINT.</h2></div><p className="section-intro">Manufacturing behind the brand.</p></Reveal>
       <dl className="strength-stats">
         <Reveal><dt>Established</dt><dd>2015</dd></Reveal>
-        <Reveal delay={80}><dt>Automated inspection lines</dt><dd>12</dd></Reveal>
+        <Reveal delay={80}><dt>Owned production lines</dt><dd>4</dd></Reveal>
         <Reveal delay={160}><dt>GFCI functional testing</dt><dd>100<span>%</span></dd></Reveal>
       </dl>
       <div className="certification-row">

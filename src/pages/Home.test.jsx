@@ -249,9 +249,9 @@ describe('Home', () => {
   it('keeps the factory-area proof consistent with the company profile', () => {
     renderHome();
 
-    expect(screen.getByText('70,000')).toBeInTheDocument();
-    expect(screen.getByText('Factory area (sq ft)')).toBeInTheDocument();
-    expect(screen.queryByText('2,400m²')).not.toBeInTheDocument();
+    expect(screen.getByText('3,600')).toBeInTheDocument();
+    expect(screen.getByText('Factory area (m²)')).toBeInTheDocument();
+    expect(screen.queryByText('70,000')).not.toBeInTheDocument();
   });
 
   it('keeps the manufacturing photograph full-bleed with a low four-column proof strip', () => {

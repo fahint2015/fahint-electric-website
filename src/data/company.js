@@ -20,10 +20,11 @@ export const company = {
   hours: 'Mon – Sat, 08:30 – 18:00 (GMT+8)'
 };
 
+// Figures must match src/data/companyFacts.js. Never restate the same fact in two places.
 export const stats = [
   { value: '2015', label: 'Year established', suffix: '' },
-  { value: '70,000', label: 'Factory area (sq ft)', suffix: '' },
-  { value: '12', label: 'Automated inspection lines', suffix: '' },
+  { value: '3,600', label: 'Factory area (m²)', suffix: '' },
+  { value: '4', label: 'Owned production lines', suffix: '' },
   { value: '98', label: 'First pass yield', suffix: '%' }
 ];
 
@@ -37,16 +38,16 @@ export const services = [
   },
   {
     tone: 'light',
-    title: '6-Hour Engineering Response',
+    title: 'Two R&D Engineers, Five New Models a Year',
     body:
-      'Our in-house engineering team returns customized design solutions within 6 hours, backed by US and China patents on our GFCI mechanism and PCB architecture.',
+      'A small engineering team handles design service, drawing customization and sample-based verification, releasing five new models a year. Patents cover the GFCI mechanism and PCB architecture.',
     link: { label: 'Talk to an engineer', to: '/contact' }
   },
   {
     tone: 'medium',
-    title: 'US Warehouse, 10-Day Delivery',
+    title: 'Ningbo Port, 11 Years of Export',
     body:
-      'Overseas warehouses serving North American customers enable shipment within 3 days and delivery in as fast as 10 days, with a decade of zero Category A complaints.',
+      'Devices ship from Ningbo, with 11 years of export documentation behind them. Lead time and shipping terms are confirmed in your quotation for the model and quantity you order.',
     link: { label: 'See logistics options', to: '/about' }
   }
 ];
@@ -55,7 +56,6 @@ export const certifications = [
   { code: 'UL / cUL', detail: 'Listed under file E504391, UL 943 5th Edition 2018' },
   { code: 'ETL', detail: 'Verified production system' },
   { code: 'ISO 9001', detail: 'Certified quality management system' },
-  { code: 'SGS', detail: 'Verified supplier audit' },
   { code: 'US Patent', detail: 'Patented GFCI mechanism' },
   { code: 'CN Patent', detail: 'Patented PCB architecture' }
 ];
@@ -67,8 +67,8 @@ export const capabilities = [
     image: 'assets/images/products/gf15-back-angle.webp'
   },
   {
-    title: '12 Automated Inspection Lines',
-    body: 'Every unit is dielectric, trip-threshold and continuity tested before packing.',
+    title: 'Four Production Lines, 29 Machines',
+    body: 'Device assembly and GFCI functional testing run on four owned lines with 29 machines and four test stations before packing.',
     image: 'assets/images/products/gf15-mcu.webp'
   },
   {
@@ -77,8 +77,8 @@ export const capabilities = [
     image: 'assets/images/products/gf15-sides.webp'
   },
   {
-    title: 'Approved ALDI Supplier',
-    body: 'Ten years of retail-grade compliance with zero Category A complaints.',
+    title: 'OEM Packaging & Private Label',
+    body: 'Retail or neutral packs, cartons, instructions and authorized brand artwork are agreed per model and confirmed against the sample.',
     image: 'assets/images/products/gf15-lifestyle.webp'
   }
 ];
