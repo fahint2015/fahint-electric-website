@@ -577,6 +577,10 @@ export const posts = [
         "text": "Ask which inspection records are available for the selected model. Agree on any additional performance evaluation with qualified personnel, including the method and acceptance criteria. Keep those requirements with the approved sample reference."
       },
       {
+        "type": "p",
+        "text": "A supplier with a defined production line can answer this precisely. Our plant in Wenzhou runs 12 automated inspection lines across 70,000 sq ft at a stated 98% first-pass yield; when we quote an inspection brief, we can name which of those lines carries the model and what the station tests. A supplier who cannot name the line is describing a capability rather than a process."
+      },
+      {
         "type": "h2",
         "text": "Request a quotation by configuration"
       },

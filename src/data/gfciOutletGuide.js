@@ -125,6 +125,10 @@ export const gfciOutletGuide = {
       text: 'The August 16, 2022 addendum to report E504391-20210212 names GF15, GF20, GT15, GT20, GW15 and GW20, and identifies GTN15 and GTN20 as tamper-resistant models without feed-through terminals. GL20 is not part of that documented shortlist. Confirm current coverage for the exact configuration you order rather than relying on a family reference.',
       links: [{ label: 'Review the GFCI certificate library', href: '/resources?family=gfci' }]
     },
+    {
+      type: 'p',
+      text: 'Behind the model list sits the line that builds it: 12 automated inspection lines in a 70,000 sq ft plant in Wenzhou, running at a stated 98% first-pass yield. That number is worth asking about in a supplier conversation, because a first-pass figure only means something when you know what is being counted and on which line. Ask what the test covers — dielectric, trip threshold and continuity are the three that matter on a GFCI — and whether the record follows the unit or the batch.'
+    },
     { type: 'h2', text: 'What to put in a specification or an inquiry' },
     {
       type: 'list',
