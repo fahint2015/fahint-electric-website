@@ -373,3 +373,13 @@
 .company-page.reading-post .reading-related .company-wrap { max-width:1240px; }
 .reading-related .reading-grid { margin-top:56px; }
 @media(max-width:1050px) { .reading-related .reading-grid { margin-top:40px; } }
+
+/* Article related cards sit on white: keep the copy off the card edge. */
+.reading-related .reading-card__body { padding:26px 20px 20px; }
+.reading-related .reading-card h3 { min-height:0; }
+.reading-related .reading-card__bottom { padding-top:20px; }
+
+/* Keep the sidebar outline inside the viewport without a tall internal scroll. */
+.reading-article-nav ol { margin-top:14px; }
+.reading-article-nav li a { min-height:0; padding-block:7px; font-size:14.5px; line-height:1.45; }
+.reading-article-nav { max-height:calc(100vh - 120px); }
