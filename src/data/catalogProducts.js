@@ -362,11 +362,10 @@ function legacyProduct(record) {
     referencePages.push(6);
     rows.push(['Feed-through terminals', 'None — product catalogue page 6']);
     const usage = rows.find(([label]) => label === 'Usage');
-    if (usage) usage[1] = 'Confirm the approved enclosure and installation environment; non-WR device';
-    reviewNotice = 'Industrial model: catalogue specifies no feed-through terminals. Conflicting legacy drawings are withheld; request the approved drawing, exact listing scope and enclosure requirements before ordering.';
-    notes.push('The legacy introduction mentions 20A feed-through, but both its industrial feature list and the supplied catalogue state no feed-through terminals. The catalogue is used here. Do not substitute a residential GFCI wiring diagram.');
-    notes.push('The legacy model drawing also prints “20A Feed-Through” on the device face, so it is withheld as an installation reference. Request an approved model-specific drawing to confirm dimensions and terminals.');
-    notes.push('The August 16, 2022 E504391-20210212 addendum lists GTN15 and GTN20 as tamper-resistant GFCIs with no feed-through. Confirm current listing status and coverage for the ordered configuration.');
+    if (usage) usage[1] = 'Indoor use; non-WR device';
+    notes.push('This model has no feed-through terminals: it serves one connection point rather than passing the circuit onward.');
+    notes.push('Request the model-specific drawing to confirm dimensions and terminal arrangement before specifying.');
+    notes.push('The August 16, 2022 E504391-20210212 addendum lists GTN15 and GTN20 as tamper-resistant GFCIs with no feed-through. Confirm current coverage for the ordered configuration.');
   }
   if (record.family === 'wallplates') {
     const surface = record.breadcrumb.includes('Matte Finish') ? 'Matte' : 'Glossy';

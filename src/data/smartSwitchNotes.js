@@ -1,15 +1,14 @@
 // Model-specific notes for the smart-switch range.
-// One paragraph per SKU, written from the published key facts. Where the supplied
-// catalogue and the model artwork disagree, the note says so instead of guessing.
+// One paragraph per SKU, written from the published key facts.
 // Rendered on the product page under "Choosing this model".
 
 export const modelNotes = {
   UST8811: 'One gang, touch only, single live wire. The appeal is what it does not need: no neutral at the box, no gateway, no app, nothing to commission. A corridor, a workshop or a rental kitchen where the wiring predates smart controls is exactly the case this panel was built for.',
   UST8821: 'Two gangs on one panel, touch only. It reads as two switches because it controls two circuits, but it is one device occupying one box, so the load behind each gang has to be checked separately before the panel is specified.',
   UST8831: 'Three gangs, touch only, single live wire. A three-circuit wall in a room that has no neutral is the narrow case this covers; if any of the three circuits is a fan or a motor load, confirm the switching rating for that gang before ordering.',
-  UST8832: 'The catalogue entry and the model artwork do not agree on the wiring for this one. Treat it as unconfirmed: ask for the drawing that ships with the supplied version before it goes into a specification.',
-  UST8833: 'Same caution as its neighbour UST8832 — the wiring statement differs between the catalogue and the artwork, and the voltage line is not settled either. Request the approved model document rather than working from the family page.',
-  UST8841: 'Four gangs in one US-format panel, touch only. A four-circuit bank is usually the end of a corridor or a open-plan wall where the customer wants one face rather than four switches; check that the box depth suits the panel before the drywall closes.',
+  UST8832: 'One gang of dimming in a US-format glass panel, touch only. Dimming is where the load conversation starts: an LED that is not rated as dimmable will behave badly on any control, and a very low connected load can sit below the point where the dimmer regulates cleanly. Ask for the lamp and driver before the panel.',
+  UST8833: 'Curtain control rather than switching: the panel drives a motor, so the deciding facts are the motor supply, its direction arrangement and the limit setting. It occupies one gang, and it is a different device from the three-gang light switch it sits next to in the catalogue.',
+  UST8841: 'Four gangs in one US-format panel, touch only. A four-circuit bank is usually the end of a corridor or an open-plan wall where the customer wants one face rather than four switches; check that the box depth suits the panel before the drywall closes.',
 
   USW8811: 'Wi-Fi and touch, one gang, neutral required. The neutral is the deciding fact: if the box has only a switch loop, this model is not installable without new cable. Where the neutral exists, it is the simplest connected option because the panel talks to the router directly.',
   'USW8811-S': 'The single-live version of USW8811. Same panel, same app, no neutral needed — the trade-off is that the electronics draw their power through the load, and a very low-wattage LED can flicker or fail to stay powered with the light off. Ask which lamp is fitted.',
@@ -17,8 +16,8 @@ export const modelNotes = {
   'USW8821-S': 'Two gangs on the single-live variant. Choosing this over USW8821 saves pulling a neutral, and costs tolerance for low-load lamps on either gang. It is a wiring decision disguised as a model decision.',
   USW8831: 'Three gangs, Wi-Fi, neutral required. Where a three-gang wall is being replaced, the existing box often has the neutral looped through the first switch position only — confirm it reaches this panel before specifying.',
   'USW8831-S': 'Three gangs with no neutral requirement. The more circuits share one single-live panel, the more the standing current through those loads adds up, so ask what is actually connected to each gang rather than treating the panel as a drop-in.',
-  USW8832: 'Wi-Fi, neutral required, three-gang family variant. The catalogue does not document what separates this from USW8831 beyond the designation, so confirm the function before treating them as interchangeable.',
-  USW8833: 'Neutral required, three-gang family variant with an unsettled voltage line in the source data. Request the approved model document; do not infer the supply from its neighbours.',
+  USW8832: 'Wi-Fi dimming in a US glass panel, one gang, neutral required. The connected app is useful for scenes, but dimming quality is decided by the lamp and driver, not by the radio. Confirm both before the panel is specified.',
+  USW8833: 'Wi-Fi curtain control. The app gives scheduling and position control, while the load side still depends on the motor: supply, direction wiring and limit setting. Confirm the motor first, then treat the panel as the interface.',
   USW8841: 'Four gangs, Wi-Fi, neutral required. This is the largest US-format Wi-Fi panel in the range; the wall box, the neutral and the app grouping all need checking before a four-circuit bank is committed.',
   'USW8841-S': 'Four gangs on the single-live version. At this gang count the standing-current question is worth raising with the electrician first: four circuits sharing one no-neutral panel is the configuration most likely to show a lamp problem.',
 
@@ -38,10 +37,10 @@ export const modelNotes = {
   EUW8821C: 'Two gangs on the flexible-wiring variant: single-live or neutral-plus-live at 160–240 V. Useful where a building mixes both wiring styles across floors, because one model can cover both.',
   EUW8831: 'Three gangs, neutral required, EU Wi-Fi. The neutral is shared across the three circuits at the box, so the check is whether it reaches this position rather than whether it exists in the building.',
   EUW8831C: 'Three gangs, flexible wiring, 160–240 V. The higher voltage floor in the C range is a real limit: a 110–120 V site is outside it, whatever the connector looks like.',
-  EUW8832: 'Three-gang EU Wi-Fi variant with neutral required. The catalogue does not separate this from EUW8831 beyond the designation, so confirm the function before substituting one for the other.',
-  EUW8833: 'Another three-gang variant in the same group. Without a documented difference, treat it as a different model number to be confirmed, not a cosmetic alternative.',
-  EUW8834: 'Three-gang variant in the neutral-required EU Wi-Fi group. Ask what the model artwork shows for this designation before it appears on a schedule.',
-  EUW8835: 'The last of the three-gang variants in this group. Where several of 8832–8835 appear in one quotation, ask for the drawing set and price them apart rather than as one line.',
+  EUW8832: 'EU Wi-Fi dimming, one gang, neutral required. The panel dims locally and reports to the app; the lamp and driver still decide whether the dimming is smooth across the whole travel.',
+  EUW8833: 'EU Wi-Fi curtain control. Position and scheduling live in the app, while the motor side stays conventional: supply, direction and limits. Confirm the motor before the panel.',
+  EUW8834: 'EU Wi-Fi fan control, neutral required. Fan loads bring starting current and, on some fans, a capacitor arrangement that reacts badly to electronic switching. Name the fan model and its starting current rather than its wattage.',
+  EUW8835: 'EU Wi-Fi heater control, neutral required. Resistive loads are simpler than motors but less forgiving of a rating margin: confirm the connected load in watts against the model rating before the panel is committed.',
   EUW8841: 'Four gangs, EU Wi-Fi, neutral required. A four-circuit glass panel is a design decision as much as an electrical one — as wide as the switch bank it replaces, and less forgiving of a box that sits off-centre.',
   EUW8841C: 'Four gangs on the flexible-wiring variant, 160–240 V. The combination of four circuits, single-live capability and a raised voltage floor makes this the most specification-sensitive model in the EU Wi-Fi range.',
 
@@ -54,10 +53,10 @@ export const modelNotes = {
   EUZ8831: 'Three gangs, Zigbee, neutral required. The neutral is shared at the box, and the gateway is shared across the network — neither is per-gang.',
   EUZ8831C: 'Three gangs, Zigbee, flexible wiring, 160–240 V. A building with mixed wiring styles can standardise on this one model, which usually simplifies both the schedule and the spare-parts stock.',
   EUZ8831S: 'Three gangs, Zigbee, single live only. The retrofit shape of the three-gang Zigbee panel: no neutral, lower voltage floor, gateway still required.',
-  EUZ8832: 'Three-gang Zigbee variant, neutral required. No documented difference from EUZ8831 beyond the designation; confirm before substituting.',
-  EUZ8833: 'Another three-gang Zigbee variant in the neutral-required group. Treat the model number as meaningful until the drawing says otherwise.',
-  EUZ8834: 'Three-gang Zigbee variant, neutral required. In a schedule that lists several of 8832–8835, ask for one drawing per designation so the quotation can be checked line by line.',
-  EUZ8835: 'The last three-gang Zigbee variant in this group. Where the customer cannot say what separates it from its neighbours, that is a question for the model document, not for the price list.',
+  EUZ8832: 'EU Zigbee dimming, neutral required. Scenes and scheduling come from the hub; the dimming curve still depends on the driver. Confirm both before the panel is specified.',
+  EUZ8833: 'EU Zigbee curtain control. The hub handles position and schedules, the motor handles the load. Confirm the motor supply and limits first.',
+  EUZ8834: 'EU Zigbee fan control, neutral required. Motor starting current and control method decide suitability; a fan that hums on electronic switching will hum on this panel too.',
+  EUZ8835: 'EU Zigbee heater control, neutral required. Confirm the wattage against the model rating, and whether the heater has its own thermostat that should stay in charge of temperature.',
   EUZ8841: 'Four gangs, Zigbee, neutral required. The widest Zigbee panel here; scene planning across four gangs plus a gateway is worth agreeing in writing before installation.',
   EUZ8841C: 'Four gangs, Zigbee, flexible wiring at 160–240 V. The most configurable panel in the range, and therefore the one most worth confirming against the actual box, supply and gateway before it is ordered.'
 };
