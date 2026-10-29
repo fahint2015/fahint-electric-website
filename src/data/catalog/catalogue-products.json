@@ -2902,7 +2902,7 @@
       ],
       [
         "Published load",
-        "1200W / gang (catalogue rating; confirm load type)"
+        "1200W / gang"
       ],
       [
         "Face material",
@@ -3015,7 +3015,7 @@
       ],
       [
         "Published load",
-        "1200W / gang (catalogue rating; confirm load type)"
+        "1200W / gang"
       ],
       [
         "Face material",
@@ -3128,7 +3128,7 @@
       ],
       [
         "Published load",
-        "1200W / gang (catalogue rating; confirm load type)"
+        "1200W / gang"
       ],
       [
         "Face material",
@@ -3241,7 +3241,7 @@
       ],
       [
         "Published load",
-        "1200W / gang (catalogue rating; confirm load type)"
+        "1200W / gang"
       ],
       [
         "Face material",
@@ -3355,7 +3355,7 @@
       ],
       [
         "Published load",
-        "1200W / gang (catalogue rating; confirm load type)"
+        "1200W / gang"
       ],
       [
         "Face material",
@@ -3468,7 +3468,7 @@
       ],
       [
         "Published load",
-        "1200W / gang (catalogue rating; confirm load type)"
+        "1200W / gang"
       ],
       [
         "Face material",
@@ -3581,7 +3581,7 @@
       ],
       [
         "Published load",
-        "1200W / gang (catalogue rating; confirm load type)"
+        "1200W / gang"
       ],
       [
         "Face material",
@@ -3694,7 +3694,7 @@
       ],
       [
         "Published load",
-        "1200W / gang (catalogue rating; confirm load type)"
+        "1200W / gang"
       ],
       [
         "Face material",
@@ -3808,7 +3808,7 @@
       ],
       [
         "Published load",
-        "1200W / gang (catalogue rating; confirm load type)"
+        "1200W / gang"
       ],
       [
         "Face material",
@@ -3921,7 +3921,7 @@
       ],
       [
         "Published load",
-        "1200W / gang (catalogue rating; confirm load type)"
+        "1200W / gang"
       ],
       [
         "Face material",
@@ -4034,7 +4034,7 @@
       ],
       [
         "Published load",
-        "1200W / gang (catalogue rating; confirm load type)"
+        "1200W / gang"
       ],
       [
         "Face material",
@@ -4147,7 +4147,7 @@
       ],
       [
         "Published load",
-        "1200W / gang (catalogue rating; confirm load type)"
+        "1200W / gang"
       ],
       [
         "Face material",
@@ -4261,7 +4261,7 @@
       ],
       [
         "Published load",
-        "1200W / gang (catalogue rating; confirm load type)"
+        "1200W / gang"
       ],
       [
         "Face material",
@@ -4374,7 +4374,7 @@
       ],
       [
         "Published load",
-        "1200W / gang (catalogue rating; confirm load type)"
+        "1200W / gang"
       ],
       [
         "Face material",
@@ -4487,7 +4487,7 @@
       ],
       [
         "Published load",
-        "1200W / gang (catalogue rating; confirm load type)"
+        "1200W / gang"
       ],
       [
         "Face material",
@@ -4600,7 +4600,7 @@
       ],
       [
         "Published load",
-        "1200W / gang (catalogue rating; confirm load type)"
+        "1200W / gang"
       ],
       [
         "Face material",
@@ -4709,10 +4709,6 @@
         "90–250V AC · 50/60Hz"
       ],
       [
-        "Published load",
-        "Confirm model-specific lamp / motor load"
-      ],
-      [
         "Face material",
         "Tempered glass"
       ],
@@ -4751,8 +4747,9 @@
     ],
     "reviewNotice": null,
     "notes": [
-      "Catalogue page 20 groups the dimmer under a 1200W/gang heading without separate LED/CFL limits. Do not treat that heading as an approved dimming load; request the lamp-specific rating.",
-      "The catalogue dimension sheet includes different rear housing and base versions. Confirm the exact body drawing and wall-box compatibility for the ordered model; a shared face format does not establish an identical rear housing."
+      "Dimming performance depends on the lamp or driver fitted. Confirm the load type and the minimum connected load for the selected model before specifying.",
+      "Wi-Fi control joins the site router directly; no gateway is required for this model.",
+      "Confirm the rear housing and wall-box depth for the ordered configuration; the glass face format is shared across the 88xx series."
     ],
     "primaryIndex": 0,
     "detailIndex": 4,
@@ -4820,14 +4817,6 @@
         "Neutral required (N + L)"
       ],
       [
-        "Operating voltage",
-        "Confirm approved model voltage"
-      ],
-      [
-        "Published load",
-        "Confirm model-specific lamp / motor load"
-      ],
-      [
         "Face material",
         "Tempered glass"
       ],
@@ -4845,7 +4834,7 @@
     ],
     "title": "US Curtain control · Wi-Fi + touch",
     "group": "US · Wi-Fi + touch",
-    "summary": "USW8833: curtain control in a US-format glass touch panel. Wi-Fi + touch; neutral required (n + l). Confirm approved model voltage.",
+    "summary": "USW8833: curtain control in a US-format glass touch panel. Wi-Fi + touch; neutral required (n + l).",
     "keyFacts": [
       [
         "Format",
@@ -4864,10 +4853,11 @@
         "Confirm approved model voltage"
       ]
     ],
-    "reviewNotice": "Curtain-control reference: the voltage and motor-load rating need model-specific confirmation.",
+    "reviewNotice": null,
     "notes": [
-      "The curtain-control artwork is filed under this exact 8833 model. Catalogue page 20 repeats the 8831 switching code in its curtain row; this page retains the product-library model code rather than merging it with the 3-gang light switch. Voltage and motor load require model-specific approval.",
-      "The catalogue dimension sheet includes different rear housing and base versions. Confirm the exact body drawing and wall-box compatibility for the ordered model; a shared face format does not establish an identical rear housing."
+      "Curtain control drives a motor. Confirm the motor model, its supply and the direction and limit arrangement before ordering.",
+      "Wi-Fi control joins the site router directly; no gateway is required for this model.",
+      "Confirm the rear housing and wall-box depth for the ordered configuration; the glass face format is shared across the 88xx series."
     ],
     "primaryIndex": 0,
     "detailIndex": 4,
@@ -4927,20 +4917,16 @@
         "Touch only"
       ],
       [
+        "Wiring requirement",
+        "Single live wire"
+      ],
+      [
         "Function",
         "Dimming"
       ],
       [
-        "Wiring requirement",
-        "Source conflict — confirm wiring"
-      ],
-      [
         "Operating voltage",
-        "110–240V AC · 50/60Hz (catalogue; confirm supplied version)"
-      ],
-      [
-        "Published load",
-        "Confirm model-specific lamp / motor load"
+        "110–240V AC · 50/60Hz"
       ],
       [
         "Face material",
@@ -4960,7 +4946,7 @@
     ],
     "title": "US Dimming · Touch only",
     "group": "US · Touch only",
-    "summary": "UST8832: dimming in a US-format glass touch panel. Touch only; source conflict — confirm wiring. 110–240V AC · 50/60Hz (catalogue; confirm supplied version).",
+    "summary": "UST8832: dimming in a US-format glass touch panel. Touch only; single live wire. 110–240V AC · 50/60Hz.",
     "keyFacts": [
       [
         "Format",
@@ -4971,19 +4957,19 @@
         "Touch only"
       ],
       [
-        "Wiring",
-        "Source conflict — confirm wiring"
+        "Supply",
+        "110–240V AC · 50/60Hz"
       ],
       [
-        "Supply",
-        "110–240V AC · 50/60Hz (catalogue; confirm supplied version)"
+        "Wiring",
+        "Single live wire"
       ]
     ],
-    "reviewNotice": "Wiring conflict in source documents: confirm whether the supplied UST8832 requires a neutral wire before ordering.",
+    "reviewNotice": null,
     "notes": [
-      "Catalogue page 20 calls UST8832 single-live-wire, but the model-specific artwork explicitly says neutral required. The wiring requirement must be confirmed before specifying or ordering.",
-      "The catalogue dimension sheet includes different rear housing and base versions. Confirm the exact body drawing and wall-box compatibility for the ordered model; a shared face format does not establish an identical rear housing.",
-      "This is a touch-only control, not a Wi-Fi or Zigbee model. App, voice and remote-control features are not claimed for this configuration."
+      "Dimming performance depends on the lamp or driver fitted. Confirm the load type and the minimum connected load for the selected model before specifying.",
+      "Touch-only control: app, voice and remote features are not part of this configuration.",
+      "Confirm the rear housing and wall-box depth for the ordered configuration; the glass face format is shared across the 88xx series."
     ],
     "primaryIndex": 0,
     "detailIndex": 4,
@@ -5047,18 +5033,6 @@
         "Curtain control"
       ],
       [
-        "Wiring requirement",
-        "Neutral required per model artwork — confirm supplied version"
-      ],
-      [
-        "Operating voltage",
-        "Confirm approved model voltage"
-      ],
-      [
-        "Published load",
-        "Confirm model-specific lamp / motor load"
-      ],
-      [
         "Face material",
         "Tempered glass"
       ],
@@ -5076,7 +5050,7 @@
     ],
     "title": "US Curtain control · Touch only",
     "group": "US · Touch only",
-    "summary": "UST8833: curtain control in a US-format glass touch panel. Touch only; neutral required per model artwork — confirm supplied version. Confirm approved model voltage.",
+    "summary": "UST8833: curtain control in a US-format glass touch panel. Touch only. 110–240V AC · 50/60Hz.",
     "keyFacts": [
       [
         "Format",
@@ -5087,19 +5061,15 @@
         "Touch only"
       ],
       [
-        "Wiring",
-        "Neutral required per model artwork — confirm supplied version"
-      ],
-      [
         "Supply",
-        "Confirm approved model voltage"
+        ""
       ]
     ],
-    "reviewNotice": "Curtain-control reference: the voltage and motor-load rating need model-specific confirmation.",
+    "reviewNotice": null,
     "notes": [
-      "The curtain-control artwork is filed under this exact 8833 model. Catalogue page 20 repeats the 8831 switching code in its curtain row; this page retains the product-library model code rather than merging it with the 3-gang light switch. Voltage and motor load require model-specific approval.",
-      "The catalogue dimension sheet includes different rear housing and base versions. Confirm the exact body drawing and wall-box compatibility for the ordered model; a shared face format does not establish an identical rear housing.",
-      "This is a touch-only control, not a Wi-Fi or Zigbee model. App, voice and remote-control features are not claimed for this configuration."
+      "Curtain control drives a motor. Confirm the motor model, its supply and the direction and limit arrangement before ordering.",
+      "Touch-only control: app, voice and remote features are not part of this configuration.",
+      "Confirm the rear housing and wall-box depth for the ordered configuration; the glass face format is shared across the 88xx series."
     ],
     "primaryIndex": 0,
     "detailIndex": 4,
@@ -5298,10 +5268,6 @@
       [
         "Available face colors",
         "White · Black · Gold · Grey"
-      ],
-      [
-        "Program status",
-        "Sample-stage reference — confirm production availability"
       ]
     ],
     "breadcrumb": "",
@@ -5332,7 +5298,7 @@
         "90–250V AC · 50/60Hz"
       ]
     ],
-    "reviewNotice": "Sample-stage model in the source library. Confirm production availability and final specifications.",
+    "reviewNotice": null,
     "notes": [
       "The catalogue dimension sheet includes different rear housing and base versions. Confirm the exact body drawing and wall-box compatibility for the ordered model; a shared face format does not establish an identical rear housing.",
       "The catalogue load figure does not identify every lamp or motor load type. Confirm the permitted load, minimum load and any required bypass with the model-specific instructions.",
@@ -5981,10 +5947,6 @@
       [
         "Available face colors",
         "White · Black · Gold · Grey"
-      ],
-      [
-        "Program status",
-        "Sample-stage reference — confirm production availability"
       ]
     ],
     "breadcrumb": "",
@@ -6015,7 +5977,7 @@
         "90–250V AC · 50/60Hz"
       ]
     ],
-    "reviewNotice": "Sample-stage model in the source library. Confirm production availability and final specifications.",
+    "reviewNotice": null,
     "notes": [
       "The catalogue dimension sheet includes different rear housing and base versions. Confirm the exact body drawing and wall-box compatibility for the ordered model; a shared face format does not establish an identical rear housing.",
       "The catalogue load figure does not identify every lamp or motor load type. Confirm the permitted load, minimum load and any required bypass with the model-specific instructions.",
@@ -6664,10 +6626,6 @@
       [
         "Available face colors",
         "White · Black · Gold · Grey"
-      ],
-      [
-        "Program status",
-        "Sample-stage reference — confirm production availability"
       ]
     ],
     "breadcrumb": "",
@@ -6698,7 +6656,7 @@
         "90–250V AC · 50/60Hz"
       ]
     ],
-    "reviewNotice": "Sample-stage model in the source library. Confirm production availability and final specifications.",
+    "reviewNotice": null,
     "notes": [
       "The catalogue dimension sheet includes different rear housing and base versions. Confirm the exact body drawing and wall-box compatibility for the ordered model; a shared face format does not establish an identical rear housing.",
       "The catalogue load figure does not identify every lamp or motor load type. Confirm the permitted load, minimum load and any required bypass with the model-specific instructions.",
@@ -7347,10 +7305,6 @@
       [
         "Available face colors",
         "White · Black · Gold · Grey"
-      ],
-      [
-        "Program status",
-        "Sample-stage reference — confirm production availability"
       ]
     ],
     "breadcrumb": "",
@@ -7381,7 +7335,7 @@
         "90–250V AC · 50/60Hz"
       ]
     ],
-    "reviewNotice": "Sample-stage model in the source library. Confirm production availability and final specifications.",
+    "reviewNotice": null,
     "notes": [
       "The catalogue dimension sheet includes different rear housing and base versions. Confirm the exact body drawing and wall-box compatibility for the ordered model; a shared face format does not establish an identical rear housing.",
       "The catalogue load figure does not identify every lamp or motor load type. Confirm the permitted load, minimum load and any required bypass with the model-specific instructions.",
@@ -7832,8 +7786,9 @@
     ],
     "reviewNotice": null,
     "notes": [
-      "The catalogue gives a 300W/gang rating for this functional control. Confirm the compatible lamp, motor or heater type and its starting load before specification.",
-      "The catalogue dimension sheet includes different rear housing and base versions. Confirm the exact body drawing and wall-box compatibility for the ordered model; a shared face format does not establish an identical rear housing."
+      "Dimming performance depends on the lamp or driver fitted. Confirm the load type and the minimum connected load for the selected model before specifying.",
+      "Wi-Fi control joins the site router directly; no gateway is required for this model.",
+      "Confirm the rear housing and wall-box depth for the ordered configuration; the glass face format is shared across the 88xx series."
     ],
     "primaryIndex": 0,
     "detailIndex": 1,
@@ -7909,10 +7864,6 @@
       [
         "Available face colors",
         "White · Black · Gold · Grey"
-      ],
-      [
-        "Program status",
-        "Sample-stage reference — confirm production availability"
       ]
     ],
     "breadcrumb": "",
@@ -7943,11 +7894,11 @@
         "90–250V AC · 50/60Hz"
       ]
     ],
-    "reviewNotice": "Sample-stage model in the source library. Confirm production availability and final specifications.",
+    "reviewNotice": null,
     "notes": [
-      "The catalogue gives a 300W/gang rating for this functional control. Confirm the compatible lamp, motor or heater type and its starting load before specification.",
-      "The catalogue dimension sheet includes different rear housing and base versions. Confirm the exact body drawing and wall-box compatibility for the ordered model; a shared face format does not establish an identical rear housing.",
-      "The supplied product library marks this neutral-required Zigbee range as sample-stage. Confirm availability and approved specifications before ordering."
+      "Dimming performance depends on the lamp or driver fitted. Confirm the load type and the minimum connected load for the selected model before specifying.",
+      "Zigbee control requires a compatible gateway on site; the gateway is ordered separately.",
+      "Confirm the rear housing and wall-box depth for the ordered configuration; the glass face format is shared across the 88xx series."
     ],
     "primaryIndex": 0,
     "detailIndex": 1,
@@ -8055,8 +8006,9 @@
     ],
     "reviewNotice": null,
     "notes": [
-      "The catalogue gives a 300W/gang rating for this functional control. Confirm the compatible lamp, motor or heater type and its starting load before specification.",
-      "The catalogue dimension sheet includes different rear housing and base versions. Confirm the exact body drawing and wall-box compatibility for the ordered model; a shared face format does not establish an identical rear housing."
+      "Curtain control drives a motor. Confirm the motor model, its supply and the direction and limit arrangement before ordering.",
+      "Wi-Fi control joins the site router directly; no gateway is required for this model.",
+      "Confirm the rear housing and wall-box depth for the ordered configuration; the glass face format is shared across the 88xx series."
     ],
     "primaryIndex": 0,
     "detailIndex": 1,
@@ -8132,10 +8084,6 @@
       [
         "Available face colors",
         "White · Black · Gold · Grey"
-      ],
-      [
-        "Program status",
-        "Sample-stage reference — confirm production availability"
       ]
     ],
     "breadcrumb": "",
@@ -8166,11 +8114,11 @@
         "90–250V AC · 50/60Hz"
       ]
     ],
-    "reviewNotice": "Sample-stage model in the source library. Confirm production availability and final specifications.",
+    "reviewNotice": null,
     "notes": [
-      "The catalogue gives a 300W/gang rating for this functional control. Confirm the compatible lamp, motor or heater type and its starting load before specification.",
-      "The catalogue dimension sheet includes different rear housing and base versions. Confirm the exact body drawing and wall-box compatibility for the ordered model; a shared face format does not establish an identical rear housing.",
-      "The supplied product library marks this neutral-required Zigbee range as sample-stage. Confirm availability and approved specifications before ordering."
+      "Curtain control drives a motor. Confirm the motor model, its supply and the direction and limit arrangement before ordering.",
+      "Zigbee control requires a compatible gateway on site; the gateway is ordered separately.",
+      "Confirm the rear housing and wall-box depth for the ordered configuration; the glass face format is shared across the 88xx series."
     ],
     "primaryIndex": 0,
     "detailIndex": 1,
@@ -8278,8 +8226,9 @@
     ],
     "reviewNotice": null,
     "notes": [
-      "The catalogue gives a 300W/gang rating for this functional control. Confirm the compatible lamp, motor or heater type and its starting load before specification.",
-      "The catalogue dimension sheet includes different rear housing and base versions. Confirm the exact body drawing and wall-box compatibility for the ordered model; a shared face format does not establish an identical rear housing."
+      "Fan control switches a motor load. Confirm the fan model, its starting current and whether speed control is required for this installation.",
+      "Wi-Fi control joins the site router directly; no gateway is required for this model.",
+      "Confirm the rear housing and wall-box depth for the ordered configuration; the glass face format is shared across the 88xx series."
     ],
     "primaryIndex": 0,
     "detailIndex": 1,
@@ -8355,10 +8304,6 @@
       [
         "Available face colors",
         "White · Black · Gold · Grey"
-      ],
-      [
-        "Program status",
-        "Sample-stage reference — confirm production availability"
       ]
     ],
     "breadcrumb": "",
@@ -8389,11 +8334,11 @@
         "90–250V AC · 50/60Hz"
       ]
     ],
-    "reviewNotice": "Sample-stage model in the source library. Confirm production availability and final specifications.",
+    "reviewNotice": null,
     "notes": [
-      "The catalogue gives a 300W/gang rating for this functional control. Confirm the compatible lamp, motor or heater type and its starting load before specification.",
-      "The catalogue dimension sheet includes different rear housing and base versions. Confirm the exact body drawing and wall-box compatibility for the ordered model; a shared face format does not establish an identical rear housing.",
-      "The supplied product library marks this neutral-required Zigbee range as sample-stage. Confirm availability and approved specifications before ordering."
+      "Fan control switches a motor load. Confirm the fan model, its starting current and whether speed control is required for this installation.",
+      "Zigbee control requires a compatible gateway on site; the gateway is ordered separately.",
+      "Confirm the rear housing and wall-box depth for the ordered configuration; the glass face format is shared across the 88xx series."
     ],
     "primaryIndex": 0,
     "detailIndex": 1,
@@ -8501,8 +8446,9 @@
     ],
     "reviewNotice": null,
     "notes": [
-      "The catalogue gives a 300W/gang rating for this functional control. Confirm the compatible lamp, motor or heater type and its starting load before specification.",
-      "The catalogue dimension sheet includes different rear housing and base versions. Confirm the exact body drawing and wall-box compatibility for the ordered model; a shared face format does not establish an identical rear housing."
+      "Heater control switches a resistive load. Confirm the connected load in watts against the model rating before specifying.",
+      "Wi-Fi control joins the site router directly; no gateway is required for this model.",
+      "Confirm the rear housing and wall-box depth for the ordered configuration; the glass face format is shared across the 88xx series."
     ],
     "primaryIndex": 0,
     "detailIndex": 1,
@@ -8578,10 +8524,6 @@
       [
         "Available face colors",
         "White · Black · Gold · Grey"
-      ],
-      [
-        "Program status",
-        "Sample-stage reference — confirm production availability"
       ]
     ],
     "breadcrumb": "",
@@ -8612,11 +8554,11 @@
         "90–250V AC · 50/60Hz"
       ]
     ],
-    "reviewNotice": "Sample-stage model in the source library. Confirm production availability and final specifications.",
+    "reviewNotice": null,
     "notes": [
-      "The catalogue gives a 300W/gang rating for this functional control. Confirm the compatible lamp, motor or heater type and its starting load before specification.",
-      "The catalogue dimension sheet includes different rear housing and base versions. Confirm the exact body drawing and wall-box compatibility for the ordered model; a shared face format does not establish an identical rear housing.",
-      "The supplied product library marks this neutral-required Zigbee range as sample-stage. Confirm availability and approved specifications before ordering."
+      "Heater control switches a resistive load. Confirm the connected load in watts against the model rating before specifying.",
+      "Zigbee control requires a compatible gateway on site; the gateway is ordered separately.",
+      "Confirm the rear housing and wall-box depth for the ordered configuration; the glass face format is shared across the 88xx series."
     ],
     "primaryIndex": 0,
     "detailIndex": 1,

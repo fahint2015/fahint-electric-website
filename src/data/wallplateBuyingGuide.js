@@ -256,6 +256,26 @@ export const wallplateBuyingGuide = {
     {
       "type": "p",
       "text": "Split quantities by model and finish. Send any unresolved mounting or device-pairing question with the inquiry."
+    },
+    {
+      "type": "h2",
+      "text": "Reading a BS number before you quote it"
+    },
+    {
+      "type": "p",
+      "text": "Every wallplate line starts with BS, and the digits after it address the opening, the gang count or the exterior size depending on the series. BS1801-M and BS1802 sit in the standard range, BS1803 appears in both a glossy and a matte finish under separate suffixes, and the BS1806 to BS18034 group covers the larger and screwless formats. The suffix is not decoration: BS1803-G and BS1803-M are the same opening with a different surface."
+    },
+    {
+      "type": "p",
+      "text": "The supplied drawings give 6.5 mm thickness for the standard range, and that number matters when a plate is replacing an existing one over an uneven wall. Thin plates follow the wall; the same plate on a flat surface shows a shadow at the edge. Both are correct installations, and both look wrong in the other situation."
+    },
+    {
+      "type": "p",
+      "text": "Certificate coverage follows the series rather than the whole catalogue. The August 16, 2022 report E501377-20181016 covers BS1801, BS1802, BS1803 and BS1804; the September 25, 2023 report E501377-20230919 covers BS1806, BS1807, BS18012, BS18013, BS18014, BS18032, BS18033 and BS18034. A plate outside those lists needs its own model document, whatever the family page says."
+    },
+    {
+      "type": "p",
+      "text": "Order the plate against the device, not against the room. One line should carry the device model, the plate model, the finish and the quantity, so a reorder six months later reproduces the wall rather than approximating it."
     }
   ]
 };

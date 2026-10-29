@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Link } from '../components/SiteLink.jsx';
 import { ChevronDown, Download, ArrowUpRight } from 'lucide-react';
@@ -24,15 +24,31 @@ function ArticleContent({ post }) {
   usePageMetadata(metadata);
   const [outlineOpen, setOutlineOpen] = useState(false);
   const headings = post.body.map((block,index) => ({ ...block, id:'article-section-' + index })).filter(block => block.type === 'h2');
+  const [activeSection, setActiveSection] = useState(headings[0]?.id ?? '');
+  useEffect(() => {
+    const targets = headings.map(heading => document.getElementById(heading.id)).filter(Boolean);
+    if (!targets.length || typeof IntersectionObserver !== 'function') return undefined;
+    const observer = new IntersectionObserver(entries => {
+      const visible = entries
+        .filter(entry => entry.isIntersecting)
+        .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+      if (visible[0]) setActiveSection(visible[0].target.id);
+    }, { rootMargin: '-88px 0px -62% 0px', threshold: 0 });
+    targets.forEach(target => observer.observe(target));
+    return () => observer.disconnect();
+  }, [post.slug]);
   const related = posts.filter(item => item.slug !== post.slug).sort((a,b) => Number(b.category === post.category) - Number(a.category === post.category)).slice(0,3);
   return <div className="company-page reading-page reading-post">
     <header className="reading-article-heading"><div className="company-wrap">
       <nav className="company-breadcrumb" aria-label="Breadcrumb"><Link to="/">Home</Link><span aria-hidden="true">/</span><Link to="/blog">Guides & insights</Link><span aria-hidden="true">/</span><span>{post.category}</span></nav>
-      <div className="reading-article-intro">
-        <div className="reading-article-title"><Reveal as="h1">{post.title}</Reveal><Reveal as="p" delay={160}>{post.excerpt}</Reveal><div className="reading-meta"><span>{post.category}</span><span>By <Link to="/about" rel="author">FAHINT</Link></span><time dateTime={metadata.entity.dateModified}>Updated {formatPostDate(metadata.entity.dateModified)}</time><span>{post.readMinutes} min read</span></div></div>
-        <Reveal as="figure" className="reading-article-image"><EditorialPhoto src={post.cover} alt={post.coverAlt} region={post.coverRegion} width={post.coverWidth} height={post.coverHeight} position={post.coverPosition} fit={post.coverFit} ratio={1.5} priority /><figcaption>{post.coverCaption}</figcaption></Reveal>
-      </div>
+      <div className="reading-article-title"><Reveal as="h1">{post.title}</Reveal><Reveal as="p" delay={160}>{post.excerpt}</Reveal><div className="reading-meta"><span>{post.category}</span><span>By <Link to="/about" rel="author">FAHINT</Link></span><time dateTime={metadata.entity.dateModified}>Updated {formatPostDate(metadata.entity.dateModified)}</time><span>{post.readMinutes} min read</span></div></div>
     </div></header>
+    <Reveal as="div" className="company-wrap reading-article-hero-wrap">
+      <figure className="reading-article-hero">
+        <EditorialPhoto src={post.cover} alt={post.coverAlt} region={post.coverRegion} width={post.coverWidth} height={post.coverHeight} position={post.coverPosition} fit={post.coverFit} ratio={16 / 9} priority />
+        <figcaption>{post.coverCaption}</figcaption>
+      </figure>
+    </Reveal>
     <div className="company-wrap reading-article-layout">
       <aside className="reading-article-nav">
         <h2 className="reading-article-nav-title">In this article</h2>
@@ -41,7 +57,7 @@ function ArticleContent({ post }) {
         </button>
         <div id="reading-outline" className={`reading-outline${outlineOpen ? ' is-open' : ''}`}>
           <nav aria-label="In this article">
-            <ol>{headings.map(heading => <li key={heading.id}><Link to={'#' + heading.id}>{heading.text}</Link></li>)}</ol>
+            <ol>{headings.map(heading => <li key={heading.id}><Link to={'#' + heading.id} className={activeSection === heading.id ? 'is-active' : undefined} aria-current={activeSection === heading.id ? 'true' : undefined}>{heading.text}</Link></li>)}</ol>
           </nav>
           <div className="reading-document"><h3>Keep the details close.</h3><p>Compare the product with the original model documentation.</p><a className="company-text-link" href={publicAsset(catalogueDocument)} download>Download FAHINT catalog <Download size={16} aria-hidden="true" /></a><CompanyLink to="/resources#certifications" secondary>Certificate library</CompanyLink></div>
         </div>
@@ -50,6 +66,7 @@ function ArticleContent({ post }) {
         <p className="reading-safety-note">Buyer information, not installation instructions. Requirements depend on the adopted local code and exact product. Electrical work and site diagnosis should be performed by qualified professionals.</p>
         {post.body.map((block, index) => {
           if (block.type === 'h2') return <h2 id={'article-section-' + index} key={index}>{block.text}</h2>;
+          if (block.type === 'h3') return <h3 key={index}>{block.text}</h3>;
           if (block.type === 'list') return <ul className="reading-checklist" aria-label={block.label} key={index}>{block.items.map(item => <li key={item}>{item}</li>)}</ul>;
           if (block.type === 'table') return <div className="reading-table-scroll" role="region" aria-label={block.caption} tabIndex={0} key={index}>
             <table><caption>{block.caption}<span aria-hidden="true">Scroll sideways on smaller screens.</span></caption>
@@ -68,7 +85,7 @@ function ArticleContent({ post }) {
         <div className="reading-article-cta"><h2>Reviewing a specific model?</h2><p>Send the model and the question you want to resolve. We will help locate the relevant product information.</p><CompanyLink to="/contact?topic=technical">Ask a product question</CompanyLink></div>
       </article>
     </div>
-    <section className="company-section company-section--paper"><div className="company-wrap"><div className="company-heading"><h2>Continue reading.</h2><CompanyLink to="/blog" secondary>All guides & insights</CompanyLink></div><div className="reading-grid">{related.map(item => <ReadingCard post={item} key={item.slug} />)}</div></div></section>
+    <section className="company-section company-section--paper reading-related"><div className="company-wrap"><div className="company-heading"><h2>Continue reading.</h2><CompanyLink to="/blog" secondary>All guides & insights</CompanyLink></div><div className="reading-grid">{related.map(item => <ReadingCard post={item} key={item.slug} />)}</div></div></section>
   </div>;
 }
 

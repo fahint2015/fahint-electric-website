@@ -189,6 +189,33 @@ export const roomOutletPlanningGuide = {
           "href": "/contact?topic=technical"
         }
       ]
+    },
+    {
+      "type": "h2",
+      "text": "Turning the room schedule into order lines"
+    },
+    {
+      "type": "p",
+      "text": "A schedule only becomes useful when each location turns into one order line, and every line carries the same five fields: device model, finish, wallplate, quantity and destination. Anything left outside those fields — \"white outlets for the guest floors\" — gets resolved by whoever is quoting, which is rarely the person who owns the design."
+    },
+    {
+      "type": "p",
+      "text": "Hotel work repeats. Fifty guest rooms usually carry the same package, so the schedule collapses into one line with a quantity of fifty and a sample approved once for the room type. Office fit-outs run the other way: meeting rooms, focus rooms and open desks differ by zone, and a schedule that repeats one line across a floor will be wrong in at least one zone."
+    },
+    {
+      "type": "list",
+      "label": "What makes a line unambiguous",
+      "items": [
+        "One line per device configuration, not one line per room",
+        "The wallplate written on the same line as the device it fits",
+        "Finish named by the catalogue term, not by an impression of the colour",
+        "Destination and pack format, because both change the packing cost",
+        "Sample reference and approval date, so a reorder can be checked against them"
+      ]
+    },
+    {
+      "type": "p",
+      "text": "Approve the sample per room type rather than per order. A guest bathroom and a hotel desk take different devices, and one approved sample cannot stand in for both. We ask for the room type, the sample reference and the quantity when a schedule arrives, and return a quotation that keeps the lines separate."
     }
   ]
 };

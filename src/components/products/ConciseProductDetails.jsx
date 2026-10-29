@@ -7,6 +7,7 @@ import { resourcesHref, catalogueDocument } from '../../data/documents.js';
 import { publicAsset } from '../../utils/publicAsset.js';
 import { modelDocumentationNote } from '../../data/buyingGuides.js';
 import { modelGuideLink } from '../../data/modelGuideLinks.js';
+import { modelNote } from '../../data/smartSwitchNotes.js';
 import Reveal from '../Reveal.jsx';
 
 export { conciseSpecificationRows } from '../../utils/productSpecifications.js';
@@ -16,6 +17,7 @@ export default function ConciseProductDetails({ product, contactHref }) {
   const tabRefs = useRef({});
   const certificate = findModelCertificate(product);
   const guide = modelGuideLink(product.sku, product.line || 'gfci');
+  const note = modelNote(product.sku);
   const features = (product.functionalFeatures || product.features || []).filter(feature => !/certified under.*report reference/i.test(feature));
   const documents = [
     ...(certificate ? [{ label: 'Model certificate', href: certificate.document }] : []),
@@ -51,6 +53,12 @@ export default function ConciseProductDetails({ product, contactHref }) {
         </div>
       </div>
     </section>
+    {note && <Reveal as="section" id="model-notes" className="concise-product-parameters" aria-labelledby="model-notes-title">
+      <div className="container">
+        <h2 id="model-notes-title">Choosing this model</h2>
+        <p className="concise-product-model-note">{note}</p>
+      </div>
+    </Reveal>}
     <Reveal as="section" id="technical-details" className="concise-product-parameters" aria-labelledby="technical-parameters-title">
       <div className="container">
         <h2 id="technical-parameters-title">Technical Parameters</h2>
