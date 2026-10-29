@@ -204,7 +204,7 @@ export const dimmerBuyingGuide = {
     },
     {
       "type": "p",
-      "text": "Both models sit in the same family and fit the same wallplate, which is why they get confused in schedules. The control method separates them. DM2010 is a digital slide dimmer and dims at the device. DM2010S takes a 0–10 V control signal, so the dimming decision happens elsewhere — a lighting controller, a wall station or a building system that outputs 0–10 V."
+      "text": "Both models sit in the same family and fit the same wallplate, which is why they get confused in schedules. The control method separates them. DM2010 is a digital slide dimmer and dims at the device. DM2010S produces a 0–10 V DC analog control signal of its own and sends it to compatible LED drivers or fluorescent ballasts, so the dimming command leaves the device and the driver does the work."
     },
     {
       "type": "p",

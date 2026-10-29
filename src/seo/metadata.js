@@ -3,6 +3,7 @@ import { findModelCertificate } from '../data/certificates.js';
 import { conciseSpecificationRows } from '../utils/productSpecifications.js';
 import { modelGuideLink } from '../data/modelGuideLinks.js';
 import { organizationEntity, organizationUpdated, certificateId, supportingEntities } from './entities.js';
+import { modelNoteDate } from '../data/smartSwitchNotes.js';
 const organization = { '@type': 'Organization', name: 'FAHINT', legalName: 'Wenzhou Fahint Electric Co., Ltd.' };
 const homeImage = 'assets/images/brand-home/generated/hero-family-belief-background.webp';
 export const staticMetadata = Object.fromEntries(Object.entries({
@@ -105,7 +106,7 @@ export function productMetadata(product, line) {
   const path = `/products/${line.slug}/${product.slug || product.sku.toLowerCase()}`;
   return {
     // Record only actual model-copy, document or guide-link changes, never a build timestamp.
-    updated: [product.updated || '2026-10-25', modelGuideLink(product.sku, line.slug)?.updated].filter(Boolean).sort().at(-1),
+    updated: [product.updated || '2026-10-25', modelGuideLink(product.sku, line.slug)?.updated, modelNoteDate(product.sku)].filter(Boolean).sort().at(-1),
     structuredDataUpdated: organizationUpdated,
     path, title: `${product.sku} ${product.name} | FAHINT`, description: product.summary,
     image: product.assets.hero, imageAlt: `FAHINT ${product.sku} ${product.name}`,

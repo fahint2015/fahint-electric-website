@@ -112,7 +112,7 @@ export const productQuestionGuides = [
       },
       {
         "type": "p",
-        "text": "Two things go wrong at order stage. The first is buying a blank-face device for a location that later needs an outlet; the fix is a GT20 or GW20, not a different plate. The second is forgetting the plate: a blank-face device still needs a wallplate, and it needs one with no opening, which is a different line on the order."
+        "text": "Two things go wrong at order stage. The first is buying a blank-face device for a location that later needs an outlet; the fix is a GT20 or GW20, not a different plate. The second is the plate: a blank-face device still needs a wallplate, and it needs one with a device opening so the TEST and RESET buttons stay reachable — a solid cover would hide the very controls the device depends on."
       },
       {
         "type": "p",
@@ -252,7 +252,7 @@ export const productQuestionGuides = [
       },
       {
         "type": "p",
-        "text": "With two devices connected, the published combined limit applies. A laptop at 65 W plus a phone is not 65 W plus 20 W; the outlet divides what it can supply, and the laptop may drop to a slower profile. If both ports matter, say which device has priority."
+        "text": "With two devices connected, the split follows whatever the model publishes for simultaneous use. A laptop at 65 W plus a phone is not 65 W plus 20 W on every product, and where a model does not publish a combined figure, the two single-port ratings should not be added together to make one. Ask for the simultaneous-port data on the exact model."
       },
       {
         "type": "p",
@@ -322,7 +322,7 @@ export const productQuestionGuides = [
       },
       {
         "type": "p",
-        "text": "For packing, we label cartons by the full model rather than the family, so a site can sort by terminal type without opening boxes. If both suffixes ship in one order, ask for them in separate cartons — it costs nothing at packing and saves an hour at installation."
+        "text": "For packing, cartons are labelled by the full model rather than the family, so a site can sort by terminal type without opening boxes. If both suffixes ship in one order, say so on the purchase order and the split is agreed with the packing instruction rather than assumed after the fact."
       }
     ]
   },
@@ -702,7 +702,7 @@ export const productQuestionGuides = [
       },
       {
         "type": "p",
-        "text": "Before a sample ships, we ask for four photographs: the inside of the box, the existing wiring, the wall opening with dimensions, and the old switch from the front. Those four answer the neutral question, the gang question and the frame question at once, and they cost the buyer nothing."
+        "text": "A useful starting point before a sample ships: four photographs — the inside of the box, the existing wiring, the wall opening with dimensions, and the old switch from the front. They answer the neutral question, the gang question and the frame question in one exchange."
       }
     ]
   },
@@ -842,7 +842,7 @@ export const productQuestionGuides = [
       },
       {
         "type": "p",
-        "text": "Exterior size is the second decision. The standard plates run around 75 × 120 mm and the medium screw-fixed plates around 80 × 124 mm; the difference is what closes a gap left by the previous plate. If the wall already carries a painted outline, measure it before choosing."
+        "text": "Exterior size is the second decision, and it is not uniform across the range: BS1801 is listed at 70 × 115 mm, BS1803 at 75 × 120 mm, and the medium screw-fixed plates are larger again. Take the size from the row for the model you are ordering instead of a family average — the difference is what closes a gap left by the previous plate."
       },
       {
         "type": "p",

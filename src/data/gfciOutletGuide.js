@@ -163,12 +163,12 @@ export const gfciOutletGuide = {
     { type: 'h3', text: 'Why does a GFCI trip when nothing is plugged in?' },
     {
       type: 'p',
-      text: 'The fault is usually downstream: moisture in an exterior box, a damaged conductor, or an appliance on the protected leg. Unplug everything on the circuit and reset once. If it trips again with nothing connected, the problem is in the wiring and needs an electrician.'
+      text: 'The fault is usually downstream: moisture in an exterior box, a damaged conductor, or an appliance on the protected leg. Unplug everything on the circuit and reset once. If it trips again with nothing connected, the circuit still needs an electrician — an empty circuit that keeps tripping can mean damaged wiring, but it can also mean a supply or terminal problem at the device itself, and only a person on site can tell those apart.'
     },
     { type: 'h3', text: 'How long does a GFCI outlet last?' },
     {
       type: 'p',
-      text: 'Manufacturers publish no single service life because it depends on load, environment and how often the device is exercised. A device that will not reset, will not trip on test, or shows an unfamiliar indicator has reached the end of its service life and should be replaced.'
+      text: 'Manufacturers publish no single service life because it depends on load, environment and how often the device is exercised. A device that will not reset, will not trip on test, or shows an unfamiliar indicator should be taken out of service until the cause is known: the fault may sit in the device, in the supply, in the wiring behind it or in something plugged into the circuit, and separating those is a job for a qualified person.'
     },
     { type: 'h3', text: 'Is a 20A GFCI outlet interchangeable with a 15A one?' },
     {

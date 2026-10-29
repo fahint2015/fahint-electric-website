@@ -132,7 +132,7 @@ export const posts = [
       },
       {
         "type": "p",
-        "text": "Dual-function breakers exist and are specified in some jurisdictions, but they are panel equipment and outside this catalogue. When a drawing calls for both protections at the outlet, the honest answer is that a GFCI receptacle cannot deliver it and the panel has to change."
+        "text": "Dual-function breakers exist and are specified in some jurisdictions, and combination devices that carry both functions in one package are also on the market. Where a drawing calls for both protections at the point of use, the device has to be marked for both functions; a GFCI-only receptacle cannot supply arc-fault protection, and which product closes that gap depends on the specification rather than on a single default answer."
       },
       {
         "type": "p",
