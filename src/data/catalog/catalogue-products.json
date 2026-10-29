@@ -4917,6 +4917,10 @@
         "Touch only"
       ],
       [
+        "Wiring requirement",
+        "Neutral required (N + L)"
+      ],
+      [
         "Function",
         "Dimming"
       ],
@@ -4942,7 +4946,7 @@
     ],
     "title": "US Dimming · Touch only",
     "group": "US · Touch only",
-    "summary": "UST8832: dimming in a US-format glass touch panel. Touch only. 110–240V AC · 50/60Hz.",
+    "summary": "UST8832: dimming in a US-format glass touch panel. Touch only; neutral required (N + L). 110–240V AC · 50/60Hz.",
     "keyFacts": [
       [
         "Format",
@@ -4955,6 +4959,10 @@
       [
         "Supply",
         "110–240V AC · 50/60Hz"
+      ],
+      [
+        "Wiring",
+        "Neutral required (N + L)"
       ]
     ],
     "reviewNotice": null,
