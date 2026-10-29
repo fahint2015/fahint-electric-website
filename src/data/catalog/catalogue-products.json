@@ -4918,7 +4918,7 @@
       ],
       [
         "Wiring requirement",
-        "Neutral required (N + L)"
+        "Single live wire"
       ],
       [
         "Function",
@@ -4946,7 +4946,7 @@
     ],
     "title": "US Dimming · Touch only",
     "group": "US · Touch only",
-    "summary": "UST8832: dimming in a US-format glass touch panel. Touch only; neutral required (N + L). 110–240V AC · 50/60Hz.",
+    "summary": "UST8832: dimming in a US-format glass touch panel. Touch only; single live wire. 110–240V AC · 50/60Hz.",
     "keyFacts": [
       [
         "Format",
@@ -4962,7 +4962,7 @@
       ],
       [
         "Wiring",
-        "Neutral required (N + L)"
+        "Single live wire"
       ]
     ],
     "reviewNotice": null,
@@ -5033,10 +5033,6 @@
         "Curtain control"
       ],
       [
-        "Wiring requirement",
-        "Neutral required (N + L)"
-      ],
-      [
         "Face material",
         "Tempered glass"
       ],
@@ -5054,7 +5050,7 @@
     ],
     "title": "US Curtain control · Touch only",
     "group": "US · Touch only",
-    "summary": "UST8833: curtain control in a US-format glass touch panel. Touch only; neutral required (N + L). 110–240V AC · 50/60Hz.",
+    "summary": "UST8833: curtain control in a US-format glass touch panel. Touch only. 110–240V AC · 50/60Hz.",
     "keyFacts": [
       [
         "Format",
@@ -5063,10 +5059,6 @@
       [
         "Control",
         "Touch only"
-      ],
-      [
-        "Wiring",
-        "Neutral required (N + L)"
       ],
       [
         "Supply",
