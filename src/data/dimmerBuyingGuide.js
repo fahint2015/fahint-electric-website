@@ -197,6 +197,26 @@ export const dimmerBuyingGuide = {
           "href": "/products/dimmers"
         }
       ]
+    },
+    {
+      "type": "h2",
+      "text": "Where DM2010 and DM2010S stop being interchangeable"
+    },
+    {
+      "type": "p",
+      "text": "Both models sit in the same family and fit the same wallplate, which is why they get confused in schedules. The control method separates them. DM2010 is a digital slide dimmer and dims at the device. DM2010S takes a 0–10 V control signal, so the dimming decision happens elsewhere — a lighting controller, a wall station or a building system that outputs 0–10 V."
+    },
+    {
+      "type": "p",
+      "text": "The signal is not the only requirement. A 0–10 V dimmer needs drivers that accept a 0–10 V input, plus the low-voltage control pair pulled to the device. A driver without that input will not dim from DM2010S however the wiring is dressed, and a control pair without the driver is an unfinished circuit."
+    },
+    {
+      "type": "p",
+      "text": "Load types cannot be compared across the two models either. LED and incandescent ratings are different limits, and driver inrush can exceed a steady-state figure on both. When a lighting schedule arrives, we ask for the lamp or driver model, the number of drivers on the dimmer, the total connected load and the control method — four answers that decide whether the model is even in scope."
+    },
+    {
+      "type": "p",
+      "text": "The two models share a family but not a model document. Confirm the exact designation on the document before the specification is issued, and keep the approved sample matched to that designation."
     }
   ]
 };

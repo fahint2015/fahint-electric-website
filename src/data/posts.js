@@ -121,6 +121,26 @@ export const posts = [
       {
         "type": "p",
         "text": "For a FAHINT GFCI order, include the full model and required features when requesting documents. This keeps a change of current rating or face style from becoming an unintended change of protection."
+      },
+      {
+        "type": "h2",
+        "text": "Which device sits on which circuit"
+      },
+      {
+        "type": "p",
+        "text": "In a typical North American installation the two functions live in different places. Ground-fault protection is usually a receptacle at the point of use — GF15 or GF20 here — while arc-fault protection is usually a breaker at the panel. That arrangement is common because it is convenient, not because one device implies the other."
+      },
+      {
+        "type": "p",
+        "text": "Dual-function breakers exist and are specified in some jurisdictions, but they are panel equipment and outside this catalogue. When a drawing calls for both protections at the outlet, the honest answer is that a GFCI receptacle cannot deliver it and the panel has to change."
+      },
+      {
+        "type": "p",
+        "text": "Purchase orders lose this distinction more often than drawings do. A line reading \"GFCI outlet, 20A, both protections\" is a line that has to be queried before it can be quoted, because the second half belongs to a different product family."
+      },
+      {
+        "type": "p",
+        "text": "The clean way to buy protection through a receptacle supplier is to state the function the device must perform and let the installer decide where it belongs. Where the answer is \"GFCI at the point of use\", the model list is short and the specification is unambiguous."
       }
     ]
   },
@@ -195,6 +215,26 @@ export const posts = [
       {
         "type": "p",
         "text": "“Weather-resistant GFCI” describes the device. It does not make a bare outlet waterproof or establish that a wallplate is a weatherproof cover. Have a qualified installer select and install the complete assembly for the site."
+      },
+      {
+        "type": "h2",
+        "text": "The cover is half of the specification"
+      },
+      {
+        "type": "p",
+        "text": "A WR marking on a receptacle describes the device. The requirement in a wet location usually concerns the assembly: the device, the box and a cover rated for use with a plug inserted. A weather-resistant GFCI behind a standard plate in an exposed location is still an exposed connection, whatever the receptacle is marked."
+      },
+      {
+        "type": "p",
+        "text": "That means the cover is a separate purchase and frequently a separate supplier. We quote GW15 and GW20 with the WR marking and the matching plate; the while-in-use cover comes from a manufacturer whose listing covers it. Two documents, two responsibilities, one installation."
+      },
+      {
+        "type": "p",
+        "text": "For a sample review this matters. Approving the receptacle alone tells you nothing about whether the cover will close over a plugged cord, and that is the detail inspectors look at. Ask for the cover model beside the device model and check them as a pair on the bench."
+      },
+      {
+        "type": "p",
+        "text": "An order line that reads \"outdoor GFCI, 20A\" leaves the cover, the plate and the enclosure to whoever is packing. Written as the device, the plate and the cover model, with the intended use stated, it can be checked before production instead of after installation."
       }
     ]
   },
@@ -278,6 +318,22 @@ export const posts = [
             "href": "/contact?topic=technical&family=gfci"
           }
         ]
+      },
+      {
+        "type": "h2",
+        "text": "What a model number can and cannot settle"
+      },
+      {
+        "type": "p",
+        "text": "Give us the full model and we can confirm what the device is meant to do: 15 A or 20 A, standard or tamper-resistant, whether it has feed-through terminals, which document names it. That is a specification question and it has a definite answer."
+      },
+      {
+        "type": "p",
+        "text": "Whether the device in front of you is behaving correctly is a different question, and it depends on the wiring behind it. A GFCI that trips on an empty circuit is reporting a fault somewhere downstream, and no document from a manufacturer can locate it. The recording exercise in this guide is what turns that into something an electrician can act on in one visit."
+      },
+      {
+        "type": "p",
+        "text": "Two details are worth writing down while you are at the wall: whether the device is a self-test model, and what the indicator does before and after a reset attempt. The first tells the electrician whether the unit monitors itself, which changes how a failure is interpreted. The second is often the fastest way to separate a device at the end of its life from a circuit with a real fault."
       }
     ]
   },
@@ -351,6 +407,42 @@ export const posts = [
       {
         "type": "p",
         "text": "Then approve the device finish and wallplate together. Keep the complete model and sample reference for reorders, so a cosmetic substitution also receives an electrical-specification check."
+      },
+      {
+        "type": "h2",
+        "text": "GT20 and RT20: same shutter, different product"
+      },
+      {
+        "type": "p",
+        "text": "Both model names carry the T that means tamper-resistant, and both are 20 A. They are still two different products. GT20 is a GFCI receptacle: it provides ground-fault protection and shuttered slots. RT20 is a duplex receptacle with the same shutters and no ground-fault function. A purchase order that says \"TR receptacle 20A\" has not yet chosen between them."
+      },
+      {
+        "type": "p",
+        "text": "The distinction changes the price, the document and the circuit. If the location needs both protection and shutters, the GT or GW family is the one to quote. If it needs shutters only and the protection sits upstream, RT20 is the cheaper and correct answer."
+      },
+      {
+        "type": "p",
+        "text": "Written properly, the line reads as the family, the rating and the feature set: GT20 for a protected 20 A location, RT20 for a shuttered 20 A receptacle on a protected circuit. Two letters apart, two different documents behind them."
+      },
+      {
+        "type": "h2",
+        "text": "Where TR is required and where it is only a preference"
+      },
+      {
+        "type": "p",
+        "text": "Tamper resistance is a code requirement in specified occupancies, not a universal one. Dwelling units are the obvious case; the scope in the adopted edition, plus local amendments, decides whether a given commercial space falls inside it. That determination belongs to the specifier, and it changes the price of a receptacle line by a noticeable margin."
+      },
+      {
+        "type": "p",
+        "text": "Mixed projects are where this gets practical. A building with residential floors above a retail podium may need shuttered devices upstairs and plain ones in the back-of-house areas. Ordering the whole job with shutters is simple and more expensive; ordering by location type is cheaper and needs a schedule that says which is which."
+      },
+      {
+        "type": "p",
+        "text": "The visual argument for uniformity is real — the same face across a project looks deliberate. It just should not be the deciding argument. Where the requirement is location-based, splitting the order by location keeps the appearance consistent in the areas anyone sees and the cost where nobody does."
+      },
+      {
+        "type": "p",
+        "text": "One last pairing mistake: shutters do not make a device weather-resistant, and a TR device in a wet location still needs the correct enclosure and cover. RT15 and RW15 differ by that W for a reason, and the order line should show it."
       }
     ]
   },
@@ -516,6 +608,28 @@ export const posts = [
             "href": "/contact?topic=oem"
           }
         ]
+      },
+      {
+        "type": "h2",
+        "text": "Four questions that decide the shortlist before pricing"
+      },
+      {
+        "type": "list",
+        "label": "Ask in this order",
+        "items": [
+          "Rating: 15 A or 20 A, which also fixes the NEMA face and the circuit.",
+          "Function: standard, tamper-resistant, tamper- and weather-resistant, or blank-face.",
+          "Visible details: finish, plate model and whether the plate ships with the device.",
+          "Destination documents: which listing record the market or the retailer actually asks to see."
+        ]
+      },
+      {
+        "type": "p",
+        "text": "Asking in that order matters because each answer removes options. A 15 A answer halves the list; a TR/WR answer removes three more; a plate requirement can remove one. By the fourth question the shortlist is usually two models, and the quotation can be compared line for line instead of by headline price."
+      },
+      {
+        "type": "p",
+        "text": "The sample plan follows from the same logic. One unit per configuration, not per model: a customer approving GW20 does not need to approve GW15 separately if the difference is the rating alone. That keeps a five-configuration program to five samples rather than nine."
       }
     ]
   },
@@ -592,6 +706,26 @@ export const posts = [
       {
         "type": "p",
         "text": "For a private-label finish, send the target sample or finish brief before committing to a customer’s delivery date. We need to confirm feasibility, quantity and lead time for the selected product and finish."
+      },
+      {
+        "type": "h2",
+        "text": "A finish that travels across five families"
+      },
+      {
+        "type": "p",
+        "text": "Finish coordination is hard because a room rarely uses one product family. A bathroom might carry a GFCI, a USB outlet, a switch and a plate within arm's reach of each other. If those four come from four different finish lists, the wall will not match even when every line is correct on its own."
+      },
+      {
+        "type": "p",
+        "text": "The practical fix is to choose the finish once, at the level of the room, then check availability family by family. A finish offered on a GFCI receptacle is not automatically offered on a metal wallplate or on a smart switch, and the gap usually surfaces after the sample has been approved for the first family."
+      },
+      {
+        "type": "p",
+        "text": "Production batches matter too. Two runs of the same named finish can differ slightly, which is invisible on separate walls and obvious on the same one. Keeping the approved sample reference and the production date on the purchase order is what lets a second batch be compared against something physical rather than a name."
+      },
+      {
+        "type": "p",
+        "text": "When a container mixes finishes, pack by finish and label the cartons by finish rather than by model alone. The installer takes one carton to one floor, and a mixed carton costs more time on site than it saves in the warehouse."
       }
     ]
   }

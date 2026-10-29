@@ -97,6 +97,26 @@ export const productQuestionGuides = [
             "href": "/blog/how-to-source-ul-listed-gfci-from-china"
           }
         ]
+      },
+      {
+        "type": "h2",
+        "text": "Where a blank-face device actually saves a run"
+      },
+      {
+        "type": "p",
+        "text": "A blank-face GFCI earns its place at a junction that needs protection but not a receptacle. Picture a bathroom wall where the circuit continues to a light or a fan: the protection has to sit upstream, and nobody wants a socket at chest height next to a towel rail. The GL20 closes that gap. It is a 20 A device with no openings, so it protects what is wired downstream and offers nothing to plug into."
+      },
+      {
+        "type": "p",
+        "text": "The alternative — moving the protection to the panel or to a receptacle further along — usually costs more in cable and time than the device itself. That is the argument to make to a contractor, and it is why the blank-face model survives in a catalogue dominated by receptacles."
+      },
+      {
+        "type": "p",
+        "text": "Two things go wrong at order stage. The first is buying a blank-face device for a location that later needs an outlet; the fix is a GT20 or GW20, not a different plate. The second is forgetting the plate: a blank-face device still needs a wallplate, and it needs one with no opening, which is a different line on the order."
+      },
+      {
+        "type": "p",
+        "text": "GL20 sits outside the documented shortlist in the August 16, 2022 addendum to E504391-20210212, and its record is still under review in our library. Request the exact model document before the specification is issued rather than relying on the family page."
       }
     ]
   },
@@ -213,6 +233,30 @@ export const productQuestionGuides = [
             "href": "/blog/usb-wall-outlet-buying-guide"
           }
         ]
+      },
+      {
+        "type": "h2",
+        "text": "Reading a laptop charger against the outlet"
+      },
+      {
+        "type": "p",
+        "text": "Start with the wattage printed on the laptop's original supply. Most 13- and 14-inch machines ship with something in the 45–65 W band, which is why the 65 W Power Delivery model is the one that gets specified. The 20 W model is a phone and tablet device; it will charge a laptop slowly or refuse the negotiation, and no cable fixes that."
+      },
+      {
+        "type": "p",
+        "text": "Above 65 W the range stops. A 90 W or 140 W workstation laptop needs a supply outside this catalogue, and the honest answer is a desk dock rather than a wall outlet. Saying so early saves a sample round."
+      },
+      {
+        "type": "p",
+        "text": "The cable is part of the circuit. A USB-C cable rated for 3 A caps the current no matter what the outlet or the laptop can negotiate, so a 65 W outlet with a 3 A cable behaves like a 60 W one. For the full profile, specify a 5 A cable with the e-marker, and keep the cable in the quotation so the customer is not left to source it."
+      },
+      {
+        "type": "p",
+        "text": "With two devices connected, the published combined limit applies. A laptop at 65 W plus a phone is not 65 W plus 20 W; the outlet divides what it can supply, and the laptop may drop to a slower profile. If both ports matter, say which device has priority."
+      },
+      {
+        "type": "p",
+        "text": "Send the laptop model, the original charger wattage, the cable rating and the second device. Those four answers decide whether FTR15QC-DC65W is even the right part before anyone talks about quantity."
       }
     ]
   },
@@ -259,7 +303,27 @@ export const productQuestionGuides = [
       { type: 'p', text: 'For a rectangular decorator face, D15Q offers side/push-in quick wiring with the same published #14 AWG limit for its 15A push-in terminal. It needs a different wallplate opening from this duplex pair.', source: 4, links: [
         { label: 'View D15Q · decorator format', href: '/products/receptacles/d15q' },
         { label: 'Standard receptacle buying guide', href: '/blog/standard-receptacle-buying-guide' }
-      ] }
+      ] },
+      {
+        "type": "h2",
+        "text": "Mixing both terminal types on one project"
+      },
+      {
+        "type": "p",
+        "text": "R15 and R15Q share a front presentation, so a photograph of a device face cannot tell an installer which one is in the carton. That matters on a project where one floor is wired in #14 and another in #12, because the terminal method, not the appearance, decides which line the electrician can use."
+      },
+      {
+        "type": "p",
+        "text": "The practical rule is one terminal type per floor, written on the schedule. Mixing them in a single carton means the installer has to check the rear of every device before choosing a conductor, and that check rarely happens on a schedule that is already behind."
+      },
+      {
+        "type": "p",
+        "text": "Push-in connections are faster to make; screw-clamp back wiring holds a wider conductor range and is the safer choice where the circuit may be reconfigured later. Neither is universally better, and the specifier usually knows which trade-off the project is buying."
+      },
+      {
+        "type": "p",
+        "text": "For packing, we label cartons by the full model rather than the family, so a site can sort by terminal type without opening boxes. If both suffixes ship in one order, ask for them in separate cartons — it costs nothing at packing and saves an hour at installation."
+      }
     ]
   },
   {
@@ -351,6 +415,29 @@ export const productQuestionGuides = [
             "href": "/blog/dimmer-buying-guide-led-0-10v"
           }
         ]
+      }
+,
+      {
+        "type": "h2",
+        "text": "Four causes we look at before calling it a dimmer fault"
+      },
+      {
+        "type": "list",
+        "label": "Flicker checklist, in the order we ask",
+        "items": [
+          "Is the lamp or driver actually rated as dimmable? A non-dimmable driver flickers at every level, not just low ones.",
+          "Is the connected load above the dimmer's minimum? A single 6 W lamp is sometimes below the threshold where the circuit behaves.",
+          "Is the dimmer a 0–10 V model on a driver without a 0–10 V input? DM2010S cannot dim a driver that was never built to accept the signal.",
+          "Are mixed lamp types sharing one dimmer? Two technologies on one control rarely track each other across the range."
+        ]
+      },
+      {
+        "type": "p",
+        "text": "The pattern narrows it quickly. Flicker only at the bottom of the travel points at load or driver behaviour. Flicker at every level, including full on, points at the driver or the supply. A buzz that appears with one particular lamp and disappears with another is usually the lamp, not the control."
+      },
+      {
+        "type": "p",
+        "text": "A photograph of a flickering lamp cannot diagnose anything, and neither can one of the dimmer. What does help is a short video taken at constant camera settings, plus the lamp model, the driver model, the number of drivers on the dimmer, the total connected load and the exact model number of the control. With those five, the answer is usually one exchange."
       }
     ]
   },
@@ -467,6 +554,26 @@ export const productQuestionGuides = [
             "href": "/products/lighting-switches"
           }
         ]
+      },
+      {
+        "type": "h2",
+        "text": "One strap, two loads: the plate is where orders go wrong"
+      },
+      {
+        "type": "p",
+        "text": "DS1502 and DS1503 put two or three rockers on a single strap that occupies one gang. The rocker count is a device property; the plate opening count is a plate property; and the two are not the same number. A two-rocker combination device takes a single-opening plate, because the plate surrounds one strap, not two devices."
+      },
+      {
+        "type": "p",
+        "text": "The most common configuration we quote is a bathroom where one rocker drives the light and the other drives the fan. Both loads sit behind the same strap, so the total connected load is the sum, and a fan with a high inrush is the part that decides whether the device is suitable. Give the fan model, not just its wattage."
+      },
+      {
+        "type": "p",
+        "text": "The range has no three-way combination device. If one of the two loads has to be switched from a second location, that load needs its own three-way circuit and a separate DS15-3 or T15-3 at each end. Trying to solve it with a combination device produces a plan that cannot be wired."
+      },
+      {
+        "type": "p",
+        "text": "Write the line as the model, the rocker layout, the load behind each rocker, the finish and the matching single-opening plate. When a quantity arrives without the rocker layout, the order is one message away from being wrong."
       }
     ]
   },
@@ -576,6 +683,26 @@ export const productQuestionGuides = [
             "href": "/blog/smart-switch-buying-guide-wifi-zigbee"
           }
         ]
+      },
+      {
+        "type": "h2",
+        "text": "What the wall usually has before anyone orders"
+      },
+      {
+        "type": "p",
+        "text": "In North American housing, a switch box from before the 1980s often carries a switch loop: line in, switched line out, no neutral waiting at the box. A neutral-required smart switch cannot be installed there without pulling a new conductor, which turns a product swap into an electrician's visit. That is the single most expensive surprise in a retrofit order."
+      },
+      {
+        "type": "p",
+        "text": "The single-live version exists for exactly that wall, and it carries its own constraint: some low-load lamps leave too little current for the electronics to stay powered, which shows up as flicker or a dim indicator with the light off. Ask what lamp is fitted, not only what switch is wanted."
+      },
+      {
+        "type": "p",
+        "text": "Zigbee adds a second dependency. The panel needs a compatible gateway on site, and the gateway is a separate line in the quotation. Touch-only panels need no gateway because they have no radio — they also will not appear in an app, and a buyer expecting app control will return them."
+      },
+      {
+        "type": "p",
+        "text": "Before a sample ships, we ask for four photographs: the inside of the box, the existing wiring, the wall opening with dimensions, and the old switch from the front. Those four answer the neutral question, the gang question and the frame question at once, and they cost the buyer nothing."
       }
     ]
   },
@@ -700,6 +827,26 @@ export const productQuestionGuides = [
             "href": "/products/wallplates"
           }
         ]
+      },
+      {
+        "type": "h2",
+        "text": "When screwless is the wrong upgrade"
+      },
+      {
+        "type": "p",
+        "text": "Screwless plates are the better finish on a new wall and the worse choice on a patched one. The plate sits flush, which is the whole point, and flush means any wobble in the drywall around the opening shows as a shadow at one edge. A screw-fixed plate with a slightly larger exterior covers the same defect without trying to hide it."
+      },
+      {
+        "type": "p",
+        "text": "The screwless range here is BS18032, BS18033 and BS18034, with the fixing handled by a backplate rather than two visible screws. That backplate needs clearance behind it, and an old steel box with a tight plaster lip is exactly where it will not seat. Check the depth before promising the finish."
+      },
+      {
+        "type": "p",
+        "text": "Exterior size is the second decision. The standard plates run around 75 × 120 mm and the medium screw-fixed plates around 80 × 124 mm; the difference is what closes a gap left by the previous plate. If the wall already carries a painted outline, measure it before choosing."
+      },
+      {
+        "type": "p",
+        "text": "Both decisions belong on a sample rather than a spec sheet. Ask for the device and the plate together, photograph the wall they will go onto, and approve the pair. A plate approved on its own is a plate that gets rejected on site."
       }
     ]
   }

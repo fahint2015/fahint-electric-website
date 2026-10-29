@@ -298,6 +298,26 @@ export const usbBuyingGuide = {
           "href": "/contact?topic=oem"
         }
       ]
+    },
+    {
+      "type": "h2",
+      "text": "Reading the FAHINT USB range as two families"
+    },
+    {
+      "type": "p",
+      "text": "The catalogue groups into two charging families, and the family decides what a distributor can promise. The 3100 mA models — FTR15-3100, FTR15C-3100, FTR20-3100 and their C variants — share 3.1 A at 5 V across both ports and carry no Power Delivery negotiation. The Power Delivery models, FTR15QC-DC20W, DC36W and DC65W, use dual USB-C and publish a single-port ceiling that differs between the three. Quoting a 65 W model as though it were a shared-output device is the most common error we see in inquiries."
+    },
+    {
+      "type": "p",
+      "text": "A connector is not a capability. A USB-C port on the shared-output family charges a laptop slowly or not at all; the same connector on the PD family charges only as far as the negotiated profile allows. Ask for the port type and the profile together, then check the combined limit with both ports occupied."
+    },
+    {
+      "type": "p",
+      "text": "Model-level documents matter here more than on other families. The USB range sits under report E498095, and that report names specific configurations. A family reference is not coverage for every port mix. When a buyer has to show a certificate to a retailer, confirm the exact model appears in the document before the order is placed."
+    },
+    {
+      "type": "p",
+      "text": "For a private-label program, the variables that move price and lead time are port mix, finish, wallplate and pack format — not the chip inside. Send those four with the quantity, and configurations can be compared on the same basis instead of one model quoted twice at different volumes."
     }
   ]
 };

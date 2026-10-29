@@ -213,6 +213,30 @@ export const lightSwitchBuyingGuide = {
     {
       "type": "p",
       "text": "Split quantities by model and finish. If the choice is still open, describe the required control arrangement so it can be reviewed before quotation."
+    },
+    {
+      "type": "h2",
+      "text": "Mapping the six models to a circuit diagram"
+    },
+    {
+      "type": "p",
+      "text": "DS15 is the paddle single-pole. DS15-3 is the three-way version of the same paddle. T15 and T15-3 are the toggle equivalents for projects that keep the older look. DS1502 and DS1503 put two and three rockers on one strap. That is six models, and only four of them are single-pole."
+    },
+    {
+      "type": "p",
+      "text": "A three-way circuit needs two three-way devices, one at each end, and the pair is ordered together. A common mistake is to specify one DS15-3 for a hallway and discover at installation that the second position was quoted as a DS15. The circuit will not work with one of each, and the fix costs a second delivery rather than a second device."
+    },
+    {
+      "type": "p",
+      "text": "Combination devices are not multi-gang devices. DS1502 controls two loads from one strap, but it still occupies one gang. The wallplate that fits it is a single-opening plate, not a two-gang plate. We see this reversed in purchase orders regularly, and it is the reason a plate dimension check belongs next to the switch line."
+    },
+    {
+      "type": "p",
+      "text": "Voltage ratings differ by model as well. Some entries are listed at 125 V and others at 120/277 V, and the two are not substitutes in a commercial panel. Read the rating on the line you are ordering, not on the family page."
+    },
+    {
+      "type": "p",
+      "text": "For a mixed order, we build the list by circuit: single-pole locations first, three-way pairs second, combination locations third. Sorted that way, the quantity per model falls out of the drawing and the plate count follows without a second pass."
     }
   ]
 };

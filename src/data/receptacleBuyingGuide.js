@@ -301,6 +301,26 @@ export const receptacleBuyingGuide = {
     {
       "type": "p",
       "text": "A model-page inquiry carries its model number into the form. Include any unresolved rating or document question so it can be addressed with the quotation."
+    },
+    {
+      "type": "h2",
+      "text": "Reading the prefix: what R15, RT15 and RW15 actually differ by"
+    },
+    {
+      "type": "p",
+      "text": "The first letter of a FAHINT receptacle model names the face: R for the standard duplex, C for the commercial duplex, D for the decorator opening, CR and CD for the industrial range. The T that follows adds tamper resistance, and the W adds weather resistance on top of it. So RT15 is a 15 A duplex with shuttered slots, RW15 is the same device built for damp and wet locations, and C15 is the commercial duplex with no shutter at all. Three letters apart, three different specifications."
+    },
+    {
+      "type": "p",
+      "text": "The Q in R15Q marks a different terminal arrangement rather than a different electrical rating, which is why the pair appears on one catalogue page and in one price list. If the installation method is fixed — back-wire or push-in — the suffix decides the order line, and switching it later changes what the installer can do on site."
+    },
+    {
+      "type": "p",
+      "text": "The number is the simplest part and the one most often mistyped: 15 A models sit on 14 AWG circuits, 20 A models on 12 AWG, and the NEMA face follows. A 20 A device on a 15 A circuit is not a capacity upgrade, it is a mismatch that the inspector will find."
+    },
+    {
+      "type": "p",
+      "text": "Finishes run across the range, so the same wall can carry a GFCI, a USB outlet and a receptacle from three different families and still look deliberate. That only works if the finish is written on the order line rather than chosen at packing."
     }
   ]
 };

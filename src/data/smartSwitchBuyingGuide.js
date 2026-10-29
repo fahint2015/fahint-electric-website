@@ -207,6 +207,26 @@ export const smartSwitchBuyingGuide = {
           "href": "/contact?topic=technical"
         }
       ]
+    },
+    {
+      "type": "h2",
+      "text": "What each control mode needs beside it"
+    },
+    {
+      "type": "p",
+      "text": "The letters in the model designation tell you how the device talks to the rest of the room. Wi-Fi models (the USW and EUW ranges) join the site network directly and need nothing else to switch. Zigbee models (USZ and EUZ) need a compatible gateway on site, and a gateway is a separate purchase that belongs on the same quotation. Touch-only panels carry no radio at all: they switch, they do not appear in an app, and no gateway makes them do so."
+    },
+    {
+      "type": "p",
+      "text": "Wiring is a second, independent axis. Neutral-required, single-live and dual-wiring versions are separate catalogue configurations, not options on one board. A wiring diagram from one configuration does not transfer to another, and a project that changes its mind after sample approval has to reopen the sample."
+    },
+    {
+      "type": "p",
+      "text": "Gang count is the third. A US 4-gang panel is one device controlling four circuits in one frame; it is not four devices. Retail buyers confuse the two because the box looks the same. Match the gang count to the plate opening and the frame, then check the finish across the whole bank of panels on the same wall."
+    },
+    {
+      "type": "p",
+      "text": "When a requirements note arrives, we look for protocol, function (switching, dimming, curtain, fan or heater), neutral availability, US or EU format, gang count and the load behind each gang. Those six answers decide the model; the app, gateway and frame are then quoted as separate lines so nothing is assumed."
     }
   ]
 };
