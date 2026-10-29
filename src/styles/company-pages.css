@@ -383,3 +383,14 @@
 .reading-article-nav ol { margin-top:14px; }
 .reading-article-nav li a { min-height:0; padding-block:7px; font-size:14.5px; line-height:1.45; }
 .reading-article-nav { max-height:calc(100vh - 120px); }
+
+/* Article measure: keep the reading column inside a comfortable 65-68 character line. */
+.company-page.reading-post .reading-article-heading>.company-wrap,
+.company-page.reading-post .reading-article-layout { max-width:900px; }
+.company-page.reading-post .reading-article-layout { grid-template-columns:200px minmax(0,1fr); gap:clamp(36px,4vw,52px); }
+.company-page.reading-post .reading-article>p { margin-top:20px; }
+.company-page.reading-post .reading-article>p+p { margin-top:1.05em; }
+
+/* FAQ sub-headings inside the body need their own rhythm. */
+.company-page.reading-post .reading-article>h3 { margin:34px 0 10px; font-size:19px; line-height:1.4; font-weight:600; color:var(--cp-ink); }
+.company-page.reading-post .reading-article>h3+p { margin-top:10px; }
