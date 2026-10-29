@@ -450,3 +450,10 @@
 
 /* Anchor jumps must clear the sticky site header. */
 .company-page.reading-post :is(h1,h2,h3) { scroll-margin-top:108px; }
+
+/* Cover image: container width, 16:9 — no more panoramic crop. */
+.company-page.reading-post .reading-article-hero-wrap { max-width:1020px; }
+.reading-article-hero { width:100%; margin:0; overflow:hidden; }
+.reading-article-hero .editorial-photo { width:100%; height:auto !important; aspect-ratio:16/9 !important; }
+.reading-article-hero figcaption { padding:11px 0 0; font-size:12.5px; line-height:1.5; color:var(--cp-muted); }
+@media(max-width:980px){ .reading-article-hero .editorial-photo { aspect-ratio:16/9 !important; } }

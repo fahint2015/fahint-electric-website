@@ -43,9 +43,11 @@ function ArticleContent({ post }) {
       <nav className="company-breadcrumb" aria-label="Breadcrumb"><Link to="/">Home</Link><span aria-hidden="true">/</span><Link to="/blog">Guides & insights</Link><span aria-hidden="true">/</span><span>{post.category}</span></nav>
       <div className="reading-article-title"><Reveal as="h1">{post.title}</Reveal><Reveal as="p" delay={160}>{post.excerpt}</Reveal><div className="reading-meta"><span>{post.category}</span><span>By <Link to="/about" rel="author">FAHINT</Link></span><time dateTime={metadata.entity.dateModified}>Updated {formatPostDate(metadata.entity.dateModified)}</time><span>{post.readMinutes} min read</span></div></div>
     </div></header>
-    <Reveal as="figure" className="reading-article-hero">
-      <EditorialPhoto src={post.cover} alt={post.coverAlt} region={post.coverRegion} width={post.coverWidth} height={post.coverHeight} position={post.coverPosition} fit={post.coverFit} ratio={3} priority />
-      <div className="company-wrap"><figcaption>{post.coverCaption}</figcaption></div>
+    <Reveal as="div" className="company-wrap reading-article-hero-wrap">
+      <figure className="reading-article-hero">
+        <EditorialPhoto src={post.cover} alt={post.coverAlt} region={post.coverRegion} width={post.coverWidth} height={post.coverHeight} position={post.coverPosition} fit={post.coverFit} ratio={16 / 9} priority />
+        <figcaption>{post.coverCaption}</figcaption>
+      </figure>
     </Reveal>
     <div className="company-wrap reading-article-layout">
       <aside className="reading-article-nav">
