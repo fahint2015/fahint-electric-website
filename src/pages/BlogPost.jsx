@@ -69,7 +69,7 @@ function ArticleContent({ post }) {
         <div className="reading-article-cta"><h2>Reviewing a specific model?</h2><p>Send the model and the question you want to resolve. We will help locate the relevant product information.</p><CompanyLink to="/contact?topic=technical">Ask a product question</CompanyLink></div>
       </article>
     </div>
-    <section className="company-section company-section--paper"><div className="company-wrap"><div className="company-heading"><h2>Continue reading.</h2><CompanyLink to="/blog" secondary>All guides & insights</CompanyLink></div><div className="reading-grid">{related.map(item => <ReadingCard post={item} key={item.slug} />)}</div></div></section>
+    <section className="company-section company-section--paper reading-related"><div className="company-wrap"><div className="company-heading"><h2>Continue reading.</h2><CompanyLink to="/blog" secondary>All guides & insights</CompanyLink></div><div className="reading-grid">{related.map(item => <ReadingCard post={item} key={item.slug} />)}</div></div></section>
   </div>;
 }
 
