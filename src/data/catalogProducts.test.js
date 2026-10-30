@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { existsSync, readFileSync } from 'node:fs';
 import { catalogProducts, findCatalogProduct, filterCatalogProducts, getCatalogProducts, modelKey, productHref } from './catalogProducts.js';
 import { products } from './products.js';
+import { modelNotes } from './smartSwitchNotes.js';
 import { findLine } from './lines.js';
 import { searchStudioModels, studioRanges } from './studioCatalog.js';
 import { PUBLIC_ROUTES } from '../../scripts/prepare-pages.mjs';
@@ -10,6 +11,13 @@ const rows = (product) => new Map(product.specificationGroups.flatMap((group) =>
 const model = (family, sku) => findCatalogProduct(family, sku);
 
 describe('complete, model-specific catalogue', () => {
+  it('keeps English model notes free of corrupted text encoding', () => {
+    const corruptedModels = Object.entries(modelNotes)
+      .filter(([, note]) => /[\u4e00-\u9fff\ufffd]/u.test(note))
+      .map(([sku]) => sku);
+    expect(corruptedModels).toEqual([]);
+  });
+
   it('offers the matching single-page extract for every documented PD model and both dimmers', () => {
     for (const product of getCatalogProducts('usb-outlets')) {
       const sheet = product.sources.find(source => source.href.endsWith('/pd-usb-outlets.pdf'));
