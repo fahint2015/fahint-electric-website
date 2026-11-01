@@ -97,10 +97,13 @@ export const legacyRedirects = new Map(Object.entries({
   "company/": "/about/",
   "Brochures": "/resources/",
   "message/": "/contact/",
+  "contacts": "/contact/",
+  "contacts/": "/contact/",
   "list_27/": "/products/lighting-switches/",
   "list_34/": "/products/smart-switches/",
   "list_41/": "/products/smart-switches/",
   "list_49/": "/products/wallplates/",
+  "pro3/": "/products/usb-outlets/",
   "pro4/": "/products/receptacles/",
   // Recovered from the local 2026-08-23 archive during the 2026-10-27 GSC audit.
   "list_17/": "/products/usb-outlets/f4p/",

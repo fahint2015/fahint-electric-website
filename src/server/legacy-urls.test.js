@@ -41,6 +41,9 @@ describe('production legacy URL cleanup', () => {
 
   it('recovers archived category and inquiry-list entrances, including HEAD and encoded queries', () => {
     const recovered = [
+      ['contacts', '/contact/'],
+      ['contacts/', '/contact/'],
+      ['pro3/', '/products/usb-outlets/'],
       ['list_17/', '/products/usb-outlets/f4p/'],
       ['pro2/', '/products/gfci/'],
       ['list_50/', '/products/wallplates/bs1802/'],
