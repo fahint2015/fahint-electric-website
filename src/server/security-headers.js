@@ -29,9 +29,14 @@ export function withSecurityHeaders(response, request) {
   return new Response(response.body, {status: response.status, statusText: response.statusText, headers});
 }
 
-export function renderSecurityHeaders() {
+export function renderSecurityHeaders({clientManifest = {}, base = '/'} = {}) {
   const common = {...sharedHeaders, 'Content-Security-Policy-Report-Only': REPORT_ONLY_CSP};
+  // Public images and documents also live under assets; only fingerprinted build outputs are immutable.
+  const immutableAssets = [...new Set(Object.values(clientManifest)
+    .flatMap(({file, css = []}) => [file, ...css])
+    .filter(file => typeof file === 'string' && /^assets\/[A-Za-z0-9_-]+-[A-Za-z0-9_-]{8}\.(?:js|css)$/.test(file)))].sort();
   return '# Generated from src/server/security-headers.js. CSP remains report-only.\n/*\n'
     + Object.entries(common).map(([name,value])=>`  ${name}: ${value}\n`).join('')
-    + productionHosts.map(host=>`https://${host}/*\n  Strict-Transport-Security: ${hsts}\n`).join('');
+    + productionHosts.map(host=>`https://${host}/*\n  Strict-Transport-Security: ${hsts}\n`).join('')
+    + immutableAssets.map(file=>`${base}${file}\n  Cache-Control: public, max-age=31536000, immutable\n`).join('');
 }

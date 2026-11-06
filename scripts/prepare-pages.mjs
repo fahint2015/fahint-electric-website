@@ -173,7 +173,7 @@ export async function preparePages({
   }));
   await writeFile(join(outputDir, '.nojekyll'), '');
   await writeFile(join(outputDir, 'sitemap.xml'), sitemap);
-  await writeFile(join(outputDir, '_headers'), renderSecurityHeaders());
+  await writeFile(join(outputDir, '_headers'), renderSecurityHeaders({clientManifest, base: validatedBase}));
   await mkdir(join(outputDir, 'ai'), {recursive: true});
   for (const [file, content] of Object.entries(publicReferenceFiles(canonicalBase || 'https://fahint.com/'))) {
     await writeFile(join(outputDir, file), content);

@@ -36,6 +36,28 @@ afterEach(async () => {
 });
 
 describe('GitHub Pages deployment', () => {
+  it.each(['/', '/fahint-electric-website/'])('limits immutable caching to manifest-listed hashed JS and CSS under %s', async expectedBase => {
+    const { preparePages } = await loadPreparePages();
+    const distDir = await createDist(`<!doctype html><html><head><base href="${expectedBase}"></head><body><div id="root"></div></body></html>`);
+    const manifest = createClientManifest();
+    manifest['index.html'] = { ...manifest['index.html'], file: 'assets/index-AbCd1234.js', css: ['assets/style-EfGh5678.css'] };
+    manifest['_vendor.js'].file = 'assets/vendor-JkLm9012.js';
+    manifest['src/pages/About.jsx'].file = 'assets/About-NpQr3456.js';
+    manifest['_shared.js'].css = ['assets/style-EfGh5678.css'];
+    manifest['_image.png'] = { file: 'assets/image-StUv7890.png' };
+    manifest['_manual.pdf'] = { file: 'assets/manual-WxYz1234.pdf' };
+    manifest['_fixed.js'] = { file: 'assets/fixed.js' };
+    manifest['_outside.js'] = { file: 'scripts/outside-AbCd1234.js' };
+    await preparePages({ distDir, expectedBase, clientManifest: manifest });
+    const headers = await readFile(join(distDir, '_headers'), 'utf8');
+    const immutablePaths = [...headers.matchAll(/^([^\s#][^\n]*)\n  Cache-Control: public, max-age=31536000, immutable$/gm)].map(match => match[1]);
+    expect(immutablePaths.sort()).toEqual(['assets/index-AbCd1234.js', 'assets/style-EfGh5678.css', 'assets/vendor-JkLm9012.js', 'assets/About-NpQr3456.js'].map(file => expectedBase + file).sort());
+    expect(headers).not.toContain(`${expectedBase}assets/*`);
+    expect(headers).toContain('Content-Security-Policy-Report-Only:');
+    expect(headers).toContain('Strict-Transport-Security: max-age=86400');
+    expect(headers).not.toMatch(/includeSubDomains|\n  Content-Security-Policy:/);
+  });
+
   it.each(['/', '/fahint-electric-website/'])('preloads only the current page entry without competing shared or other route modules under %s', async expectedBase => {
     const { preparePages } = await loadPreparePages();
     const distDir = await createDist(`<!doctype html><html><head><base href="${expectedBase}"><link rel="modulepreload" crossorigin href="${expectedBase}assets/vendor.js"></head><body><div id="root"></div></body></html>`);
