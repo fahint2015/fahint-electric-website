@@ -359,6 +359,7 @@
   .brand-site .company-contact-form, .brand-site .company-contact-details { padding:24px; }
   .brand-site .resources-catalog { padding:28px; }
   .brand-site .studio-catalog-hero { height:auto; min-height:300px; }
+  .brand-site .studio-catalog-hero__poster { min-height:100%; }
   .brand-site .studio-catalog-hero__content { min-height:300px; padding-block:16px 24px; }
   .brand-site .studio-catalog-hero__copy { padding-top:12px; }
   .brand-site .studio-catalog-hero__copy p { margin-block:12px 8px; font-size:16px; }

@@ -9,6 +9,8 @@ import { StudioImage, StudioLink, useStudioPageMeta } from '../components/studio
 import '../styles/studio.css';
 import Reveal from '../components/Reveal.jsx';
 
+const catalogPoster = 'assets/images/brand-home/generated/application-residential-scene';
+
 function RangeTile({ range }) {
   return <Reveal as="article" className="studio-range-tile" aria-label={range.name}>
     <Link to={`/products/${range.slug}`} aria-label={`Explore ${range.name}`}>
@@ -53,7 +55,13 @@ export default function ProductsStudio() {
     <section className="studio-catalog-hero" aria-labelledby="studio-catalog-title">
       <StudioImage
         className="studio-catalog-hero__poster"
-        src="assets/images/brand-home/generated/application-residential-scene.webp"
+        src={`${catalogPoster}.webp`}
+        srcSet={[
+          `${publicAsset(`${catalogPoster}-768.webp`)} 768w`,
+          `${publicAsset(`${catalogPoster}-1200.webp`)} 1200w`,
+          `${publicAsset(`${catalogPoster}.webp`)} 1536w`,
+        ].join(', ')}
+        sizes="(max-width: 760px) 100vw, 1536px"
         width={1920}
         height={550}
         priority
