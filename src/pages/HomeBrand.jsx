@@ -67,8 +67,13 @@ function Hero() {
         <img src={webp(hero.image)} srcSet={responsive(hero.image, hero.width)} sizes="100vw" alt={active === index ? hero.alt : ''} width={hero.width} height={hero.height} fetchpriority={index === 0 ? 'high' : 'auto'} />
       </picture>)}
     </div>
-    <div className="hero-copy"><div className="wrap hero-heading" aria-live={focused ? 'polite' : 'off'} aria-atomic="true">
-      <Reveal as="h1" key={heroes[active].id}>{heroes[active].title}</Reveal>
+    <div className="hero-copy"><div className="wrap hero-heading">
+      <div aria-live={focused ? 'polite' : 'off'} aria-atomic="true"><Reveal as="h1" key={heroes[active].id}>{heroes[active].title}</Reveal></div>
+      <p className="hero-description">Outlets, switches, dimmers and wall plates for brands and distributors. OEM/ODM support.</p>
+      <div className="hero-actions">
+        <TextLink to="/products" className="button-link button-link--light">Explore Products</TextLink>
+        <TextLink to="/contact" className="button-link hero-quote">Request a Quote</TextLink>
+      </div>
     </div></div>
     <div className="wrap hero-controls">
       <div className="hero-selectors" role="group" aria-label="Choose brand story">

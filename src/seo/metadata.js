@@ -8,7 +8,8 @@ const organization = { '@type': 'Organization', name: 'FAHINT', legalName: 'Wenz
 const homeImage = 'assets/images/brand-home/generated/hero-family-belief-background.webp';
 export const staticMetadata = Object.fromEntries(Object.entries({
   '/': {
-    title: 'FAHINT | Safer Power. Better Living.',
+    title: 'Wiring Device Manufacturer | OEM/ODM | FAHINT',
+    updated: '2026-11-06', // Broader manufacturer positioning and homepage purchase entry added.
     description: 'FAHINT manufactures GFCI outlets, USB wall outlets, switches and dimmers for North American markets, with OEM/ODM support for brands and distributors.',
     image: homeImage, imageAlt: 'A family in a bright home — FAHINT brand concept', organization: true,
   },

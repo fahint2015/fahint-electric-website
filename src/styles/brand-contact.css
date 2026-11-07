@@ -98,26 +98,31 @@
   .brand-site .rail__item:hover::after { animation-play-state: paused; }
 }
 @media (max-width: 1080px) {
-  .brand-site .hero-copy { top: min(42%, calc(100svh - var(--header-height) - 400px)); }
-  .brand-site .hero-controls {
-    bottom: max(calc(var(--contact-size) + var(--contact-bottom) + 24px), calc(100% - 100svh + var(--header-height) + var(--contact-size) + var(--contact-bottom) + 24px));
-  }
+  .brand-site .hero { --hero-controls-bottom: max(calc(var(--contact-size) + var(--contact-bottom) + 24px), calc(100% - 100svh + var(--header-height) + var(--contact-size) + var(--contact-bottom) + 24px)); }
+  .brand-site .hero-copy { top: auto; bottom: calc(var(--hero-controls-bottom) + 80px); }
+  .brand-site .hero-controls { bottom: var(--hero-controls-bottom); }
 }
 @media (max-width: 920px) {
-  .brand-site .hero-copy { top: min(59%, calc(100svh - var(--header-height) - 380px)); }
   .brand-site .hero-down { position: static; margin-left: 8px; }
 }
 @media (max-width: 640px) {
   .brand-site { --contact-size: 48px; --contact-gap: 12px; --contact-edge: 18px; --contact-bottom: calc(18px + env(safe-area-inset-bottom, 0px)); }
   .brand-site .rail__item--top { right: calc(max(var(--contact-edge), env(safe-area-inset-right, 0px)) + 2px); }
   .brand-site .rail__whatsapp-mark { width: 25px; height: 25px; }
-  .brand-site .hero-copy { top: min(58%, calc(100svh - var(--header-height) - 320px)); }
   .brand-site .footer { padding-bottom: calc(var(--contact-size) + var(--contact-bottom) + 24px); }
   .brand-site .footer-bottom a { align-self: flex-start; }
 }
 @media (max-width: 760px) {
   .brand-site:has(.company-contact-form) .rail { display: none; }
   .brand-site:has(.why-fahint) .rail { display: none; }
+}
+@media (max-width: 360px) {
+  .brand-site .hero-actions { flex-direction: column; align-items: flex-start; }
+  .brand-site .hero-actions .text-link { min-width: 180px; }
+}
+@media (max-width: 1080px) and (max-height: 500px) and (orientation: landscape) {
+  .brand-site .hero-copy { top: 32px; bottom: auto; }
+  .brand-site .hero-controls { top: 300px; bottom: auto; }
 }
 @media print { .brand-site .rail { display: none; } }
 
