@@ -8,6 +8,7 @@
 .buying-guide .faq-q { text-align: left; color: var(--site-ink); }
 .buying-guide .faq-q svg { flex-shrink: 0; }
 .buying-guide .faq-a { font-size: 16px; line-height: 1.7; color: var(--site-muted); }
+.buying-guide .faq-a a { color: var(--site-blue); text-decoration: underline; text-underline-offset: .15em; }
 .model-buying-checklist { margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--site-line); }
 .model-buying-checklist h3 { font-size: 20px; line-height: 1.35; margin: 0 0 16px; overflow-wrap: anywhere; }
 .model-buying-checklist ul { margin: 0 0 16px; padding-left: 20px; }

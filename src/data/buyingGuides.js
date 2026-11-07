@@ -1,36 +1,70 @@
 import { findModelCertificate } from './certificates.js';
 
+const modelLink = (family, sku) => ({ label: sku, to: `/products/${family}/${sku.toLowerCase()}` });
+
 // Purchasing guidance based on the published model data, not installation instructions.
 export const buyingGuides = {
   gfci: {
     intro: 'Compare 15A and 20A self-test GFCI outlets, including tamper-resistant, weather-resistant and blank-face models. Check the exact rating and certification coverage, then specify finishes, wallplates and quantities for your bulk or OEM order.',
     questions: [
-      { q: 'How do I compare standard, TR / WR and blank-face models?', a: 'GF15/GF20 are the standard-face models; GT15/GT20 add tamper resistance; GW15/GW20 combine tamper and weather resistance. GL20 is a blank-face device, not a plug-in receptacle. Filter the model directory by rating and variant, then review the model specifications and have a qualified professional confirm suitability for the project.' },
+      {
+        q: 'How do I compare standard, TR / WR and blank-face models?',
+        a: [
+          modelLink('gfci', 'GF15'), ' and ', modelLink('gfci', 'GF20'), ' are the standard-face models. ',
+          modelLink('gfci', 'GT15'), ' and ', modelLink('gfci', 'GT20'), ' add tamper resistance. ',
+          modelLink('gfci', 'GW15'), ' and ', modelLink('gfci', 'GW20'), ' combine tamper and weather resistance. ',
+          modelLink('gfci', 'GL20'), ' is a blank-face device, not a plug-in receptacle. Filter the model directory by rating and variant, then review the model specifications and have a qualified professional confirm suitability for the project.',
+        ],
+      },
       { q: 'Does the same certificate cover every GFCI model?', a: 'No. The August 16, 2022 E504391-20210212 addendum names GF15, GF20, GT15, GT20, GW15 and GW20, plus GTN15 and GTN20 as tamper-resistant models with no feed-through. GL20 documentation remains under review. Confirm current listing status and coverage for the ordered configuration.' },
       { q: 'What should I confirm with the sample?', a: 'Record the complete model number, face rating, finish, wallplate and required markings. Compare the sample with the relevant specifications and documents. Confirm packaging and any authorized private-label artwork before approving an order.' },
       { q: 'What should I include in a bulk GFCI outlet inquiry?', a: 'Send the full model numbers, quantities by finish, destination market and required documents. Specify the wallplate and packaging format, any authorized brand artwork, sample needs and requested delivery date. FAHINT confirms minimum quantities, customization and lead times for the actual order.' },
     ],
     resource: { label: 'Read the GFCI sourcing checklist', to: '/blog/how-to-source-ul-listed-gfci-from-china' },
+    relatedGuide: { label: 'Read the GFCI model selection guide', to: '/blog/gfci-outlet-guide' },
     modelCheck: 'Confirm the face rating, TR / WR or blank-face configuration, and required model documents.',
   },
   'usb-outlets': {
     intro: 'FAHINT manufactures USB-A, USB-A + USB-C and dual USB-C wall outlets. Compare conventional 5V charging with 20W, 36W and 65W USB-C Power Delivery. Check single-port output, shared power and the AC receptacle rating before ordering.',
     questions: [
-      { q: 'Should I choose a USB-A, USB-C or Power Delivery outlet?', a: 'Use the port arrangement and published profiles to narrow the range. FTR15C-3100 combines USB-A and USB-C with 3.1A at 5V shared output; it is non-PD. FTR15QC-DC20W, DC36W and DC65W offer dual USB-C Power Delivery with different single-port limits. A USB-C connector alone does not establish a particular PD output.' },
+      {
+        q: 'Should I choose a USB-A, USB-C or Power Delivery outlet?',
+        a: [
+          'Use the port arrangement and published profiles to narrow the range. FTR15C-3100 combines USB-A and USB-C with 3.1A at 5V shared output; it is non-PD. ',
+          modelLink('usb-outlets', 'FTR15QC-DC20W'), ', FTR15QC-DC36W and ', modelLink('usb-outlets', 'FTR15QC-DC65W'),
+          ' offer dual USB-C Power Delivery with different single-port limits. A USB-C connector alone does not establish a particular PD output.',
+        ],
+      },
       { q: 'How should I compare total output and power sharing?', a: 'Check combined USB output, single-port limits and the behaviour with multiple ports in use. Do not add individual maximum ratings together. Charging output depends on the connected device, cable and negotiated profile; confirm simultaneous-port power sharing for the selected model.' },
       { q: 'What belongs in a USB outlet quotation request?', a: 'Send the complete model, input rating, any AC receptacle rating, required port mix, target charging profile and quantity. Include finish, wallplate, destination and packaging requirements. Review the model documentation and approve the requested configuration with a sample.' },
     ],
     resource: { label: 'Read the USB outlet buying guide', to: '/blog/usb-wall-outlet-buying-guide' },
+    relatedGuide: { label: 'Read the laptop charging guide', to: '/blog/usb-c-wall-outlet-laptop-charging' },
     modelCheck: 'Confirm port mix, charging profiles, simultaneous-port power sharing and input rating; where applicable, confirm the AC receptacle rating.',
   },
   receptacles: {
     intro: 'Compare duplex and decorator receptacles, including 15A and 20A commercial models and tamper-resistant options. Match voltage, plug configuration and wiring to the project, then select the wallplate and finish. Industrial models have separate ratings and specifications.',
     questions: [
-      { q: 'Which voltage and current should I specify?', a: 'Use the exact current, voltage and plug configuration required by the project. The catalogue lists the standard and commercial range at 125V, and industrial CR15/CR20/CD20 at 125V/250V. That voltage label does not establish plug compatibility; confirm the exact ordered configuration.' },
-      { q: 'How do face style and TR / WR affect the shortlist?', a: 'Compare duplex or decorator openings, tamper-resistant and weather-resistant features, and the stated wiring method for each model. A similar-looking face does not make two configurations interchangeable. Confirm location and installation requirements with a qualified professional.' },
+      {
+        q: 'Which voltage and current should I specify?',
+        a: [
+          'For 15A, 125V receptacles, compare the traditional duplex ', modelLink('receptacles', 'R15'), ' with the decorator ', modelLink('receptacles', 'D15'), '. ',
+          'For 20A, 125V, compare ', modelLink('receptacles', 'R20'), ' with ', modelLink('receptacles', 'D20'), '. Confirm the plug configuration for the exact model. ',
+          'The catalogue lists industrial CR15, CR20 and CD20 at 125V/250V; check their plug configurations separately.',
+        ],
+      },
+      {
+        q: 'How do face style and TR / WR affect the shortlist?',
+        a: [
+          'Start with the face style and matching wallplate. Among 20A duplex models, ', modelLink('receptacles', 'RT20'),
+          ' adds tamper resistance (TR), while ', modelLink('receptacles', 'RW20'), ' combines TR with weather resistance (WR). ',
+          'Check the wiring method for the selected model and confirm location and installation requirements with a qualified professional.',
+        ],
+      },
       { q: 'What do I need to approve before ordering?', a: 'Confirm the model designation, electrical ratings, wiring method, finish and matching wallplate. Request the relevant model documents and record the agreed sample, markings and packaging in the quotation.' },
     ],
     resource: { label: 'Read the standard receptacle buying guide', to: '/blog/standard-receptacle-buying-guide' },
+    relatedGuide: { label: 'Compare back wire and push-in terminals', to: '/blog/back-wire-vs-push-in-outlets' },
     modelCheck: 'Confirm voltage, current, NEMA configuration, TR / WR features and wiring method for the exact model.',
   },
   dimmers: {

@@ -10,6 +10,10 @@ import '../../styles/buying-guide.css';
 export function BuyingGuide({ line }) {
   const guide = buyingGuides[line];
   const family = findLine(line);
+  const questions = guide.questions.map(({ q, a }) => ({
+    q,
+    a: Array.isArray(a) ? a.map(part => typeof part === 'string' ? part : <Link key={part.to} to={part.to}>{part.label}</Link>) : a,
+  }));
   return <section className="buying-guide" id="buying-guide" aria-label={`Buying guide: ${family.name}`}>
     <div className="container buying-guide__layout">
       <div className="buying-guide__intro">
@@ -17,9 +21,10 @@ export function BuyingGuide({ line }) {
         <h2>Choosing {family.name}.</h2>
         <p>{guide.intro}</p>
         <Link className="textlink" to={guide.resource.to}>{guide.resource.label} <ArrowUpRight size={16} aria-hidden="true" /></Link>
+        {guide.relatedGuide && <Link className="textlink" to={guide.relatedGuide.to}>{guide.relatedGuide.label} <ArrowUpRight size={16} aria-hidden="true" /></Link>}
         <Link className="textlink" to="/contact?topic=technical">Discuss your selection <ArrowUpRight size={16} aria-hidden="true" /></Link>
       </div>
-      <Faq items={guide.questions} />
+      <Faq items={questions} />
     </div>
   </section>;
 }

@@ -94,7 +94,7 @@ export function familyMetadata(line, models = []) {
   };
   return {
     path: `/products/${line.slug}`, title: titles[line.slug] || `${line.name} · Models & Specifications | FAHINT`, description: descriptions[line.slug] || line.summary,
-    updated: '2026-10-28', // Concise selection copy revised for all seven families; five titles made specific.
+    updated: ['gfci', 'usb-outlets', 'receptacles'].includes(line.slug) ? '2026-11-07' : '2026-10-28', // Model and guide links added to the three outlet family pages.
     structuredDataUpdated: organizationUpdated,
     image: line.cover, imageAlt: `${line.name} from FAHINT`,
     breadcrumbs: [['Home', '/'], ['Products', '/products'], [line.name, `/products/${line.slug}`]],

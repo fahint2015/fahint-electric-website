@@ -149,12 +149,13 @@ describe('GfciSeries', () => {
   });
 
   it('emits only known lowercase deployment paths for residential and industrial product links', () => {
-    const { container } = renderSeries();
-    const productLinks = [...container.querySelectorAll('a[href^="/products/gfci/"]')];
+    renderSeries();
+    const directory = screen.getByRole('region', { name: 'Explore GFCI models' });
+    const productLinks = [...directory.querySelectorAll('a[href^="/products/gfci/"]')];
 
     expect(productLinks).toHaveLength(9);
     ['gtn15', 'gtn20'].forEach((sku) => {
-      expect(screen.getByRole('link', { name: new RegExp(`^${sku.toUpperCase()} `) })).toHaveAttribute('href', `/products/gfci/${sku}/`);
+      expect(within(directory).getByRole('link', { name: new RegExp(`^${sku.toUpperCase()} `) })).toHaveAttribute('href', `/products/gfci/${sku}/`);
     });
     productLinks.forEach((link) => {
       expect(link.getAttribute('href')).toMatch(/^\/products\/gfci\/[a-z0-9]+\/$/);
