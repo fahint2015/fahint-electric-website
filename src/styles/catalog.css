@@ -55,7 +55,7 @@
 .catalog-model-card__review { color: #81612d; font-size: 12px; margin: -12px 0 22px; }
 .catalog-model-card .textlink { margin-top: auto; font-size: 14px; min-height: 32px; }
 .catalog-empty { padding: 70px 20px; text-align: center; background: #f5f8fa; }
-.catalog-series__footer { padding: 64px 0 80px; background: #edf3f5; }
+.catalog-series__footer { padding: 64px 0 80px; background: #fff; }
 .catalog-family-links { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 30px; }
 .catalog-family-links a { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 70px; border-bottom: 1px solid #cfdde5; font-weight: 700; }
 .catalog-overview-ranges { background: #edf3f5; padding: 28px 0 36px; }

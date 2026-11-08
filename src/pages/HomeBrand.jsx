@@ -26,6 +26,32 @@ const spaces = [
   { id: 'workplace', name: 'Workplace', title: 'Spaces that work with you.', description: 'Practical power and lighting choices for offices and shared spaces.', image: 'application-workplace-scene.png', position: 'center', alt: 'A bright modern workplace with shared desks and a meeting area.', link: '/applications/workplace', linkLabel: 'Explore workplace' },
   { id: 'hospitality', name: 'Hospitality', title: 'Thoughtful details. A warmer welcome.', description: 'Convenient charging and coordinated controls for a comfortable guest experience.', image: 'application-hospitality-scene.png', position: 'center', alt: 'A contemporary hotel lounge with navy seating and a quiet guest.', link: '/applications/hospitality', linkLabel: 'Explore hospitality' }
 ];
+const featuredGuides = [
+  {
+    slug: 'gfci-outlet-guide',
+    title: 'GFCI Outlet Selection Guide',
+    description: 'Compare 15A and 20A GFCI outlets and see when to choose tamper-resistant or weather-resistant models.',
+    image: 'assets/images/products/gf15-application-kitchen-v2.jpg',
+    width: 1536,
+    height: 1024,
+  },
+  {
+    slug: 'usb-wall-outlet-buying-guide',
+    title: 'USB Wall Outlet Buying Guide',
+    description: 'Compare USB-A, USB-C and Power Delivery, including single-port ratings and shared output.',
+    image: 'assets/images/editorial-home/product-usb-optimized.webp',
+    width: 1600,
+    height: 889,
+  },
+  {
+    slug: 'standard-receptacle-buying-guide',
+    title: 'Standard Receptacle Buying Guide',
+    description: 'Compare duplex and decorator outlets by rating, terminal type and wallplate fit.',
+    image: 'assets/images/lines/receptacle-series-desk-power-v1.webp',
+    width: 1920,
+    height: 450,
+  },
+];
 const webp = (file, folder = generated) => folder + file.replace(/\.png$/, '.webp');
 const responsive = (file, width = 1536, folder = generated, breakpoints = [768, 1200]) => [...breakpoints.filter(size => size < width), width].map(size => `${folder}${file.replace(/\.png$/, size === width ? '.webp' : `-${size}.webp`)} ${size}w`).join(', ');
 
@@ -157,6 +183,29 @@ export function ApplicationTabs() {
   </section>;
 }
 
+function BuyingGuides() {
+  return <section id="buying-guides" className="home-guides section wrap" aria-labelledby="buying-guides-title">
+    <div className="section-heading">
+      <div><p className="eyebrow">FAHINT GUIDES</p><h2 id="buying-guides-title">Buying guides.</h2></div>
+      <TextLink to="/blog">View all guides</TextLink>
+    </div>
+    <div className="home-guides-grid">
+      {featuredGuides.map(guide => <article key={guide.slug}>
+        <Link className="home-guide" to={`/blog/${guide.slug}`} aria-labelledby={`home-guide-${guide.slug}`}>
+          <img src={publicAsset(guide.image)} width={guide.width} height={guide.height} alt="" loading="lazy" decoding="async" />
+          <div className="home-guide-copy">
+            <div className="home-guide-heading">
+              <h3 id={`home-guide-${guide.slug}`}>{guide.title}</h3>
+              <ArrowRight size={19} strokeWidth={1.6} aria-hidden="true" />
+            </div>
+            <p>{guide.description}</p>
+          </div>
+        </Link>
+      </article>)}
+    </div>
+  </section>;
+}
+
 function Resources() {
   return <section id="support" className="support section wrap">
     <div className="section-heading"><div><p className="eyebrow">HERE TO HELP</p><h2>Resources & support.</h2></div></div>
@@ -169,5 +218,5 @@ function Resources() {
 
 export default function HomeBrand() {
   usePageMetadata(staticMetadata['/']);
-  return <div className="brand-home"><Hero /><About /><WhyFahint /><Products /><StudioApplicationMap imageSrc="assets/images/brand-home/rooms/residential-application-map-daylight-v1.webp" /><ApplicationTabs /><Resources /></div>;
+  return <div className="brand-home"><Hero /><About /><WhyFahint /><Products /><StudioApplicationMap imageSrc="assets/images/brand-home/rooms/residential-application-map-daylight-v1.webp" /><ApplicationTabs /><BuyingGuides /><Resources /></div>;
 }

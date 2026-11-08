@@ -115,6 +115,20 @@
 .brand-site .space-story { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; margin-top: 32px; }
 .brand-site .space-story h3 { max-width: 24ch; font-size: clamp(26px, 2.05vw, 38px); font-weight: 600; line-height: 1.22; }
 .brand-site .space-story .text-link { margin-top: 12px; }
+.brand-site .home-guides.section { padding-block: 16px clamp(64px, 7vw, 104px); }
+.brand-site .home-guides .section-heading { margin-bottom: 28px; }
+.brand-site .home-guides-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(24px, 2.2vw, 32px); }
+.brand-site .home-guide { display: block; height: 100%; border-bottom: 1px solid var(--line); color: var(--ink); }
+.brand-site .home-guide img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
+.brand-site .home-guide-copy { padding-block: 18px 22px; }
+.brand-site .home-guide-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+.brand-site .home-guide-heading h3 { font-size: clamp(19px, 1.5vw, 26px); font-weight: 600; line-height: 1.25; }
+.brand-site .home-guide-heading svg { flex: none; margin-top: 3px; color: var(--blue); }
+.brand-site .home-guide p { margin-top: 10px; color: var(--muted); font-size: 16px; line-height: 1.55; }
+.brand-site .home-guide:hover h3 { text-decoration: underline; text-underline-offset: 3px; }
+@media (max-width: 760px) {
+  .brand-site .home-guides-grid { grid-template-columns: minmax(0, 1fr); }
+}
 .brand-site .support { padding-top: 16px; }
 .brand-site .support-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
 .brand-site .support-entry { padding: clamp(32px, 3.5vw, 64px); background: var(--paper); display: flex; flex-direction: column; justify-content: space-between; gap: 32px; }
