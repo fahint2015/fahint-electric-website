@@ -34,8 +34,10 @@ describe('Series purchasing information and retained checklist component', () =>
     openPage(`/products/${line}`);
     const guide = screen.getByRole('region', { name: /Buying guide:/ });
     expect(guide.textContent.toLowerCase()).toContain(topic.toLowerCase());
-    expect(within(guide).getAllByRole('button')).toHaveLength(line === 'gfci' ? 4 : 3);
-    expect(within(guide).getByRole('link', { name: /Discuss your selection/ })).toHaveAttribute('href', '/contact/?topic=technical');
+    const quotes = ['usb-outlets', 'receptacles'].includes(line);
+    expect(within(guide).getAllByRole('button')).toHaveLength(line === 'gfci' || quotes ? 4 : 3);
+    expect(within(guide).getByRole('link', { name: quotes ? /Request a .* quote/ : /Discuss your selection/ }))
+      .toHaveAttribute('href', quotes ? '/contact/?topic=products' : '/contact/?topic=technical');
   });
 
   it('supports keyboard expansion of the buying questions', async () => {

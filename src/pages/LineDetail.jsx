@@ -1,12 +1,13 @@
 import BrandBanner from '../components/BrandBanner.jsx';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useParams, useSearchParams, Navigate } from 'react-router-dom';
 import { Link } from '../components/SiteLink.jsx';
 import { ArrowRight, Search } from 'lucide-react';
 import { findLine, productLines } from '../data/lines.js';
 import { filterCatalogProducts, findCatalogAliasMatch, getCatalogProducts } from '../data/catalogProducts.js';
 import { filterUsbProducts, usbFilters } from '../data/usbFilters.js';
-import { resolveUsbComparison } from '../data/usbComparison.js';
+import { resolveModelComparison } from '../data/modelComparison.js';
+import CatalogFilterPanel from '../components/products/CatalogFilterPanel.jsx';
 import CatalogModelCard from '../components/products/CatalogModelCard.jsx';
 import UsbComparison from '../components/products/UsbComparison.jsx';
 import { familyMetadata } from '../seo/metadata.js';
@@ -17,6 +18,7 @@ function ModelCatalogue({ line }) {
   const [localQuery, setLocalQuery] = useState('');
   const [group, setGroup] = useState('');
   const [params, setParams] = useSearchParams();
+  const filterPanelRef = useRef(null);
   const isUsb = line.slug === 'usb-outlets';
   const query = isUsb ? params.get('q') || '' : localQuery;
   const selected = Object.fromEntries(usbFilters.map(({ name, options }) => {
@@ -29,14 +31,20 @@ function ModelCatalogue({ line }) {
   const filtered = isUsb ? filterUsbProducts(searched, selected) : searched;
   const alias = findCatalogAliasMatch(query);
   const aliasMatch = filtered.includes(alias) ? alias : null;
-  const compared = isUsb ? resolveUsbComparison(params.get('compare') || '') : [];
+  const compared = resolveModelComparison(line.slug, params.get('compare') || '');
   const updateUsbState = (filters, comparison) => {
     const next = new URLSearchParams(Object.entries(filters).filter(([, item]) => item));
     if (comparison.length) next.set('compare', comparison.map(product => product.sku).join(','));
     setParams(next, { replace: true, preventScrollReset: true, state: { preserveScroll: true } });
   };
   const updateUsbFilter = (name, value) => updateUsbState({ q: query, ...selected, [name]: value }, compared);
-  const updateComparison = products => updateUsbState({ q: query, ...selected }, products);
+  const updateComparison = products => {
+    if (isUsb) return updateUsbState({ q: query, ...selected }, products);
+    const next = new URLSearchParams(params);
+    if (products.length) next.set('compare', products.map(product => product.sku).join(','));
+    else next.delete('compare');
+    setParams(next, { replace: true, preventScrollReset: true, state: { preserveScroll: true } });
+  };
   const toggleCompare = product => {
     if (compared.some(item => item.sku === product.sku)) updateComparison(compared.filter(item => item.sku !== product.sku));
     else if (compared.length < 3) updateComparison([...compared, product]);
@@ -68,7 +76,7 @@ function ModelCatalogue({ line }) {
           <Link className="textlink" to="/blog/usb-wall-outlet-buying-guide">Compare ports and charging power <ArrowRight size={16} aria-hidden="true" /></Link>
         </header>}
         <div className="brand-catalog-layout">
-        <div className={`catalog-filters${isUsb ? ' catalog-filters--usb' : ''}`}>
+        <CatalogFilterPanel ref={filterPanelRef}><div className={`catalog-filters${isUsb ? ' catalog-filters--usb' : ''}`}>
           <label className="catalog-filters__search"><span>Search models</span><div><Search size={18} aria-hidden="true" />
             <input type="search" value={query} onChange={(event) => isUsb ? updateUsbFilter('q', event.target.value) : setLocalQuery(event.target.value)} placeholder="Model number or feature" aria-describedby={aliasMatch ? 'catalog-alias-note' : undefined} />
           </div></label>
@@ -81,20 +89,20 @@ function ModelCatalogue({ line }) {
           </select></label>}
           {isUsb && <p id="usb-output-note" className="catalog-filters__note">Receptacle rating is the AC outlet current. 5V values are combined USB output; PD values are USB-C single-port maximums, not simultaneous dual-port output.</p>}
           <div className="catalog-filters__summary"><p className="catalog-filters__count" aria-live="polite">{filtered.length} of {models.length} models</p>
-            {isUsb && <button type="button" className="catalog-filters__clear" onClick={clear} disabled={!query && !Object.values(selected).some(Boolean)}>Clear filters</button>}
+            <button type="button" className="catalog-filters__clear" onClick={clear} disabled={isUsb ? !query && !Object.values(selected).some(Boolean) : !query && !group}>Clear filters</button>
             <Link className="textlink" to={`/products/${line.slug}${isUsb && params.size ? `?${params}` : ''}#buying-guide`}>Need help choosing?</Link></div>
           {aliasMatch && <p id="catalog-alias-note" className="catalog-filters__note" aria-live="polite">{aliasMatch.sourceModel} is listed in the current catalog as {aliasMatch.sku}.</p>}
-        </div>
+        </div></CatalogFilterPanel>
         <div className="brand-catalog-results">
-        {isUsb && <UsbComparison products={compared} onChange={updateComparison} />}
+        <UsbComparison line={line.slug} products={compared} onChange={updateComparison} onOpenFilters={() => filterPanelRef.current?.showModal?.()} />
         {filtered.length ? <div className="catalog-model-grid">{filtered.map((product) => <CatalogModelCard key={product.slug} product={product}>
-          {isUsb && <label className="usb-compare-choice">
+          <label className="usb-compare-choice">
             <input type="checkbox" aria-label={`Compare ${product.sku}`} checked={compared.some(item => item.sku === product.sku)}
               disabled={compared.length === 3 && !compared.some(item => item.sku === product.sku)} onChange={() => toggleCompare(product)} />
             <span>Compare</span>
-          </label>}
+          </label>
         </CatalogModelCard>)}</div>
-          : <div className="catalog-empty"><p role="status">No models match your selection.</p>{isUsb ? <p>Try another combination or clear the filters above.</p> : <button className="btn btn--outline" onClick={clear}>Clear filters</button>}</div>}
+          : <div className="catalog-empty"><p role="status">No models match your selection.</p><p>Try another combination or clear the filters.</p></div>}
         </div></div>
       </div>
     </section>
@@ -102,7 +110,7 @@ function ModelCatalogue({ line }) {
     <section className="catalog-series__footer">
       <div className="container">
         <header className="catalog-section-heading"><div><h2>Explore the other ranges.</h2></div>
-          <Link className="textlink" to="/contact">Discuss your project <ArrowRight size={16} aria-hidden="true" /></Link>
+          <Link className="textlink quote-button" to="/contact">Discuss your project <ArrowRight size={16} aria-hidden="true" /></Link>
         </header>
         <div className="catalog-family-links">{productLines.filter((item) => item.slug !== line.slug).map((item) =>
           <Link key={item.slug} to={`/products/${item.slug}`}><span>{item.name}</span><ArrowRight size={18} aria-hidden="true" /></Link>

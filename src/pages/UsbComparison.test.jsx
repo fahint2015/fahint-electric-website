@@ -3,6 +3,7 @@ import userEvent from '@testing-library/user-event';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { MemoryRouter, Route, Routes, useLocation } from 'react-router-dom';
 import LineDetail from './LineDetail.jsx';
+import GfciSeries from './GfciSeries.jsx';
 
 function LocationProbe() {
   const { search } = useLocation();
@@ -10,7 +11,7 @@ function LocationProbe() {
 }
 function renderListing(search = '', line = 'usb-outlets') {
   return render(<MemoryRouter initialEntries={[`/products/${line}${search}`]} future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
-    <Routes><Route path="/products/:line" element={<LineDetail />} /></Routes><LocationProbe />
+    <Routes><Route path="/products/gfci" element={<GfciSeries />} /><Route path="/products/:line" element={<LineDetail />} /></Routes><LocationProbe />
   </MemoryRouter>);
 }
 const choice = sku => screen.getByRole('checkbox', { name: `Compare ${sku}` });
@@ -114,9 +115,44 @@ describe('USB comparison flow', () => {
     expect(open()).toHaveFocus();
   });
 
-  it('does not expose USB comparison in other families', () => {
+  it('ignores USB selections in another family while offering that family’s own comparison', () => {
     renderListing('?compare=FTR15-3100,F4P', 'dimmers');
-    expect(screen.queryByRole('region', { name: 'Model comparison' })).not.toBeInTheDocument();
-    expect(screen.queryByRole('checkbox')).not.toBeInTheDocument();
+    expect(toolbar()).toHaveTextContent('Select 2–3 models');
+    expect(open()).toBeDisabled();
+    expect(choice('DM2010')).not.toBeChecked();
+    expect(within(toolbar()).queryByText('FTR15-3100')).not.toBeInTheDocument();
+  });
+
+  it.each(['gfci', 'receptacles', 'dimmers', 'smart-switches', 'lighting-switches', 'wallplates'])('opens a working comparison from the %s listing', async line => {
+    const user = userEvent.setup();
+    renderListing('', line);
+    const choices = screen.getAllByRole('checkbox', { name: /^Compare / }).slice(0, 2);
+    const models = choices.map(input => input.getAttribute('aria-label').replace('Compare ', ''));
+    for (const input of choices) await user.click(input);
+    expect(open()).toBeEnabled();
+    await user.click(open());
+    const dialog = screen.getByRole('dialog');
+    const table = within(dialog).getByRole('table');
+    expect(within(table).getAllByRole('rowheader').length).toBeGreaterThan(0);
+    for (const model of models) {
+      expect(within(table).getByRole('link', { name: `View ${model} details` }).getAttribute('href')).toMatch(new RegExp(`^/products/${line}/`));
+      expect(within(table).getByRole('link', { name: `Request quote for ${model}` }))
+        .toHaveAttribute('href', `/contact/?topic=products&model=${model}`);
+    }
+    await user.click(within(dialog).getByRole('button', { name: 'Close comparison' }));
+    expect(open()).toHaveFocus();
+  });
+
+  it('keeps receptacle choices while filtering, clearing filters and clearing comparison independently', async () => {
+    const user = userEvent.setup();
+    renderListing('?compare=R15,R15Q', 'receptacles');
+    await user.type(screen.getByRole('searchbox', { name: 'Search models' }), 'D20');
+    expect(within(toolbar()).getByText('R15Q')).toBeVisible();
+    await user.click(screen.getByRole('button', { name: 'Clear filters' }));
+    expect(choice('R15')).toBeChecked();
+    expect(choice('R15Q')).toBeChecked();
+    await user.click(within(toolbar()).getByRole('button', { name: 'Clear comparison' }));
+    expect(choice('R15')).not.toBeChecked();
+    expect(screen.getByTestId('comparison-url')).toBeEmptyDOMElement();
   });
 });

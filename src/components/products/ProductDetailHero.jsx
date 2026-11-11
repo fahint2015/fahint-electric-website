@@ -97,7 +97,7 @@ export default function ProductDetailHero({ product, anchorPath, anchorSearch, i
           </p>
 
           <div className="product-detail-hero__actions">
-            <Link to={quoteHref || anchorTarget('#inquiry')} className="btn btn--primary">
+            <Link to={quoteHref || anchorTarget('#inquiry')} className="btn btn--primary quote-button">
               {product.draft ? 'Request documentation' : 'Request a quote'} <ArrowRight size={16} aria-hidden="true" />
             </Link>
             <Link

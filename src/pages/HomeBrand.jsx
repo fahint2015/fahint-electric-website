@@ -98,7 +98,7 @@ function Hero() {
       <p className="hero-description">Outlets, switches, dimmers and wall plates for brands and distributors. OEM/ODM support.</p>
       <div className="hero-actions">
         <TextLink to="/products" className="button-link button-link--light">Explore Products</TextLink>
-        <TextLink to="/contact" className="button-link hero-quote">Request a Quote</TextLink>
+        <TextLink to="/contact" className="button-link hero-quote quote-button">Request a Quote</TextLink>
       </div>
     </div></div>
     <div className="wrap hero-controls">

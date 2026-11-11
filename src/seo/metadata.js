@@ -86,8 +86,8 @@ export function familyMetadata(line, models = []) {
   };
   const descriptions = {
     gfci: 'Compare FAHINT 15A and 20A self-test GFCI outlets, including TR and WR models. Review model documents and prepare your bulk or OEM inquiry.',
-    'usb-outlets': 'Compare USB-A and USB-C wall outlets, from conventional 5V to 20W, 36W and 65W Power Delivery. Check model outputs, AC ratings and OEM options.',
-    receptacles: 'Compare 15A and 20A duplex and decorator receptacles, including commercial and tamper-resistant models. Review wiring, ratings and model documents.',
+    'usb-outlets': 'FAHINT USB wall outlets for bulk and OEM orders. Compare USB-A, USB-C and 20W, 36W or 65W PD models, then confirm AC ratings and charging profiles.',
+    receptacles: 'FAHINT manufactures 15A and 20A duplex and decorator receptacles. Compare wiring, TR/WR options and model documents for bulk and OEM orders.',
     dimmers: 'Compare the DM2010 LED slide dimmer and DM2010S 120/277V 0–10V dimmer switch. Check lamp or driver compatibility and load-specific ratings.',
     'smart-switches': 'Compare Wi-Fi touch switches and Zigbee wall switches by control function, wiring and US/EU format. Check the exact model and gateway requirements.',
     'lighting-switches': 'Compare single-pole and 3-way paddle switches, toggle switches, and double- or triple-rocker combination models. Review ratings and wiring.',
@@ -95,7 +95,7 @@ export function familyMetadata(line, models = []) {
   };
   return {
     path: `/products/${line.slug}`, title: titles[line.slug] || `${line.name} · Models & Specifications | FAHINT`, description: descriptions[line.slug] || line.summary,
-    updated: ['gfci', 'usb-outlets', 'receptacles'].includes(line.slug) ? '2026-11-07' : '2026-10-28', // Model and guide links added to the three outlet family pages.
+    updated: '2026-11-11',
     structuredDataUpdated: organizationUpdated,
     image: line.cover, imageAlt: `${line.name} from FAHINT`,
     breadcrumbs: [['Home', '/'], ['Products', '/products'], [line.name, `/products/${line.slug}`]],

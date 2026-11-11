@@ -25,25 +25,33 @@ export const buyingGuides = {
     modelCheck: 'Confirm the face rating, TR / WR or blank-face configuration, and required model documents.',
   },
   'usb-outlets': {
-    intro: 'FAHINT manufactures USB-A, USB-A + USB-C and dual USB-C wall outlets. Compare conventional 5V charging with 20W, 36W and 65W USB-C Power Delivery. Check single-port output, shared power and the AC receptacle rating before ordering.',
+    intro: 'FAHINT manufactures USB wall outlets for brands and distributors. Choose USB-A, USB-A + USB-C or dual USB-C models, then compare 5V charging with 20W, 36W and 65W Power Delivery. Confirm the AC receptacle rating and each USB port’s output.',
     questions: [
       {
         q: 'Should I choose a USB-A, USB-C or Power Delivery outlet?',
         a: [
-          'Use the port arrangement and published profiles to narrow the range. FTR15C-3100 combines USB-A and USB-C with 3.1A at 5V shared output; it is non-PD. ',
-          modelLink('usb-outlets', 'FTR15QC-DC20W'), ', FTR15QC-DC36W and ', modelLink('usb-outlets', 'FTR15QC-DC65W'),
-          ' offer dual USB-C Power Delivery with different single-port limits. A USB-C connector alone does not establish a particular PD output.',
+          modelLink('usb-outlets', 'FTR15C-3100'), ' combines USB-A and USB-C with 3.1A at 5V shared output. For dual USB-C Power Delivery, compare ',
+          modelLink('usb-outlets', 'FTR15QC-DC20W'), ', ', modelLink('usb-outlets', 'FTR15QC-DC36W'), ' and ', modelLink('usb-outlets', 'FTR15QC-DC65W'),
+          ' by their published single-port limits. Check the charging profiles as well as the connector type.',
         ],
       },
       { q: 'How should I compare total output and power sharing?', a: 'Check combined USB output, single-port limits and the behaviour with multiple ports in use. Do not add individual maximum ratings together. Charging output depends on the connected device, cable and negotiated profile; confirm simultaneous-port power sharing for the selected model.' },
-      { q: 'What belongs in a USB outlet quotation request?', a: 'Send the complete model, input rating, any AC receptacle rating, required port mix, target charging profile and quantity. Include finish, wallplate, destination and packaging requirements. Review the model documentation and approve the requested configuration with a sample.' },
+      {
+        q: 'How do I specify a 15A or 20A USB receptacle?',
+        a: [
+          'For the dual USB-C 65W range, ', modelLink('usb-outlets', 'FTR15QC-DC65W'), ' has a 15A, 125V NEMA 5-15R receptacle. ',
+          modelLink('usb-outlets', 'FTR20QC-DC65W'), ' has a 20A, 125V NEMA 5-20R receptacle. Both list a 65W USB-C single-port maximum. Specify the AC receptacle rating and USB charging profile separately on the order.',
+        ],
+      },
+      { q: 'What belongs in a bulk USB outlet quotation request?', a: 'Send complete model numbers, quantities by finish, input ratings, USB port mix and charging profiles. Include the AC receptacle rating where applicable, matching wallplates, destination, packaging and authorized brand artwork. Approve the model documents and sample configuration. Minimum quantities, customization and lead times are confirmed in the quotation.' },
     ],
     resource: { label: 'Read the USB outlet buying guide', to: '/blog/usb-wall-outlet-buying-guide' },
     relatedGuide: { label: 'Read the laptop charging guide', to: '/blog/usb-c-wall-outlet-laptop-charging' },
+    inquiry: { label: 'Request a USB outlet quote', to: '/contact?topic=products' },
     modelCheck: 'Confirm port mix, charging profiles, simultaneous-port power sharing and input rating; where applicable, confirm the AC receptacle rating.',
   },
   receptacles: {
-    intro: 'Compare duplex and decorator receptacles, including 15A and 20A commercial models and tamper-resistant options. Match voltage, plug configuration and wiring to the project, then select the wallplate and finish. Industrial models have separate ratings and specifications.',
+    intro: 'FAHINT manufactures duplex and decorator receptacles for brands and distributors. Compare 15A and 20A standard and commercial models by voltage, plug configuration, wiring and TR / WR options. Industrial models have separate ratings. Specify quantities, finishes and matching wallplates for your order.',
     questions: [
       {
         q: 'Which voltage and current should I specify?',
@@ -61,10 +69,17 @@ export const buyingGuides = {
           'Check the wiring method for the selected model and confirm location and installation requirements with a qualified professional.',
         ],
       },
-      { q: 'What do I need to approve before ordering?', a: 'Confirm the model designation, electrical ratings, wiring method, finish and matching wallplate. Request the relevant model documents and record the agreed sample, markings and packaging in the quotation.' },
+      {
+        q: 'How do I choose back-wire or push-in terminals?',
+        a: [
+          modelLink('receptacles', 'R15'), ' and ', modelLink('receptacles', 'R15Q'), ' are both 15A, 125V duplex receptacles. R15 uses side/back wiring, while R15Q uses side/push-in quick wiring. Include the complete model code and wiring method in the order, then check the approved model instructions for conductor and terminal requirements.',
+        ],
+      },
+      { q: 'What should I include in a bulk receptacle inquiry?', a: 'List complete model codes, quantities by finish, current and voltage, plug configuration and wiring method. Include matching wallplates, destination, packaging and any authorized brand artwork. Review the exact-model documents and agree on the sample. Minimum quantities, customization and lead times are confirmed in the quotation.' },
     ],
     resource: { label: 'Read the standard receptacle buying guide', to: '/blog/standard-receptacle-buying-guide' },
     relatedGuide: { label: 'Compare back wire and push-in terminals', to: '/blog/back-wire-vs-push-in-outlets' },
+    inquiry: { label: 'Request a receptacle quote', to: '/contact?topic=products' },
     modelCheck: 'Confirm voltage, current, NEMA configuration, TR / WR features and wiring method for the exact model.',
   },
   dimmers: {

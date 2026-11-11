@@ -11,7 +11,7 @@ describe('optional public reading files', () => {
     expect(summary.addressText).toContain('No. 130 Xinguang Avenue');
     expect(summary.productFamilies).toHaveLength(7);
     expect(summary.certifications).toHaveLength(7);
-    expect(faq.questions).toHaveLength(22);
+    expect(faq.questions).toHaveLength(24);
     for(const q of faq.questions)expect(routeMetadata.has(new URL(q.source).pathname.replace(/\/$/,''))).toBe(true);
     for(const match of files['llms.txt'].matchAll(/\]\(([^)]+)\)/g)) {
       const path=new URL(match[1]).pathname.replace(/\/$/,'');
