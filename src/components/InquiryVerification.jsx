@@ -30,8 +30,25 @@ export default function InquiryVerification({ siteKey, onToken, resetKey }) {
   const container = useRef(null);
   const [failed, setFailed] = useState(false);
   const [attempt, setAttempt] = useState(0);
+  const [size, setSize] = useState(null);
 
   useEffect(() => {
+    const update = () => {
+      const width = container.current?.clientWidth || 0;
+      setSize(width > 0 && width < 300 ? 'compact' : 'flexible');
+    };
+    update();
+    if (typeof ResizeObserver === 'undefined') {
+      window.addEventListener('resize', update);
+      return () => window.removeEventListener('resize', update);
+    }
+    const observer = new ResizeObserver(update);
+    observer.observe(container.current);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!size) return undefined;
     let disposed = false;
     let api;
     let widget;
@@ -43,7 +60,7 @@ export default function InquiryVerification({ siteKey, onToken, resetKey }) {
       if (disposed) return;
       api = turnstile;
       widget = api.render(container.current, {
-        sitekey: siteKey, action: 'inquiry', size: 'flexible', theme: 'light',
+        sitekey: siteKey, action: 'inquiry', size, theme: 'light',
         callback: token => { if (!disposed) { setFailed(false); onToken(token); } },
         'expired-callback': clearToken, 'error-callback': fail, 'timeout-callback': fail
       });
@@ -52,7 +69,7 @@ export default function InquiryVerification({ siteKey, onToken, resetKey }) {
       disposed = true;
       if (widget !== undefined) api.remove(widget);
     };
-  }, [siteKey, onToken, resetKey, attempt]);
+  }, [siteKey, onToken, resetKey, attempt, size]);
 
   return <div className="field">
     <div ref={container} />

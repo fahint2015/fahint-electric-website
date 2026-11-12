@@ -29,6 +29,37 @@ const submit = () => fireEvent.submit(screen.getByRole('button', { name: 'Send i
 const endpoint = 'https://fahint.com/api/inquiry';
 
 describe('Verified inquiry submission', () => {
+  it('fits narrow containers and requires fresh verification after resizing', async () => {
+    let notifyResize;
+    const disconnect = vi.fn();
+    const width = vi.spyOn(Element.prototype, 'clientWidth', 'get').mockReturnValue(238);
+    vi.stubGlobal('ResizeObserver', class {
+      constructor(callback) { notifyResize = callback; }
+      observe() {}
+      disconnect = disconnect;
+    });
+    try {
+      const request = vi.fn().mockResolvedValue({ ok: true, json: async () => ({ ok: true }) });
+      const { unmount } = render(<InquiryForm endpoint={endpoint} turnstileSiteKey="public-site-key" request={request} />);
+      await waitFor(() => expect(widgets.at(-1)).toMatchObject({ size: 'compact' }));
+      fillInquiry();
+      const oldWidget = widgets.at(-1);
+      act(() => oldWidget.callback('old-token'));
+      width.mockReturnValue(500);
+      act(() => notifyResize());
+      await waitFor(() => expect(widgets.at(-1)).toMatchObject({ size: 'flexible' }));
+      act(() => oldWidget.callback('stale-token'));
+      submit();
+      expect(request).not.toHaveBeenCalled();
+      expect(screen.getByRole('alert')).toHaveTextContent('Please complete the verification');
+      unmount();
+      expect(disconnect).toHaveBeenCalledOnce();
+    } finally {
+      width.mockRestore();
+      vi.unstubAllGlobals();
+    }
+  });
+
   it.each([
     ['GF15', 'GF20', 'GFCI Outlets'],
     ['R15', 'R15Q', 'Standard Receptacles'],
