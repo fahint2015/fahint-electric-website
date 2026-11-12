@@ -5,7 +5,7 @@ import { productHref } from '../../data/catalogProducts.js';
 import { modelComparisonRows } from '../../data/modelComparison.js';
 import { findLine } from '../../data/lines.js';
 import { inquiryContactHref, resolveInquiryContext } from '../../utils/inquiryContext.js';
-import { usbInquiryHref } from '../../utils/inquiryList.js';
+import { inquiryListHref } from '../../utils/inquiryList.js';
 import SafeImage from '../SafeImage.jsx';
 import './usb-comparison.css';
 
@@ -71,9 +71,9 @@ export default function UsbComparison({ products, onChange, line = 'usb-outlets'
           </tr>)}{!rows.length && <tr><td colSpan={products.length + 1}>No differences in these published specifications. Turn off “Show differences only” to see all rows.</td></tr>}</tbody>
         </table>
       </div>
-      {isUsb && <div className="usb-comparison__inquiry">
+      {(isUsb || line === 'gfci' || line === 'receptacles') && <div className="usb-comparison__inquiry">
         <p>Shortlist ready? Set quantities and finishes on the contact page.</p>
-        <Link className="usb-comparison__open" to={`${usbInquiryHref(products.map(product => ({ model: product.sku })))}#inquiry`}>
+        <Link className="usb-comparison__open" to={`${inquiryListHref(products.map(product => ({ model: product.sku })))}#inquiry`}>
           Add selected to inquiry <ArrowRight size={16} aria-hidden="true" />
         </Link>
       </div>}

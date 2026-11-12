@@ -3,7 +3,7 @@ import { Send } from 'lucide-react';
 import { company } from '../data/company.js';
 import { products } from '../data/products.js';
 import { resolveInquiryContext } from '../utils/inquiryContext.js';
-import { resolveUsbInquiryItems, serializeUsbInquiryItems, validInquiryQuantity } from '../utils/inquiryList.js';
+import { resolveInquiryItems, serializeInquiryItems, validInquiryQuantity } from '../utils/inquiryList.js';
 import InquiryList from './InquiryList.jsx';
 import InquiryVerification from './InquiryVerification.jsx';
 import { trackEvent } from '../utils/analytics.js';
@@ -57,8 +57,9 @@ export default function InquiryForm({
   const requestIdentityRef = useRef(null);
   const trackedRequestIdRef = useRef(null);
   const [form, setForm] = useState({ ...EMPTY, model: defaultModel, category: defaultCategory });
-  const items = form.category === 'USB Outlets' ? resolveUsbInquiryItems(inquiryItems) : [];
-  const itemsKey = serializeUsbInquiryItems(items);
+  const resolvedItems = resolveInquiryItems(inquiryItems);
+  const items = form.category === resolvedItems[0]?.category ? resolvedItems : [];
+  const itemsKey = serializeInquiryItems(items);
   const context = items.length ? null : categoryOptions
     ? (productContext?.category === form.category ? productContext : null)
     : resolveInquiryContext(form.model, productContext?.model === form.model ? productContext.finishSlug : '');
@@ -147,7 +148,7 @@ export default function InquiryForm({
     setForm((current) => ({ ...current, [key]: nextValue }));
     if (key === 'model') onModelChange?.(nextValue);
     if (key === 'category' && productContext && nextValue !== productContext.category) onClearProduct?.();
-    if (key === 'category' && items.length && nextValue !== 'USB Outlets') onItemsChange?.([]);
+    if (key === 'category' && items.length && nextValue !== items[0].category) onItemsChange?.([]);
     setErrors((currentErrors) => {
       if (!currentErrors[key]) return currentErrors;
       if (nextErrors[key]) return { ...currentErrors, [key]: nextErrors[key] };

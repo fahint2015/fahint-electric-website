@@ -1,12 +1,11 @@
 import { useId } from 'react';
 import { Link } from './SiteLink.jsx';
 import { X } from 'lucide-react';
-import { getCatalogProducts } from '../data/catalogProducts.js';
+import { catalogProducts } from '../data/catalogProducts.js';
+import { colors, findProduct } from '../data/products.js';
 import { validInquiryQuantity } from '../utils/inquiryList.js';
 import SafeImage from './SafeImage.jsx';
 import './inquiry-list.css';
-
-const usbProducts = getCatalogProducts('usb-outlets');
 
 export default function InquiryList({ items, onChange }) {
   const id = useId();
@@ -15,13 +14,14 @@ export default function InquiryList({ items, onChange }) {
     <div className="inquiry-list__heading"><h4 id={`${id}-title`}>Your inquiry list</h4><span aria-live="polite">{items.length} {items.length === 1 ? 'model' : 'models'}</span></div>
     <p className="inquiry-list__intro">Set a quantity and finish for each model, or leave them open for discussion.</p>
     <ul>{items.map(item => {
-      const product = usbProducts.find(candidate => candidate.sku === item.model);
+      const product = findProduct(item.model) || catalogProducts.find(candidate => candidate.sku === item.model);
       const invalidQuantity = !validInquiryQuantity(item.quantity);
       const itemId = `${id}-${item.model}`;
-      const [width, height] = product.assets.imageSizes[product.assets.card] || [800, 800];
+      const image = product.assets.card || product.assets.hero;
+      const [width, height] = product.assets.imageSizes?.[image] || [800, 800];
       return <li key={item.model} className="inquiry-list__item">
         <div className="inquiry-list__product">
-          <SafeImage src={product.assets.card} alt="" width={width} height={height} />
+          <SafeImage src={image} alt="" width={width} height={height} />
           <div><Link to={item.source}>{item.model}</Link><p>{product.name}</p></div>
           <button className="inquiry-list__remove" type="button" aria-label={`Remove ${item.model} from inquiry`} onClick={() => onChange(items.filter(row => row.model !== item.model))}><X size={18} aria-hidden="true" /></button>
         </div>
@@ -37,7 +37,7 @@ export default function InquiryList({ items, onChange }) {
             <label htmlFor={`${itemId}-finish`}>Finish</label>
             <select id={`${itemId}-finish`} aria-label={`Finish for ${item.model}`} value={item.finishSlug} onChange={event => change(item.model, 'finishSlug', event.target.value)}>
               <option value="">Not specified</option>
-              {product.finishes.map(finish => <option key={finish.slug} value={finish.slug}>{finish.name}</option>)}
+              {(product.finishes ?? colors).map(finish => <option key={finish.slug} value={finish.slug}>{finish.name}</option>)}
             </select>
           </div>
         </div>

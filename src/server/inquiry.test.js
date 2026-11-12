@@ -107,7 +107,9 @@ describe('Cloudflare inquiry email', () => {
     { items: [{ model: 'unknown', quantity: '1' }] },
     { items: [{ model: 'FTR15-3100', quantity: '1.5' }] },
     { items: [{ model: 'FTR15-3100', quantity: 100 }] },
-    { items: [{ model: 'FTR15-3100' }, { model: 'FTR15-3100' }] }
+    { items: [{ model: 'FTR15-3100' }, { model: 'FTR15-3100' }] },
+    { items: [{ model: 'GF15' }, { model: 'R15' }] },
+    { items: [{ model: 'DM2010S' }] }
   ])('rejects invalid buyer data before verifying or sending (case %#)', async change => {
     const fetcher = vi.fn();
     vi.stubGlobal('fetch', fetcher);
@@ -143,21 +145,29 @@ describe('Cloudflare inquiry email', () => {
     expect(env.INQUIRY_DB.rows.size).toBe(0);
   });
 
-  it('uses canonical product details for all items instead of client-supplied labels or links', async () => {
+  it.each([
+    ['FTR15-3100', 'FTR15C-3100', 'USB Outlets', 'White'],
+    ['GF15', 'GTN20', 'GFCI Outlets', 'Not specified'],
+    ['R15', 'R15Q', 'Standard Receptacles', 'White']
+  ])('stores and emails canonical list details for %s and %s', async (first, second, category, expectedFinish) => {
     const fetcher = vi.fn(async url => url.includes('siteverify')
       ? Response.json(verified) : Response.json({ id: 'accepted-id' }));
     vi.stubGlobal('fetch', fetcher);
     const response = await onRequest({ request: requestFor({ ...inquiry, items: [
-      { model: 'FTR15-3100', quantity: '1200', finishSlug: 'black', finish: 'Forged', source: 'https://evil.example' },
-      { model: 'FTR15C-3100', quantity: '600', finishSlug: 'white' }
+      { model: first, quantity: '1200', finishSlug: 'black', finish: 'Forged', source: 'https://evil.example' },
+      { model: second, quantity: '600', finishSlug: 'white' }
     ] }), env });
     expect(response.status).toBe(200);
     const email = JSON.parse(fetcher.mock.calls.find(([url]) => url === 'https://api.resend.com/emails')[1].body);
     expect(email.text).toContain('Inquiry list (2 models)');
+    expect(email.text).toContain(`Product category: ${category}`);
+    expect(email.text).toContain(`1. ${first}`);
+    expect(email.text).toContain(`2. ${second}`);
     expect(email.text).toContain('Quantity: 1200 pcs\nFinish: Black');
-    expect(email.text).toContain('Quantity: 600 pcs\nFinish: White');
+    expect(email.text).toContain(`Quantity: 600 pcs\nFinish: ${expectedFinish}`);
     expect(email.text).not.toMatch(/Forged|evil/);
     const row = env.INQUIRY_DB.rows.get(inquiry.requestId);
+    expect(row.category).toBe(category);
     expect(JSON.parse(row.items_json)).toHaveLength(2);
     expect(row.inquiry_text).toContain('Quantity: 1200 pcs\nFinish: Black');
     expect(row.items_json).not.toMatch(/Forged|evil/);

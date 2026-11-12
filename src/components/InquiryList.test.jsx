@@ -23,6 +23,24 @@ function fillRequired() {
 }
 
 describe('itemized inquiry output', () => {
+  it.each([
+    ['GF15', 'GTN20', 'GFCI Outlets'],
+    ['R15', 'R15Q', 'Standard Receptacles']
+  ])('renders and copies a canonical %s and %s list', async (first, second, category) => {
+    const user = userEvent.setup();
+    const clipboardWriter = vi.fn();
+    const selected = [{ model: first, quantity: '500', finishSlug: 'black' }, { model: second, quantity: '', finishSlug: '' }];
+    renderList({ defaultCategory: category, inquiryItems: selected, clipboardWriter });
+    expect(screen.getByLabelText(`Quantity for ${first}`)).toHaveValue('500');
+    expect(screen.getByLabelText(`Finish for ${first}`)).toHaveValue('black');
+    expect(screen.getByRole('link', { name: first })).toHaveAttribute('href', `/products/${first === 'GF15' ? 'gfci' : 'receptacles'}/${first.toLowerCase()}/`);
+    expect(screen.queryByLabelText('Estimated quantity')).not.toBeInTheDocument();
+    await user.click(screen.getByRole('button', { name: 'Copy inquiry details' }));
+    expect(clipboardWriter.mock.calls[0][0]).toContain(`Product category: ${category}`);
+    expect(clipboardWriter.mock.calls[0][0]).toContain(`1. ${first}\nQuantity: 500 pcs\nFinish: Black`);
+    expect(clipboardWriter.mock.calls[0][0]).toContain(`2. ${second}`);
+  });
+
   it('uses the same validated itemized body for mail and copying without conflicting global choices', () => {
     const body = new URLSearchParams(buildMailtoUrl(brief).split('?')[1]).get('body');
     expect(body).toContain('Inquiry list (2 models):');

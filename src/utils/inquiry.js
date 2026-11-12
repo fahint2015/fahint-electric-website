@@ -1,5 +1,5 @@
 import { company } from '../data/company.js';
-import { resolveUsbInquiryItems, validInquiryQuantity } from './inquiryList.js';
+import { resolveInquiryItems, validInquiryQuantity } from './inquiryList.js';
 
 export const EMPTY_INQUIRY = {
   name: '', email: '', company: '', country: '', model: '', category: '', quantity: '', message: ''
@@ -14,10 +14,10 @@ export function normalizeInquiry(form) {
     if (Object.hasOwn(form, key)) fields.push(key);
   }
   const values = Object.fromEntries(fields.map(key => [key, clean(form[key])]));
-  const items = resolveUsbInquiryItems(form.items);
+  const items = resolveInquiryItems(form.items);
   if (items.length) {
     values.items = items;
-    values.category = 'USB Outlets';
+    values.category = items[0].category;
     for (const key of ['model', 'finish', 'source', 'quantity']) delete values[key];
   }
   return values;
@@ -45,7 +45,7 @@ export function validateInquiry(form) {
   if (!clean(form.name)) errors.name = 'Enter your name.';
   if (!EMAIL_PATTERN.test(clean(form.email))) errors.email = 'Enter a valid business email.';
   if (!clean(form.message)) errors.message = 'Describe the product or project you need.';
-  if (resolveUsbInquiryItems(form.items).some(item => !validInquiryQuantity(item.quantity))) errors.items = 'Check each model quantity.';
+  if (resolveInquiryItems(form.items).some(item => !validInquiryQuantity(item.quantity))) errors.items = 'Check each model quantity.';
   return errors;
 }
 

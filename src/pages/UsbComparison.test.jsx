@@ -139,6 +139,13 @@ describe('USB comparison flow', () => {
       expect(within(table).getByRole('link', { name: `Request quote for ${model}` }))
         .toHaveAttribute('href', `/contact/?topic=products&model=${model}`);
     }
+    if (['gfci', 'receptacles'].includes(line)) {
+      const href = within(dialog).getByRole('link', { name: 'Add selected to inquiry' }).getAttribute('href');
+      const url = new URL(href, 'https://example.com');
+      expect(url.hash).toBe('#inquiry');
+      expect(url.searchParams.get('topic')).toBe('products');
+      expect(JSON.parse(url.searchParams.get('items'))).toEqual(models.map(model => [model, '', '']));
+    } else expect(within(dialog).queryByRole('link', { name: 'Add selected to inquiry' })).not.toBeInTheDocument();
     await user.click(within(dialog).getByRole('button', { name: 'Close comparison' }));
     expect(open()).toHaveFocus();
   });

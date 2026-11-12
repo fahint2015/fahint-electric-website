@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 import { MemoryRouter, Route, Routes, useLocation } from 'react-router-dom';
 import { describe, expect, it } from 'vitest';
 import Contact from './Contact.jsx';
-import { parseUsbInquiryItems } from '../utils/inquiryList.js';
+import { parseInquiryItems } from '../utils/inquiryList.js';
 
 const listUrl = '/contact?topic=products&items=' + encodeURIComponent(JSON.stringify([
   ['FTR15-3100', '1200', 'black'], ['FTR15C-3100', '', ''], ['FTR20QC-DC65W', '800', 'grey']
@@ -18,7 +18,7 @@ function renderContact(url = listUrl) {
   </MemoryRouter>);
 }
 const currentUrl = () => screen.getByLabelText('Current URL').textContent;
-const currentItems = () => parseUsbInquiryItems(new URL(currentUrl(), 'https://example.com').searchParams.get('items'));
+const currentItems = () => parseInquiryItems(new URL(currentUrl(), 'https://example.com').searchParams.get('items'));
 
 describe('USB list contact integration', () => {
   it('restores validated choices without changing the seven-category selector', () => {
@@ -92,8 +92,46 @@ describe('USB list contact integration', () => {
     expect(screen.getByLabelText('Product category')).toHaveValue('USB Outlets');
     expect(screen.queryByRole('group', { name: 'Selected product' })).not.toBeInTheDocument();
     unmount();
-    renderContact('/contact?items=%5B%5B%22GF15%22%5D%5D');
+    renderContact('/contact?items=' + encodeURIComponent(JSON.stringify([['DM2010S']])));
     expect(screen.queryByRole('group', { name: 'Your inquiry list' })).not.toBeInTheDocument();
     expect(screen.getByLabelText('Product category')).toHaveValue('');
+  });
+
+  it.each([
+    [['GF15', 'GF20', 'GTN20'], 'GFCI Outlets'],
+    [['R15', 'R15Q', 'R20'], 'Standard Receptacles']
+  ])('preserves edits, topic and customer draft for the %s list', async (models, category) => {
+    const user = userEvent.setup();
+    renderContact('/contact?topic=products&items=' + encodeURIComponent(JSON.stringify(models.map(model => [model, '', '']))));
+    expect(screen.getByLabelText('Product category')).toHaveValue(category);
+    await user.type(screen.getByLabelText('Company'), 'Private buyer');
+    fireEvent.change(screen.getByLabelText(`Quantity for ${models[0]}`), { target: { value: '2500' } });
+    await user.selectOptions(screen.getByLabelText(`Finish for ${models[0]}`), 'black');
+    await user.click(screen.getByRole('link', { name: 'OEM / ODM inquiry', exact: true }));
+    expect(currentItems()[0]).toMatchObject({ model: models[0], quantity: '2500', finishSlug: 'black', category });
+    expect(currentUrl()).toContain('topic=oem');
+    expect(currentUrl()).not.toContain('Private');
+    await user.click(screen.getByRole('button', { name: `Remove ${models[1]} from inquiry` }));
+    expect(currentItems().map(item => item.model)).toEqual([models[0], models[2]]);
+    await user.click(screen.getByRole('button', { name: `Remove ${models[2]} from inquiry` }));
+    await user.click(screen.getByRole('button', { name: `Remove ${models[0]} from inquiry` }));
+    expect(screen.queryByRole('group', { name: 'Your inquiry list' })).not.toBeInTheDocument();
+    expect(screen.getByLabelText('Company')).toHaveValue('Private buyer');
+    expect(screen.getByLabelText('Estimated quantity')).toBeVisible();
+    expect(currentUrl()).not.toContain('items=');
+  });
+
+  it.each([
+    ['GF15', 'GF20', 'GFCI Outlets'],
+    ['R15', 'R15Q', 'Standard Receptacles']
+  ])('clears the %s list when switching product category', async (first, second, category) => {
+    const user = userEvent.setup();
+    renderContact('/contact?items=' + encodeURIComponent(JSON.stringify([[first], [second]])));
+    expect(screen.getByLabelText('Product category')).toHaveValue(category);
+    await user.type(screen.getByLabelText('Company'), 'Keep this draft');
+    await user.selectOptions(screen.getByLabelText('Product category'), 'USB Outlets');
+    expect(currentUrl()).not.toContain('items=');
+    expect(screen.queryByRole('group', { name: 'Your inquiry list' })).not.toBeInTheDocument();
+    expect(screen.getByLabelText('Company')).toHaveValue('Keep this draft');
   });
 });

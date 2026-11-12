@@ -51,7 +51,7 @@ export const staticMetadata = Object.fromEntries(Object.entries({
     image: 'assets/images/company/factory/electronics-workshop-v2.webp', imageAlt: 'FAHINT electronics workshop', label: 'About FAHINT', organization: true,
   },
   '/contact': {
-    updated: '2026-10-26', // Owner-confirmed full street address added to the page.
+    updated: '2026-11-12', // GFCI and standard receptacle inquiry lists added.
     title: 'Contact FAHINT | Product & OEM Inquiries',
     description: 'Send FAHINT your models, quantities, market and packaging needs. Contact our Wenzhou team about product quotations, OEM/ODM projects or technical documents.',
     image: 'assets/images/company/fahint-showroom-front-v1.webp', imageAlt: 'FAHINT showroom and product display', label: 'Contact',
@@ -95,7 +95,7 @@ export function familyMetadata(line, models = []) {
   };
   return {
     path: `/products/${line.slug}`, title: titles[line.slug] || `${line.name} · Models & Specifications | FAHINT`, description: descriptions[line.slug] || line.summary,
-    updated: '2026-11-11',
+    updated: ['gfci', 'receptacles'].includes(line.slug) ? '2026-11-12' : '2026-11-11',
     structuredDataUpdated: organizationUpdated,
     image: line.cover, imageAlt: `${line.name} from FAHINT`,
     breadcrumbs: [['Home', '/'], ['Products', '/products'], [line.name, `/products/${line.slug}`]],

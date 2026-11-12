@@ -9,7 +9,7 @@ import InquiryForm from '../components/InquiryForm.jsx';
 import Faq from '../components/Faq.jsx';
 import { productLines } from '../data/lines.js';
 import { inquiryContactHref, resolveInquiryContext } from '../utils/inquiryContext.js';
-import { parseUsbInquiryItems, serializeUsbInquiryItems, usbInquiryHref } from '../utils/inquiryList.js';
+import { parseInquiryItems, serializeInquiryItems, inquiryListHref } from '../utils/inquiryList.js';
 import { CompanyBreadcrumb, CompanyLink, usePageMeta } from '../components/company/CompanyShared.jsx';
 
 const topics = [
@@ -23,7 +23,7 @@ export default function Contact() {
   usePageMeta('Contact FAHINT', 'Talk to FAHINT about product orders, OEM / ODM projects and model-specific documentation. Contact our team in Wenzhou, China.');
   const { hash } = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
-  const items = parseUsbInquiryItems(searchParams.get('items'));
+  const items = parseInquiryItems(searchParams.get('items'));
   const context = items.length ? null : resolveInquiryContext(searchParams.get('model'), searchParams.get('finish'));
   const applicationId = !context && !items.length ? searchParams.get('application') : null;
   const application = Object.hasOwn(applicationNames, applicationId) ? { id: applicationId, name: applicationNames[applicationId] } : null;
@@ -45,7 +45,7 @@ export default function Contact() {
     const next = new URLSearchParams(current);
     next.delete('model');
     next.delete('finish');
-    const value = serializeUsbInquiryItems(nextItems);
+    const value = serializeInquiryItems(nextItems);
     if (value) next.set('items', value);
     else next.delete('items');
     return next;
@@ -67,9 +67,9 @@ export default function Contact() {
         <div className="company-contact-help"><h3>Looking for a document?</h3><p>Original product-family certificates are available before you write.</p><CompanyLink to="/resources#certifications" secondary light>View certificate library</CompanyLink></div>
       </Reveal>
       <div className="company-contact-form" id="inquiry" tabIndex={-1}>
-        <nav className="company-contact-topics" aria-label="Inquiry type">{topics.map(item => <Link key={item.id} to={items.length ? usbInquiryHref(items, item.id) : inquiryContactHref(context, item.id, application?.id)} state={{ preserveScroll: true }} aria-current={item.id === topic.id ? 'page' : undefined}>{item.label}</Link>)}</nav>
+        <nav className="company-contact-topics" aria-label="Inquiry type">{topics.map(item => <Link key={item.id} to={items.length ? inquiryListHref(items, item.id) : inquiryContactHref(context, item.id, application?.id)} state={{ preserveScroll: true }} aria-current={item.id === topic.id ? 'page' : undefined}>{item.label}</Link>)}</nav>
         <p className="company-contact-context">{topic.hint}</p>
-        <InquiryForm defaultCategory={items.length ? 'USB Outlets' : context?.category || ''} categoryOptions={productLines}
+        <InquiryForm defaultCategory={items[0]?.category || context?.category || ''} categoryOptions={productLines}
           inquiryItems={items} onItemsChange={updateItems}
           productContext={context} application={application} topic={topic.label} onClearProduct={clearProduct} title="Tell us what you need" />
       </div>

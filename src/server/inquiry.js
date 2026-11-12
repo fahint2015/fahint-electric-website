@@ -1,6 +1,6 @@
 import { company } from '../data/company.js';
 import { buildInquiryBody, normalizeInquiry, validateInquiry } from '../utils/inquiry.js';
-import { resolveUsbInquiryItems } from '../utils/inquiryList.js';
+import { resolveInquiryItems } from '../utils/inquiryList.js';
 import { recordNotification, saveInquiry } from './inquiry-store.js';
 
 const SITE_ORIGIN = 'https://fahint.com';
@@ -54,7 +54,7 @@ function validPayload(payload) {
         if (item[key] !== undefined && (typeof item[key] !== 'string' || item[key].length > 64)) return false;
       }
     }
-    if (resolveUsbInquiryItems(payload.items).length !== payload.items.length) return false;
+    if (resolveInquiryItems(payload.items).length !== payload.items.length) return false;
   }
   return Object.keys(validateInquiry(payload)).length === 0;
 }

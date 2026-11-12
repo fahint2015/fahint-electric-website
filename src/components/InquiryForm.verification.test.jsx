@@ -1,6 +1,8 @@
 import { act, fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import InquiryForm from './InquiryForm.jsx';
+import { MemoryRouter } from 'react-router-dom';
+import { productLines } from '../data/lines.js';
 import { trackEvent } from '../utils/analytics.js';
 
 vi.mock('../utils/analytics.js', () => ({ trackEvent: vi.fn() }));
@@ -27,6 +29,33 @@ const submit = () => fireEvent.submit(screen.getByRole('button', { name: 'Send i
 const endpoint = 'https://fahint.com/api/inquiry';
 
 describe('Verified inquiry submission', () => {
+  it.each([
+    ['GF15', 'GF20', 'GFCI Outlets'],
+    ['R15', 'R15Q', 'Standard Receptacles'],
+    ['FTR15-3100', 'FTR15C-3100', 'USB Outlets']
+  ])('posts both %s and %s with verified, itemized quantities and finishes', async (first, second, category) => {
+    vi.useFakeTimers();
+    const request = vi.fn().mockResolvedValue({ ok: true, json: async () => ({ ok: true }) });
+    render(<MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}><InquiryForm endpoint={endpoint} turnstileSiteKey="public-site-key" request={request}
+      categoryOptions={productLines} defaultCategory={category} inquiryItems={[
+        { model: first, quantity: '500', finishSlug: 'black' },
+        { model: second, quantity: '100', finishSlug: 'white' }
+      ]} onItemsChange={vi.fn()} /></MemoryRouter>);
+    await act(async () => {});
+    fillInquiry();
+    act(() => widgets[0].callback('verified-list-token'));
+    submit();
+    await act(async () => vi.advanceTimersByTimeAsync(1500));
+    expect(request).toHaveBeenCalledTimes(1);
+    const payload = JSON.parse(request.mock.calls[0][1].body);
+    expect(payload.category).toBe(category);
+    expect(payload.items.map(item => item.model)).toEqual([first, second]);
+    expect(payload.items[0]).toMatchObject({ quantity: '500', finish: 'Black', finishSlug: 'black' });
+    expect(payload.items[1]).toMatchObject({ quantity: '100', finish: 'White', finishSlug: 'white' });
+    expect(payload).toMatchObject({ turnstileToken: 'verified-list-token', requestId: expect.any(String) });
+    expect(payload).not.toHaveProperty('model');
+  });
+
   it('counts a confirmed inquiry once when the same request is resubmitted', async () => {
     vi.useFakeTimers();
     const request = vi.fn().mockResolvedValue({ ok: true, json: async () => ({ ok: true }) });
