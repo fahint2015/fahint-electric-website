@@ -77,8 +77,8 @@ export const notFoundMetadata = {
 export function familyMetadata(line, models = []) {
   const titles = {
     gfci: 'GFCI Outlet Manufacturer | 15A & 20A Models | FAHINT',
-    'usb-outlets': 'USB-C Wall Outlets | USB-A & Power Delivery | FAHINT',
-    receptacles: 'Duplex & Decorator Receptacles | FAHINT',
+    'usb-outlets': 'USB Outlet Manufacturer | USB-A & USB-C PD | FAHINT',
+    receptacles: 'Duplex & Decorator Receptacle Manufacturer | FAHINT',
     dimmers: 'LED & 0–10V Dimmer Switches | FAHINT',
     'smart-switches': 'Wi-Fi & Zigbee Smart Wall Switches | FAHINT',
     'lighting-switches': 'Single-Pole, 3-Way & Combination Switches | FAHINT',
@@ -95,7 +95,7 @@ export function familyMetadata(line, models = []) {
   };
   return {
     path: `/products/${line.slug}`, title: titles[line.slug] || `${line.name} · Models & Specifications | FAHINT`, description: descriptions[line.slug] || line.summary,
-    updated: ['gfci', 'receptacles'].includes(line.slug) ? '2026-11-12' : '2026-11-11',
+    updated: ['gfci', 'usb-outlets', 'receptacles'].includes(line.slug) ? '2026-11-12' : '2026-11-11',
     structuredDataUpdated: organizationUpdated,
     image: line.cover, imageAlt: `${line.name} from FAHINT`,
     breadcrumbs: [['Home', '/'], ['Products', '/products'], [line.name, `/products/${line.slug}`]],
