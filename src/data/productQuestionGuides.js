@@ -5,7 +5,7 @@ export const productQuestionGuides = [
     title: 'What is a blank-face GFCI?',
     excerpt: "A blank-face GFCI provides protection with TEST and RESET controls but no plug sockets. Compare this format with a receptacle and review FAHINT GL20.",
     date: '2026-10-22',
-    updated: "2026-10-29",
+    updated: '2026-11-13',
     readMinutes: 2,
     category: 'Technical Guide',
     cover: 'assets/images/products/gl20-feature-application-v1.jpg',
@@ -73,7 +73,7 @@ export const productQuestionGuides = [
       },
       {
         "type": "p",
-        "text": "For GL20, include the intended equipment and location in the review. Its indoor rating has no weather-resistant designation. The installer needs the exact model instructions to approve the load arrangement and access to the controls."
+        "text": "For GL20, include the intended equipment and location in the review. Its indoor rating has no weather-resistant designation. The installer needs the exact model instructions to approve the load arrangement. Confirm the matching wallplate opening and access to the TEST/RESET controls against the model drawing."
       },
       {
         "type": "p",
@@ -95,28 +95,16 @@ export const productQuestionGuides = [
           {
             "label": "GFCI sourcing guide",
             "href": "/blog/how-to-source-ul-listed-gfci-from-china"
+          },
+          {
+            "label": "Compare GFCI outlets",
+            "href": "/products/gfci"
+          },
+          {
+            "label": "Request a GFCI quote",
+            "href": "/contact?topic=products"
           }
         ]
-      },
-      {
-        "type": "h2",
-        "text": "Where a blank-face device actually saves a run"
-      },
-      {
-        "type": "p",
-        "text": "A blank-face GFCI earns its place at a junction that needs protection but not a receptacle. Picture a bathroom wall where the circuit continues to a light or a fan: the protection has to sit upstream, and nobody wants a socket at chest height next to a towel rail. The GL20 closes that gap. It is a 20 A device with no openings, so it protects what is wired downstream and offers nothing to plug into."
-      },
-      {
-        "type": "p",
-        "text": "The alternative — moving the protection to the panel or to a receptacle further along — usually costs more in cable and time than the device itself. That is the argument to make to a contractor, and it is why the blank-face model survives in a catalogue dominated by receptacles."
-      },
-      {
-        "type": "p",
-        "text": "Two things go wrong at order stage. The first is buying a blank-face device for a location that later needs an outlet; the fix is a GT20 or GW20, not a different plate. The second is the plate: a blank-face device still needs a wallplate, and it needs one with a device opening so the TEST and RESET buttons stay reachable — a solid cover would hide the very controls the device depends on."
-      },
-      {
-        "type": "p",
-        "text": "GL20 sits outside the documented shortlist in the August 16, 2022 addendum to E504391-20210212, and its record is still under review in our library. Request the exact model document before the specification is issued rather than relying on the family page."
       }
     ]
   },
@@ -125,7 +113,7 @@ export const productQuestionGuides = [
     title: 'Can a USB-C wall outlet charge a laptop?',
     excerpt: "Match the laptop’s USB-C charging profile and cable to the outlet. Review FTR15QC-DC65W and the power-sharing question when a second device connects.",
     date: '2026-10-22',
-    updated: "2026-10-29",
+    updated: '2026-11-13',
     readMinutes: 2,
     category: 'Buying Guide',
     cover: 'assets/images/home-installations/ftr15qc-dc65w-desk-installed-v1.webp',
@@ -201,6 +189,19 @@ export const productQuestionGuides = [
       },
       {
         "type": "h2",
+        "text": "Does a higher-wattage laptop charger rule out this outlet?"
+      },
+      {
+        "type": "p",
+        "text": "The original charger’s wattage alone does not decide compatibility. Apple says a Mac that charges over USB-C can use a USB Power Delivery source with a lower wattage than its recommended adapter. This guidance is not a compatibility test of FTR15QC-DC65W with a particular Mac.",
+        "source": 1
+      },
+      {
+        "type": "p",
+        "text": "For the proposed laptop, compare its accepted voltage and current with the outlet’s published profiles. Include the laptop model, recommended charger, cable and intended workload in the sample review. The outlet’s published single-port ceiling remains 65W; do not assume it will match the original charger’s performance."
+      },
+      {
+        "type": "h2",
         "text": "Allow for the second device"
       },
       {
@@ -231,32 +232,16 @@ export const productQuestionGuides = [
           {
             "label": "Compare USB outlet configurations",
             "href": "/blog/usb-wall-outlet-buying-guide"
+          },
+          {
+            "label": "Browse USB outlets",
+            "href": "/products/usb-outlets"
+          },
+          {
+            "label": "Request a USB outlet quote",
+            "href": "/contact?topic=products"
           }
         ]
-      },
-      {
-        "type": "h2",
-        "text": "Reading a laptop charger against the outlet"
-      },
-      {
-        "type": "p",
-        "text": "Start with the wattage printed on the laptop's original supply. Most 13- and 14-inch machines ship with something in the 45–65 W band, which is why the 65 W Power Delivery model is the one that gets specified. The 20 W model is a phone and tablet device; it will charge a laptop slowly or refuse the negotiation, and no cable fixes that."
-      },
-      {
-        "type": "p",
-        "text": "Above 65 W the range stops. A 90 W or 140 W workstation laptop needs a supply outside this catalogue, and the honest answer is a desk dock rather than a wall outlet. Saying so early saves a sample round."
-      },
-      {
-        "type": "p",
-        "text": "The cable is part of the circuit. A USB-C cable rated for 3 A caps the current no matter what the outlet or the laptop can negotiate, so a 65 W outlet with a 3 A cable behaves like a 60 W one. For the full profile, specify a 5 A cable with the e-marker, and keep the cable in the quotation so the customer is not left to source it."
-      },
-      {
-        "type": "p",
-        "text": "With two devices connected, the split follows whatever the model publishes for simultaneous use. A laptop at 65 W plus a phone is not 65 W plus 20 W on every product, and where a model does not publish a combined figure, the two single-port ratings should not be added together to make one. Ask for the simultaneous-port data on the exact model."
-      },
-      {
-        "type": "p",
-        "text": "Send the laptop model, the original charger wattage, the cable rating and the second device. Those four answers decide whether FTR15QC-DC65W is even the right part before anyone talks about quantity."
       }
     ]
   },
@@ -265,7 +250,7 @@ export const productQuestionGuides = [
     title: 'Back wire vs push-in outlets: R15 or R15Q?',
     excerpt: 'R15 uses side/back wiring; R15Q uses side/push-in quick wiring. Compare these 15A duplex outlets and the published #14 AWG push-in limit.',
     date: '2026-10-22',
-    updated: '2026-10-29',
+    updated: '2026-11-13',
     readMinutes: 2,
     category: 'Technical Guide',
     cover: 'assets/images/catalog/models/f7545e332ba20ec4.webp',
@@ -296,34 +281,17 @@ export const productQuestionGuides = [
       { type: 'h2', text: 'What the terminal names mean' },
       { type: 'p', text: 'With screw-clamp back wiring, a screw operates a clamp that holds the conductor. Side wiring uses the screw terminal on the side of the device. Leviton illustrates both methods in its wiring guide.', source: 2 },
       { type: 'p', text: 'Push-in wiring accepts the conductor directly into the rear terminal. Leviton calls its version Quickwire and also uses the term “backstab.” These overlapping names are why “back wire” on its own can be ambiguous in a quotation.', source: 3 },
-      { type: 'p', text: 'For the selected FAHINT model, the approved instructions specify conductor material, solid or stranded suitability, strip length and torque. The #14 AWG push-in marking does not specify the conductor range for the separate side/back terminals.' },
+      { type: 'p', text: 'Request the approved instructions for the selected FAHINT model to confirm conductor material, solid or stranded suitability, strip length and torque. The #14 AWG push-in marking does not specify the conductor range for the separate side/back terminals.' },
       { type: 'h2', text: 'A purchase description you can use' },
       { type: 'p', text: 'For R15Q, write “R15Q, 15A 125V, standard duplex, side/push-in quick wire,” followed by the chosen finish and quantity. If the project calls for side/back wiring, compare R15 using the first row above.' },
       { type: 'p', text: 'When checking a sample, look at its model marking and rear terminals together. R15 and R15Q share a front presentation in our catalog, so a front photo alone cannot confirm the wiring version.' },
+      { type: 'p', text: 'If the order includes R15 and R15Q, list each full model separately with its quantity, finish and wiring method. Agree the model markings and carton labels during sample approval so the two versions can be identified on receipt.' },
       { type: 'p', text: 'For a rectangular decorator face, D15Q offers side/push-in quick wiring with the same published #14 AWG limit for its 15A push-in terminal. It needs a different wallplate opening from this duplex pair.', source: 4, links: [
         { label: 'View D15Q · decorator format', href: '/products/receptacles/d15q' },
-        { label: 'Standard receptacle buying guide', href: '/blog/standard-receptacle-buying-guide' }
+        { label: 'Standard receptacle buying guide', href: '/blog/standard-receptacle-buying-guide' },
+        { label: 'Browse standard receptacles', href: '/products/receptacles' },
+        { label: 'Request a receptacle quote', href: '/contact?topic=products' }
       ] },
-      {
-        "type": "h2",
-        "text": "Mixing both terminal types on one project"
-      },
-      {
-        "type": "p",
-        "text": "R15 and R15Q share a front presentation, so a photograph of a device face cannot tell an installer which one is in the carton. That matters on a project where one floor is wired in #14 and another in #12, because the terminal method, not the appearance, decides which line the electrician can use."
-      },
-      {
-        "type": "p",
-        "text": "The practical rule is one terminal type per floor, written on the schedule. Mixing them in a single carton means the installer has to check the rear of every device before choosing a conductor, and that check rarely happens on a schedule that is already behind."
-      },
-      {
-        "type": "p",
-        "text": "Push-in connections are faster to make; screw-clamp back wiring holds a wider conductor range and is the safer choice where the circuit may be reconfigured later. Neither is universally better, and the specifier usually knows which trade-off the project is buying."
-      },
-      {
-        "type": "p",
-        "text": "For packing, cartons are labelled by the full model rather than the family, so a site can sort by terminal type without opening boxes. If both suffixes ship in one order, say so on the purchase order and the split is agreed with the packing instruction rather than assumed after the fact."
-      }
     ]
   },
   {

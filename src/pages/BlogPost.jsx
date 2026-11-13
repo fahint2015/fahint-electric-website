@@ -79,7 +79,7 @@ function ArticleContent({ post }) {
           </div>;
           return <Fragment key={index}><p>{block.text}
             {Number.isInteger(block.source) && post.sources[block.source] && <> <SourceLink className="reading-inline-source" source={post.sources[block.source]}>[Source]</SourceLink></>}
-          </p>{block.links?.length > 0 && <div className="reading-action-links">{block.links.map(link => <SourceLink className="reading-action-link" key={link.href} source={link} />)}</div>}</Fragment>;
+          </p>{block.links?.length > 0 && <div className="reading-action-links">{block.links.map(link => link.href === '/contact?topic=products' ? <CompanyLink key={link.href} to={link.href}>{link.label}</CompanyLink> : <SourceLink className="reading-action-link" key={link.href} source={link} />)}</div>}</Fragment>;
         })}
         <section className="reading-sources" aria-labelledby="reading-sources-title"><h2 id="reading-sources-title">Sources & further reading</h2><ul>{post.sources.map(source => <li key={source.href}><SourceLink source={source} /><ArrowUpRight size={15} aria-hidden="true" /></li>)}</ul></section>
         <div className="reading-article-cta"><h2>Reviewing a specific model?</h2><p>Send the model and the question you want to resolve. We will help locate the relevant product information.</p><CompanyLink to="/contact?topic=technical">Ask a product question</CompanyLink></div>

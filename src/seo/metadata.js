@@ -63,7 +63,7 @@ export const staticMetadata = Object.fromEntries(Object.entries({
     image: 'assets/images/company/factory/showroom-samples-v1.webp', imageAlt: 'FAHINT wiring-device samples', label: 'Resources',
   },
   '/blog': {
-    updated: '2026-10-28', // Revised guide dates are shown in the article listing.
+    updated: '2026-11-13', // Three revised outlet guides show their current dates in the listing.
     title: 'Wiring Device Guides | FAHINT',
     description: 'Read FAHINT buyer guides on GFCI selection, sourcing, finishes and product documentation. Compare options using practical questions and original references.',
     image: 'assets/images/company/factory/showroom-samples-v1.webp', imageAlt: 'Wiring-device samples in the FAHINT showroom', label: 'Guides & insights',
