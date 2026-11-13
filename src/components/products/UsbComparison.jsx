@@ -61,7 +61,8 @@ export default function UsbComparison({ products, onChange, line = 'usb-outlets'
               <strong>{product.sku}</strong><p>{product.name}</p>
               <div className="usb-comparison__links">
                 <Link to={productHref(product)} aria-label={`View ${product.sku} details`}>View details <ArrowRight size={14} aria-hidden="true" /></Link>
-                <Link className="quote-button" to={inquiryContactHref(resolveInquiryContext(product.sku), 'products')} aria-label={`Request quote for ${product.sku}`}>Request quote</Link>
+                <Link className="quote-button" to={inquiryContactHref(resolveInquiryContext(product.sku), 'products')} aria-label={`Request quote for ${product.sku}`}
+                  data-quote-location="comparison_model" data-quote-family={line} data-quote-model={product.sku}>Request quote</Link>
               </div>
             </th>;
           })}</tr></thead>
@@ -73,7 +74,8 @@ export default function UsbComparison({ products, onChange, line = 'usb-outlets'
       </div>
       {(isUsb || line === 'gfci' || line === 'receptacles') && <div className="usb-comparison__inquiry">
         <p>Shortlist ready? Set quantities and finishes on the contact page.</p>
-        <Link className="usb-comparison__open" to={`${inquiryListHref(products.map(product => ({ model: product.sku })))}#inquiry`}>
+        <Link className="usb-comparison__open" to={`${inquiryListHref(products.map(product => ({ model: product.sku })))}#inquiry`}
+          data-quote-location="comparison_batch" data-quote-family={line} data-quote-model={products.map(product => product.sku).join('|')}>
           Add selected to inquiry <ArrowRight size={16} aria-hidden="true" />
         </Link>
       </div>}

@@ -55,8 +55,8 @@ const featuredGuides = [
 const webp = (file, folder = generated) => folder + file.replace(/\.png$/, '.webp');
 const responsive = (file, width = 1536, folder = generated, breakpoints = [768, 1200]) => [...breakpoints.filter(size => size < width), width].map(size => `${folder}${file.replace(/\.png$/, size === width ? '.webp' : `-${size}.webp`)} ${size}w`).join(', ');
 
-function TextLink({ to, children, className = '' }) {
-  return <Link className={`text-link ${className}`} to={to}>{children}<ArrowRight size={19} strokeWidth={1.6} aria-hidden="true" /></Link>;
+function TextLink({ to, children, className = '', ...props }) {
+  return <Link className={`text-link ${className}`} to={to} {...props}>{children}<ArrowRight size={19} strokeWidth={1.6} aria-hidden="true" /></Link>;
 }
 
 function Hero() {
@@ -98,7 +98,7 @@ function Hero() {
       <p className="hero-description">Outlets, switches, dimmers and wall plates for brands and distributors. OEM/ODM support.</p>
       <div className="hero-actions">
         <TextLink to="/products" className="button-link button-link--light">Explore Products</TextLink>
-        <TextLink to="/contact" className="button-link hero-quote quote-button">Request a Quote</TextLink>
+        <TextLink to="/contact" className="button-link hero-quote quote-button" data-quote-location="home_hero">Request a Quote</TextLink>
       </div>
     </div></div>
     <div className="wrap hero-controls">

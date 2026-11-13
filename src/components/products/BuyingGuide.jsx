@@ -23,7 +23,7 @@ export function BuyingGuide({ line }) {
         <p>{guide.intro}</p>
         <Link className="textlink" to={guide.resource.to}>{guide.resource.label} <ArrowUpRight size={16} aria-hidden="true" /></Link>
         {guide.relatedGuide && <Link className="textlink" to={guide.relatedGuide.to}>{guide.relatedGuide.label} <ArrowUpRight size={16} aria-hidden="true" /></Link>}
-        <Link className="textlink quote-button" to={inquiry.to}>{inquiry.label} <ArrowUpRight size={16} aria-hidden="true" /></Link>
+        <Link className="textlink quote-button" to={inquiry.to} data-quote-location="category_guide" data-quote-family={line}>{inquiry.label} <ArrowUpRight size={16} aria-hidden="true" /></Link>
       </div>
       <Faq items={questions} />
     </div>
